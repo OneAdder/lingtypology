@@ -15,10 +15,12 @@ legend_html = '''
                           ">
               '''
 
+csv = pandas.read_csv('glottolog.csv', delimiter='\t', header=0)
+
 def get_affiliations(languages):
     affiliations = []
     for language in languages:
-        affiliations.append(str(csv[csv.language == language].affiliation))
+        affiliations.append(tuple(csv[csv.language == language].affiliation)[0])
     return affiliations
 
 class LingMap(object):
@@ -30,10 +32,16 @@ class LingMap(object):
         latitude = float(csv[csv.language == language].latitude)
         return (longitude, latitude)
 
+    def _get_glot_id(self,language):
+        return tuple(csv[csv.language == language].glottocode)[0]
+
     def add_features(self, features):
         self.features = features
+
+    def add_popups(self, popups):
+        self.popups = popups
     
-    def render(self):
+    def _create_map(self):
         m = folium.Map(location=[0, 0], zoom_start=2)
         if 'features' in dir(self):
             features = []
@@ -51,23 +59,43 @@ class LingMap(object):
                 color = features[i]
             else:
                 color = '#DEB887'
-            folium.CircleMarker(
+            if 'popups' in dir(self):
+                popup_href = '''<a href="https://glottolog.org/resource/languoid/id/{}" onclick="this.target='_blank';">{}</a><br>'''
+                popup = popup_href.format(self._get_glot_id(language), language) + self.popups[i]
+                folium.CircleMarker(
                         location=[coordinates[1], coordinates[0]],
                         radius=5,
                         fill=True,
                         fill_opacity=1,
-                        color=color
+                        color=color,
+                        popup=popup
                     ).add_to(m)
+            else:
+                folium.CircleMarker(
+                            location=[coordinates[1], coordinates[0]],
+                            radius=5,
+                            fill=True,
+                            fill_opacity=1,
+                            color=color
+                        ).add_to(m)
         if 'features' in dir(self):
             legend += '</div>'
             m.get_root().html.add_child(folium.Element(legend))
-        m.save('test')
+        return m
+
+    def save(self, path):
+        self._create_map().save(path)
+
+    def render(self):
+        return self._create_map().get_root().render()
     
-csv = pandas.read_csv('glottolog.csv', delimiter='\t', header=0)
-#print(csv[csv.language == 'German'].longitude)
-#print(csv[csv.language == 'Teojomulco Chatino'].longitude)
-#print(get_affiliations(['Russian']))
+
 m = LingMap(["Adyghe", "Kabardian", "Polish", "Russian", "Bulgarian"])
-features = get_affiliations(["Adyghe", "Kabardian", "Polish", "Russian", "Bulgarian"])
+
+affs = get_affiliations(["Adyghe", "Kabardian", "Polish", "Russian", "Bulgarian"])
+features = ["Agglutinative", "Agglutinative", "Inflected", "Inflected", "Analythic"]
+
 m.add_features(features)
-m.render()
+m.add_popups(affs)
+m.save('test_map.html')
+
