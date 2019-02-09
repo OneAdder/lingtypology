@@ -1,6 +1,6 @@
 import folium
 import pandas
-from itertools import groupby
+import branca.colormap
 
 
 legend_html = '''
@@ -45,9 +45,13 @@ class LingMap(object):
     def _get_glot_id(self,language):
         return tuple(csv[csv.language == language].glottocode)[0]
 
-    def add_features(self, features):
+    def add_features(self, features, numeric=False):
         self._sanity_check(features, feature_name='features')
         self.features = features
+        if numeric:
+            self.numeric = True
+        else:
+            self.numeric = False
 
     def add_popups(self, popups):
         self._sanity_check(popups, feature_name='popups')
@@ -60,10 +64,6 @@ class LingMap(object):
     def add_custom_coordinates(self, custom_coordinates):
         self._sanity_check(custom_coordinates, feature_name='custom_coordinates')
         self.custom_coordinates = custom_coordinates
-
-    def add_numeric_features(self, features):
-        self._sanity_check(features, feature_name='numeric features')
-        self.numeric_features = features
 
     def add_custom_colors(self, colors):
         if 'features' in dir(self):
@@ -79,35 +79,42 @@ class LingMap(object):
             raise LingMapError("Length of languages and {} does not match".format(feature_name))
     
     def _create_map(self):
-        m = folium.Map(location=[0, 0], zoom_start=2)
+        m = folium.Map(location=[0, 0], zoom_start=3)
         if 'features' in dir(self):
-            features = []
-            mapping = {}
-            legend = legend_html
-            clear_features = []
-            for i in self.features:
-                if i not in clear_features:
-                    clear_features.append(i)
-            for i, feature in enumerate(clear_features):
-                mapping[feature] = self.colors[i]
-                legend += '<a style="color: {};font-size: 150%;margin-left:20px;">●</a> — {}<br>'.format(self.colors[i], feature)
-            features = [mapping[f] for f in self.features]
-
+            if self.numeric:
+                features = self.features
+                features.sort()
+                colormap = branca.colormap.LinearColormap(colors=['#e6ccff','#4a008f'], index=[features[0],features[-1]], vmin=features[0], vmax=features[-1])
+                colors = [colormap(feature) for feature in features]
+            else:
+                mapping = {}
+                legend = legend_html
+                clear_features = []
+                for i in self.features:
+                    if i not in clear_features:
+                        clear_features.append(i)
+                for i, feature in enumerate(clear_features):
+                    mapping[feature] = self.colors[i]
+                    legend += '<a style="color: {};font-size: 150%;margin-left:20px;">●</a> — {}<br>'.format(self.colors[i], feature)
+                colors = [mapping[f] for f in self.features]
+        
         for i, language in enumerate(self.languages):
             if 'custom_coordinates' in dir(self):
                 coordinates = self.custom_coordinates[i]
             else:
                 coordinates = self._get_coordinates(language)
             if 'features' in dir(self):
-                color = features[i]
+                color = colors[i]
             else:
                 color = '#DEB887'
             marker = folium.CircleMarker(
                         location=[coordinates[0], coordinates[1]],
-                        radius=5,
+                        radius=7,
                         fill=True,
+                        weight=1,
                         fill_opacity=1,
-                        color=color
+                        color='#000000',
+                        fill_color=color
                     )
             popup_href = '''<a href="https://glottolog.org/resource/languoid/id/{}" onclick="this.target='_blank';">{}</a><br>'''
             if 'popups' in dir(self):
@@ -120,8 +127,12 @@ class LingMap(object):
                 tooltip.add_to(marker)
             marker.add_to(m)
         if 'features' in dir(self):
-            legend += '</div>'
-            m.get_root().html.add_child(folium.Element(legend))
+            if self.numeric:
+                m.add_child(colormap)
+            else:
+                legend += '</div>'
+                m.get_root().html.add_child(folium.Element(legend))
+
         return m
 
     def save(self, path):
@@ -130,35 +141,42 @@ class LingMap(object):
     def render(self):
         return self._create_map().get_root().render()
 
-'''
-languages = ["Adyghe", "Kabardian", "Polish", "Russian", "Bulgarian"]
-m = LingMap(languages)
+def random_test():
+    languages = ["Adyghe", "Kabardian", "Polish", "Russian", "Bulgarian"]
+    m = LingMap(languages)
 
-affs = get_affiliations(languages)
-features = ["Agglutinative", "Agglutinative", "Inflected", "Inflected", "Analythic"]
+    affs = get_affiliations(languages)
+    features = ["Agglutinative", "Agglutinative", "Inflected", "Inflected", "Analythic"]
 
-m.add_features(features)
-m.add_popups(affs)
-m.add_tooltips(languages)
-#m.add_custom_colors(("yellowgreen", "navy", "black"))
+    m.add_features(features)
+    m.add_popups(affs)
+    m.add_tooltips(languages)
+    m.add_custom_colors(("yellowgreen", "navy", "black"))
+    m.save('test_map.html')
 
-m.save('test_map.html')
-'''
+def circassian_test():
+    circassian = pandas.read_csv('circassian.csv', delimiter=',', header=0)
 
+    coordinates = list(zip(list(circassian.latitude), list(circassian.longitude)))
+    features = list(circassian.dialect)
 
+    languages = list(circassian.language)
+    popups = list(circassian.village)
 
-circassian = pandas.read_csv('circassian.csv', delimiter=',', header=0)
+    m = LingMap(languages)
+    m.add_features(features)
+    m.add_popups(popups)
+    m.add_tooltips(languages)
+    m.add_custom_coordinates(coordinates)
+    m.save('test_map.html')
 
-coordinates = list(zip(list(circassian.latitude), list(circassian.longitude)))
-features = list(circassian.dialect)
+def ejectives_test():
+    data = pandas.read_csv('ejective_and_n_consonants.csv', delimiter=',', header=0)
+    languages = list(data.language)
+    consonants = list(data.consonants)
+    ejectives = list(data.consonants)
+    m = LingMap(languages)
+    m.add_features(consonants, numeric=True)
+    m.save('test_map.html')
 
-languages = list(circassian.language)
-popups = list(circassian.village)
-
-m = LingMap(languages)
-m.add_features(features)
-m.add_popups(popups)
-m.add_tooltips(languages)
-m.add_custom_coordinates(coordinates)
-
-m.save('test_map.html')
+ejectives_test()
