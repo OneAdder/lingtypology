@@ -58,21 +58,12 @@ class LingMap(object):
         self.popups = popups
 
     def add_tooltips(self, tooltips):
-        self._sanity_check(features, feature_name='tooltips')
+        self._sanity_check(tooltips, feature_name='tooltips')
         self.tooltips = tooltips
 
     def add_custom_coordinates(self, custom_coordinates):
         self._sanity_check(custom_coordinates, feature_name='custom_coordinates')
         self.custom_coordinates = custom_coordinates
-
-    def add_custom_colors(self, colors):
-        if 'features' in dir(self):
-            if len(set(features)) == len(colors):
-                self.colors = colors
-            else:
-                self.colors = colors + self.colors
-        else:
-            raise LingMapError('Colors cannot be set without features')
 
     def _sanity_check(self, features, feature_name='corresponding lists'):
         if len(self.languages) != len(features):
@@ -151,7 +142,7 @@ def random_test():
     m.add_features(features)
     m.add_popups(affs)
     m.add_tooltips(languages)
-    m.add_custom_colors(("yellowgreen", "navy", "black"))
+    m.colors = ("yellowgreen", "navy", "black")
     m.save('test_map.html')
 
 def circassian_test():
@@ -179,4 +170,4 @@ def ejectives_test():
     m.add_features(consonants, numeric=True)
     m.save('test_map.html')
 
-ejectives_test()
+random_test()
