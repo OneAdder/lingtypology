@@ -1,5 +1,6 @@
 import folium
 import pandas
+from itertools import groupby
 
 
 legend_html = '''
@@ -7,7 +8,7 @@ legend_html = '''
                           bottom: 50px;
                           left: 50px;
                           width: 250px;
-                          height: 500px; 
+                          height: 300px; 
                           border:2px solid grey;
                           z-index:9999;
                           font-size:14px;
@@ -31,7 +32,7 @@ class LingMapError(Exception):
 
 
 class LingMap(object):
-    colors = ['#0000FF', '#8A2BE2', '#A52A2A', '#DEB887', '#5F9EA0', '#7FFF00', '#D2691E', '#FF7F50', '#6495ED', '#F08080']
+    colors = ['#0000FF', '#8A2BE2', '#A52A2A', '#DEB887', '#5F9EA0', '#7FFF00', '#D2691E', '#FF7F50', '#6495ED', '#F08080', '#000000', '#ffffff']
     
     def __init__(self, languages):
         self.languages = languages
@@ -60,12 +61,16 @@ class LingMap(object):
         self._sanity_check(custom_coordinates, feature_name='custom_coordinates')
         self.custom_coordinates = custom_coordinates
 
+    def add_numeric_features(self, features):
+        self._sanity_check(features, feature_name='numeric features')
+        self.numeric_features = features
+
     def add_custom_colors(self, colors):
-        if 'features' in dir(sel):
+        if 'features' in dir(self):
             if len(set(features)) == len(colors):
                 self.colors = colors
             else:
-                raise LingMapError('Quantity of colors != quantity of features')
+                self.colors = colors + self.colors
         else:
             raise LingMapError('Colors cannot be set without features')
 
@@ -79,7 +84,10 @@ class LingMap(object):
             features = []
             mapping = {}
             legend = legend_html
-            clear_features = set(self.features)
+            clear_features = []
+            for i in self.features:
+                if i not in clear_features:
+                    clear_features.append(i)
             for i, feature in enumerate(clear_features):
                 mapping[feature] = self.colors[i]
                 legend += '<a style="color: {};font-size: 150%;margin-left:20px;">●</a> — {}<br>'.format(self.colors[i], feature)
@@ -101,10 +109,12 @@ class LingMap(object):
                         fill_opacity=1,
                         color=color
                     )
+            popup_href = '''<a href="https://glottolog.org/resource/languoid/id/{}" onclick="this.target='_blank';">{}</a><br>'''
             if 'popups' in dir(self):
-                popup_href = '''<a href="https://glottolog.org/resource/languoid/id/{}" onclick="this.target='_blank';">{}</a><br>'''
                 popup = folium.Popup(popup_href.format(self._get_glot_id(language), language) + self.popups[i])
-                popup.add_to(marker)
+            else:
+                popup = folium.Popup(popup_href.format(self._get_glot_id(language), language))
+            popup.add_to(marker)
             if 'tooltips' in dir(self):
                 tooltip = folium.Tooltip(self.tooltips[i])
                 tooltip.add_to(marker)
@@ -120,7 +130,7 @@ class LingMap(object):
     def render(self):
         return self._create_map().get_root().render()
 
-    
+'''
 languages = ["Adyghe", "Kabardian", "Polish", "Russian", "Bulgarian"]
 m = LingMap(languages)
 
@@ -130,10 +140,13 @@ features = ["Agglutinative", "Agglutinative", "Inflected", "Inflected", "Analyth
 m.add_features(features)
 m.add_popups(affs)
 m.add_tooltips(languages)
+#m.add_custom_colors(("yellowgreen", "navy", "black"))
 
 m.save('test_map.html')
-
 '''
+
+
+
 circassian = pandas.read_csv('circassian.csv', delimiter=',', header=0)
 
 coordinates = list(zip(list(circassian.latitude), list(circassian.longitude)))
@@ -143,14 +156,9 @@ languages = list(circassian.language)
 popups = list(circassian.village)
 
 m = LingMap(languages)
-
-
-
 m.add_features(features)
 m.add_popups(popups)
 m.add_tooltips(languages)
 m.add_custom_coordinates(coordinates)
 
 m.save('test_map.html')
-
-'''
