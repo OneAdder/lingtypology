@@ -1,7 +1,6 @@
 import folium
 import pandas
 
-colors = ['#0000FF', '#8A2BE2', '#A52A2A', '#DEB887', '#5F9EA0', '#7FFF00', '#D2691E', '#FF7F50', '#6495ED', '#F08080']
 
 legend_html = '''
               <div style="position: fixed; 
@@ -32,6 +31,8 @@ class LingMapError(Exception):
 
 
 class LingMap(object):
+    colors = ['#0000FF', '#8A2BE2', '#A52A2A', '#DEB887', '#5F9EA0', '#7FFF00', '#D2691E', '#FF7F50', '#6495ED', '#F08080']
+    
     def __init__(self, languages):
         self.languages = languages
 
@@ -59,6 +60,15 @@ class LingMap(object):
         self._sanity_check(custom_coordinates, feature_name='custom_coordinates')
         self.custom_coordinates = custom_coordinates
 
+    def add_custom_colors(self, colors):
+        if 'features' in dir(sel):
+            if len(set(features)) == len(colors):
+                self.colors = colors
+            else:
+                raise LingMapError('Quantity of colors != quantity of features')
+        else:
+            raise LingMapError('Colors cannot be set without features')
+
     def _sanity_check(self, features, feature_name='corresponding lists'):
         if len(self.languages) != len(features):
             raise LingMapError("Length of languages and {} does not match".format(feature_name))
@@ -71,8 +81,8 @@ class LingMap(object):
             legend = legend_html
             clear_features = set(self.features)
             for i, feature in enumerate(clear_features):
-                mapping[feature] = colors[i]
-                legend += '<a style="color: {};font-size: 150%;margin-left:20px;">●</a> — {}<br>'.format(colors[i], feature)
+                mapping[feature] = self.colors[i]
+                legend += '<a style="color: {};font-size: 150%;margin-left:20px;">●</a> — {}<br>'.format(self.colors[i], feature)
             features = [mapping[f] for f in self.features]
 
         for i, language in enumerate(self.languages):
@@ -110,7 +120,7 @@ class LingMap(object):
     def render(self):
         return self._create_map().get_root().render()
 
-'''    
+    
 languages = ["Adyghe", "Kabardian", "Polish", "Russian", "Bulgarian"]
 m = LingMap(languages)
 
@@ -122,8 +132,8 @@ m.add_popups(affs)
 m.add_tooltips(languages)
 
 m.save('test_map.html')
-'''
 
+'''
 circassian = pandas.read_csv('circassian.csv', delimiter=',', header=0)
 
 coordinates = list(zip(list(circassian.latitude), list(circassian.longitude)))
@@ -143,3 +153,4 @@ m.add_custom_coordinates(coordinates)
 
 m.save('test_map.html')
 
+'''
