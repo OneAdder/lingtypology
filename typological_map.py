@@ -33,6 +33,7 @@ class LingMapError(Exception):
 
 class LingMap(object):
     colors = ['#0000FF', '#8A2BE2', '#A52A2A', '#DEB887', '#5F9EA0', '#7FFF00', '#D2691E', '#FF7F50', '#6495ED', '#F08080', '#000000', '#ffffff']
+    languages_in_popups = True
     
     def __init__(self, languages):
         self.languages = languages
@@ -44,6 +45,18 @@ class LingMap(object):
 
     def _get_glot_id(self,language):
         return tuple(csv[csv.language == language].glottocode)[0]
+
+    def _create_popups(self, marker, language):
+        popup_href = '''<a href="https://glottolog.org/resource/languoid/id/{}" onclick="this.target='_blank';">{}</a><br>'''
+        if self.languages_in_popups:
+            if 'popups' in dir(self):
+                popup = folium.Popup(popup_href.format(self._get_glot_id(language), language) + self.popups[i])
+            else:
+                popup = folium.Popup(popup_href.format(self._get_glot_id(language), language))
+            popup.add_to(marker)
+        else:
+            if 'popups' in dir(self):
+                popup = folium.Popup(self.popups[i])
 
     def add_features(self, features, numeric=False):
         self._sanity_check(features, feature_name='features')
@@ -107,12 +120,9 @@ class LingMap(object):
                         color='#000000',
                         fill_color=color
                     )
-            popup_href = '''<a href="https://glottolog.org/resource/languoid/id/{}" onclick="this.target='_blank';">{}</a><br>'''
-            if 'popups' in dir(self):
-                popup = folium.Popup(popup_href.format(self._get_glot_id(language), language) + self.popups[i])
-            else:
-                popup = folium.Popup(popup_href.format(self._get_glot_id(language), language))
-            popup.add_to(marker)
+            
+            self._create_popups(marker, language)
+            
             if 'tooltips' in dir(self):
                 tooltip = folium.Tooltip(self.tooltips[i])
                 tooltip.add_to(marker)
@@ -143,7 +153,7 @@ def random_test():
     m.add_popups(affs)
     m.add_tooltips(languages)
     m.colors = ("yellowgreen", "navy", "black")
-    m.save('test_map.html')
+    m.save('random.html')
 
 def circassian_test():
     circassian = pandas.read_csv('circassian.csv', delimiter=',', header=0)
@@ -159,7 +169,7 @@ def circassian_test():
     m.add_popups(popups)
     m.add_tooltips(languages)
     m.add_custom_coordinates(coordinates)
-    m.save('test_map.html')
+    m.save('circassian.html')
 
 def ejectives_test():
     data = pandas.read_csv('ejective_and_n_consonants.csv', delimiter=',', header=0)
@@ -168,6 +178,5 @@ def ejectives_test():
     ejectives = list(data.consonants)
     m = LingMap(languages)
     m.add_features(consonants, numeric=True)
-    m.save('test_map.html')
-
-random_test()
+    #m.languages_in_popups = False
+    m.save('ejectives.html')
