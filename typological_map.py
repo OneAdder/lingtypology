@@ -1,9 +1,12 @@
 import folium
 import folium.plugins
-import pandas
+
 import branca.colormap
 import branca.element
+
 import jinja2
+import pandas
+import pygal
 
 legend_html = ''
 csv = pandas.read_csv('glottolog.csv', delimiter='\t', header=0)
@@ -23,9 +26,15 @@ class LingMapError(Exception):
 
 
 class LingMap(object):
-    colors = ['#0000FF', '#8A2BE2', '#A52A2A', '#DEB887', '#5F9EA0', '#7FFF00', '#D2691E', '#FF7F50', '#6495ED', '#F08080', '#000000', '#ffffff']
-    minimap = False
+    colors = ['#0000FF', '#8A2BE2', '#A52A2A', '#DEB887', '#5F9EA0', '#7FFF00', '#D2691E',
+              '#FF7F50', '#6495ED', '#F08080', '#00FFFF', '#40E0D0', '#778899', '#FF6347',
+              '#4682B4', '#6495ED', '#FFE4C4', '#BC8F8F', '#800000', '#000000', '#ffffff']
+    shapes = ['⬤', '◼', '▲', '◯', '◻', '△', '◉', '▣', '◐', '◧', '◭', '◍','▤', '▶']
+    start_location = (0, 0)
+    start_zoom = 3
+    minimap = {}
     languages_in_popups = True
+    use_shapes = False
     control_scale = True
     control = False
     stroke_control = False
@@ -36,6 +45,8 @@ class LingMap(object):
     stroke_legend_title = 'Legend'
     legend_position = 'bottomright'
     stroke_legend_position = 'bottomleft'
+    rectangles = []
+    lines = []
     
     def __init__(self, languages):
         self.languages = languages
@@ -79,18 +90,33 @@ class LingMap(object):
                     weight=1,
                     fill_opacity=1,
                     color='#000000',
-                    fill_color='#DEB887'):
-        marker = folium.CircleMarker(location=location, radius=radius, fill=fill, stroke=stroke, weight=weight, fill_opacity=fill_opacity, color=color, fill_color=fill_color)
+                    fill_color='#DEB887',
+                    shape=''):
+        if shape:
+            div = folium.DivIcon(html=('<div style="font-size: 170%">' + shape + '</div>'))
+            marker = folium.Marker(location=location, icon=div)
+        else:
+            marker = folium.CircleMarker(
+                location=location,
+                radius=radius,
+                fill=fill,
+                stroke=stroke,
+                weight=weight,
+                fill_opacity=fill_opacity,
+                color=color,
+                fill_color=fill_color)
         return marker
 
-    def _prepare_features(self, features, stroke=False):
+    def _prepare_features(self, features, stroke=False, use_shapes=False):
         colors = self.colors
+        if use_shapes:
+            colors = self.shapes
         if stroke:
             colors.reverse()
         if self.numeric and not stroke:
             features.sort()
             colormap = branca.colormap.LinearColormap(colors=['#e6ccff','#4a008f'], index=[features[0],features[-1]], vmin=features[0], vmax=features[-1])
-            groups_colors = [(0, colormap(feature)) for feature in features]
+            groups_features = [(0, colormap(feature)) for feature in features]
             data = colormap
         else:
             mapping = {}
@@ -104,10 +130,10 @@ class LingMap(object):
             for i, feature in enumerate(clear_features):
                 mapping[feature] = (groups[i], colors[i])
                 data += '<li><span style="background: {};opacity:0.7;"></span>{}</li>\n'.format(self.colors[i], feature)
-            groups_colors = [mapping[f] for f in features]
-        return (groups_colors, data)
+            groups_features = [mapping[f] for f in features]
+        return (groups_features, data)
 
-    def add_features(self, features, numeric=False, control=False):
+    def add_features(self, features, numeric=False, control=False, use_shapes=False):
         self._sanity_check(features, feature_name='features')
         self.features = features
         if numeric:
@@ -116,6 +142,8 @@ class LingMap(object):
             self.numeric = False
         if control:
             self.control = True
+        if use_shapes:
+            self.use_shapes = True
 
     def add_stroke_features(self, features, numeric=False, control=False):
         self._sanity_check(features, feature_name='stroke features')
@@ -142,20 +170,30 @@ class LingMap(object):
     def add_minimap(self, position='bottomleft', width=150, height=150, collapsed_width=25, collapsed_height=25, zoom_animation=True):
         self.minimap = {'position': position, 'width': width, 'height': height, 'collapsed_width': collapsed_width, 'collapsed_height': collapsed_height, 'zoom_animation': zoom_animation}
 
+    def add_minichart(self, data):
+        self._sanity_check(data, feature_name='minicharts')
+        self.minicharts = data
+
+    def add_rectangle(self, locations, tooltip='', popup='', color='black'):
+        self.rectangles.append({'bounds': locations, 'tooltip': tooltip, 'popup': popup, 'color': color})
+
+    def add_line(self, locations, tooltip='', popup='', color='black', smooth_factor=1.0):
+        self.lines.append({'locations': locations, 'tooltip': tooltip, 'popup': popup, 'color': color, 'smooth_factor': smooth_factor})
+
     def _sanity_check(self, features, feature_name='corresponding lists'):
         if len(self.languages) != len(features):
             raise LingMapError("Length of languages and {} does not match".format(feature_name))
     
     def _create_map(self):
-        m = folium.Map(location=[0, 0], zoom_start=3, control_scale=self.control_scale)
+        m = folium.Map(location=self.start_location, zoom_start=self.start_zoom, control_scale=self.control_scale)
         if 'features' in dir(self):
-            prepared = self._prepare_features(self.features)
-            groups_colors = prepared[0]
+            prepared = self._prepare_features(self.features, use_shapes=self.use_shapes)
+            groups_features = prepared[0]
             data = prepared[1]
 
         if 'stroke_features' in dir(self):
-            prepared = self._prepare_features(self.stroke_features, stroke=True)
-            s_groups_colors = prepared[0]
+            prepared = self._prepare_features(self.stroke_features, stroke=True, use_shapes=self.use_shapes)
+            s_groups_features = prepared[0]
             s_data = prepared[1]
         
         for i, language in enumerate(self.languages):
@@ -165,21 +203,24 @@ class LingMap(object):
                 coordinates = self._get_coordinates(language)
                 
             if 'features' in dir(self):
-                color = groups_colors[i][1]
+                color_shape = groups_features[i][1]
             else:
-                color = '#DEB887'
+                color_shape = '#DEB887'
                 
             if 'stroke_features' in dir(self):
-                marker = self._set_marker([coordinates[0], coordinates[1]], stroke=True, weight=3, fill_color=color, color=s_groups_colors[i][1])
+                marker = self._set_marker([coordinates[0], coordinates[1]], stroke=True, weight=3, fill_color=color_shape, color=s_groups_features[i][1])
             else:
-                marker = self._set_marker([coordinates[0], coordinates[1]], stroke=True, fill_color=color)
+                if self.use_shapes:
+                    marker = self._set_marker([coordinates[0], coordinates[1]], stroke=True, fill_color='#000000', shape=color_shape)
+                else:
+                    marker = self._set_marker([coordinates[0], coordinates[1]], stroke=True, fill_color=color_shape)
             
             self._create_popups(marker, language, i)
 
             if 'features' in dir(self) and not self.numeric and self.control:
-                marker.add_to(groups_colors[i][0])
+                marker.add_to(groups_features[i][0])
             elif 'stroke_features' in dir(self) and self.stroke_control:
-                marker.add_to(s_groups_colors[i][0])
+                marker.add_to(s_groups_features[i][0])
             else:
                 marker.add_to(m)
                 
@@ -194,10 +235,10 @@ class LingMap(object):
             else:
                 
                 if self.control:
-                    [m.add_child(fg[0]) for fg in groups_colors]
+                    [m.add_child(fg[0]) for fg in groups_features]
                     folium.LayerControl(collapsed=False, position=self.control_position).add_to(m)
                 elif self.stroke_control:
-                    [m.add_child(fg[0]) for fg in s_groups_colors]
+                    [m.add_child(fg[0]) for fg in s_groups_features]
                     folium.LayerControl(collapsed=False, position=self.control_position).add_to(m)
                 
                 if self.legend:
@@ -207,6 +248,13 @@ class LingMap(object):
         if self.minimap:
             minimap = folium.plugins.MiniMap(**self.minimap)
             m.add_child(minimap)
+        if self.rectangles:
+            for rectangle in self.rectangles:
+                folium.Rectangle(**rectangle).add_to(m)
+        if self.lines:
+            for line in self.lines:
+                folium.PolyLine(**line).add_to(m)
+
         return m
 
     def save(self, path):
@@ -215,6 +263,8 @@ class LingMap(object):
     def render(self):
         return self._create_map().get_root().render()
 
+
+
 def random_test():
     languages = ["Adyghe", "Kabardian", "Polish", "Russian", "Bulgarian"]
     m = LingMap(languages)
@@ -222,10 +272,10 @@ def random_test():
     affs = get_affiliations(languages)
     features = ["Agglutinative", "Agglutinative", "Inflected", "Inflected", "Analythic"]
 
-    m.add_features(features, control=True)
+    m.add_features(features, control=True, use_shapes=True)
     m.add_popups(affs)
     m.add_tooltips(languages)
-    m.colors = ("yellowgreen", "navy", "blue")
+    #m.colors = ("yellowgreen", "navy", "blue")
     m.add_minimap()
     m.save('random.html')
 
@@ -239,12 +289,16 @@ def circassian_test():
     popups = list(circassian.village)
 
     m = LingMap(languages)
+    m.start_location = (44.21, 42.32)
+    m.start_zoom = 8
     m.add_features(dialects, control=True)
     #m.control_position = 'bottomleft'
     m.add_stroke_features(languages)
     m.add_popups(popups)
     m.add_tooltips(languages)
     m.add_custom_coordinates(coordinates)
+    #m.add_rectangle(((44.443206, 42.735694), (42.927524, 44.577277)), tooltip='Square Enix', popup='FFX', color='green')
+    #m.add_line(((44.5, 39), (43, 43)))
     #m.legend = False
     #m.stroke_legend = False
     m.stroke_legend_position = 'right'
@@ -258,11 +312,35 @@ def ejectives_test():
     languages = list(data.language)
     consonants = list(data.consonants)
     ejectives = list(data.consonants)
+    
     m = LingMap(languages)
     m.add_features(consonants, numeric=True)
     #m.languages_in_popups = False
     m.save('ejectives.html')
 
+def ejectives2_test():
+    data = pandas.read_csv('ejective_and_n_consonants.csv', delimiter=',', header=0)
+    languages = list(data.language)
+    vowels = list(data.vowels)
+    consonants = list(data.consonants)
+    
+    m = LingMap(languages)
+    #m.add_minicharts(zip(vowels, consonants))
+    m.save('ejectives2.html')
+
+def ejectives3_test():
+    data = pandas.read_csv('ejective_and_n_consonants.csv', delimiter=',', header=0)
+    languages = list(data.language)
+
+    m = LingMap(languages)
+    m.add_features(languages)
+    m.save('ejectives3_test.html')
+
 #random_test()
 #circassian_test()
 #ejectives_test()
+#ejectives2_test()
+#ejectives3_test()
+
+
+
