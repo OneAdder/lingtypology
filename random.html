@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script>L_PREFER_CANVAS=false; L_NO_TOUCH=false; L_DISABLE_3D=false;</script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.3.4/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.3.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+    <meta name="viewport" content="width=device-width,
+        initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>#map_a6540f324a1747a6915b5dd70323bfd1 {
+        position: relative;
+        width: 100.0%;
+        height: 100.0%;
+        left: 0.0%;
+        top: 0.0%;
+        }
+    </style>
+</head>
+<body>    
+    
+    <div class="folium-map" id="map_a6540f324a1747a6915b5dd70323bfd1" ></div>
+    
+<!-- Based on the template from here: https://nbviewer.jupyter.org/gist/talbertc-usgs/18f8901fc98f109f2b71156cf3ac81cd -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+  <script>
+  $( function() {
+    $( "#maplegend" ).draggable({
+                    start: function (event, ui) {
+                        $(this).css({
+                            right: "auto",
+                            top: "auto",
+                            bottom: "auto"
+                        });
+                    }
+                });
+});
+
+  </script>
+</head>
+<body>
+
+ 
+<div id='maplegend' class='maplegend' 
+    style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
+     border-radius:6px; padding: 10px; font-size:14px; right: 20px; bottom: 20px;'>
+     
+<div class='legend-title'>Legend</div>
+<div class='legend-scale'>
+  <ul class='legend-labels'>
+    <li><span style="background: yellowgreen;opacity:0.7;"></span>Agglutinative</li>
+<li><span style="background: navy;opacity:0.7;"></span>Inflected</li>
+<li><span style="background: black;opacity:0.7;"></span>Analythic</li>
+
+
+  </ul>
+</div>
+</div>
+ 
+</body>
+</html>
+
+<style type='text/css'>
+  .maplegend .legend-title {
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 90%;
+    }
+  .maplegend .legend-scale ul {
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 0;
+    float: left;
+    list-style: none;
+    }
+  .maplegend .legend-scale ul li {
+    font-size: 80%;
+    list-style: none;
+    margin-left: 0;
+    line-height: 18px;
+    margin-bottom: 2px;
+    }
+  .maplegend ul.legend-labels li span {
+    display: block;
+    float: left;
+    height: 16px;
+    width: 30px;
+    margin-right: 5px;
+    margin-left: 0;
+    border: 1px solid #999;
+    }
+  .maplegend .legend-source {
+    font-size: 80%;
+    color: #777;
+    clear: both;
+    }
+  .maplegend a {
+    color: #777;
+    }
+</style>
+</body>
+<script>    
+    
+    
+        var bounds = null;
+    
+
+    var map_a6540f324a1747a6915b5dd70323bfd1 = L.map(
+        'map_a6540f324a1747a6915b5dd70323bfd1', {
+        center: [0, 0],
+        zoom: 3,
+        maxBounds: bounds,
+        layers: [],
+        worldCopyJump: false,
+        crs: L.CRS.EPSG3857,
+        zoomControl: true,
+        });
+
+    
+    
+    var tile_layer_0777be8fe7014c09acd333b6b1becffb = L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+        "attribution": null,
+        "detectRetina": false,
+        "maxNativeZoom": 18,
+        "maxZoom": 18,
+        "minZoom": 0,
+        "noWrap": false,
+        "opacity": 1,
+        "subdomains": "abc",
+        "tms": false
+}).addTo(map_a6540f324a1747a6915b5dd70323bfd1);
+    
+            var feature_group_ec74dad1f0544d9e9cc945f5348143ae = L.featureGroup(
+                ).addTo(map_a6540f324a1747a6915b5dd70323bfd1);
+        
+    
+            var circle_marker_dcfe48d57a3a430f9598b9359c163cdd = L.circleMarker(
+                [44.0, 39.33],
+                {
+  "bubblingMouseEvents": true,
+  "color": "#000000",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "yellowgreen",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 7,
+  "stroke": true,
+  "weight": 1
+}
+                )
+                .addTo(feature_group_ec74dad1f0544d9e9cc945f5348143ae);
+            
+    
+            var popup_8b13efdcb9a54629a41f0a40a02bec3d = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_9f5322480dd2492e8523977d68d528af = $(`<div id="html_9f5322480dd2492e8523977d68d528af" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/adyg1241" onclick="this.target='_blank';">Adyghe</a><br>North Caucasian, West Caucasian, Circassian</div>`)[0];
+                popup_8b13efdcb9a54629a41f0a40a02bec3d.setContent(html_9f5322480dd2492e8523977d68d528af);
+            
+
+            circle_marker_dcfe48d57a3a430f9598b9359c163cdd.bindPopup(popup_8b13efdcb9a54629a41f0a40a02bec3d)
+            ;
+
+            
+        
+    
+        circle_marker_dcfe48d57a3a430f9598b9359c163cdd.bindTooltip(
+            `<div>`
+            + `Adyghe` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_e244e2fcd9c64e278e8ee1209829a762 = L.circleMarker(
+                [43.50822, 43.39182],
+                {
+  "bubblingMouseEvents": true,
+  "color": "#000000",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "yellowgreen",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 7,
+  "stroke": true,
+  "weight": 1
+}
+                )
+                .addTo(feature_group_ec74dad1f0544d9e9cc945f5348143ae);
+            
+    
+            var popup_4cf059243ca9466b8ef5452cd1527c76 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_00f8cb514f024094a5ef24a1d094b8ce = $(`<div id="html_00f8cb514f024094a5ef24a1d094b8ce" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/kaba1278" onclick="this.target='_blank';">Kabardian</a><br>North Caucasian, West Caucasian, Circassian</div>`)[0];
+                popup_4cf059243ca9466b8ef5452cd1527c76.setContent(html_00f8cb514f024094a5ef24a1d094b8ce);
+            
+
+            circle_marker_e244e2fcd9c64e278e8ee1209829a762.bindPopup(popup_4cf059243ca9466b8ef5452cd1527c76)
+            ;
+
+            
+        
+    
+        circle_marker_e244e2fcd9c64e278e8ee1209829a762.bindTooltip(
+            `<div>`
+            + `Kabardian` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var feature_group_ac10e24d3a5b45c1ac5e9320c2179aad = L.featureGroup(
+                ).addTo(map_a6540f324a1747a6915b5dd70323bfd1);
+        
+    
+            var circle_marker_8dee9a180f8d4b9690f9cf324028e5eb = L.circleMarker(
+                [51.843923, 18.625487],
+                {
+  "bubblingMouseEvents": true,
+  "color": "#000000",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "navy",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 7,
+  "stroke": true,
+  "weight": 1
+}
+                )
+                .addTo(feature_group_ac10e24d3a5b45c1ac5e9320c2179aad);
+            
+    
+            var popup_b0b6c43a3a68428f96e99cd7aea0fa5c = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_a8bc6e8cbc14403eb9ee44d6ac8a342c = $(`<div id="html_a8bc6e8cbc14403eb9ee44d6ac8a342c" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/poli1260" onclick="this.target='_blank';">Polish</a><br>Indo-European, Slavic, West, Lechitic</div>`)[0];
+                popup_b0b6c43a3a68428f96e99cd7aea0fa5c.setContent(html_a8bc6e8cbc14403eb9ee44d6ac8a342c);
+            
+
+            circle_marker_8dee9a180f8d4b9690f9cf324028e5eb.bindPopup(popup_b0b6c43a3a68428f96e99cd7aea0fa5c)
+            ;
+
+            
+        
+    
+        circle_marker_8dee9a180f8d4b9690f9cf324028e5eb.bindTooltip(
+            `<div>`
+            + `Polish` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_d1680e5135724a3786757acd180deafb = L.circleMarker(
+                [59.0, 50.0],
+                {
+  "bubblingMouseEvents": true,
+  "color": "#000000",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "navy",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 7,
+  "stroke": true,
+  "weight": 1
+}
+                )
+                .addTo(feature_group_ac10e24d3a5b45c1ac5e9320c2179aad);
+            
+    
+            var popup_0439813349e245919b0a174388957a5c = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_66f4cf8c5820461e8dbf5646375cf8e0 = $(`<div id="html_66f4cf8c5820461e8dbf5646375cf8e0" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/russ1263" onclick="this.target='_blank';">Russian</a><br>Indo-European, Slavic, East</div>`)[0];
+                popup_0439813349e245919b0a174388957a5c.setContent(html_66f4cf8c5820461e8dbf5646375cf8e0);
+            
+
+            circle_marker_d1680e5135724a3786757acd180deafb.bindPopup(popup_0439813349e245919b0a174388957a5c)
+            ;
+
+            
+        
+    
+        circle_marker_d1680e5135724a3786757acd180deafb.bindTooltip(
+            `<div>`
+            + `Russian` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var feature_group_0148284322814192a44145cb525b4a73 = L.featureGroup(
+                ).addTo(map_a6540f324a1747a6915b5dd70323bfd1);
+        
+    
+            var circle_marker_1b6fa095e68b43dc8511273004e34b51 = L.circleMarker(
+                [43.364585, 25.0469866667],
+                {
+  "bubblingMouseEvents": true,
+  "color": "#000000",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "black",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 7,
+  "stroke": true,
+  "weight": 1
+}
+                )
+                .addTo(feature_group_0148284322814192a44145cb525b4a73);
+            
+    
+            var popup_f08c463d833d4566b9d45011b4a1c6f9 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_21c7b4ec7f2549f6874ce0fd86ac67ff = $(`<div id="html_21c7b4ec7f2549f6874ce0fd86ac67ff" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/bulg1262" onclick="this.target='_blank';">Bulgarian</a><br>Indo-European, Slavic, South, Eastern</div>`)[0];
+                popup_f08c463d833d4566b9d45011b4a1c6f9.setContent(html_21c7b4ec7f2549f6874ce0fd86ac67ff);
+            
+
+            circle_marker_1b6fa095e68b43dc8511273004e34b51.bindPopup(popup_f08c463d833d4566b9d45011b4a1c6f9)
+            ;
+
+            
+        
+    
+        circle_marker_1b6fa095e68b43dc8511273004e34b51.bindTooltip(
+            `<div>`
+            + `Bulgarian` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var layer_control_523ea0663d4241e59eb4ff8c27a9602a = {
+                base_layers : { "openstreetmap" : tile_layer_0777be8fe7014c09acd333b6b1becffb, },
+                overlays : { "Agglutinative" : feature_group_ec74dad1f0544d9e9cc945f5348143ae,"Inflected" : feature_group_ac10e24d3a5b45c1ac5e9320c2179aad,"Analythic" : feature_group_0148284322814192a44145cb525b4a73, }
+                };
+            L.control.layers(
+                layer_control_523ea0663d4241e59eb4ff8c27a9602a.base_layers,
+                layer_control_523ea0663d4241e59eb4ff8c27a9602a.overlays,
+                {position: 'topright',
+                 collapsed: false,
+                 autoZIndex: true
+                }).addTo(map_a6540f324a1747a6915b5dd70323bfd1);
+            
+        
+</script>

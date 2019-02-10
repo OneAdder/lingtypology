@@ -1,20 +1,10 @@
 import folium
 import pandas
 import branca.colormap
+import branca.element
+import jinja2
 
-
-legend_html = '''
-              <div style="position: fixed; 
-                          bottom: 50px;
-                          left: 50px;
-                          width: 250px;
-                          height: 300px; 
-                          border:2px solid grey;
-                          z-index:9999;
-                          font-size:14px;
-                          ">
-              '''
-
+legend_html = ''
 csv = pandas.read_csv('glottolog.csv', delimiter='\t', header=0)
 
 def get_affiliations(languages):
@@ -60,6 +50,16 @@ class LingMap(object):
                 popup = folium.Popup(self.popups[i])
                 popup.add_to(marker)
 
+    def _create_legend(self, m, legend_data):
+        with open('legend.html', 'r', encoding='utf-8') as f:
+            template = f.read()
+        template = jinja2.Template(template)
+        template = template.render(data=legend_data)
+        template = '{% macro html(this, kwargs) %}' + template + '{% endmacro %}'
+        macro = branca.element.MacroElement()
+        macro._template = branca.element.Template(template)
+        m.get_root().add_child(macro)
+
     def add_features(self, features, numeric=False, control=False):
         self._sanity_check(features, feature_name='features')
         self.features = features
@@ -93,10 +93,10 @@ class LingMap(object):
                 features = self.features
                 features.sort()
                 colormap = branca.colormap.LinearColormap(colors=['#e6ccff','#4a008f'], index=[features[0],features[-1]], vmin=features[0], vmax=features[-1])
-                colors = [colormap(feature) for feature in features]
+                groups_colors = [(0, colormap(feature)) for feature in features]
             else:
                 mapping = {}
-                legend = legend_html
+                legend_data = ''
                 clear_features = []
                 groups = []
                 for i, feature in enumerate(self.features):
@@ -105,7 +105,7 @@ class LingMap(object):
                         groups.append(folium.FeatureGroup(name=self.features[i]))
                 for i, feature in enumerate(clear_features):
                     mapping[feature] = (groups[i], self.colors[i])
-                    legend += '<a style="color: {};font-size: 150%;margin-left:20px;">●</a> — {}<br>'.format(self.colors[i], feature)
+                    legend_data += '<li><span style="background: {};opacity:0.7;"></span>{}</li>\n'.format(self.colors[i], feature)
                 groups_colors = [mapping[f] for f in self.features]
         
         for i, language in enumerate(self.languages):
@@ -144,8 +144,7 @@ class LingMap(object):
                 if self.control:
                     [m.add_child(fg[0]) for fg in groups_colors]
                     folium.LayerControl(collapsed=False).add_to(m)
-                legend += '</div>'
-                m.get_root().html.add_child(folium.Element(legend))
+                self._create_legend(m, legend_data)
         return m
 
     def save(self, path):
@@ -193,4 +192,6 @@ def ejectives_test():
     #m.languages_in_popups = False
     m.save('ejectives.html')
 
+#random_test()
 #circassian_test()
+#ejectives_test()
