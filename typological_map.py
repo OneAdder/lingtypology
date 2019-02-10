@@ -34,6 +34,7 @@ class LingMapError(Exception):
 class LingMap(object):
     colors = ['#0000FF', '#8A2BE2', '#A52A2A', '#DEB887', '#5F9EA0', '#7FFF00', '#D2691E', '#FF7F50', '#6495ED', '#F08080', '#000000', '#ffffff']
     languages_in_popups = True
+    control = False
     
     def __init__(self, languages):
         self.languages = languages
@@ -46,7 +47,7 @@ class LingMap(object):
     def _get_glot_id(self,language):
         return tuple(csv[csv.language == language].glottocode)[0]
 
-    def _create_popups(self, marker, language):
+    def _create_popups(self, marker, language, i):
         popup_href = '''<a href="https://glottolog.org/resource/languoid/id/{}" onclick="this.target='_blank';">{}</a><br>'''
         if self.languages_in_popups:
             if 'popups' in dir(self):
@@ -57,14 +58,17 @@ class LingMap(object):
         else:
             if 'popups' in dir(self):
                 popup = folium.Popup(self.popups[i])
+                popup.add_to(marker)
 
-    def add_features(self, features, numeric=False):
+    def add_features(self, features, numeric=False, control=False):
         self._sanity_check(features, feature_name='features')
         self.features = features
         if numeric:
             self.numeric = True
         else:
             self.numeric = False
+        if control:
+            self.control = True
 
     def add_popups(self, popups):
         self._sanity_check(popups, feature_name='popups')
@@ -94,13 +98,15 @@ class LingMap(object):
                 mapping = {}
                 legend = legend_html
                 clear_features = []
-                for i in self.features:
-                    if i not in clear_features:
-                        clear_features.append(i)
+                groups = []
+                for i, feature in enumerate(self.features):
+                    if feature not in clear_features:
+                        clear_features.append(feature)
+                        groups.append(folium.FeatureGroup(name=self.features[i]))
                 for i, feature in enumerate(clear_features):
-                    mapping[feature] = self.colors[i]
+                    mapping[feature] = (groups[i], self.colors[i])
                     legend += '<a style="color: {};font-size: 150%;margin-left:20px;">●</a> — {}<br>'.format(self.colors[i], feature)
-                colors = [mapping[f] for f in self.features]
+                groups_colors = [mapping[f] for f in self.features]
         
         for i, language in enumerate(self.languages):
             if 'custom_coordinates' in dir(self):
@@ -108,7 +114,7 @@ class LingMap(object):
             else:
                 coordinates = self._get_coordinates(language)
             if 'features' in dir(self):
-                color = colors[i]
+                color = groups_colors[i][1]
             else:
                 color = '#DEB887'
             marker = folium.CircleMarker(
@@ -121,19 +127,25 @@ class LingMap(object):
                         fill_color=color
                     )
             
-            self._create_popups(marker, language)
-            
+            self._create_popups(marker, language, i)
+
+            if 'features' in dir(self) and not self.numeric and self.control:
+                marker.add_to(groups_colors[i][0])
+            else:
+                marker.add_to(m)
             if 'tooltips' in dir(self):
                 tooltip = folium.Tooltip(self.tooltips[i])
                 tooltip.add_to(marker)
-            marker.add_to(m)
+    
         if 'features' in dir(self):
             if self.numeric:
                 m.add_child(colormap)
             else:
+                if self.control:
+                    [m.add_child(fg[0]) for fg in groups_colors]
+                    folium.LayerControl(collapsed=False).add_to(m)
                 legend += '</div>'
                 m.get_root().html.add_child(folium.Element(legend))
-
         return m
 
     def save(self, path):
@@ -149,7 +161,7 @@ def random_test():
     affs = get_affiliations(languages)
     features = ["Agglutinative", "Agglutinative", "Inflected", "Inflected", "Analythic"]
 
-    m.add_features(features)
+    m.add_features(features, control=True)
     m.add_popups(affs)
     m.add_tooltips(languages)
     m.colors = ("yellowgreen", "navy", "black")
@@ -165,7 +177,7 @@ def circassian_test():
     popups = list(circassian.village)
 
     m = LingMap(languages)
-    m.add_features(features)
+    m.add_features(features, control=True)
     m.add_popups(popups)
     m.add_tooltips(languages)
     m.add_custom_coordinates(coordinates)
@@ -180,3 +192,5 @@ def ejectives_test():
     m.add_features(consonants, numeric=True)
     #m.languages_in_popups = False
     m.save('ejectives.html')
+
+#circassian_test()
