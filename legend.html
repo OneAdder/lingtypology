@@ -27,19 +27,44 @@
 </head>
 <body>
 
-{% if position == 'right' %} 
+{% if position == 'bottomright' %} 
 <div id='maplegend' class='maplegend' 
     style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
      border-radius:6px; padding: 10px; font-size:14px; right: 20px; bottom: 20px;'>
-{% elif position == 'left'%}
+{% elif position == 'bottomleft'%}
 <div id='maplegend' class='maplegend' 
     style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
      border-radius:6px; padding: 10px; font-size:14px; left: 20px; bottom: 20px;'>
+{% elif position == 'topright'%}
+<div id='maplegend' class='maplegend' 
+    style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
+     border-radius:6px; padding: 10px; font-size:14px; right: 20px; top: 20px;'>
+{% elif position == 'topleft'%}
+<div id='maplegend' class='maplegend' 
+    style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
+     border-radius:6px; padding: 10px; font-size:14px; left: 20px; top: 20px;'>
+{% elif position == 'top'%}
+<div id='maplegend' class='maplegend' 
+    style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
+     border-radius:6px; padding: 10px; font-size:14px; top: 20px; left: 50%;'>
+{% elif position == 'bottom'%}
+<div id='maplegend' class='maplegend' 
+    style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
+     border-radius:6px; padding: 10px; font-size:14px; bottom: 20px; left: 50%;'>
+{% elif position == 'right'%}
+<div id='maplegend' class='maplegend' 
+    style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
+     border-radius:6px; padding: 10px; font-size:14px; top: 50%; right: 20px;'>
+{% elif position == 'left'%}
+<div id='maplegend' class='maplegend' 
+    style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
+     border-radius:6px; padding: 10px; font-size:14px; top: 50%; left: 20px;'>
 {% endif %}
      
-<div class='legend-title'>Legend</div>
+<div class='legend-title'>{{ title }}</div>
 <div class='legend-scale'>
   <ul class='legend-labels'>
+
     {{data}}
 
   </ul>

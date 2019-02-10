@@ -1,4 +1,5 @@
 import folium
+import folium.plugins
 import pandas
 import branca.colormap
 import branca.element
@@ -23,8 +24,18 @@ class LingMapError(Exception):
 
 class LingMap(object):
     colors = ['#0000FF', '#8A2BE2', '#A52A2A', '#DEB887', '#5F9EA0', '#7FFF00', '#D2691E', '#FF7F50', '#6495ED', '#F08080', '#000000', '#ffffff']
+    minimap = False
     languages_in_popups = True
+    control_scale = True
     control = False
+    stroke_control = False
+    control_position = 'topright'
+    legend = True
+    stroke_legend = True
+    legend_title = 'Legend'
+    stroke_legend_title = 'Legend'
+    legend_position = 'bottomright'
+    stroke_legend_position = 'bottomleft'
     
     def __init__(self, languages):
         self.languages = languages
@@ -50,11 +61,11 @@ class LingMap(object):
                 popup = folium.Popup(self.popups[i])
                 popup.add_to(marker)
 
-    def _create_legend(self, m, legend_data, position='right'):
+    def _create_legend(self, m, legend_data, title='Legend', position='bottomright'):
         with open('legend.html', 'r', encoding='utf-8') as f:
             template = f.read()
         template = jinja2.Template(template)
-        template = template.render(data=legend_data, position=position)
+        template = template.render(data=legend_data, position=position, title=title)
         template = '{% macro html(this, kwargs) %}' + template + '{% endmacro %}'
         macro = branca.element.MacroElement()
         macro._template = branca.element.Template(template)
@@ -89,7 +100,7 @@ class LingMap(object):
             for i, feature in enumerate(features):
                 if feature not in clear_features:
                     clear_features.append(feature)
-                    groups.append(folium.FeatureGroup(name=self.features[i]))
+                    groups.append(folium.FeatureGroup(name=features[i]))
             for i, feature in enumerate(clear_features):
                 mapping[feature] = (groups[i], colors[i])
                 data += '<li><span style="background: {};opacity:0.7;"></span>{}</li>\n'.format(self.colors[i], feature)
@@ -106,12 +117,15 @@ class LingMap(object):
         if control:
             self.control = True
 
-    def add_stroke_features(self, features, numeric=False):
+    def add_stroke_features(self, features, numeric=False, control=False):
+        self._sanity_check(features, feature_name='stroke features')
         self.stroke_features = features
         if numeric:
             self.s_numeric = True
         else:
             self.s_numeric = False
+        if control:
+            self.stroke_control = True
 
     def add_popups(self, popups):
         self._sanity_check(popups, feature_name='popups')
@@ -125,12 +139,15 @@ class LingMap(object):
         self._sanity_check(custom_coordinates, feature_name='custom_coordinates')
         self.custom_coordinates = custom_coordinates
 
+    def add_minimap(self, position='bottomleft', width=150, height=150, collapsed_width=25, collapsed_height=25, zoom_animation=True):
+        self.minimap = {'position': position, 'width': width, 'height': height, 'collapsed_width': collapsed_width, 'collapsed_height': collapsed_height, 'zoom_animation': zoom_animation}
+
     def _sanity_check(self, features, feature_name='corresponding lists'):
         if len(self.languages) != len(features):
             raise LingMapError("Length of languages and {} does not match".format(feature_name))
     
     def _create_map(self):
-        m = folium.Map(location=[0, 0], zoom_start=3)
+        m = folium.Map(location=[0, 0], zoom_start=3, control_scale=self.control_scale)
         if 'features' in dir(self):
             prepared = self._prepare_features(self.features)
             groups_colors = prepared[0]
@@ -161,8 +178,11 @@ class LingMap(object):
 
             if 'features' in dir(self) and not self.numeric and self.control:
                 marker.add_to(groups_colors[i][0])
+            elif 'stroke_features' in dir(self) and self.stroke_control:
+                marker.add_to(s_groups_colors[i][0])
             else:
                 marker.add_to(m)
+                
             if 'tooltips' in dir(self):
                 tooltip = folium.Tooltip(self.tooltips[i])
                 tooltip.add_to(marker)
@@ -172,12 +192,21 @@ class LingMap(object):
                 colormap = data
                 m.add_child(colormap)
             else:
+                
                 if self.control:
                     [m.add_child(fg[0]) for fg in groups_colors]
-                    folium.LayerControl(collapsed=False).add_to(m)
-                self._create_legend(m, data)
-                if 'stroke_features' in dir(self):
-                    self._create_legend(m, s_data, position='left')
+                    folium.LayerControl(collapsed=False, position=self.control_position).add_to(m)
+                elif self.stroke_control:
+                    [m.add_child(fg[0]) for fg in s_groups_colors]
+                    folium.LayerControl(collapsed=False, position=self.control_position).add_to(m)
+                
+                if self.legend:
+                    self._create_legend(m, data, title=self.legend_title, position=self.legend_position)
+                if 'stroke_features' in dir(self) and self.stroke_legend:
+                    self._create_legend(m, s_data, title=self.stroke_legend_title, position=self.stroke_legend_position)
+        if self.minimap:
+            minimap = folium.plugins.MiniMap(**self.minimap)
+            m.add_child(minimap)
         return m
 
     def save(self, path):
@@ -196,24 +225,32 @@ def random_test():
     m.add_features(features, control=True)
     m.add_popups(affs)
     m.add_tooltips(languages)
-    m.colors = ("yellowgreen", "navy", "black")
+    m.colors = ("yellowgreen", "navy", "blue")
+    m.add_minimap()
     m.save('random.html')
 
 def circassian_test():
     circassian = pandas.read_csv('circassian.csv', delimiter=',', header=0)
 
     coordinates = list(zip(list(circassian.latitude), list(circassian.longitude)))
-    features = list(circassian.dialect)
+    dialects = list(circassian.dialect)
 
     languages = list(circassian.language)
     popups = list(circassian.village)
 
     m = LingMap(languages)
-    m.add_features(features, control=True)
+    m.add_features(dialects, control=True)
+    #m.control_position = 'bottomleft'
     m.add_stroke_features(languages)
     m.add_popups(popups)
     m.add_tooltips(languages)
     m.add_custom_coordinates(coordinates)
+    #m.legend = False
+    #m.stroke_legend = False
+    m.stroke_legend_position = 'right'
+    #m.legend_position = 'topleft'
+    m.stroke_legend_title = 'Languages'
+    m.legend_title = 'Dialects'
     m.save('circassian.html')
 
 def ejectives_test():
@@ -226,6 +263,6 @@ def ejectives_test():
     #m.languages_in_popups = False
     m.save('ejectives.html')
 
-random_test()
-circassian_test()
-ejectives_test()
+#random_test()
+#circassian_test()
+#ejectives_test()
