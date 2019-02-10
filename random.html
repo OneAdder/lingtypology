@@ -17,7 +17,7 @@
     
     <meta name="viewport" content="width=device-width,
         initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <style>#map_50b8afc8918e4aa79c451c83202c5e9a {
+    <style>#map_a4603056da0643beae1871d0c6661157 {
         position: relative;
         width: 100.0%;
         height: 100.0%;
@@ -25,10 +25,12 @@
         top: 0.0%;
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.css"/>
 </head>
 <body>    
     
-    <div class="folium-map" id="map_50b8afc8918e4aa79c451c83202c5e9a" ></div>
+    <div class="folium-map" id="map_a4603056da0643beae1871d0c6661157" ></div>
     
 <!-- Based on the template from here: https://nbviewer.jupyter.org/gist/talbertc-usgs/18f8901fc98f109f2b71156cf3ac81cd -->
 <!doctype html>
@@ -67,9 +69,10 @@
 <div class='legend-title'>Legend</div>
 <div class='legend-scale'>
   <ul class='legend-labels'>
+
     <li><span style="background: yellowgreen;opacity:0.7;"></span>Agglutinative</li>
 <li><span style="background: navy;opacity:0.7;"></span>Inflected</li>
-<li><span style="background: black;opacity:0.7;"></span>Analythic</li>
+<li><span style="background: blue;opacity:0.7;"></span>Analythic</li>
 
 
   </ul>
@@ -125,8 +128,8 @@
         var bounds = null;
     
 
-    var map_50b8afc8918e4aa79c451c83202c5e9a = L.map(
-        'map_50b8afc8918e4aa79c451c83202c5e9a', {
+    var map_a4603056da0643beae1871d0c6661157 = L.map(
+        'map_a4603056da0643beae1871d0c6661157', {
         center: [0, 0],
         zoom: 3,
         maxBounds: bounds,
@@ -135,10 +138,10 @@
         crs: L.CRS.EPSG3857,
         zoomControl: true,
         });
-
+L.control.scale().addTo(map_a4603056da0643beae1871d0c6661157);
     
     
-    var tile_layer_173d19c77587470fa9a483c6ccbf5cb4 = L.tileLayer(
+    var tile_layer_6e8f07838c3c421e875728518725f1e0 = L.tileLayer(
         'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         {
         "attribution": null,
@@ -150,13 +153,13 @@
         "opacity": 1,
         "subdomains": "abc",
         "tms": false
-}).addTo(map_50b8afc8918e4aa79c451c83202c5e9a);
+}).addTo(map_a4603056da0643beae1871d0c6661157);
     
-            var feature_group_ea53d7c21831487a9d9ed666dcd6ee3f = L.featureGroup(
-                ).addTo(map_50b8afc8918e4aa79c451c83202c5e9a);
+            var feature_group_62e031e9b47d400caa7efb5868376565 = L.featureGroup(
+                ).addTo(map_a4603056da0643beae1871d0c6661157);
         
     
-            var circle_marker_f52ec000ac1c464fa49970093f32fc43 = L.circleMarker(
+            var circle_marker_89eecd8cb46c4ceaa3e43b81fcbc5fca = L.circleMarker(
                 [44.0, 39.33],
                 {
   "bubblingMouseEvents": true,
@@ -175,32 +178,32 @@
   "weight": 1
 }
                 )
-                .addTo(feature_group_ea53d7c21831487a9d9ed666dcd6ee3f);
+                .addTo(feature_group_62e031e9b47d400caa7efb5868376565);
             
     
-            var popup_eb5957c41c344b7b8b17b8b72a598ea9 = L.popup({maxWidth: '300'
+            var popup_54adae983f194b288293d78712a76d0b = L.popup({maxWidth: '300'
             
             });
 
             
-                var html_fb13d54c283a4ac8b0f498a6223807ee = $(`<div id="html_fb13d54c283a4ac8b0f498a6223807ee" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/adyg1241" onclick="this.target='_blank';">Adyghe</a><br>North Caucasian, West Caucasian, Circassian</div>`)[0];
-                popup_eb5957c41c344b7b8b17b8b72a598ea9.setContent(html_fb13d54c283a4ac8b0f498a6223807ee);
+                var html_6d11dc2d034748da8bbee33847934517 = $(`<div id="html_6d11dc2d034748da8bbee33847934517" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/adyg1241" onclick="this.target='_blank';">Adyghe</a><br>North Caucasian, West Caucasian, Circassian</div>`)[0];
+                popup_54adae983f194b288293d78712a76d0b.setContent(html_6d11dc2d034748da8bbee33847934517);
             
 
-            circle_marker_f52ec000ac1c464fa49970093f32fc43.bindPopup(popup_eb5957c41c344b7b8b17b8b72a598ea9)
+            circle_marker_89eecd8cb46c4ceaa3e43b81fcbc5fca.bindPopup(popup_54adae983f194b288293d78712a76d0b)
             ;
 
             
         
     
-        circle_marker_f52ec000ac1c464fa49970093f32fc43.bindTooltip(
+        circle_marker_89eecd8cb46c4ceaa3e43b81fcbc5fca.bindTooltip(
             `<div>`
             + `Adyghe` + `</div>`,
             {"sticky": true}
         );
         
     
-            var circle_marker_d5d4d6227b1549058bbd9de806cdbe21 = L.circleMarker(
+            var circle_marker_3adebd7d0771466d86ffa6f10dee6467 = L.circleMarker(
                 [43.50822, 43.39182],
                 {
   "bubblingMouseEvents": true,
@@ -219,36 +222,36 @@
   "weight": 1
 }
                 )
-                .addTo(feature_group_ea53d7c21831487a9d9ed666dcd6ee3f);
+                .addTo(feature_group_62e031e9b47d400caa7efb5868376565);
             
     
-            var popup_45ca55150edf4c47b0da6749dd4b8d28 = L.popup({maxWidth: '300'
+            var popup_e5d887c5a581409ab38dc2e249e0a4c7 = L.popup({maxWidth: '300'
             
             });
 
             
-                var html_81e4ea333ab34894b0badcaf9deb228c = $(`<div id="html_81e4ea333ab34894b0badcaf9deb228c" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/kaba1278" onclick="this.target='_blank';">Kabardian</a><br>North Caucasian, West Caucasian, Circassian</div>`)[0];
-                popup_45ca55150edf4c47b0da6749dd4b8d28.setContent(html_81e4ea333ab34894b0badcaf9deb228c);
+                var html_18afae94e8e242ca85e08ed9b193398b = $(`<div id="html_18afae94e8e242ca85e08ed9b193398b" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/kaba1278" onclick="this.target='_blank';">Kabardian</a><br>North Caucasian, West Caucasian, Circassian</div>`)[0];
+                popup_e5d887c5a581409ab38dc2e249e0a4c7.setContent(html_18afae94e8e242ca85e08ed9b193398b);
             
 
-            circle_marker_d5d4d6227b1549058bbd9de806cdbe21.bindPopup(popup_45ca55150edf4c47b0da6749dd4b8d28)
+            circle_marker_3adebd7d0771466d86ffa6f10dee6467.bindPopup(popup_e5d887c5a581409ab38dc2e249e0a4c7)
             ;
 
             
         
     
-        circle_marker_d5d4d6227b1549058bbd9de806cdbe21.bindTooltip(
+        circle_marker_3adebd7d0771466d86ffa6f10dee6467.bindTooltip(
             `<div>`
             + `Kabardian` + `</div>`,
             {"sticky": true}
         );
         
     
-            var feature_group_aced0451f84b4c0f876fc1ae543e6770 = L.featureGroup(
-                ).addTo(map_50b8afc8918e4aa79c451c83202c5e9a);
+            var feature_group_1009f5a0075c4287ae19f564e92172c6 = L.featureGroup(
+                ).addTo(map_a4603056da0643beae1871d0c6661157);
         
     
-            var circle_marker_e1bcc510517849f3846903e56359757c = L.circleMarker(
+            var circle_marker_59658441291b41478f3a6145b934cb19 = L.circleMarker(
                 [51.843923, 18.625487],
                 {
   "bubblingMouseEvents": true,
@@ -267,32 +270,32 @@
   "weight": 1
 }
                 )
-                .addTo(feature_group_aced0451f84b4c0f876fc1ae543e6770);
+                .addTo(feature_group_1009f5a0075c4287ae19f564e92172c6);
             
     
-            var popup_422314ad09974cbc8de71eed51955b0a = L.popup({maxWidth: '300'
+            var popup_b51dd49e847a425d9e1d345efe7d5bb1 = L.popup({maxWidth: '300'
             
             });
 
             
-                var html_face8b00a21040dcba2eafbff6e003e8 = $(`<div id="html_face8b00a21040dcba2eafbff6e003e8" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/poli1260" onclick="this.target='_blank';">Polish</a><br>Indo-European, Slavic, West, Lechitic</div>`)[0];
-                popup_422314ad09974cbc8de71eed51955b0a.setContent(html_face8b00a21040dcba2eafbff6e003e8);
+                var html_6a47f00b9c90471aa4c4f22017b3fa59 = $(`<div id="html_6a47f00b9c90471aa4c4f22017b3fa59" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/poli1260" onclick="this.target='_blank';">Polish</a><br>Indo-European, Slavic, West, Lechitic</div>`)[0];
+                popup_b51dd49e847a425d9e1d345efe7d5bb1.setContent(html_6a47f00b9c90471aa4c4f22017b3fa59);
             
 
-            circle_marker_e1bcc510517849f3846903e56359757c.bindPopup(popup_422314ad09974cbc8de71eed51955b0a)
+            circle_marker_59658441291b41478f3a6145b934cb19.bindPopup(popup_b51dd49e847a425d9e1d345efe7d5bb1)
             ;
 
             
         
     
-        circle_marker_e1bcc510517849f3846903e56359757c.bindTooltip(
+        circle_marker_59658441291b41478f3a6145b934cb19.bindTooltip(
             `<div>`
             + `Polish` + `</div>`,
             {"sticky": true}
         );
         
     
-            var circle_marker_fb034266566145278aa7479ef464c14e = L.circleMarker(
+            var circle_marker_211c10b6861e4ed0a550e4cf4afe8940 = L.circleMarker(
                 [59.0, 50.0],
                 {
   "bubblingMouseEvents": true,
@@ -311,36 +314,36 @@
   "weight": 1
 }
                 )
-                .addTo(feature_group_aced0451f84b4c0f876fc1ae543e6770);
+                .addTo(feature_group_1009f5a0075c4287ae19f564e92172c6);
             
     
-            var popup_74e297e7c87c41308d561081c65a3d0a = L.popup({maxWidth: '300'
+            var popup_cb306ca30282435c8280c77a11f46566 = L.popup({maxWidth: '300'
             
             });
 
             
-                var html_ef393c4b457f4fa3978881198cc87931 = $(`<div id="html_ef393c4b457f4fa3978881198cc87931" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/russ1263" onclick="this.target='_blank';">Russian</a><br>Indo-European, Slavic, East</div>`)[0];
-                popup_74e297e7c87c41308d561081c65a3d0a.setContent(html_ef393c4b457f4fa3978881198cc87931);
+                var html_debf805ebfed43019546886e69ad66e1 = $(`<div id="html_debf805ebfed43019546886e69ad66e1" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/russ1263" onclick="this.target='_blank';">Russian</a><br>Indo-European, Slavic, East</div>`)[0];
+                popup_cb306ca30282435c8280c77a11f46566.setContent(html_debf805ebfed43019546886e69ad66e1);
             
 
-            circle_marker_fb034266566145278aa7479ef464c14e.bindPopup(popup_74e297e7c87c41308d561081c65a3d0a)
+            circle_marker_211c10b6861e4ed0a550e4cf4afe8940.bindPopup(popup_cb306ca30282435c8280c77a11f46566)
             ;
 
             
         
     
-        circle_marker_fb034266566145278aa7479ef464c14e.bindTooltip(
+        circle_marker_211c10b6861e4ed0a550e4cf4afe8940.bindTooltip(
             `<div>`
             + `Russian` + `</div>`,
             {"sticky": true}
         );
         
     
-            var feature_group_bd79709026ae417cb1c40913562e0d24 = L.featureGroup(
-                ).addTo(map_50b8afc8918e4aa79c451c83202c5e9a);
+            var feature_group_a43792959dfb4424aee6eef19f6115d8 = L.featureGroup(
+                ).addTo(map_a4603056da0643beae1871d0c6661157);
         
     
-            var circle_marker_c5197db5b3a040a485a93a0567a29fb4 = L.circleMarker(
+            var circle_marker_281c0de41d6d453492d98f4557c07dc9 = L.circleMarker(
                 [43.364585, 25.0469866667],
                 {
   "bubblingMouseEvents": true,
@@ -348,7 +351,7 @@
   "dashArray": null,
   "dashOffset": null,
   "fill": true,
-  "fillColor": "black",
+  "fillColor": "blue",
   "fillOpacity": 1,
   "fillRule": "evenodd",
   "lineCap": "round",
@@ -359,42 +362,76 @@
   "weight": 1
 }
                 )
-                .addTo(feature_group_bd79709026ae417cb1c40913562e0d24);
+                .addTo(feature_group_a43792959dfb4424aee6eef19f6115d8);
             
     
-            var popup_e207ccba99ce4fec89cd6cfa5aa9d635 = L.popup({maxWidth: '300'
+            var popup_66d6f1152a1e4c70ad0cd369e1e09ac3 = L.popup({maxWidth: '300'
             
             });
 
             
-                var html_d30629de13324adc90206874700d328b = $(`<div id="html_d30629de13324adc90206874700d328b" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/bulg1262" onclick="this.target='_blank';">Bulgarian</a><br>Indo-European, Slavic, South, Eastern</div>`)[0];
-                popup_e207ccba99ce4fec89cd6cfa5aa9d635.setContent(html_d30629de13324adc90206874700d328b);
+                var html_9b704027b00a4c26915a5d669ee65211 = $(`<div id="html_9b704027b00a4c26915a5d669ee65211" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/bulg1262" onclick="this.target='_blank';">Bulgarian</a><br>Indo-European, Slavic, South, Eastern</div>`)[0];
+                popup_66d6f1152a1e4c70ad0cd369e1e09ac3.setContent(html_9b704027b00a4c26915a5d669ee65211);
             
 
-            circle_marker_c5197db5b3a040a485a93a0567a29fb4.bindPopup(popup_e207ccba99ce4fec89cd6cfa5aa9d635)
+            circle_marker_281c0de41d6d453492d98f4557c07dc9.bindPopup(popup_66d6f1152a1e4c70ad0cd369e1e09ac3)
             ;
 
             
         
     
-        circle_marker_c5197db5b3a040a485a93a0567a29fb4.bindTooltip(
+        circle_marker_281c0de41d6d453492d98f4557c07dc9.bindTooltip(
             `<div>`
             + `Bulgarian` + `</div>`,
             {"sticky": true}
         );
         
     
-            var layer_control_f56709c1a8d44304857895ab299a2d34 = {
-                base_layers : { "openstreetmap" : tile_layer_173d19c77587470fa9a483c6ccbf5cb4, },
-                overlays : { "Agglutinative" : feature_group_ea53d7c21831487a9d9ed666dcd6ee3f,"Inflected" : feature_group_aced0451f84b4c0f876fc1ae543e6770,"Analythic" : feature_group_bd79709026ae417cb1c40913562e0d24, }
+            var layer_control_5a6e17a5689a4dc885aca0eb0347870e = {
+                base_layers : { "openstreetmap" : tile_layer_6e8f07838c3c421e875728518725f1e0, },
+                overlays : { "Agglutinative" : feature_group_62e031e9b47d400caa7efb5868376565,"Inflected" : feature_group_1009f5a0075c4287ae19f564e92172c6,"Analythic" : feature_group_a43792959dfb4424aee6eef19f6115d8, }
                 };
             L.control.layers(
-                layer_control_f56709c1a8d44304857895ab299a2d34.base_layers,
-                layer_control_f56709c1a8d44304857895ab299a2d34.overlays,
+                layer_control_5a6e17a5689a4dc885aca0eb0347870e.base_layers,
+                layer_control_5a6e17a5689a4dc885aca0eb0347870e.overlays,
                 {position: 'topright',
                  collapsed: false,
                  autoZIndex: true
-                }).addTo(map_50b8afc8918e4aa79c451c83202c5e9a);
+                }).addTo(map_a4603056da0643beae1871d0c6661157);
             
+        
+    
+
+        var tile_layer_08178cb35b8840edb02aae41ce503caf = L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+        "attribution": null,
+        "detectRetina": false,
+        "maxNativeZoom": 18,
+        "maxZoom": 18,
+        "minZoom": 0,
+        "noWrap": false,
+        "opacity": 1,
+        "subdomains": "abc",
+        "tms": false
+} );
+
+        var mini_map_2fcbd263a43b47ceb22f427d43d7107b = new L.Control.MiniMap( tile_layer_08178cb35b8840edb02aae41ce503caf,
+         {
+  "autoToggleDisplay": false,
+  "centerFixed": false,
+  "collapsedHeight": 25,
+  "collapsedWidth": 25,
+  "height": 150,
+  "minimized": false,
+  "position": "bottomleft",
+  "toggleDisplay": false,
+  "width": 150,
+  "zoomAnimation": true,
+  "zoomLevelFixed": null,
+  "zoomLevelOffset": -5
+});
+        map_a4603056da0643beae1871d0c6661157.addControl(mini_map_2fcbd263a43b47ceb22f427d43d7107b);
+
         
 </script>
