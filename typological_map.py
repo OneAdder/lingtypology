@@ -25,6 +25,7 @@ class LingMapError(Exception):
 
 
 class LingMap(object):
+    # Feature representation
     colors = ['#0000FF', '#8A2BE2', '#A52A2A', '#DEB887', '#5F9EA0', '#7FFF00', '#D2691E',
               '#FF7F50', '#6495ED', '#F08080', '#00FFFF', '#40E0D0', '#778899', '#FF6347',
               '#4682B4', '#6495ED', '#FFE4C4', '#BC8F8F', '#800000', '#000000', '#ffffff']
@@ -32,27 +33,34 @@ class LingMap(object):
                      '#FF6347', '#778899', '#40E0D0', '#00FFFF', '#F08080', '#6495ED', '#FF7F50',
                      '#D2691E', '#7FFF00', '#5F9EA0', '#DEB887', '#A52A2A', '#8A2BE2', '#0000FF']
     shapes = ['⬤', '◼', '▲', '◯', '◻', '△', '◉', '▣', '◐', '◧', '◭', '◍','▤', '▶']
+    # Map
     start_location = (0, 0)
     start_zoom = 3
-    minimap = {}
-    colormap_colors = ('#e6ccff','#4a008f')
-    languages_in_popups = True
-    use_shapes = False
     control_scale = True
-    control = False
-    stroke_control = False
-    control_position = 'topright'
+    # Legend
     legend = True
     stroke_legend = True
     legend_title = 'Legend'
     stroke_legend_title = 'Legend'
     legend_position = 'bottomright'
     stroke_legend_position = 'bottomleft'
-    rectangles = []
-    lines = []
+    # Popups
+    languages_in_popups = True
     html_popups = False
+    # Markers
+    use_shapes = False
     radius = 7
     stroke_radius = 12
+    # Control
+    control = False
+    stroke_control = False
+    control_position = 'topright'
+    # Colormap
+    colormap_colors = ('#e6ccff','#4a008f')
+    # Adding other stuff
+    minimap = {}
+    rectangles = []
+    lines = []
     
     def __init__(self, languages):
         self.languages = languages
@@ -404,5 +412,4 @@ def simplest_test():
 #circassian_test()
 #ejectives_test()
 #circassian2_test()
-
 
