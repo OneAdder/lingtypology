@@ -58,9 +58,14 @@ class LingMap(object):
         self.languages = languages
 
     def _get_coordinates(self, language):
-        longitude = float(csv[csv.language == language].longitude)
-        latitude = float(csv[csv.language == language].latitude)
-        return (latitude, longitude)
+        latitude = csv[csv.language == language].latitude
+        longitude = csv[csv.language == language].longitude
+        try:
+            float(latitude)
+            float(longitude)
+        except TypeError:
+            raise LingMapError('Cannot find coordinates')
+        return (float(latitude), float(longitude))
 
     def _get_glot_id(self,language):
         return tuple(csv[csv.language == language].glottocode)[0]
