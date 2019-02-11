@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script>L_PREFER_CANVAS=false; L_NO_TOUCH=false; L_DISABLE_3D=false;</script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.3.4/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.3.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+    <meta name="viewport" content="width=device-width,
+        initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>#map_6e6b9e8d91ea484cbb668a5259ddf62a {
+        position: relative;
+        width: 100.0%;
+        height: 100.0%;
+        left: 0.0%;
+        top: 0.0%;
+        }
+    </style>
+</head>
+<body>    
+    
+    <div class="folium-map" id="map_6e6b9e8d91ea484cbb668a5259ddf62a" ></div>
+</body>
+<script>    
+    
+    
+        var bounds = null;
+    
+
+    var map_6e6b9e8d91ea484cbb668a5259ddf62a = L.map(
+        'map_6e6b9e8d91ea484cbb668a5259ddf62a', {
+        center: [0, 0],
+        zoom: 3,
+        maxBounds: bounds,
+        layers: [],
+        worldCopyJump: false,
+        crs: L.CRS.EPSG3857,
+        zoomControl: true,
+        });
+L.control.scale().addTo(map_6e6b9e8d91ea484cbb668a5259ddf62a);
+    
+    
+    var tile_layer_4f82357fe9ee4f7c8ffffc9867f0f6b0 = L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+        "attribution": null,
+        "detectRetina": false,
+        "maxNativeZoom": 18,
+        "maxZoom": 18,
+        "minZoom": 0,
+        "noWrap": false,
+        "opacity": 1,
+        "subdomains": "abc",
+        "tms": false
+}).addTo(map_6e6b9e8d91ea484cbb668a5259ddf62a);
+    
+            var feature_group_17f2ccc43a8a4af0bef90afa5cb6d260 = L.featureGroup(
+                ).addTo(map_6e6b9e8d91ea484cbb668a5259ddf62a);
+        
+    
+            var circle_marker_9b7659abf14a409fb6069e225638d4c3 = L.circleMarker(
+                [46.391292, 24.22557],
+                {
+  "bubblingMouseEvents": true,
+  "color": "#000000",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#000000",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 8.049999999999999,
+  "stroke": true,
+  "weight": 1
+}
+                )
+                .addTo(feature_group_17f2ccc43a8a4af0bef90afa5cb6d260);
+            
+    
+            var circle_marker_7978b994da234a11ac7b6c2aa94c0993 = L.circleMarker(
+                [48.175841999999996, 24.395785999999998],
+                {
+  "bubblingMouseEvents": true,
+  "color": "#000000",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#000000",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 8.049999999999999,
+  "stroke": true,
+  "weight": 1
+}
+                )
+                .addTo(feature_group_17f2ccc43a8a4af0bef90afa5cb6d260);
+            
+    
+            var circle_marker_a4c018ae91234dac81e7ffa065afdbaa = L.circleMarker(
+                [46.391292, 24.22557],
+                {
+  "bubblingMouseEvents": true,
+  "color": "#000000",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#DEB887",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 7,
+  "stroke": false,
+  "weight": 1
+}
+                )
+                .addTo(feature_group_17f2ccc43a8a4af0bef90afa5cb6d260);
+            
+    
+            var popup_6ca03af1c4da446fa0f5d0e416623109 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_15b29e1ff93f4a109b3cae23ce94dc26 = $(`<div id="html_15b29e1ff93f4a109b3cae23ce94dc26" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/roma1327" onclick="this.target='_blank';">Romanian</a><br></div>`)[0];
+                popup_6ca03af1c4da446fa0f5d0e416623109.setContent(html_15b29e1ff93f4a109b3cae23ce94dc26);
+            
+
+            circle_marker_a4c018ae91234dac81e7ffa065afdbaa.bindPopup(popup_6ca03af1c4da446fa0f5d0e416623109)
+            ;
+
+            
+        
+    
+            var circle_marker_738962cab7844a36b0313607e3975416 = L.circleMarker(
+                [48.175841999999996, 24.395785999999998],
+                {
+  "bubblingMouseEvents": true,
+  "color": "#000000",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#DEB887",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 7,
+  "stroke": false,
+  "weight": 1
+}
+                )
+                .addTo(feature_group_17f2ccc43a8a4af0bef90afa5cb6d260);
+            
+    
+            var popup_3061076995924c3c8bf22b2cea90ba13 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_0c76144b70e84b05915d0cc5e03503e5 = $(`<div id="html_0c76144b70e84b05915d0cc5e03503e5" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/ukra1253" onclick="this.target='_blank';">Ukrainian</a><br></div>`)[0];
+                popup_3061076995924c3c8bf22b2cea90ba13.setContent(html_0c76144b70e84b05915d0cc5e03503e5);
+            
+
+            circle_marker_738962cab7844a36b0313607e3975416.bindPopup(popup_3061076995924c3c8bf22b2cea90ba13)
+            ;
+
+            
+        
+</script>

@@ -102,7 +102,9 @@
     width: 30px;
     margin-right: 5px;
     margin-left: 0;
+    {% if not use_shapes %}
     border: 1px solid #999;
+    {% endif %}
     }
   .maplegend .legend-source {
     font-size: 80%;
