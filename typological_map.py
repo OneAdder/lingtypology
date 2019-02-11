@@ -28,6 +28,9 @@ class LingMap(object):
     colors = ['#0000FF', '#8A2BE2', '#A52A2A', '#DEB887', '#5F9EA0', '#7FFF00', '#D2691E',
               '#FF7F50', '#6495ED', '#F08080', '#00FFFF', '#40E0D0', '#778899', '#FF6347',
               '#4682B4', '#6495ED', '#FFE4C4', '#BC8F8F', '#800000', '#000000', '#ffffff']
+    stroke_colors = ['#ffffff', '#000000', '#800000', '#BC8F8F', '#FFE4C4', '#6495ED', '#4682B4',
+                     '#FF6347', '#778899', '#40E0D0', '#00FFFF', '#F08080', '#6495ED', '#FF7F50',
+                     '#D2691E', '#7FFF00', '#5F9EA0', '#DEB887', '#A52A2A', '#8A2BE2', '#0000FF']
     shapes = ['⬤', '◼', '▲', '◯', '◻', '△', '◉', '▣', '◐', '◧', '◭', '◍','▤', '▶']
     start_location = (0, 0)
     start_zoom = 3
@@ -124,7 +127,7 @@ class LingMap(object):
         if use_shapes:
             colors = self.shapes
         if stroke:
-            colors.reverse()
+            colors = self.stroke_colors
         if self.numeric and not stroke:
             features.sort()
             colormap = branca.colormap.LinearColormap(colors=self.colormap_colors, index=[features[0],features[-1]], vmin=features[0], vmax=features[-1])
@@ -224,8 +227,6 @@ class LingMap(object):
         
         for i, language in enumerate(self.languages):
             stroke_marker = False
-            radius = self.radius
-            stroke_radius = radius * 1.15
             if 'custom_coordinates' in dir(self):
                 coordinates = self.custom_coordinates[i]
             else:
@@ -238,15 +239,15 @@ class LingMap(object):
                 
             if 'stroke_features' in dir(self):
                 marker = self._set_marker([coordinates[0], coordinates[1]], fill_color=color_shape)
-                stroke_marker = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=radius*1.15, fill_color='#000000')
+                stroke_marker = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=self.radius*1.15, fill_color='#000000')
                 s_marker = self._set_marker([coordinates[0], coordinates[1]], radius=self.stroke_radius, fill_color=s_groups_features[i][1])
-                s_stroke_marker = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=self.stroke_radius*1.15, fill_color='#000000')
+                s_stroke_marker = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=self.radius*1.8, fill_color='#000000')
             else:
                 if self.use_shapes:
                     marker = self._set_marker([coordinates[0], coordinates[1]], fill_color='#000000', shape=color_shape)
                 else:
-                    marker = self._set_marker([coordinates[0], coordinates[1]], radius=radius, fill_color=color_shape)
-                    stroke_marker = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=stroke_radius, fill_color='#000000')
+                    marker = self._set_marker([coordinates[0], coordinates[1]], radius=self.radius, fill_color=color_shape)
+                    stroke_marker = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=self.radius*1.15, fill_color='#000000')
             
             self._create_popups(marker, language, i, parse_html=self.html_popups)
 
@@ -298,6 +299,7 @@ class LingMap(object):
                     self._create_legend(m, s_data, title=self.stroke_legend_title, position=self.stroke_legend_position)
         else:
             m.add_child(default_group)
+            
         if self.minimap:
             minimap = folium.plugins.MiniMap(**self.minimap)
             m.add_child(minimap)
@@ -392,10 +394,10 @@ def simplest_test():
     m = LingMap(('Romanian', 'Ukrainian'))
     m.save('simplest_test.html')
 
-simplest_test()
-random_test()
-circassian_test()
-ejectives_test()
-circassian2_test()
+#simplest_test()
+#random_test()
+#circassian_test()
+#ejectives_test()
+#circassian2_test()
 
 
