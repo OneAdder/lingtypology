@@ -44,6 +44,7 @@ class LingMap(object):
     stroke_legend_title = 'Legend'
     legend_position = 'bottomright'
     stroke_legend_position = 'bottomleft'
+    _legend_id = 0
     # Popups
     languages_in_popups = True
     html_popups = False
@@ -51,6 +52,8 @@ class LingMap(object):
     use_shapes = False
     radius = 7
     stroke_radius = 12
+    stroked = True
+    unstroked = True
     # Control
     control = False
     stroke_control = False
@@ -104,11 +107,12 @@ class LingMap(object):
         with open('legend.html', 'r', encoding='utf-8') as f:
             template = f.read()
         template = jinja2.Template(template)
-        template = template.render(data=legend_data, position=position, title=title, use_shapes=self.use_shapes)
+        template = template.render(data=legend_data, position=position, title=title, use_shapes=self.use_shapes, legend_id=self._legend_id)
         template = '{% macro html(this, kwargs) %}' + template + '{% endmacro %}'
         macro = branca.element.MacroElement()
         macro._template = branca.element.Template(template)
         m.get_root().add_child(macro)
+        self._legend_id += 1
 
     def _set_marker(self,
                     location,
@@ -163,6 +167,31 @@ class LingMap(object):
                     data += '<li><span style="background: {};opacity:0.7;"></span>{}</li>\n'.format(colors[i], feature)
             groups_features = [mapping[f] for f in features]
         return (groups_features, data)
+
+    def _create_unified_marker(self, coordinates, color_shape, s_color):
+        marker = ''
+        stroke = ''
+        s_marker = ''
+        s_stroke = ''
+        if 'stroke_features' in dir(self):
+            if self.unstroked:
+                marker = self._set_marker([coordinates[0], coordinates[1]], fill_color=color_shape)
+                stroke = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=self.radius*1.15, fill_color='#000000')
+                s_marker = self._set_marker([coordinates[0], coordinates[1]], radius=self.stroke_radius, fill_color=s_color)
+                s_stroke = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=self.radius*1.8, fill_color='#000000')
+            else:
+                marker = self._set_marker([coordinates[0], coordinates[1]], stroke=self.stroked, fill_color=color_shape)
+                s_marker = self._set_marker([coordinates[0], coordinates[1]], stroke=self.stroked, radius=self.stroke_radius, fill_color=s_color)
+        else:
+            if self.use_shapes:
+                marker = self._set_marker([coordinates[0], coordinates[1]], fill_color='#000000', shape=color_shape)
+            else:
+                if self.unstroked:
+                    marker = self._set_marker([coordinates[0], coordinates[1]], radius=self.radius, fill_color=color_shape)
+                    stroke = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=self.radius*1.15, fill_color='#000000')
+                else:
+                    marker = self._set_marker([coordinates[0], coordinates[1]], stroke=self.stroked, radius=self.radius, fill_color=color_shape)
+        return {'marker': marker, 'stroke': stroke, 's_marker': s_marker, 's_stroke': s_stroke}
 
     def add_features(self, features, radius=7, numeric=False, control=False, use_shapes=False):
         self._sanity_check(features, feature_name='features')
@@ -221,13 +250,13 @@ class LingMap(object):
     
     def _create_map(self):
         m = folium.Map(location=self.start_location, zoom_start=self.start_zoom, control_scale=self.control_scale)
+        
         default_group = folium.FeatureGroup()
         markers = []
-        stroke_markers = []
+        strokes = []
         s_markers = []
-        s_stroke_markers = []
-        s_marker = ''
-        s_stroke_marker = ''
+        s_strokes = []
+
         if 'features' in dir(self):
             prepared = self._prepare_features(self.features, use_shapes=self.use_shapes)
             groups_features = prepared[0]
@@ -249,20 +278,15 @@ class LingMap(object):
                 color_shape = groups_features[i][1]
             else:
                 color_shape = '#DEB887'
-                
+
             if 'stroke_features' in dir(self):
-                marker = self._set_marker([coordinates[0], coordinates[1]], fill_color=color_shape)
-                stroke_marker = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=self.radius*1.15, fill_color='#000000')
-                s_marker = self._set_marker([coordinates[0], coordinates[1]], radius=self.stroke_radius, fill_color=s_groups_features[i][1])
-                s_stroke_marker = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=self.radius*1.8, fill_color='#000000')
+                s_color = s_groups_features[i][1]
             else:
-                if self.use_shapes:
-                    marker = self._set_marker([coordinates[0], coordinates[1]], fill_color='#000000', shape=color_shape)
-                else:
-                    marker = self._set_marker([coordinates[0], coordinates[1]], radius=self.radius, fill_color=color_shape)
-                    stroke_marker = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=self.radius*1.15, fill_color='#000000')
+                s_color = '#000000'
+                
+            unified_marker = self._create_unified_marker(coordinates, color_shape, s_color)
             
-            self._create_popups(marker, language, i, parse_html=self.html_popups)
+            self._create_popups(unified_marker['marker'], language, i, parse_html=self.html_popups)
 
             if 'features' in dir(self) and not self.numeric and self.control:
                 group = groups_features[i][0]
@@ -273,22 +297,22 @@ class LingMap(object):
                 
             if 'tooltips' in dir(self):
                 tooltip = folium.Tooltip(self.tooltips[i])
-                tooltip.add_to(marker)
+                tooltip.add_to(unified_marker['marker'])
 
-            markers.append((marker, group))
-            if stroke_marker:
-                stroke_markers.append((stroke_marker, group))
-            if s_marker:
-                s_markers.append((s_marker, group))
-            if s_stroke_marker:
-                s_stroke_markers.append((s_stroke_marker, group))
+            markers.append((unified_marker['marker'], group))
+            if unified_marker['stroke']:
+                strokes.append((unified_marker['stroke'], group))
+            if unified_marker['s_marker']:
+                s_markers.append((unified_marker['s_marker'], group))
+            if unified_marker['s_stroke']:
+                s_strokes.append((unified_marker['s_stroke'], group))
 
-        if s_stroke_markers:
-            [s_stroke_mark[0].add_to(s_stroke_mark[1]) for s_stroke_mark in s_stroke_markers]
+        if s_strokes:
+            [s_stroke[0].add_to(s_stroke[1]) for s_stroke in s_strokes]
         if s_markers:
             [s_mark[0].add_to(s_mark[1]) for s_mark in s_markers]
-        if stroke_markers:
-            [stroke_mark[0].add_to(stroke_mark[1]) for stroke_mark in stroke_markers]
+        if strokes:
+            [stroke[0].add_to(stroke[1]) for stroke in strokes]
         [mark[0].add_to(mark[1]) for mark in markers]
     
         if 'features' in dir(self):
@@ -356,6 +380,7 @@ def circassian_test():
     popups = list(circassian.village)
 
     m = LingMap(languages)
+    #m.unstroked = False
     m.start_location = (44.21, 42.32)
     m.start_zoom = 8
     m.add_features(dialects)#, control=True)
@@ -405,6 +430,7 @@ def circassian2_test():
 
 def simplest_test():
     m = LingMap(('Romanian', 'Ukrainian'))
+    m.unstroked = False
     m.save('simplest_test.html')
 
 #simplest_test()
