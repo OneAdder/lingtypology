@@ -393,7 +393,7 @@ def circassian_test():
     #m.add_line(((44.5, 39), (43, 43)))
     #m.legend = False
     #m.stroke_legend = False
-    m.stroke_legend_position = 'right'
+    m.stroke_legend_position = 'topright'
     #m.legend_position = 'topleft'
     m.stroke_legend_title = 'Languages'
     m.legend_title = 'Dialects'
