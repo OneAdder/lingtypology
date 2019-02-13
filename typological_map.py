@@ -59,14 +59,21 @@ class LingMap(object):
     stroke_control = False
     control_position = 'topright'
     # Colormap
-    colormap_colors = ('#e6ccff','#4a008f')
+    colormap_colors = ('#ffffff','#4a008f')
+    # Heat map
+    use_heatmap = False
+    heatmap_only = False
+    heatmap = []
     # Adding other stuff
     minimap = {}
     rectangles = []
     lines = []
     
     def __init__(self, languages):
-        self.languages = languages
+        if languages:
+            self.languages = languages
+        else:
+            self.heatmap_only = True
 
     def _get_coordinates(self, language):
         latitude = csv[csv.language == language].latitude
@@ -113,6 +120,9 @@ class LingMap(object):
         macro._template = branca.element.Template(template)
         m.get_root().add_child(macro)
         self._legend_id += 1
+
+    def _create_heatmap(self, m, heatmap):
+        folium.plugins.HeatMap(heatmap).add_to(m)
 
     def _set_marker(self,
                     location,
@@ -244,6 +254,10 @@ class LingMap(object):
     def add_line(self, locations, tooltip='', popup='', color='black', smooth_factor=1.0):
         self.lines.append({'locations': locations, 'tooltip': tooltip, 'popup': popup, 'color': color, 'smooth_factor': smooth_factor})
 
+    def add_heatmap(self, heatmap=[]):
+        self.use_heatmap = True
+        self.heatmap = heatmap
+
     def _sanity_check(self, features, feature_name='corresponding lists'):
         if len(self.languages) != len(features):
             raise LingMapError("Length of languages and {} does not match".format(feature_name))
@@ -256,6 +270,11 @@ class LingMap(object):
         strokes = []
         s_markers = []
         s_strokes = []
+
+        if self.heatmap_only:
+            if self.heatmap:
+                self._create_heatmap(m, self.heatmap)
+            return m
 
         if 'features' in dir(self):
             prepared = self._prepare_features(self.features, use_shapes=self.use_shapes)
@@ -273,6 +292,7 @@ class LingMap(object):
                 coordinates = self.custom_coordinates[i]
             else:
                 coordinates = self._get_coordinates(language)
+                self.heatmap.append(coordinates)
                 
             if 'features' in dir(self):
                 color_shape = groups_features[i][1]
@@ -346,6 +366,8 @@ class LingMap(object):
         if self.lines:
             for line in self.lines:
                 folium.PolyLine(**line).add_to(m)
+        if self.heatmap:
+            self._create_heatmap(m, self.heatmap)
         return m
 
     def save(self, path):
@@ -433,9 +455,49 @@ def simplest_test():
     m.unstroked = False
     m.save('simplest_test.html')
 
+def heatmap_only_test():
+    circassian = pandas.read_csv('circassian.csv', delimiter=',', header=0)
+    coordinates = list(zip(list(circassian[circassian.language == 'Kabardian'].latitude), list(circassian[circassian.language == 'Kabardian'].longitude)))
+    m = LingMap([])
+    m.start_zoom = 6
+    m.start_location = (44.21, 42.32)
+    m.add_heatmap(coordinates)
+    m.save('heatmap_only.html')
+
+def heatmap_test():
+    circassian = pandas.read_csv('circassian.csv', delimiter=',', header=0)
+
+    coordinates = list(zip(list(circassian.latitude), list(circassian.longitude)))
+    dialects = list(circassian.dialect)
+
+    languages = list(circassian.language)
+    popups = list(circassian.village)
+
+    m = LingMap(languages)
+    m.start_location = (44.21, 42.32)
+    m.start_zoom = 6
+    m.add_custom_coordinates(coordinates)
+    m.legend_title = 'Languages'
+    m.add_heatmap(coordinates)
+    m.save('heatmap.html')
+    
+
 #simplest_test()
 #random_test()
 #circassian_test()
 #ejectives_test()
 #circassian2_test()
+#heatmap_only_test()
+#heatmap_test()
+
+
+
+
+
+
+
+
+
+
+
 
