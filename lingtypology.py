@@ -1,20 +1,24 @@
+'''
+Folium tools
+'''
 import folium
 import folium.plugins
 
+'''
+Branca tools
+'''
 import branca.colormap
 import branca.element
 
+#Jinja2
 import jinja2
+#Pandas
 import pandas
 
-legend_html = ''
-csv = pandas.read_csv('glottolog.csv', delimiter='\t', header=0)
-
-def get_affiliations(languages):
-    affiliations = []
-    for language in languages:
-        affiliations.append(tuple(csv[csv.language == language].affiliation)[0])
-    return affiliations
+'''
+Local tools
+'''
+import glottolog
 
 
 class LingMapError(Exception):
@@ -75,19 +79,6 @@ class LingMap(object):
         else:
             self.heatmap_only = True
 
-    def _get_coordinates(self, language):
-        latitude = csv[csv.language == language].latitude
-        longitude = csv[csv.language == language].longitude
-        try:
-            float(latitude)
-            float(longitude)
-        except TypeError:
-            raise LingMapError('Cannot find coordinates')
-        return (float(latitude), float(longitude))
-
-    def _get_glot_id(self,language):
-        return tuple(csv[csv.language == language].glottocode)[0]
-
     def _create_popups(self, marker, language, i, parse_html=False):
         popup_href = '''<a href="https://glottolog.org/resource/languoid/id/{}" onclick="this.target='_blank';">{}</a><br>'''
         if self.languages_in_popups:
@@ -97,9 +88,9 @@ class LingMap(object):
                                        It is impossible to add both language links and large HTML strings.
                                        You can either not use parse_html option or set ling_map_object.languages_in_popups = False.
                                        ''')
-                popup = folium.Popup(popup_href.format(self._get_glot_id(language), language) + self.popups[i])
+                popup = folium.Popup(popup_href.format(glottolog.get_glot_id(language), language) + self.popups[i])
             else:
-                popup = folium.Popup(popup_href.format(self._get_glot_id(language), language))
+                popup = folium.Popup(popup_href.format(glottolog.get_glot_id(language), language))
             popup.add_to(marker)
         else:
             if 'popups' in dir(self):
@@ -291,9 +282,11 @@ class LingMap(object):
             if 'custom_coordinates' in dir(self):
                 coordinates = self.custom_coordinates[i]
             else:
-                coordinates = self._get_coordinates(language)
+                coordinates = glottolog.get_coordinates(language)
+                if not coordinates:
+                    continue
                 self.heatmap.append(coordinates)
-                
+            
             if 'features' in dir(self):
                 color_shape = groups_features[i][1]
             else:
@@ -366,7 +359,7 @@ class LingMap(object):
         if self.lines:
             for line in self.lines:
                 folium.PolyLine(**line).add_to(m)
-        if self.heatmap:
+        if self.use_heatmap:
             self._create_heatmap(m, self.heatmap)
         return m
 
@@ -382,7 +375,7 @@ def random_test():
     languages = ["Adyghe", "Kabardian", "Polish", "Russian", "Bulgarian"]
     m = LingMap(languages)
 
-    affs = get_affiliations(languages)
+    affs = glottolog.get_affiliations(languages)
     features = ["Agglutinative", "Agglutinative", "Inflected", "Inflected", "Analythic"]
 
     m.add_features(features, control=True, use_shapes=True)
