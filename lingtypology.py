@@ -73,7 +73,7 @@ class LingMap(object):
     rectangles = []
     lines = []
     
-    def __init__(self, languages):
+    def __init__(self, languages=[]):
         if languages:
             if isinstance(languages, str):
                 self.languages = (languages,)
