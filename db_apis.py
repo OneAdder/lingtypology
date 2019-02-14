@@ -3,7 +3,7 @@ import urllib.request as ur
 
 
 class Wals(object):
-    show_citation = False
+    show_citation = True
     features_set = ("1A", "2A", "3A", "4A", "5A", "6A", "7A", "8A", "9A", "10A", "10B", "11A",
                     "12A", "13A", "14A", "15A", "16A", "17A", "18A", "19A", "20A", "21A", "21B",
                     "22A", "23A", "24A", "25A", "25B", "26A", "27A", "28A", "29A", "30A", "31A",
@@ -47,11 +47,11 @@ class Wals(object):
     def _get_citation(self, feature):
         wals_url = 'http://wals.info/feature/{}.tab'.format(feature)
         wals_page = ur.urlopen(wals_url)
-        _citation = 'Citation for feature {}:\n{}'
+        _citation = 'Citation for feature {}:\n{}\n'
         citation = _citation.format(feature, '\n'.join(wals_page.read().decode('utf-8').split('\n')[:5]))
         return citation
 
-    def get_wals_features(self):
+    def get_df(self):
         features = self.features
         if isinstance(features, str):
             features = (features,)
@@ -64,6 +64,19 @@ class Wals(object):
             wals_feature = wals_feature.rename(columns={'description': '_' + feature})
             df = pandas.merge(df, wals_feature, on="wals code")
         return df
-            
 
-#print(Wals('1a').get_wals_features())
+    def get_json(self):
+        df = self.get_df()
+
+        js = {}
+        for header in list(df):
+            if not header == 'latitude' and not header == 'longitude' and not header == 'area':
+                js[header] = list(df[header])
+
+        coordinates = list(zip(list(df[df._1A == 'Large'].latitude), list(df[df._1A == 'Large'].longitude)))
+        js['coordinates'] = coordinates
+        return js
+
+#print(Wals('1a').get_json())
+
+
