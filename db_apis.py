@@ -65,7 +65,6 @@ class Wals(object):
             df = pandas.merge(df, wals_feature, on="wals code")
         return df
 
-
     def get_json(self):
         df = self.get_df()
 
@@ -78,6 +77,36 @@ class Wals(object):
         js['coordinates'] = coordinates
         return js
 
+
+class Phoible(object):
+    show_citation = True
+    citation =  '''
+Moran, Steven & McCloy, Daniel & Wright, Richard (eds.) 2014. PHOIBLE Online. Leipzig: Max Planck Institute for Evolutionary Anthropology. (Available online at http://phoible.org, Accessed on ...)
+A BibTeX entry for LaTeX users is
+@book{phoible,
+address   = {Leipzig},
+editor    = {Steven Moran and Daniel McCloy and Richard Wright},
+publisher = {Max Planck Institute for Evolutionary Anthropology},
+title     = {PHOIBLE Online},
+url       = {http://phoible.org/},
+year      = {2014}
+}
+                '''
+    def get_df(self):
+        if self.show_citation:
+            print(self.citation)
+        phoible_url = 'https://raw.githubusercontent.com/clld/phoible/master/data/phoible-aggregated.tsv'
+        df = pandas.read_csv(phoible_url, delimiter='\t', header=0)
+        return df
+
+    def get_json(self):
+        df = self.get_df()
+        js = {}
+        for header in list(df):
+            if not header == 'Latitude' and not header == 'Longitude':
+                js[header] = list(df[header])
+        coordinates = list(zip(list(df.Latitude), list(df.Longitude)))
+        return js
+
 #print(Wals('1a').get_json())
-
-
+#print(Phoible().get_json())
