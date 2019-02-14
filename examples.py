@@ -105,16 +105,35 @@ def heatmap_test():
     m.add_heatmap(coordinates)
     m.save('heatmap.html')
     
+def wals_test():
+    df = Wals(('1a',)).get_wals_features()
+    languages = list(df.language)
+    features = list(df._1A)
+    coordinates = list(zip(list(df.latitude), list(df.longitude)))
+    
+    m = LingMap(languages)
+    m.add_custom_coordinates(coordinates)
+    m.add_features(features)
+    m.legend_title = 'Consonant Inventory'
+    m.save('wals_test.html')
 
-simplest_test()
-random_test()
-circassian_test()
-ejectives_test()
-circassian2_test()
-heatmap_only_test()
-heatmap_test()
+def wals_heatmap_test():
+    df = Wals('1a').get_df()
+    coordinates = list(zip(list(df[df._1A == 'Large'].latitude), list(df[df._1A == 'Large'].longitude)))
 
+    m = LingMap()
+    m.heatmap = coordinates
+    m.save('wals_heatmap')
 
+#simplest_test()
+#random_test()
+#circassian_test()
+#ejectives_test()
+#circassian2_test()
+#heatmap_only_test()
+#heatmap_test()
+#wals_test()
+wals_heatmap_test()
 
 
 
