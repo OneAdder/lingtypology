@@ -65,6 +65,7 @@ class Wals(object):
             df = pandas.merge(df, wals_feature, on="wals code")
         return df
 
+
     def get_json(self):
         df = self.get_df()
 
@@ -73,7 +74,7 @@ class Wals(object):
             if not header == 'latitude' and not header == 'longitude':
                 js[header] = list(df[header])
 
-        coordinates = list(zip(list(df[df._1A == 'Large'].latitude), list(df[df._1A == 'Large'].longitude)))
+        coordinates = list(zip(list(df.latitude), list(df.longitude)))
         js['coordinates'] = coordinates
         return js
 
