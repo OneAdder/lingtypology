@@ -30,8 +30,9 @@ class Wals(object):
     def _get_wals_template(self):
         wals_url = 'http://wals.info/feature/1A.tab'
         df = pandas.read_csv(wals_url, delimiter='\t', skiprows=7)
-        df.drop('value', 1)
-        df.drop('description', 1)
+        df = df.drop('value', 1)
+        df = df.drop('description', 1)
+        df = df.rename(columns={'name': 'language'})
         return df
 
     def _get_wals_data(self, feature):
@@ -50,14 +51,19 @@ class Wals(object):
         citation = _citation.format(feature, '\n'.join(wals_page.read().decode('utf-8').split('\n')[:5]))
         return citation
 
-    def get_wals_features(self, features):
+    def get_wals_features(self):
+        features = self.features
+        if isinstance(features, str):
+            features = (features,)
         df = self._get_wals_template()
         for feature in features:
             feature = feature.upper()
             if self.show_citation:
                 print(self._get_citation(feature))
             wals_feature = self._get_wals_data(feature)
+            wals_feature = wals_feature.rename(columns={'description': '_' + feature})
             df = pandas.merge(df, wals_feature, on="wals code")
         return df
             
 
+#print(Wals('1a').get_wals_features())

@@ -19,7 +19,7 @@ import pandas
 Local tools
 '''
 import glottolog
-
+from db_apis import Wals
 
 class LingMapError(Exception):
     def __init__(self,value):
@@ -75,7 +75,10 @@ class LingMap(object):
     
     def __init__(self, languages):
         if languages:
-            self.languages = languages
+            if isinstance(languages, str):
+                self.languages = (languages,)
+            else:
+                self.languages = tuple(languages)
         else:
             self.heatmap_only = True
 
@@ -155,18 +158,21 @@ class LingMap(object):
             mapping = {}
             clear_features = []
             groups = []
-            data = ''
+            data = []
             for i, feature in enumerate(features):
                 if feature not in clear_features:
                     clear_features.append(feature)
                     groups.append(folium.FeatureGroup(name=features[i]))
             for i, feature in enumerate(clear_features):
                 mapping[feature] = (groups[i], colors[i])
-                if use_shapes:
-                    data += '<li><span style="color: #000000; text-align: center; opacity:0.7;">{}</span>{}</li>\n'.format(colors[i], feature)
-                else:
-                    data += '<li><span style="background: {};opacity:0.7;"></span>{}</li>\n'.format(colors[i], feature)
+                data.append((feature, colors[i]))
             groups_features = [mapping[f] for f in features]
+            data.sort()
+            if use_shapes:
+                html = '<li><span style="color: #000000; text-align: center; opacity:0.7;">{}</span>{}</li>'
+            else:
+                html = '<li><span style="background: {};opacity:0.7;"></span>{}</li>'
+            data = '\n'.join([html.format(d[1], d[0]) for d in data])
         return (groups_features, data)
 
     def _create_unified_marker(self, coordinates, color_shape, s_color):
@@ -196,7 +202,7 @@ class LingMap(object):
 
     def add_features(self, features, radius=7, numeric=False, control=False, use_shapes=False):
         self._sanity_check(features, feature_name='features')
-        self.features = features
+        self.features = tuple(features)
         self.radius = 7
         if numeric:
             self.numeric = True
@@ -209,7 +215,7 @@ class LingMap(object):
 
     def add_stroke_features(self, features, radius=12, numeric=False, control=False):
         self._sanity_check(features, feature_name='stroke features')
-        self.stroke_features = features
+        self.stroke_features = tuple(features)
         if numeric:
             self.s_numeric = True
         else:
@@ -220,13 +226,13 @@ class LingMap(object):
 
     def add_popups(self, popups, parse_html=False):
         self._sanity_check(popups, feature_name='popups')
-        self.popups = popups
+        self.popups = tuple(popups)
         if parse_html:
             self.html_popups=True
 
     def add_tooltips(self, tooltips):
         self._sanity_check(tooltips, feature_name='tooltips')
-        self.tooltips = tooltips
+        self.tooltips = tuple(tooltips)
 
     def add_custom_coordinates(self, custom_coordinates):
         self._sanity_check(custom_coordinates, feature_name='custom_coordinates')
@@ -327,7 +333,7 @@ class LingMap(object):
         if strokes:
             [stroke[0].add_to(stroke[1]) for stroke in strokes]
         [mark[0].add_to(mark[1]) for mark in markers]
-    
+        
         if 'features' in dir(self):
             if self.numeric:
                 m.add_child(default_group)
