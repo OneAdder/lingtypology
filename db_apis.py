@@ -70,7 +70,7 @@ class Wals(object):
 
         js = {}
         for header in list(df):
-            if not header == 'latitude' and not header == 'longitude' and not header == 'area':
+            if not header == 'latitude' and not header == 'longitude':
                 js[header] = list(df[header])
 
         coordinates = list(zip(list(df[df._1A == 'Large'].latitude), list(df[df._1A == 'Large'].longitude)))

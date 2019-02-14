@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script>L_PREFER_CANVAS=false; L_NO_TOUCH=false; L_DISABLE_3D=false;</script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.3.4/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.3.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+    <meta name="viewport" content="width=device-width,
+        initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>#map_524fd4cdad6b4179aef38dfaace288ca {
+        position: relative;
+        width: 100.0%;
+        height: 100.0%;
+        left: 0.0%;
+        top: 0.0%;
+        }
+    </style>
+</head>
+<body>    
+    
+    <div class="folium-map" id="map_524fd4cdad6b4179aef38dfaace288ca" ></div>
+</body>
+<script>    
+    
+    
+        var bounds = null;
+    
+
+    var map_524fd4cdad6b4179aef38dfaace288ca = L.map(
+        'map_524fd4cdad6b4179aef38dfaace288ca', {
+        center: [0, 0],
+        zoom: 1,
+        maxBounds: bounds,
+        layers: [],
+        worldCopyJump: false,
+        crs: L.CRS.EPSG3857,
+        zoomControl: true,
+        });
+
+    
+    
+    var tile_layer_f0f201f2e18342e392bfc562f00f85cf = L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+        "attribution": null,
+        "detectRetina": false,
+        "maxNativeZoom": 18,
+        "maxZoom": 18,
+        "minZoom": 0,
+        "noWrap": false,
+        "opacity": 1,
+        "subdomains": "abc",
+        "tms": false
+}).addTo(map_524fd4cdad6b4179aef38dfaace288ca);
+    
+        var marker_a7c4cb24a8cc4f5a9763e081714428bf = L.marker(
+            [0, 0],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_524fd4cdad6b4179aef38dfaace288ca);
+        
+    
+
+                var div_icon_43a9a05a676c4dd2a0a98360ffca0b40 = L.divIcon({
+                    
+                    
+                    
+                    className: 'empty',
+                    html: '<!DOCTYPE html><?xml version="1.0" encoding="utf-8"?>
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" class="pygal-chart" id="chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg"><!--Generated with pygal 2.4.0 (etree) ©Kozea 2012-2016 on 2019-02-12--><!--http://pygal.org--><!--http://github.com/Kozea/pygal--><defs><style type="text/css">#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72{-webkit-user-select:none;-webkit-font-smoothing:antialiased;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .title{font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;font-size:16px}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .legends .legend text{font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;font-size:14px}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis text{font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;font-size:10px}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis text.major{font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;font-size:10px}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .text-overlay text.value{font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;font-size:16px}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .text-overlay text.label{font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;font-size:10px}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .tooltip{font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;font-size:14px}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 text.no_data{font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;font-size:64px}
+#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72{background-color:rgba(249,249,249,1)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 path,#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 line,#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 rect,#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 circle{-webkit-transition:150ms;-moz-transition:150ms;transition:150ms}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .graph &gt; .background{fill:rgba(249,249,249,1)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .plot &gt; .background{fill:rgba(255,255,255,1)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .graph{fill:rgba(0,0,0,.87)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 text.no_data{fill:rgba(0,0,0,1)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .title{fill:rgba(0,0,0,1)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .legends .legend text{fill:rgba(0,0,0,.87)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .legends .legend:hover text{fill:rgba(0,0,0,1)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis .line{stroke:rgba(0,0,0,1)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis .guide.line{stroke:rgba(0,0,0,.54)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis .major.line{stroke:rgba(0,0,0,.87)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis text.major{fill:rgba(0,0,0,1)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis.y .guides:hover .guide.line,#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .line-graph .axis.x .guides:hover .guide.line,#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .stackedline-graph .axis.x .guides:hover .guide.line,#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .xy-graph .axis.x .guides:hover .guide.line{stroke:rgba(0,0,0,1)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis .guides:hover text{fill:rgba(0,0,0,1)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .reactive{fill-opacity:.7;stroke-opacity:.8}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .ci{stroke:rgba(0,0,0,.87)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .reactive.active,#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .active .reactive{fill-opacity:.8;stroke-opacity:.9;stroke-width:4}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .ci .reactive.active{stroke-width:1.5}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .series text{fill:rgba(0,0,0,1)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .tooltip rect{fill:rgba(255,255,255,1);stroke:rgba(0,0,0,1);-webkit-transition:opacity 150ms;-moz-transition:opacity 150ms;transition:opacity 150ms}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .tooltip .label{fill:rgba(0,0,0,.87)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .tooltip .label{fill:rgba(0,0,0,.87)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .tooltip .legend{font-size:.8em;fill:rgba(0,0,0,.54)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .tooltip .x_label{font-size:.6em;fill:rgba(0,0,0,1)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .tooltip .xlink{font-size:.5em;text-decoration:underline}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .tooltip .value{font-size:1.5em}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .bound{font-size:.5em}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .max-value{font-size:.75em;fill:rgba(0,0,0,.54)}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .map-element{fill:rgba(255,255,255,1);stroke:rgba(0,0,0,.54) !important}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .map-element .reactive{fill-opacity:inherit;stroke-opacity:inherit}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .color-0,#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .color-0 a:visited{stroke:#F44336;fill:#F44336}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .color-1,#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .color-1 a:visited{stroke:#3F51B5;fill:#3F51B5}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .color-2,#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .color-2 a:visited{stroke:#009688;fill:#009688}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .text-overlay .color-0 text{fill:black}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .text-overlay .color-1 text{fill:black}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .text-overlay .color-2 text{fill:black}
+#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 text.no_data{text-anchor:middle}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .guide.line{fill:none}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .centered{text-anchor:middle}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .title{text-anchor:middle}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .legends .legend text{fill-opacity:1}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis.x text{text-anchor:middle}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis.x:not(.web) text[transform]{text-anchor:start}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis.x:not(.web) text[transform].backwards{text-anchor:end}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis.y text{text-anchor:end}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis.y text[transform].backwards{text-anchor:start}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis.y2 text{text-anchor:start}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis.y2 text[transform].backwards{text-anchor:end}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis .guide.line{stroke-dasharray:4,4}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis .major.guide.line{stroke-dasharray:6,6}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .horizontal .axis.y .guide.line,#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .horizontal .axis.y2 .guide.line,#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .vertical .axis.x .guide.line{opacity:0}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .horizontal .axis.always_show .guide.line,#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .vertical .axis.always_show .guide.line{opacity:1 !important}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis.y .guides:hover .guide.line,#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis.y2 .guides:hover .guide.line,#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis.x .guides:hover .guide.line{opacity:1}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .axis .guides:hover text{opacity:1}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .nofill{fill:none}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .subtle-fill{fill-opacity:.2}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .dot{stroke-width:1px;fill-opacity:1}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .dot.active{stroke-width:5px}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .dot.negative{fill:transparent}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 text,#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 tspan{stroke:none !important}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .series text.active{opacity:1}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .tooltip rect{fill-opacity:.95;stroke-width:.5}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .tooltip text{fill-opacity:1}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .showable{visibility:hidden}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .showable.shown{visibility:visible}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .gauge-background{fill:rgba(229,229,229,1);stroke:none}#chart-48ce79de-2cb3-440e-9ec3-3b5c2c382d72 .bg-lines{stroke:rgba(249,249,249,1);stroke-width:2px}</style><script type="text/javascript" xlink:href="https://kozea.github.io/pygal.js/2.0.x/pygal-tooltips.min.js" /></defs><title>Destiny Kill/Death Ratio</title><g class="graph bar-graph vertical"><rect class="background" height="600" width="800" x="0" y="0" /><g class="plot" transform="translate(48, 46)"><rect class="background" height="534" width="732.0" x="0" y="0" /><g class="axis y always_show"><g class="guides"><path class="axis major line" d="M0.000000 523.730769 h732.000000" /><text class="major" x="-5" y="527.2307692307693">0</text><title>0</title></g><g class="guides"><path class="guide line" d="M0.000000 477.052448 h732.000000" /><text class="" x="-5" y="480.5524475524476">0.1</text><title>0.1</title></g><g class="guides"><path class="guide line" d="M0.000000 430.374126 h732.000000" /><text class="" x="-5" y="433.87412587412587">0.2</text><title>0.2</title></g><g class="guides"><path class="guide line" d="M0.000000 383.695804 h732.000000" /><text class="" x="-5" y="387.1958041958042">0.3</text><title>0.3</title></g><g class="guides"><path class="guide line" d="M0.000000 337.017483 h732.000000" /><text class="" x="-5" y="340.51748251748256">0.4</text><title>0.4</title></g><g class="guides"><path class="major guide line" d="M0.000000 290.339161 h732.000000" /><text class="major" x="-5" y="293.83916083916085">0.5</text><title>0.5</title></g><g class="guides"><path class="guide line" d="M0.000000 243.660839 h732.000000" /><text class="" x="-5" y="247.16083916083915">0.6</text><title>0.6</title></g><g class="guides"><path class="guide line" d="M0.000000 196.982517 h732.000000" /><text class="" x="-5" y="200.4825174825175">0.7</text><title>0.7</title></g><g class="guides"><path class="guide line" d="M0.000000 150.304196 h732.000000" /><text class="" x="-5" y="153.80419580419584">0.8</text><title>0.8</title></g><g class="guides"><path class="guide line" d="M0.000000 103.625874 h732.000000" /><text class="" x="-5" y="107.12587412587419">0.9</text><title>0.9</title></g><g class="guides"><path class="major guide line" d="M0.000000 56.947552 h732.000000" /><text class="major" x="-5" y="60.44755244755248">1</text><title>1</title></g><g class="guides"><path class="guide line" d="M0.000000 10.269231 h732.000000" /><text class="" x="-5" y="13.76923076923083">1.1</text><title>1.1</title></g></g><g class="series serie-0 color-0"><g class="bars"><g class="bar"><rect class="rect reactive tooltip-trigger" height="438.77622377622373" rx="0" ry="0" width="181.68615384615384" x="68.69538461538461" y="84.95454545454555" /><desc class="value">0.94</desc><desc class="x centered">159.53846153846155</desc><desc class="y centered">304.3426573426574</desc></g></g></g><g class="series serie-1 color-1"><g class="bars"><g class="bar"><rect class="rect reactive tooltip-trigger" height="490.1223776223776" rx="0" ry="0" width="181.68615384615384" x="275.1569230769231" y="33.608391608391685" /><desc class="value">1.05</desc><desc class="x centered">366.0</desc><desc class="y centered">278.6695804195805</desc></g></g></g><g class="series serie-2 color-2"><g class="bars"><g class="bar"><rect class="rect reactive tooltip-trigger" height="513.4615384615385" rx="0" ry="0" width="181.68615384615384" x="481.61846153846153" y="10.26923076923083" /><desc class="value">1.1</desc><desc class="x centered">572.4615384615385</desc><desc class="y centered">267.00000000000006</desc></g></g></g></g><g class="titles"><text class="title plot_title" x="400.0" y="26">Destiny Kill/Death Ratio</text></g><g class="plot overlay" transform="translate(48, 46)"><g class="series serie-0 color-0" /><g class="series serie-1 color-1" /><g class="series serie-2 color-2" /></g><g class="plot text-overlay" transform="translate(48, 46)"><g class="series serie-0 color-0" /><g class="series serie-1 color-1" /><g class="series serie-2 color-2" /></g><g class="plot tooltip-overlay" transform="translate(48, 46)"><g class="tooltip" style="opacity: 0" transform="translate(0 0)"><rect class="tooltip-box" height="0" rx="0" ry="0" width="0" /><g class="text" /></g></g></g></svg></html>',
+                    });
+                marker_a7c4cb24a8cc4f5a9763e081714428bf.setIcon(div_icon_43a9a05a676c4dd2a0a98360ffca0b40);
+            
+</script>
