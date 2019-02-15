@@ -150,6 +150,7 @@ class LingMap(object):
         if stroke:
             colors = self.stroke_colors
         if self.numeric and not stroke:
+            features = list(features)
             features.sort()
             colormap = branca.colormap.LinearColormap(colors=self.colormap_colors, index=[features[0],features[-1]], vmin=features[0], vmax=features[-1])
             groups_features = [(0, colormap(feature)) for feature in features]
