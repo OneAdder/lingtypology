@@ -17,7 +17,7 @@ def random_test():
     m.save('random.html')
 
 def circassian_test():
-    circassian = pandas.read_csv('circassian.csv', delimiter=',', header=0)
+    circassian = pandas.read_csv('examples/circassian.csv', delimiter=',', header=0)
 
     coordinates = list(zip(list(circassian.latitude), list(circassian.longitude)))
     dialects = list(circassian.dialect)
@@ -46,7 +46,7 @@ def circassian_test():
     m.save('circassian.html')
 
 def ejectives_test():
-    data = pandas.read_csv('ejective_and_n_consonants.csv', delimiter=',', header=0)
+    data = pandas.read_csv('examples/ejective_and_n_consonants.csv', delimiter=',', header=0)
     languages = list(data.language)
     consonants = list(data.consonants)
     ejectives = list(data.consonants)
@@ -58,7 +58,7 @@ def ejectives_test():
 
 
 def circassian2_test():
-    circassian = pandas.read_csv('circassian.csv', delimiter=',', header=0)
+    circassian = pandas.read_csv('examples/circassian.csv', delimiter=',', header=0)
 
     coordinates = list(zip(list(circassian.latitude), list(circassian.longitude)))
     dialects = list(circassian.dialect)
@@ -80,7 +80,7 @@ def simplest_test():
     m.save('simplest_test.html')
 
 def heatmap_only_test():
-    circassian = pandas.read_csv('circassian.csv', delimiter=',', header=0)
+    circassian = pandas.read_csv('examples/circassian.csv', delimiter=',', header=0)
     coordinates = list(zip(list(circassian[circassian.language == 'Kabardian'].latitude), list(circassian[circassian.language == 'Kabardian'].longitude)))
     m = LingMap([])
     m.start_zoom = 6
@@ -89,7 +89,7 @@ def heatmap_only_test():
     m.save('heatmap_only.html')
 
 def heatmap_test():
-    circassian = pandas.read_csv('circassian.csv', delimiter=',', header=0)
+    circassian = pandas.read_csv('examples/circassian.csv', delimiter=',', header=0)
 
     coordinates = list(zip(list(circassian.latitude), list(circassian.longitude)))
     dialects = list(circassian.dialect)
@@ -106,7 +106,7 @@ def heatmap_test():
     m.save('heatmap.html')
     
 def wals_test():
-    df = Wals(('1a',)).get_wals_features()
+    df = Wals(('1a',)).get_df()
     languages = list(df.language)
     features = list(df._1A)
     coordinates = list(zip(list(df.latitude), list(df.longitude)))
@@ -133,7 +133,7 @@ def wals_heatmap_test():
 #heatmap_only_test()
 #heatmap_test()
 #wals_test()
-wals_heatmap_test()
+#wals_heatmap_test()
 
 
 
