@@ -52,6 +52,8 @@ def ejectives_test():
     ejectives = list(data.consonants)
     
     m = LingMap(languages)
+    m.legend_title='Amount of consonants'
+    m.add_tooltips(consonants)
     m.add_features(consonants, numeric=True)
     #m.languages_in_popups = False
     m.save(os.path.join('examples', 'ejectives.html'))
@@ -125,15 +127,15 @@ def wals_heatmap_test():
     m.heatmap = coordinates
     m.save(os.path.join('examples', 'wals_heatmap'))
 
-simplest_test()
-random_test()
-circassian_test()
-ejectives_test()
-circassian2_test()
-heatmap_only_test()
-heatmap_test()
-wals_test()
-wals_heatmap_test()
+#simplest_test()
+#random_test()
+#circassian_test()
+#ejectives_test()
+#circassian2_test()
+#heatmap_only_test()
+#heatmap_test()
+#wals_test()
+#wals_heatmap_test()
 
 
 
