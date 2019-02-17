@@ -19,7 +19,7 @@ import pandas
 Local tools
 '''
 import glottolog
-from db_apis import Wals
+from db_apis import Wals, Phoible
 
 class LingMapError(Exception):
     def __init__(self,value):
@@ -72,6 +72,11 @@ class LingMap(object):
     minimap = {}
     rectangles = []
     lines = []
+    features = False
+    popups = False
+    tooltips = False
+    custom_coordinates = False
+    stroke_features = False
     
     def __init__(self, languages=[]):
         if languages:
@@ -85,7 +90,7 @@ class LingMap(object):
     def _create_popups(self, marker, language, i, parse_html=False):
         popup_href = '''<a href="https://glottolog.org/resource/languoid/id/{}" onclick="this.target='_blank';">{}</a><br>'''
         if self.languages_in_popups:
-            if 'popups' in dir(self):
+            if self.popups:
                 if parse_html:
                     raise LingMapError('''
                                        It is impossible to add both language links and large HTML strings.
@@ -96,7 +101,7 @@ class LingMap(object):
                 popup = folium.Popup(popup_href.format(glottolog.get_glot_id(language), language))
             popup.add_to(marker)
         else:
-            if 'popups' in dir(self):
+            if self.popups:
                 if parse_html:
                     iframe = folium.IFrame(html=self.popups[i])
                     popup = folium.Popup(iframe)
@@ -143,6 +148,38 @@ class LingMap(object):
                 fill_color=fill_color)
         return marker
 
+    '''
+    This crazy function is needed to sort everything by features for the colormap
+    '''
+    def _sort_all(self, features):
+        attrs = [self.languages, self.popups, self.tooltips, self.custom_coordinates]
+        length = [False for n in range(len(features))]
+        attrs_r = []
+        for attr in attrs:
+            if attr:
+                attrs_r.append(attr)
+            else:
+                attrs_r.append(length)
+        al = list(zip(features, *attrs_r))
+        al.sort()
+        features = []
+        self.languages = []
+        self.popups = []
+        self.tooltips = []
+        self.custom_coordinates = []
+        for el in al:
+            features.append(el[0])
+            if el[1]:
+                self.languages.append(el[1])
+            if el[2]:
+                self.popups.append(el[2])
+            if el[3]:
+                self.tooltips.append(el[3])
+            if el[4]:
+                self.custom_coordinates.append(el[4])
+        self.features = features
+        return features
+
     def _prepare_features(self, features, stroke=False, use_shapes=False):
         colors = self.colors
         if use_shapes:
@@ -150,11 +187,30 @@ class LingMap(object):
         if stroke:
             colors = self.stroke_colors
         if self.numeric and not stroke:
-            features = list(features)
-            features.sort()
-            colormap = branca.colormap.LinearColormap(colors=self.colormap_colors, index=[features[0],features[-1]], vmin=features[0], vmax=features[-1])
+            features = self._sort_all(features)
+            colormap = branca.colormap.LinearColormap(colors=self.colormap_colors,
+                                                      index=[features[0], features[-1]],
+                                                      vmin=features[0],
+                                                      vmax=features[-1],
+                                                      caption=self.legend_title)
             groups_features = [(0, colormap(feature)) for feature in features]
-            data = colormap
+            template =  '''
+                        <style>
+                            .grad {
+                                height: 200px;
+                                width: 20px;
+                                background: linear-gradient({{ color0 }}, {{ color1 }});
+                                }
+                        </style>
+                        <div class="grad"/>
+                        <li style="margin-left: 35px;">{{ feature0 }}</li>
+                        <li style="margin-left: 35px; margin-top: 170px;">{{ feature1 }}</li>
+                        '''
+            template = jinja2.Template(template)
+            data = template.render(color0=self.colormap_colors[0],
+                                   color1=self.colormap_colors[1],
+                                   feature0=features[0],
+                                   feature1=features[-1])
         else:
             mapping = {}
             clear_features = []
@@ -181,7 +237,7 @@ class LingMap(object):
         stroke = ''
         s_marker = ''
         s_stroke = ''
-        if 'stroke_features' in dir(self):
+        if self.stroke_features:
             if self.unstroked:
                 marker = self._set_marker([coordinates[0], coordinates[1]], fill_color=color_shape)
                 stroke = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=self.radius*1.15, fill_color='#000000')
@@ -274,19 +330,19 @@ class LingMap(object):
                 self._create_heatmap(m, self.heatmap)
             return m
 
-        if 'features' in dir(self):
+        if self.features:
             prepared = self._prepare_features(self.features, use_shapes=self.use_shapes)
             groups_features = prepared[0]
             data = prepared[1]
 
-        if 'stroke_features' in dir(self):
+        if self.stroke_features:
             prepared = self._prepare_features(self.stroke_features, stroke=True, use_shapes=self.use_shapes)
             s_groups_features = prepared[0]
             s_data = prepared[1]
         
         for i, language in enumerate(self.languages):
             stroke_marker = False
-            if 'custom_coordinates' in dir(self):
+            if self.custom_coordinates:
                 coordinates = self.custom_coordinates[i]
             else:
                 coordinates = glottolog.get_coordinates(language)
@@ -294,12 +350,12 @@ class LingMap(object):
                     continue
                 self.heatmap.append(coordinates)
             
-            if 'features' in dir(self):
+            if self.features:
                 color_shape = groups_features[i][1]
             else:
                 color_shape = '#DEB887'
 
-            if 'stroke_features' in dir(self):
+            if self.stroke_features:
                 s_color = s_groups_features[i][1]
             else:
                 s_color = '#000000'
@@ -308,14 +364,14 @@ class LingMap(object):
             
             self._create_popups(unified_marker['marker'], language, i, parse_html=self.html_popups)
 
-            if 'features' in dir(self) and not self.numeric and self.control:
+            if self.features and not self.numeric and self.control:
                 group = groups_features[i][0]
-            elif 'stroke_features' in dir(self) and self.stroke_control:
+            elif self.stroke_features and self.stroke_control:
                 group = s_groups_features[i][0]
             else:
                 group = default_group
                 
-            if 'tooltips' in dir(self):
+            if self.tooltips:
                 tooltip = folium.Tooltip(self.tooltips[i])
                 tooltip.add_to(unified_marker['marker'])
 
@@ -335,11 +391,10 @@ class LingMap(object):
             [stroke[0].add_to(stroke[1]) for stroke in strokes]
         [mark[0].add_to(mark[1]) for mark in markers]
         
-        if 'features' in dir(self):
+        if self.features:
             if self.numeric:
                 m.add_child(default_group)
-                colormap = data
-                m.add_child(colormap)
+                self._create_legend(m, data, title=self.legend_title, position=self.legend_position)
             else:
                 if self.control:
                     [m.add_child(fg[0]) for fg in groups_features]
@@ -352,7 +407,7 @@ class LingMap(object):
                 
                 if self.legend:
                     self._create_legend(m, data, title=self.legend_title, position=self.legend_position)
-                if 'stroke_features' in dir(self) and self.stroke_legend:
+                if self.stroke_features and self.stroke_legend:
                     self._create_legend(m, s_data, title=self.stroke_legend_title, position=self.stroke_legend_position)
         else:
             m.add_child(default_group)
@@ -375,6 +430,4 @@ class LingMap(object):
 
     def render(self):
         return self._create_map().get_root().render()
-
-
 
