@@ -14,6 +14,8 @@ import branca.element
 import jinja2
 #Pandas
 import pandas
+#Math
+import math
 
 '''
 Local tools
@@ -41,6 +43,7 @@ class LingMap(object):
     start_location = (0, 0)
     start_zoom = 3
     control_scale = True
+    prefer_canvas = False
     # Legend
     legend = True
     stroke_legend = True
@@ -317,7 +320,7 @@ class LingMap(object):
             raise LingMapError("Length of languages and {} does not match".format(feature_name))
     
     def _create_map(self):
-        m = folium.Map(location=self.start_location, zoom_start=self.start_zoom, control_scale=self.control_scale)
+        m = folium.Map(location=self.start_location, zoom_start=self.start_zoom, control_scale=self.control_scale, prefer_canvas=self.prefer_canvas)
         
         default_group = folium.FeatureGroup()
         markers = []
@@ -346,7 +349,7 @@ class LingMap(object):
                 coordinates = self.custom_coordinates[i]
             else:
                 coordinates = glottolog.get_coordinates(language)
-                if not coordinates:
+                if not coordinates or math.isnan(coordinates[0]) or math.isnan(coordinates[1]):
                     continue
                 self.heatmap.append(coordinates)
             
@@ -423,6 +426,9 @@ class LingMap(object):
                 folium.PolyLine(**line).add_to(m)
         if self.use_heatmap:
             self._create_heatmap(m, self.heatmap)
+
+        if glottolog.warnings:
+            print('(get_coordinates) Warning: coordinates for {} not found'.format(', '.join(glottolog.warnings)))
         return m
 
     def save(self, path):

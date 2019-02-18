@@ -1,6 +1,7 @@
 import pandas
 
 glottolog = pandas.read_csv('glottolog.csv', delimiter=',', header=0)
+warnings = []
 
 '''
 get_affiliations(('Russian', 'English'))
@@ -30,7 +31,9 @@ def get_coordinates(language):
     latitude = glottolog[glottolog.Name == language].Latitude
     longitude = glottolog[glottolog.Name == language].Longitude
     if not list(latitude) or not list(longitude):
-        print('(get_coordinates) Warning: coordinates for {} not found'.format(language))
+        global warnings
+        warnings.append(language)
+        #print('(get_coordinates) Warning: coordinates for {} not found'.format(language))
     else:
         return (float(latitude), float(longitude))
 

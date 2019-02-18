@@ -97,6 +97,7 @@ year      = {2014}
             print(self.citation)
         phoible_url = 'https://raw.githubusercontent.com/clld/phoible/master/data/phoible-aggregated.tsv'
         df = pandas.read_csv(phoible_url, delimiter='\t', header=0)
+        df.LanguageName = df.LanguageName.str.capitalize()
         return df
 
     def get_json(self):
@@ -109,4 +110,5 @@ year      = {2014}
         return js
 
 #print(Wals('1a').get_json())
-#print(Phoible().get_json())
+#df = Phoible().get_df()
+#print(df.LanguageName.str.capitalize())
