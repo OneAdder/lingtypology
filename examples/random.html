@@ -17,7 +17,7 @@
     
     <meta name="viewport" content="width=device-width,
         initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <style>#map_5df1a8737d7949a2b724823552d4c235 {
+    <style>#map_71b321dbf3aa444ab682af7a91ad4f91 {
         position: relative;
         width: 100.0%;
         height: 100.0%;
@@ -30,7 +30,7 @@
 </head>
 <body>    
     
-    <div class="folium-map" id="map_5df1a8737d7949a2b724823552d4c235" ></div>
+    <div class="folium-map" id="map_71b321dbf3aa444ab682af7a91ad4f91" ></div>
     
 <!-- Based on the template from here: https://nbviewer.jupyter.org/gist/talbertc-usgs/18f8901fc98f109f2b71156cf3ac81cd -->
 <!doctype html>
@@ -127,8 +127,8 @@
         var bounds = null;
     
 
-    var map_5df1a8737d7949a2b724823552d4c235 = L.map(
-        'map_5df1a8737d7949a2b724823552d4c235', {
+    var map_71b321dbf3aa444ab682af7a91ad4f91 = L.map(
+        'map_71b321dbf3aa444ab682af7a91ad4f91', {
         center: [0, 0],
         zoom: 3,
         maxBounds: bounds,
@@ -137,10 +137,10 @@
         crs: L.CRS.EPSG3857,
         zoomControl: true,
         });
-L.control.scale().addTo(map_5df1a8737d7949a2b724823552d4c235);
+L.control.scale().addTo(map_71b321dbf3aa444ab682af7a91ad4f91);
     
     
-    var tile_layer_eaa68fae6adb40fe84aaa5f0310043c1 = L.tileLayer(
+    var tile_layer_51996b59578e4b15bc7e867a143aa363 = L.tileLayer(
         'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         {
         "attribution": null,
@@ -152,241 +152,241 @@ L.control.scale().addTo(map_5df1a8737d7949a2b724823552d4c235);
         "opacity": 1,
         "subdomains": "abc",
         "tms": false
-}).addTo(map_5df1a8737d7949a2b724823552d4c235);
+}).addTo(map_71b321dbf3aa444ab682af7a91ad4f91);
     
-            var feature_group_6c591d4c696d4d40bfad3b1dd5f81c6c = L.featureGroup(
-                ).addTo(map_5df1a8737d7949a2b724823552d4c235);
+            var feature_group_f295d098d633475a9840e2ecbb3be6f4 = L.featureGroup(
+                ).addTo(map_71b321dbf3aa444ab682af7a91ad4f91);
         
     
-        var marker_cd380df5cf56417aa6eedb2802a1fade = L.marker(
+        var marker_3801140d8e4d4e4581e3ef789cd4acd6 = L.marker(
             [44.0, 39.33],
             {
                 icon: new L.Icon.Default()
                 }
-            ).addTo(feature_group_6c591d4c696d4d40bfad3b1dd5f81c6c);
+            ).addTo(feature_group_f295d098d633475a9840e2ecbb3be6f4);
         
     
 
-                var div_icon_89c6b18f040d464a999aa18ab650cab7 = L.divIcon({
+                var div_icon_0a6c8a8ba640447da1ed7a04e1fb6f73 = L.divIcon({
                     
                     
                     
                     className: 'empty',
                     html: '<div style="font-size: 170%">⬤</div>',
                     });
-                marker_cd380df5cf56417aa6eedb2802a1fade.setIcon(div_icon_89c6b18f040d464a999aa18ab650cab7);
+                marker_3801140d8e4d4e4581e3ef789cd4acd6.setIcon(div_icon_0a6c8a8ba640447da1ed7a04e1fb6f73);
             
     
-            var popup_f8b359969feb4095b990431ed6e8e2e4 = L.popup({maxWidth: '300'
+            var popup_6e05a81c408d455683b2af27ace4dfc4 = L.popup({maxWidth: '300'
             
             });
 
             
-                var html_f3f4ac3c340f4c4799c7f1e6ff127066 = $(`<div id="html_f3f4ac3c340f4c4799c7f1e6ff127066" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/adyg1241" onclick="this.target='_blank';">Adyghe</a><br>Abkhaz-Adyge, Circassian</div>`)[0];
-                popup_f8b359969feb4095b990431ed6e8e2e4.setContent(html_f3f4ac3c340f4c4799c7f1e6ff127066);
+                var html_140430b9cb57475cb10a805ec388c312 = $(`<div id="html_140430b9cb57475cb10a805ec388c312" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/adyg1241" onclick="this.target='_blank';">Adyghe</a><br>Abkhaz-Adyge, Circassian</div>`)[0];
+                popup_6e05a81c408d455683b2af27ace4dfc4.setContent(html_140430b9cb57475cb10a805ec388c312);
             
 
-            marker_cd380df5cf56417aa6eedb2802a1fade.bindPopup(popup_f8b359969feb4095b990431ed6e8e2e4)
+            marker_3801140d8e4d4e4581e3ef789cd4acd6.bindPopup(popup_6e05a81c408d455683b2af27ace4dfc4)
             ;
 
             
         
     
-        marker_cd380df5cf56417aa6eedb2802a1fade.bindTooltip(
+        marker_3801140d8e4d4e4581e3ef789cd4acd6.bindTooltip(
             `<div>`
             + `Adyghe` + `</div>`,
             {"sticky": true}
         );
         
     
-        var marker_853d9c7706344df5bb3eb7399c4a7308 = L.marker(
+        var marker_eed2d76f33c84cf3941ef1530b3d2230 = L.marker(
             [43.5082, 43.3918],
             {
                 icon: new L.Icon.Default()
                 }
-            ).addTo(feature_group_6c591d4c696d4d40bfad3b1dd5f81c6c);
+            ).addTo(feature_group_f295d098d633475a9840e2ecbb3be6f4);
         
     
 
-                var div_icon_5c410462fd434bc7aa0eab79d540f52c = L.divIcon({
+                var div_icon_2b3a6ea6f95040b1968b33cbcf1d56e6 = L.divIcon({
                     
                     
                     
                     className: 'empty',
                     html: '<div style="font-size: 170%">⬤</div>',
                     });
-                marker_853d9c7706344df5bb3eb7399c4a7308.setIcon(div_icon_5c410462fd434bc7aa0eab79d540f52c);
+                marker_eed2d76f33c84cf3941ef1530b3d2230.setIcon(div_icon_2b3a6ea6f95040b1968b33cbcf1d56e6);
             
     
-            var popup_e0153cee89f44e20bbc60ee76c1cdd6c = L.popup({maxWidth: '300'
+            var popup_ff315733ac654e0ca5fee50490d1da92 = L.popup({maxWidth: '300'
             
             });
 
             
-                var html_1cb774c350224228be817ca184e75a09 = $(`<div id="html_1cb774c350224228be817ca184e75a09" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/kaba1278" onclick="this.target='_blank';">Kabardian</a><br>Abkhaz-Adyge, Circassian</div>`)[0];
-                popup_e0153cee89f44e20bbc60ee76c1cdd6c.setContent(html_1cb774c350224228be817ca184e75a09);
+                var html_b3ada8c0029849b78871d09e016271fc = $(`<div id="html_b3ada8c0029849b78871d09e016271fc" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/kaba1278" onclick="this.target='_blank';">Kabardian</a><br>Abkhaz-Adyge, Circassian</div>`)[0];
+                popup_ff315733ac654e0ca5fee50490d1da92.setContent(html_b3ada8c0029849b78871d09e016271fc);
             
 
-            marker_853d9c7706344df5bb3eb7399c4a7308.bindPopup(popup_e0153cee89f44e20bbc60ee76c1cdd6c)
+            marker_eed2d76f33c84cf3941ef1530b3d2230.bindPopup(popup_ff315733ac654e0ca5fee50490d1da92)
             ;
 
             
         
     
-        marker_853d9c7706344df5bb3eb7399c4a7308.bindTooltip(
+        marker_eed2d76f33c84cf3941ef1530b3d2230.bindTooltip(
             `<div>`
             + `Kabardian` + `</div>`,
             {"sticky": true}
         );
         
     
-            var feature_group_f33bca89f1ac4fbc8f5e928b1b670dd0 = L.featureGroup(
-                ).addTo(map_5df1a8737d7949a2b724823552d4c235);
+            var feature_group_2db7ac4e7fa84aaca6c4125c5c079eef = L.featureGroup(
+                ).addTo(map_71b321dbf3aa444ab682af7a91ad4f91);
         
     
-        var marker_9cbacc55e0de4d3cba7e31dee9dc63d8 = L.marker(
+        var marker_24c4529ad46b4daba8ec72612b58f4fd = L.marker(
             [51.8439, 18.6255],
             {
                 icon: new L.Icon.Default()
                 }
-            ).addTo(feature_group_f33bca89f1ac4fbc8f5e928b1b670dd0);
+            ).addTo(feature_group_2db7ac4e7fa84aaca6c4125c5c079eef);
         
     
 
-                var div_icon_2f9aba14208a48c395e553cb304b0b33 = L.divIcon({
+                var div_icon_0722caab127945dda4f80152c5aaf4fa = L.divIcon({
                     
                     
                     
                     className: 'empty',
                     html: '<div style="font-size: 170%">◼</div>',
                     });
-                marker_9cbacc55e0de4d3cba7e31dee9dc63d8.setIcon(div_icon_2f9aba14208a48c395e553cb304b0b33);
+                marker_24c4529ad46b4daba8ec72612b58f4fd.setIcon(div_icon_0722caab127945dda4f80152c5aaf4fa);
             
     
-            var popup_861d34ca06a8463dad8927256b459dc7 = L.popup({maxWidth: '300'
+            var popup_e265bbbe4eb84cc186e4af1add7f0baf = L.popup({maxWidth: '300'
             
             });
 
             
-                var html_d87a53a24295497dbaa75f4193a4cba5 = $(`<div id="html_d87a53a24295497dbaa75f4193a4cba5" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/poli1260" onclick="this.target='_blank';">Polish</a><br>Indo-European, Balto-Slavic, Slavic, West Slavic, Lechitic</div>`)[0];
-                popup_861d34ca06a8463dad8927256b459dc7.setContent(html_d87a53a24295497dbaa75f4193a4cba5);
+                var html_d5be576cb0574072a3859fed6cfdbb97 = $(`<div id="html_d5be576cb0574072a3859fed6cfdbb97" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/poli1260" onclick="this.target='_blank';">Polish</a><br>Indo-European, Balto-Slavic, Slavic, West Slavic, Lechitic</div>`)[0];
+                popup_e265bbbe4eb84cc186e4af1add7f0baf.setContent(html_d5be576cb0574072a3859fed6cfdbb97);
             
 
-            marker_9cbacc55e0de4d3cba7e31dee9dc63d8.bindPopup(popup_861d34ca06a8463dad8927256b459dc7)
+            marker_24c4529ad46b4daba8ec72612b58f4fd.bindPopup(popup_e265bbbe4eb84cc186e4af1add7f0baf)
             ;
 
             
         
     
-        marker_9cbacc55e0de4d3cba7e31dee9dc63d8.bindTooltip(
+        marker_24c4529ad46b4daba8ec72612b58f4fd.bindTooltip(
             `<div>`
             + `Polish` + `</div>`,
             {"sticky": true}
         );
         
     
-        var marker_7553dbf2592542c996afa6d5885aaab7 = L.marker(
+        var marker_043e0dcbd7c3414ab8d36ba09eaa839b = L.marker(
             [59.0, 50.0],
             {
                 icon: new L.Icon.Default()
                 }
-            ).addTo(feature_group_f33bca89f1ac4fbc8f5e928b1b670dd0);
+            ).addTo(feature_group_2db7ac4e7fa84aaca6c4125c5c079eef);
         
     
 
-                var div_icon_f081df53916e4ed6a19bd0231042f4a0 = L.divIcon({
+                var div_icon_b0fb1ea5f4d947858bded065b19b7aee = L.divIcon({
                     
                     
                     
                     className: 'empty',
                     html: '<div style="font-size: 170%">◼</div>',
                     });
-                marker_7553dbf2592542c996afa6d5885aaab7.setIcon(div_icon_f081df53916e4ed6a19bd0231042f4a0);
+                marker_043e0dcbd7c3414ab8d36ba09eaa839b.setIcon(div_icon_b0fb1ea5f4d947858bded065b19b7aee);
             
     
-            var popup_2262f304f96841a1b7ad12ad34ac3b1a = L.popup({maxWidth: '300'
+            var popup_0b88589dfc694c679168e173db147265 = L.popup({maxWidth: '300'
             
             });
 
             
-                var html_7f635f5b2a054010a343e49410e1dada = $(`<div id="html_7f635f5b2a054010a343e49410e1dada" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/russ1263" onclick="this.target='_blank';">Russian</a><br>Indo-European, Balto-Slavic, Slavic, East Slavic</div>`)[0];
-                popup_2262f304f96841a1b7ad12ad34ac3b1a.setContent(html_7f635f5b2a054010a343e49410e1dada);
+                var html_48229e2ad79543e6b5644c5674add54c = $(`<div id="html_48229e2ad79543e6b5644c5674add54c" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/russ1263" onclick="this.target='_blank';">Russian</a><br>Indo-European, Balto-Slavic, Slavic, East Slavic</div>`)[0];
+                popup_0b88589dfc694c679168e173db147265.setContent(html_48229e2ad79543e6b5644c5674add54c);
             
 
-            marker_7553dbf2592542c996afa6d5885aaab7.bindPopup(popup_2262f304f96841a1b7ad12ad34ac3b1a)
+            marker_043e0dcbd7c3414ab8d36ba09eaa839b.bindPopup(popup_0b88589dfc694c679168e173db147265)
             ;
 
             
         
     
-        marker_7553dbf2592542c996afa6d5885aaab7.bindTooltip(
+        marker_043e0dcbd7c3414ab8d36ba09eaa839b.bindTooltip(
             `<div>`
             + `Russian` + `</div>`,
             {"sticky": true}
         );
         
     
-            var feature_group_9674fef04bb643659e477d7037c48f39 = L.featureGroup(
-                ).addTo(map_5df1a8737d7949a2b724823552d4c235);
+            var feature_group_f9823be524fb4e648b8401f3e22b6164 = L.featureGroup(
+                ).addTo(map_71b321dbf3aa444ab682af7a91ad4f91);
         
     
-        var marker_22d37bb95b164c2993291568309af7ed = L.marker(
+        var marker_bbffe5e01314441f9ba697b7c6ab8085 = L.marker(
             [43.3646, 25.046999999999997],
             {
                 icon: new L.Icon.Default()
                 }
-            ).addTo(feature_group_9674fef04bb643659e477d7037c48f39);
+            ).addTo(feature_group_f9823be524fb4e648b8401f3e22b6164);
         
     
 
-                var div_icon_94fe489f89144794bc97b4570737d3cc = L.divIcon({
+                var div_icon_7a9f96e2973e4280acdcced6b9e1d1de = L.divIcon({
                     
                     
                     
                     className: 'empty',
                     html: '<div style="font-size: 170%">▲</div>',
                     });
-                marker_22d37bb95b164c2993291568309af7ed.setIcon(div_icon_94fe489f89144794bc97b4570737d3cc);
+                marker_bbffe5e01314441f9ba697b7c6ab8085.setIcon(div_icon_7a9f96e2973e4280acdcced6b9e1d1de);
             
     
-            var popup_ed3c389cc1244fca8cffa7170a86bbbc = L.popup({maxWidth: '300'
+            var popup_bcfc71c586784268ab10af2f15e6a837 = L.popup({maxWidth: '300'
             
             });
 
             
-                var html_1be249efc25b4a4686a2b8aa324242c7 = $(`<div id="html_1be249efc25b4a4686a2b8aa324242c7" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/bulg1262" onclick="this.target='_blank';">Bulgarian</a><br>Indo-European, Balto-Slavic, Slavic, South Slavic, Eastern South Slavic, Macedo-Bulgarian</div>`)[0];
-                popup_ed3c389cc1244fca8cffa7170a86bbbc.setContent(html_1be249efc25b4a4686a2b8aa324242c7);
+                var html_dbff78f9daab4af2838bc8e9732b9e0d = $(`<div id="html_dbff78f9daab4af2838bc8e9732b9e0d" style="width: 100.0%; height: 100.0%;"><a href="https://glottolog.org/resource/languoid/id/bulg1262" onclick="this.target='_blank';">Bulgarian</a><br>Indo-European, Balto-Slavic, Slavic, South Slavic, Eastern South Slavic, Macedo-Bulgarian</div>`)[0];
+                popup_bcfc71c586784268ab10af2f15e6a837.setContent(html_dbff78f9daab4af2838bc8e9732b9e0d);
             
 
-            marker_22d37bb95b164c2993291568309af7ed.bindPopup(popup_ed3c389cc1244fca8cffa7170a86bbbc)
+            marker_bbffe5e01314441f9ba697b7c6ab8085.bindPopup(popup_bcfc71c586784268ab10af2f15e6a837)
             ;
 
             
         
     
-        marker_22d37bb95b164c2993291568309af7ed.bindTooltip(
+        marker_bbffe5e01314441f9ba697b7c6ab8085.bindTooltip(
             `<div>`
             + `Bulgarian` + `</div>`,
             {"sticky": true}
         );
         
     
-            var layer_control_9a41d68cf8394a16acd5f5d72f381a57 = {
-                base_layers : { "openstreetmap" : tile_layer_eaa68fae6adb40fe84aaa5f0310043c1, },
-                overlays : { "Agglutinative" : feature_group_6c591d4c696d4d40bfad3b1dd5f81c6c,"Inflected" : feature_group_f33bca89f1ac4fbc8f5e928b1b670dd0,"Analythic" : feature_group_9674fef04bb643659e477d7037c48f39, }
+            var layer_control_d7c68635d4fb4f2ab0cd0298f4b0ebbc = {
+                base_layers : { "openstreetmap" : tile_layer_51996b59578e4b15bc7e867a143aa363, },
+                overlays : { "Agglutinative" : feature_group_f295d098d633475a9840e2ecbb3be6f4,"Inflected" : feature_group_2db7ac4e7fa84aaca6c4125c5c079eef,"Analythic" : feature_group_f9823be524fb4e648b8401f3e22b6164, }
                 };
             L.control.layers(
-                layer_control_9a41d68cf8394a16acd5f5d72f381a57.base_layers,
-                layer_control_9a41d68cf8394a16acd5f5d72f381a57.overlays,
+                layer_control_d7c68635d4fb4f2ab0cd0298f4b0ebbc.base_layers,
+                layer_control_d7c68635d4fb4f2ab0cd0298f4b0ebbc.overlays,
                 {position: 'topright',
                  collapsed: false,
                  autoZIndex: true
-                }).addTo(map_5df1a8737d7949a2b724823552d4c235);
+                }).addTo(map_71b321dbf3aa444ab682af7a91ad4f91);
             
         
     
 
-        var tile_layer_0ffe05f847bb48cfbb21ce4cf121414e = L.tileLayer(
+        var tile_layer_97e853e94aaf42cba38ac1db4a3b3bb6 = L.tileLayer(
         'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         {
         "attribution": null,
@@ -400,7 +400,7 @@ L.control.scale().addTo(map_5df1a8737d7949a2b724823552d4c235);
         "tms": false
 } );
 
-        var mini_map_46af89a6c31f46358d8b634144fdc9a4 = new L.Control.MiniMap( tile_layer_0ffe05f847bb48cfbb21ce4cf121414e,
+        var mini_map_1bd9bce1e2c045339acc5f20248d2e93 = new L.Control.MiniMap( tile_layer_97e853e94aaf42cba38ac1db4a3b3bb6,
          {
   "autoToggleDisplay": false,
   "centerFixed": false,
@@ -415,7 +415,7 @@ L.control.scale().addTo(map_5df1a8737d7949a2b724823552d4c235);
   "zoomLevelFixed": null,
   "zoomLevelOffset": -5
 });
-        map_5df1a8737d7949a2b724823552d4c235.addControl(mini_map_46af89a6c31f46358d8b634144fdc9a4);
+        map_71b321dbf3aa444ab682af7a91ad4f91.addControl(mini_map_1bd9bce1e2c045339acc5f20248d2e93);
 
         
 </script>

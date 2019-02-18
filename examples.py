@@ -127,6 +127,17 @@ def wals_heatmap_test():
     m.heatmap = coordinates
     m.save(os.path.join('examples', 'wals_heatmap'))
 
+def phoible_test():
+    df = Phoible().get_df()
+    #print(list(df))
+    languages = list(df.LanguageName)
+    phonemes = list(df.Phonemes)
+
+    m = LingMap(languages)
+    m.unstroked = False
+    m.legend_title = 'Number of Phonemes'
+    m.add_features(phonemes, numeric=True)
+    m.save(os.path.join('examples', 'phoible.html'))
 #simplest_test()
 #random_test()
 #circassian_test()
@@ -136,6 +147,6 @@ def wals_heatmap_test():
 #heatmap_test()
 #wals_test()
 #wals_heatmap_test()
-
+#phoible_test()
 
 
