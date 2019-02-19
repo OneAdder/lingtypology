@@ -43,6 +43,7 @@ def circassian_test():
     #m.legend_position = 'topleft'
     m.stroke_legend_title = 'Languages'
     m.legend_title = 'Dialects'
+    #m.title = 'Circassian Dialects'
     m.save(os.path.join('examples', 'circassian.html'))
 
 def ejectives_test():
@@ -78,7 +79,7 @@ def circassian2_test():
 
 def simplest_test():
     m = LingMap(('Romanian', 'Ukrainian'))
-    m.unstroked = False
+    m.title = 'Simplest Test'
     m.save(os.path.join('examples', 'simplest_test.html'))
 
 def heatmap_only_test():
@@ -125,6 +126,7 @@ def wals_heatmap_test():
 
     m = LingMap()
     m.heatmap = coordinates
+    m.title = 'Large Consonant Inventories'
     m.save(os.path.join('examples', 'wals_heatmap'))
 
 def phoible_test():
