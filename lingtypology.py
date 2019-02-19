@@ -44,6 +44,7 @@ class LingMap(object):
     start_zoom = 3
     control_scale = True
     prefer_canvas = False
+    title = False
     # Legend
     legend = True
     stroke_legend = True
@@ -125,6 +126,29 @@ class LingMap(object):
 
     def _create_heatmap(self, m, heatmap):
         folium.plugins.HeatMap(heatmap).add_to(m)
+
+    def _create_title(self, m, title):
+        template = '''
+                    <div
+                        style='position: absolute;
+                        z-index:9999;
+                        border:2px solid grey;
+                        background-color:rgba(255, 255, 255, 0.8);
+                        border-radius:6px;
+                        padding: 10px;
+                        font-size:20px;
+                        top: 20px;
+                        left: 50%;'
+                    >
+                    {{ title }}
+                    </div>
+                   '''
+        template = jinja2.Template(template)
+        template = template.render(title=title)
+        template = '{% macro html(this, kwargs) %}' + template + '{% endmacro %}'
+        macro = branca.element.MacroElement()
+        macro._template = branca.element.Template(template)
+        m.get_root().add_child(macro)    
 
     def _set_marker(self,
                     location,
@@ -328,6 +352,18 @@ class LingMap(object):
         s_markers = []
         s_strokes = []
 
+        if self.minimap:
+            minimap = folium.plugins.MiniMap(**self.minimap)
+            m.add_child(minimap)
+        if self.rectangles:
+            for rectangle in self.rectangles:
+                folium.Rectangle(**rectangle).add_to(m)
+        if self.lines:
+            for line in self.lines:
+                folium.PolyLine(**line).add_to(m)
+        if self.title:
+            self._create_title(m, self.title)
+    
         if self.heatmap_only:
             if self.heatmap:
                 self._create_heatmap(m, self.heatmap)
@@ -415,15 +451,6 @@ class LingMap(object):
         else:
             m.add_child(default_group)
             
-        if self.minimap:
-            minimap = folium.plugins.MiniMap(**self.minimap)
-            m.add_child(minimap)
-        if self.rectangles:
-            for rectangle in self.rectangles:
-                folium.Rectangle(**rectangle).add_to(m)
-        if self.lines:
-            for line in self.lines:
-                folium.PolyLine(**line).add_to(m)
         if self.use_heatmap:
             self._create_heatmap(m, self.heatmap)
 
