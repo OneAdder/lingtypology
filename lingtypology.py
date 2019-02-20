@@ -142,70 +142,71 @@ class LingMap(object):
         Default colors for the colormap.
     ---
     """
-    # Feature representation
-    stroke_colors = ['#ffffff', '#000000', '#800000', '#BC8F8F', '#FFE4C4', '#6495ED', '#4682B4',
-                     '#FF6347', '#778899', '#40E0D0', '#00FFFF', '#F08080', '#6495ED', '#FF7F50',
-                     '#D2691E', '#7FFF00', '#5F9EA0', '#DEB887', '#A52A2A', '#8A2BE2', '#0000FF']
-    colors = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6',
-              '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8','#800000',
-              '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000']
-    shapes = ['⬤', '◼', '▲', '◯', '◻', '△', '◉', '▣', '◐', '◧', '◭', '◍','▤', '▶']
-    # Map
-    start_location = (0, 0)
-    start_zoom = 3
-    control_scale = True
-    prefer_canvas = False
-    title = None
-    # Legend
-    legend = True
-    stroke_legend = True
-    legend_title = 'Legend'
-    stroke_legend_title = 'Legend'
-    legend_position = 'bottomright'
-    stroke_legend_position = 'bottomleft'
-    # Popups
-    languages_in_popups = True
-    html_popups = False
-    # Markers
-    use_shapes = False
-    radius = 7
-    stroke_radius = 12
-    stroked = True
-    unstroked = True
-    # Control
-    control = False
-    stroke_control = False
-    control_position = 'topright'
-    # Colormap
-    colormap_colors = ('#ffffff','#4a008f')
-    # Heat map
-    use_heatmap = False
-    heatmap_only = False
-    heatmap = []
-    # Adding other stuff
-    minimap = {}
-    rectangles = []
-    lines = []
-    #Don't touch
-    _legend_id = 0
-    features = None
-    popups = None
-    tooltips = None
-    custom_coordinates = None
-    stroke_features = None
     
     def __init__(self, languages=[]):
         """__init__
 
         Sets self.languages. If no languages are given, sets self.heatmap_only to true.
+        Then it sets everything else.
         """
         if languages:
+            self.heatmap_only = False
             if isinstance(languages, str):
                 self.languages = (languages,)
             else:
                 self.languages = tuple(languages)
         else:
             self.heatmap_only = True
+        # Feature representation
+        self.stroke_colors = ['#ffffff', '#000000', '#800000', '#BC8F8F', '#FFE4C4', '#6495ED', '#4682B4',
+                         '#FF6347', '#778899', '#40E0D0', '#00FFFF', '#F08080', '#6495ED', '#FF7F50',
+                         '#D2691E', '#7FFF00', '#5F9EA0', '#DEB887', '#A52A2A', '#8A2BE2', '#0000FF']
+        self.colors = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6',
+                  '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8','#800000',
+                  '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000']
+        self.shapes = ['⬤', '◼', '▲', '◯', '◻', '△', '◉', '▣', '◐', '◧', '◭', '◍','▤', '▶']
+        # Map
+        self.start_location = (0, 0)
+        self.start_zoom = 3
+        self.control_scale = True
+        self.prefer_canvas = False
+        self.title = None
+        # Legend
+        self.legend = True
+        self.stroke_legend = True
+        self.legend_title = 'Legend'
+        self.stroke_legend_title = 'Legend'
+        self.legend_position = 'bottomright'
+        self.stroke_legend_position = 'bottomleft'
+        # Popups
+        self.languages_in_popups = True
+        self.html_popups = False
+        # Markers
+        self.use_shapes = False
+        self.radius = 7
+        self.stroke_radius = 12
+        self.stroked = True
+        self.unstroked = True
+        # Control
+        self.control = False
+        self.stroke_control = False
+        self.control_position = 'topright'
+        # Colormap
+        self.colormap_colors = ('#ffffff','#4a008f')
+        # Heat map
+        self.use_heatmap = False
+        self.heatmap = []
+        # Adding other stuff
+        self.minimap = {}
+        self.rectangles = []
+        self.lines = []
+        #Don't touch
+        self._legend_id = 0
+        self.features = None
+        self.popups = None
+        self.tooltips = None
+        self.custom_coordinates = None
+        self.stroke_features = None
 
     def _create_popups(self, marker, language, i, parse_html=False):
         """Creates popups.
@@ -719,7 +720,6 @@ class LingMap(object):
         strokes = []
         s_markers = []
         s_strokes = []
-
         if self.minimap:
             minimap = folium.plugins.MiniMap(**self.minimap)
             m.add_child(minimap)
@@ -747,7 +747,6 @@ class LingMap(object):
             prepared = self._prepare_features(self.stroke_features, stroke=True, use_shapes=self.use_shapes)
             s_groups_features = prepared[0]
             s_data = prepared[1]
-        
         for i, language in enumerate(self.languages):
             stroke_marker = False
             if self.custom_coordinates:
