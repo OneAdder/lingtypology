@@ -1,12 +1,10 @@
-'''
-Folium tools
-'''
+"""This module draws a map"""
+
+#Folium tools
 import folium
 import folium.plugins
 
-'''
-Branca tools
-'''
+#Branca tools
 import branca.colormap
 import branca.element
 
@@ -17,13 +15,12 @@ import pandas
 #Math
 import math
 
-'''
-Local tools
-'''
+#Local tools
 import glottolog
 from db_apis import Wals, Phoible
 
 class LingMapError(Exception):
+    """All special exceptions"""
     def __init__(self,value):
         self.msg = value
     def __str__(self):
@@ -31,6 +28,120 @@ class LingMapError(Exception):
 
 
 class LingMap(object):
+    """Lingtypology map object
+    Parameter languages: list of strings, default []
+
+    Attributes:
+    -----------
+    Features
+    ---
+    colors: list of html codes for colors
+        Colors that represent features.
+        You can either use the default colors or set yours.
+    stroke_colors: list of html codes for colors
+        Colors that represent additional (stroke) features.
+        You can either use the default colors or set yours.
+    shapes: list of characters
+        If you use shapes instead of colors, you can either use the default shapes or set yours.
+        Shapes are Unicode symbols.
+    ---
+    
+    Map
+    ---
+    start_location: (float, float), default (0, 0)
+        Coordinates of the map (latitude, longitude).
+    start_zoom: int, default 3
+        Imitial zoom level.
+    control_scale: bool, default True
+        Whether to add control scale.
+    prefer_canvas: bool, default False
+        Use canvas instead of SVG.
+        If set to True, the map may be more responsive in case you have a lot of markers.
+    title: str, default None
+        You can add a title to the map.
+    ---
+
+    Legend
+    ---
+    legend: bool, default True
+        Whether to add legend
+    stroke_legend: bool True
+        Whether to add stroke legend
+    legend_title: str, default Legend
+        Legend title
+    stroke_legend_title: str, default Legend
+        Stroke legend title
+    legend_position: str, default 'bottomright'
+        Legend position.
+        Available values: 'right', 'left', 'top', 'bottom', 'bottomright', 'bottomleft', 'topright', 'topleft'
+    stroke_legend_position: str, default 'bottomleft'
+        Stroke legend position.
+        Available values: 'right', 'left', 'top', 'bottom', 'bottomright', 'bottomleft', 'topright', 'topleft'
+    ---
+
+    Markers
+    ---
+    use_shapes: bool, default False
+        Whether to use shapes instead of colors.
+    radius: int, default 7
+        Circle marker radius.
+    stroke_radius: int, default 12
+        Radius of markers if you use stroke features.
+    stroked: bool, default True
+        Whether to add stroke to markers.
+    unstroked: bool, default True
+        If set to True, circle marker will merge if you zoom out without stroke between them.
+        It multiplies the number of markers by 2. For better performance set it to False.
+        To understand how it looks see the example below.
+
+        unstroked = True (default):
+             ┌——————————┐
+             │ ▒▒▒▒▒▒▒▒ │
+             │ ▒▒▒▒▒▒▒▒ └—————┐
+             │ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ │
+             │ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ │
+             └—————┐ ▒▒▒▒▒▒▒▒ │
+                   │ ▒▒▒▒▒▒▒▒ │
+                   └——————————┘
+        unstroked = False:
+             ┌——————————┐
+             │ ▒▒▒▒▒▒▒▒ │
+             │ ▒▒▒▒▒┌———┴——————┐
+             │ ▒▒▒▒▒│ ▒▒▒▒▒▒▒▒ │
+             │ ▒▒▒▒▒│ ▒▒▒▒▒▒▒▒ │
+             └——————┤ ▒▒▒▒▒▒▒▒ │
+                    │ ▒▒▒▒▒▒▒▒ │
+                    └——————————┘
+                    
+    ---
+
+    Popups
+    ---
+    languages_in_popups: bool, default True
+        Whether to show links to Glottolog website in popups
+    html_popups: bool, default False
+        Setting it to True allows to put full html pages into popups (using folium.IFrame).
+    ---
+
+    Control
+    ---
+    control: bool, default False
+        Whether to add LayerControls and group by features.
+    stroke_control: bool, default False
+        Whether to add LayerControls and group by stroke features.
+    control_position: str, default 'topright'
+        Position of LayerControls.
+        May be ‘topleft’, ‘topright’, ‘bottomleft’ or ‘bottomright’.
+    ---
+
+    Other
+    ---
+    heatmap_only: bool, default False
+        If set to true no markers will be rendered.
+    colormap_colors: tuple, default ('#ffffff','#4a008f')
+        Default colors for the colormap.
+    ---
+    """
     # Feature representation
     stroke_colors = ['#ffffff', '#000000', '#800000', '#BC8F8F', '#FFE4C4', '#6495ED', '#4682B4',
                      '#FF6347', '#778899', '#40E0D0', '#00FFFF', '#F08080', '#6495ED', '#FF7F50',
@@ -44,7 +155,7 @@ class LingMap(object):
     start_zoom = 3
     control_scale = True
     prefer_canvas = False
-    title = False
+    title = None
     # Legend
     legend = True
     stroke_legend = True
@@ -52,7 +163,6 @@ class LingMap(object):
     stroke_legend_title = 'Legend'
     legend_position = 'bottomright'
     stroke_legend_position = 'bottomleft'
-    _legend_id = 0
     # Popups
     languages_in_popups = True
     html_popups = False
@@ -76,13 +186,19 @@ class LingMap(object):
     minimap = {}
     rectangles = []
     lines = []
-    features = False
-    popups = False
-    tooltips = False
-    custom_coordinates = False
-    stroke_features = False
+    #Don't touch
+    _legend_id = 0
+    features = None
+    popups = None
+    tooltips = None
+    custom_coordinates = None
+    stroke_features = None
     
     def __init__(self, languages=[]):
+        """__init__
+
+        Sets self.languages. If no languages are given, sets self.heatmap_only to true.
+        """
         if languages:
             if isinstance(languages, str):
                 self.languages = (languages,)
@@ -92,13 +208,26 @@ class LingMap(object):
             self.heatmap_only = True
 
     def _create_popups(self, marker, language, i, parse_html=False):
+        """Creates popups.
+
+        Parameters
+        ----------
+        marker: folium.CircleMarker
+            Marker to add the popup to.
+        language: str
+            Language name.
+        i: int
+            Number of the marker.
+        parse_html: bool, default False
+            Whether to use Folium.IFrame to add content to the popup
+        """
         popup_href = '''<a href="https://glottolog.org/resource/languoid/id/{}" onclick="this.target='_blank';">{}</a><br>'''
         if self.languages_in_popups:
             if self.popups:
                 if parse_html:
                     raise LingMapError('''
                                        It is impossible to add both language links and large HTML strings.
-                                       You can either not use parse_html option or set ling_map_object.languages_in_popups = False.
+                                       You can either not use html_popups option or set ling_map_object.languages_in_popups = False.
                                        ''')
                 popup = folium.Popup(popup_href.format(glottolog.get_glot_id(language), language) + self.popups[i])
             else:
@@ -114,6 +243,17 @@ class LingMap(object):
                 popup.add_to(marker)
 
     def _create_legend(self, m, legend_data, title='Legend', position='bottomright'):
+        """Creates legend and adds it to the map
+
+        m: folium.Map
+            The map.
+        legend_data: str
+            Html string with the contents for the legend.
+        title: str, default 'Legend'
+            Legend title.
+        position: str, default 'bottomright'
+            Legend position.
+        """
         with open('legend.html', 'r', encoding='utf-8') as f:
             template = f.read()
         template = jinja2.Template(template)
@@ -125,9 +265,23 @@ class LingMap(object):
         self._legend_id += 1
 
     def _create_heatmap(self, m, heatmap):
+        """Creates heatmap and adds it to the map
+
+        m: folium.Map
+            The map.
+        heatmap: list
+            List of coordinates.
+        """
         folium.plugins.HeatMap(heatmap).add_to(m)
 
     def _create_title(self, m, title):
+        """Creates title and adds it to the map
+
+        m: folium.Map
+            The map.
+        title: str
+            Title.
+        """
         template = '''
                     <div
                         style='position: absolute;
@@ -160,6 +314,25 @@ class LingMap(object):
                     color='#000000',
                     fill_color='#DEB887',
                     shape=''):
+        """Sets marker
+
+        Parameters
+        ----------
+        location: list
+            List of coordinates.
+        radius: int, default 7,
+        fill: bool, default True,
+        stroke: bool, default False,
+        weight: int, default 1,
+        fill_opacity: int, default 1,
+        color: str, default '#000000',
+        fill_color: str, default '#DEB887',
+        shape: str, default ''
+
+        Returns
+        ----------
+        marker: folium.CircleMarker
+        """
         if shape:
             div = folium.DivIcon(html=('<div style="font-size: 170%">' + str(shape) + '</div>'))
             marker = folium.Marker(location=location, icon=div)
@@ -175,10 +348,20 @@ class LingMap(object):
                 fill_color=fill_color)
         return marker
 
-    '''
-    This crazy function is needed to sort everything by features for the colormap
-    '''
+
     def _sort_all(self, features):
+        """This crazy function is needed to sort everything by features for the colormap
+
+        It takes all necessary attributes and sorts them by features.
+        Parameters
+        ----------
+        features: str
+            List of features
+
+        Returns
+        ----------
+        features: str
+        """
         attrs = [self.languages, self.popups, self.tooltips, self.custom_coordinates]
         length = [False for n in range(len(features))]
         attrs_r = []
@@ -208,6 +391,27 @@ class LingMap(object):
         return features
 
     def _prepare_features(self, features, stroke=False, use_shapes=False):
+        """Creates data for legend (depending on type of features) and creates features groups if needed
+
+        Parameters
+        ----------
+        features: list of strings
+            Features or stroke features.
+        stroke: bool, default False
+            Defines whether there are stroke features or not.
+        use_shapes: bool, default False
+            Whether to use shapes instead of colors.
+
+        Returns
+        ----------
+        groups_features: tuple:
+            folium.map.FeatureGroup or 0
+                Feature group for the feature or 0 if it is not needed.
+            str
+                Color or shape.
+        data: str
+            HTML string of data for legend.
+        """
         colors = self.colors
         if use_shapes:
             colors = self.shapes
@@ -260,6 +464,60 @@ class LingMap(object):
         return (groups_features, data)
 
     def _create_unified_marker(self, coordinates, color_shape, s_color):
+        """Creates several (<5, >0) markers that will look like one.
+
+        Parameters
+        ----------
+        coordinates: tuple
+            Tuple of (latitude, longitude).
+        color_shape: str
+            Color OR shape.
+        s_color:
+            Stroke color. It is not used if there are no stroke features.
+
+        Returns
+        ----------
+        dict:
+            'marker': folium.CircleMarker
+                Base marker.
+
+                ▒▒▒▒▒
+                ▒▒▒▒▒
+                ▒▒▒▒▒
+                
+            'stroke': folium.CircleMarker
+                Marker that will look like stroke for the base marker.
+                
+               ┌———————┐
+               │ ▒▒▒▒▒ │
+               │ ▒▒▒▒▒ │
+               │ ▒▒▒▒▒ │
+               └———————┘
+                
+            's_marker': folium.CircleMarker
+                Base marker for stroke features, it will look like big stroke.
+                
+              ▓▓▓▓▓▓▓▓▓▓▓▓▓
+              ▓ ┌———————┐ ▓
+              ▓ │ ▒▒▒▒▒ │ ▓
+              ▓ │ ▒▒▒▒▒ │ ▓
+              ▓ │ ▒▒▒▒▒ │ ▓
+              ▓ └———————┘ ▓
+              ▓▓▓▓▓▓▓▓▓▓▓▓▓
+              
+            's_stroke': folium.CircleMarker
+                Marker that will look like stroke for s_marker.
+
+             ┌———————————————┐
+             │ ▓▓▓▓▓▓▓▓▓▓▓▓▓ │
+             │ ▓ ┌———————┐ ▓ │
+             │ ▓ │ ▒▒▒▒▒ │ ▓ │
+             │ ▓ │ ▒▒▒▒▒ │ ▓ │
+             │ ▓ │ ▒▒▒▒▒ │ ▓ │
+             │ ▓ └———————┘ ▓ │
+             │ ▓▓▓▓▓▓▓▓▓▓▓▓▓ │
+             └———————————————┘  
+        """
         marker = ''
         stroke = ''
         s_marker = ''
@@ -285,6 +543,29 @@ class LingMap(object):
         return {'marker': marker, 'stroke': stroke, 's_marker': s_marker, 's_stroke': s_stroke}
 
     def add_features(self, features, radius=7, numeric=False, control=False, use_shapes=False):
+        """Add features
+
+        features: list of strings
+            List of features. Length of the list should equal to length of languages.
+            By default, if you add features, a legend will appear. To shut it down set
+            "legend" attribute to False.
+            To change the title of the legend use "legend_title" attribute.
+        radius: int, default 7
+            Marker radius.
+        numeric: bool, default False
+            Whether to assign different color to each feature (False),
+            or to assign a color from colormap (True).
+            You can set it to True only in case your features are numeric,
+            for example "Number of phonemes", and stroke features are not given.
+        control: bool, default False
+            Whether to add LayerControls to the map.
+            It allows interactive turning on/off given features.
+        use_shapes: bool, default False
+            Whether to use shapes instead of colors. This option allows to represent features as shapes.
+            Shapes are Unicode charaters like ⬤ or ◼. You can replace or add to default symbols by
+            changing attribute "shapes".
+            If colors are not a viable option for you, you can set this option to True.
+        """
         self._sanity_check(features, feature_name='features')
         self.features = tuple(features)
         self.radius = 7
@@ -298,6 +579,21 @@ class LingMap(object):
             self.use_shapes = True
 
     def add_stroke_features(self, features, radius=12, numeric=False, control=False):
+        """Add stroke features
+
+        This function assigns features to strokes of markers.
+        
+        features: list of strings
+            List of features. Length of the list should equal to length of languages.
+            By default, if you add features, a legend will appear. To shut it down set
+            "stroke_legend" attribute to False.
+            To change the title of the legend use "stroke_legend_title" attribute.
+        radius: int, default 12
+            Marker radius.
+        control: bool, default False
+            Whether to add LayerControls to the map.
+            It allows interactive turning on/off given features.
+        """
         self._sanity_check(features, feature_name='stroke features')
         self.stroke_features = tuple(features)
         if numeric:
@@ -309,41 +605,113 @@ class LingMap(object):
         self.stroke_radius = 12
 
     def add_popups(self, popups, parse_html=False):
+        """Add popups to markers
+
+        popups: list of strings
+            List of popups. Length of the list should equal to length of languages.
+        parse_html: bool, default False
+            By default (False) you can add small pieces of html code.
+            If you need to add full html pages to popups, you need to set the option to True.
+        """
         self._sanity_check(popups, feature_name='popups')
         self.popups = tuple(popups)
         if parse_html:
             self.html_popups=True
 
     def add_tooltips(self, tooltips):
+        """Add tooltips to markers
+
+        tooltips: list of strings
+            List of tooltips. Length of the list should equal to length of languages.
+        """
         self._sanity_check(tooltips, feature_name='tooltips')
         self.tooltips = tuple(tooltips)
 
     def add_custom_coordinates(self, custom_coordinates):
+        """Set custom coordinates
+
+        By default coordinates for the languages are taken from the Glottolog database.
+        If you have coordinates and want to use them, use this function.
+        
+        custom_coordinates: list of custom_coordinates (tuples)
+            Length of the list should equal to length of languages.
+        """
         self._sanity_check(custom_coordinates, feature_name='custom_coordinates')
         self.custom_coordinates = custom_coordinates
 
     def add_minimap(self, position='bottomleft', width=150, height=150, collapsed_width=25, collapsed_height=25, zoom_animation=True):
+        """Add minimap
+
+        position: str, default 'bottomleft'
+        width: int, default 150
+        height: int, default 150
+        collapsed_width: int, default 25
+        collapsed_height: int, default 25
+        zoom_animation: bool, default True
+            You can disable zoom animation for better performance.
+        """
         self.minimap = {'position': position, 'width': width, 'height': height, 'collapsed_width': collapsed_width, 'collapsed_height': collapsed_height, 'zoom_animation': zoom_animation}
 
     def add_minichart(self, data):
+        """Not implemented"""
         self._sanity_check(data, feature_name='minicharts')
         self.minicharts = data
 
     def add_rectangle(self, locations, tooltip='', popup='', color='black'):
+        """Add one rectangle
+
+        To add several rectangles, use this function several times.
+
+        locations: list of two tuples
+            Coordinates of two points to draw a rectangle.
+        tooltip: str, default ''
+        popups: str, default ''
+        color: str, default 'black'
+        """
         self.rectangles.append({'bounds': locations, 'tooltip': tooltip, 'popup': popup, 'color': color})
 
     def add_line(self, locations, tooltip='', popup='', color='black', smooth_factor=1.0):
+        """Add one line
+
+        To add several lines, use this function several times.
+
+        locations: list of two tuples
+            Coordinates of two points to draw a line.
+        tooltip: str, default ''
+        popups: str, default ''
+        color: str, default 'black'
+        smooth_factor: float, default 1.0
+        """
         self.lines.append({'locations': locations, 'tooltip': tooltip, 'popup': popup, 'color': color, 'smooth_factor': smooth_factor})
 
     def add_heatmap(self, heatmap=[]):
+        """Add heatmap
+
+        heatmap: list of tuples
+            Coordinates for the heatmap.
+        """
         self.use_heatmap = True
         self.heatmap = heatmap
 
     def _sanity_check(self, features, feature_name='corresponding lists'):
+        """Checks if length of features, popups and tooltips is equal to the length of languages
+
+        features: list
+        feature_name: str, default 'corresponding list'
+            feature_name is what will appear in the exception.
+        """
         if len(self.languages) != len(features):
             raise LingMapError("Length of languages and {} does not match".format(feature_name))
     
     def _create_map(self):
+        """Draw the map
+
+        Gets all necessary attributes and draws everything on the map.
+
+        Returns
+        ----------
+        m: folium.Map
+        """
         m = folium.Map(location=self.start_location, zoom_start=self.start_zoom, control_scale=self.control_scale, prefer_canvas=self.prefer_canvas)
         
         default_group = folium.FeatureGroup()
@@ -367,6 +735,7 @@ class LingMap(object):
         if self.heatmap_only:
             if self.heatmap:
                 self._create_heatmap(m, self.heatmap)
+            #If we don't draw markers, we're done here
             return m
 
         if self.features:
@@ -422,6 +791,7 @@ class LingMap(object):
             if unified_marker['s_stroke']:
                 s_strokes.append((unified_marker['s_stroke'], group))
 
+        #This order is important
         if s_strokes:
             [s_stroke[0].add_to(s_stroke[1]) for s_stroke in s_strokes]
         if s_markers:
@@ -459,8 +829,14 @@ class LingMap(object):
         return m
 
     def save(self, path):
+        """Save to file
+
+        path: str
+            Path to the output HTML file.
+        """
         self._create_map().save(path)
 
     def render(self):
+        """Renders the map returns it as HTML string"""
         return self._create_map().get_root().render()
 
