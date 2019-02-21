@@ -146,15 +146,18 @@ class LingMap(object):
     def __init__(self, languages=[]):
         """__init__
 
-        Sets self.languages. If no languages are given, sets self.heatmap_only to true.
+        Sets self.languages turning it into a tuple.
+        If no languages are given, sets self.heatmap_only to true.
         Then it sets everything else.
         """
+        if isinstance(languages, str):
+            languages = (languages,)
+        if not isinstance(languages, tuple):
+            languages = tuple(languages)
+            
         if languages:
+            self.languages = languages
             self.heatmap_only = False
-            if isinstance(languages, str):
-                self.languages = (languages,)
-            else:
-                self.languages = tuple(languages)
         else:
             self.heatmap_only = True
         # Feature representation
@@ -349,7 +352,7 @@ class LingMap(object):
                 fill_color=fill_color)
         return marker
 
-
+    
     def _sort_all(self, features):
         """This crazy function is needed to sort everything by features for the colormap
 
@@ -372,7 +375,7 @@ class LingMap(object):
             else:
                 attrs_r.append(length)
         al = list(zip(features, *attrs_r))
-        al.sort()
+        al.sort(key=lambda element: element[0])
         features = []
         self.languages = []
         self.popups = []
@@ -567,9 +570,10 @@ class LingMap(object):
             changing attribute "shapes".
             If colors are not a viable option for you, you can set this option to True.
         """
+        features = tuple(features)
         self._sanity_check(features, feature_name='features')
-        self.features = tuple(features)
-        self.radius = 7
+        self.features = features
+        self.radius = radius
         if numeric:
             self.numeric = True
         else:
@@ -595,8 +599,9 @@ class LingMap(object):
             Whether to add LayerControls to the map.
             It allows interactive turning on/off given features.
         """
+        features = tuple(features)
         self._sanity_check(features, feature_name='stroke features')
-        self.stroke_features = tuple(features)
+        self.stroke_features = features
         if numeric:
             self.s_numeric = True
         else:
@@ -614,8 +619,9 @@ class LingMap(object):
             By default (False) you can add small pieces of html code.
             If you need to add full html pages to popups, you need to set the option to True.
         """
+        popups = tuple(popups)
         self._sanity_check(popups, feature_name='popups')
-        self.popups = tuple(popups)
+        self.popups = popups
         if parse_html:
             self.html_popups=True
 
@@ -625,8 +631,9 @@ class LingMap(object):
         tooltips: list of strings
             List of tooltips. Length of the list should equal to length of languages.
         """
+        tooltips = tuple(tooltips)
         self._sanity_check(tooltips, feature_name='tooltips')
-        self.tooltips = tuple(tooltips)
+        self.tooltips = tooltips
 
     def add_custom_coordinates(self, custom_coordinates):
         """Set custom coordinates
@@ -637,6 +644,7 @@ class LingMap(object):
         custom_coordinates: list of custom_coordinates (tuples)
             Length of the list should equal to length of languages.
         """
+        custom_coordinates = tuple(custom_coordinates)
         self._sanity_check(custom_coordinates, feature_name='custom_coordinates')
         self.custom_coordinates = custom_coordinates
 
@@ -669,6 +677,7 @@ class LingMap(object):
         popups: str, default ''
         color: str, default 'black'
         """
+        locations = tuple(locations)
         self.rectangles.append({'bounds': locations, 'tooltip': tooltip, 'popup': popup, 'color': color})
 
     def add_line(self, locations, tooltip='', popup='', color='black', smooth_factor=1.0):
@@ -683,6 +692,7 @@ class LingMap(object):
         color: str, default 'black'
         smooth_factor: float, default 1.0
         """
+        locations = tuple(locations)
         self.lines.append({'locations': locations, 'tooltip': tooltip, 'popup': popup, 'color': color, 'smooth_factor': smooth_factor})
 
     def add_heatmap(self, heatmap=[]):
@@ -692,7 +702,7 @@ class LingMap(object):
             Coordinates for the heatmap.
         """
         self.use_heatmap = True
-        self.heatmap = heatmap
+        self.heatmap = tuple(heatmap)
 
     def _sanity_check(self, features, feature_name='corresponding lists'):
         """Checks if length of features, popups and tooltips is equal to the length of languages
@@ -714,7 +724,7 @@ class LingMap(object):
         m: folium.Map
         """
         m = folium.Map(location=self.start_location, zoom_start=self.start_zoom, control_scale=self.control_scale, prefer_canvas=self.prefer_canvas)
-        
+
         default_group = folium.FeatureGroup()
         markers = []
         strokes = []

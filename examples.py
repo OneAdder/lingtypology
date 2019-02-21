@@ -19,11 +19,11 @@ def random_test():
 def circassian_test():
     circassian = pandas.read_csv(os.path.join('examples', 'circassian.csv'), delimiter=',', header=0)
 
-    coordinates = list(zip(list(circassian.latitude), list(circassian.longitude)))
-    dialects = list(circassian.dialect)
+    coordinates = zip(list(circassian.latitude), list(circassian.longitude))
+    dialects = circassian.dialect
 
-    languages = list(circassian.language)
-    popups = list(circassian.village)
+    languages = circassian.language#list(circassian.language)
+    popups = circassian.village
 
     m = LingMap(languages)
     #m.unstroked = False
@@ -48,14 +48,11 @@ def circassian_test():
 
 def ejectives_test():
     data = pandas.read_csv(os.path.join('examples', 'ejective_and_n_consonants.csv'), delimiter=',', header=0)
-    languages = list(data.language)
-    consonants = list(data.consonants)
-    ejectives = list(data.consonants)
-    
-    m = LingMap(languages)
+
+    m = LingMap(data.language)
     m.legend_title='Amount of consonants'
-    m.add_tooltips(consonants)
-    m.add_features(consonants, numeric=True)
+    m.add_tooltips(data.consonants)
+    m.add_features(data.consonants, numeric=True)
     #m.languages_in_popups = False
     m.save(os.path.join('examples', 'ejectives.html'))
 
@@ -63,11 +60,11 @@ def ejectives_test():
 def circassian2_test():
     circassian = pandas.read_csv(os.path.join('examples', 'circassian.csv'), delimiter=',', header=0)
 
-    coordinates = list(zip(list(circassian.latitude), list(circassian.longitude)))
-    dialects = list(circassian.dialect)
+    coordinates = zip(list(circassian.latitude), list(circassian.longitude))
+    dialects = circassian.dialect
 
-    languages = list(circassian.language)
-    popups = list(circassian.village)
+    languages = circassian.language
+    popups = circassian.village
 
     m = LingMap(languages)
     #m.shapes = range(1, 20)
@@ -94,11 +91,11 @@ def heatmap_only_test():
 def heatmap_test():
     circassian = pandas.read_csv(os.path.join('examples', 'circassian.csv'), delimiter=',', header=0)
 
-    coordinates = list(zip(list(circassian.latitude), list(circassian.longitude)))
-    dialects = list(circassian.dialect)
+    coordinates = zip(list(circassian.latitude), list(circassian.longitude))
+    dialects = circassian.dialect
 
-    languages = list(circassian.language)
-    popups = list(circassian.village)
+    languages = circassian.language
+    popups = circassian.village
 
     m = LingMap(languages)
     m.start_location = (44.21, 42.32)
@@ -109,37 +106,32 @@ def heatmap_test():
     m.save(os.path.join('examples', 'heatmap.html'))
     
 def wals_test():
-    df = Wals(('1a',)).get_df()
-    languages = list(df.language)
-    features = list(df._1A)
-    coordinates = list(zip(list(df.latitude), list(df.longitude)))
+    wals_page = Wals(('1a',)).get_df()
     
-    m = LingMap(languages)
-    m.add_custom_coordinates(coordinates)
-    m.add_features(features)
+    m = LingMap(wals_page.language)
+    m.add_custom_coordinates(wals_page.coordinates)
+    m.add_features(wals_page._1A)
     m.legend_title = 'Consonant Inventory'
     m.save(os.path.join('examples', 'wals_test.html'))
 
 def wals_heatmap_test():
-    df = Wals('1a').get_df()
-    coordinates = list(zip(list(df[df._1A == 'Large'].latitude), list(df[df._1A == 'Large'].longitude)))
+    wals_page = Wals('1a').get_df()
 
     m = LingMap()
-    m.heatmap = coordinates
+    m.add_heatmap(wals_page[wals_page._1A == 'Large'].coordinates)
     m.title = 'Large Consonant Inventories'
     m.save(os.path.join('examples', 'wals_heatmap'))
 
 def phoible_test():
-    df = Phoible().get_df()
-    #print(list(df))
-    languages = list(df.LanguageName)
-    phonemes = list(df.Phonemes)
+    phoible_data = Phoible().get_df()
 
-    m = LingMap(languages)
+    m = LingMap(phoible_data.language)
+    m.prefer_canvas = True
     m.unstroked = False
     m.legend_title = 'Number of Phonemes'
-    m.add_features(phonemes, numeric=True)
+    m.add_features(phoible_data.phonemes.astype(int), numeric=True)
     m.save(os.path.join('examples', 'phoible.html'))
+
 #simplest_test()
 #random_test()
 #circassian_test()
