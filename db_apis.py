@@ -1,6 +1,7 @@
 """APIs for work Wals and Phoible. Requires Internet connection."""
 import pandas
 import urllib.request as ur
+import glottolog
 
 
 class Wals(object):
@@ -25,13 +26,17 @@ class Wals(object):
         Returns:
         ---------
         df: pandas.DataFrame
-            Headers: 'wals code', 'language', 'latitude', 'longitude', 'genus', 'family', 'area'.
+            Headers: 'wals code', 'language', 'genus', 'family', 'area', 'coordinates'.
         """
         wals_url = 'http://wals.info/feature/1A.tab'
         df = pandas.read_csv(wals_url, delimiter='\t', skiprows=7)
-        df = df.drop('value', 1)
-        df = df.drop('description', 1)
-        df = df.rename(columns={'name': 'language'})
+        coordinates = zip(list(df.latitude), list(df.longitude))
+        df.drop('latitude', axis=1, inplace=True)
+        df.drop('longitude', axis=1, inplace=True)
+        df = df.assign(coordinates=pandas.Series(coordinates))
+        df.drop('value', axis=1, inplace=True)
+        df.drop('description', axis=1, inplace=True)
+        df.rename(columns={'name': 'language'}, inplace=True)
         return df
 
     def _get_wals_data(self, feature):
@@ -69,7 +74,7 @@ class Wals(object):
         """Get data from Wals in pandas.DataFrame format.
 
         Returns pandas.DataFrame
-            Headers: 'wals code', 'language', 'latitude', 'longitude', 'genus', 'family', 'area', [[name of the page1]], [[name of the page2]], ...
+            Headers: 'wals code', 'language', 'genus', 'family', 'area', 'coordinates', [[name of the page1]], [[name of the page2]], ...
             Names of the pages start with '_'.
         """
         features = self.features
@@ -89,18 +94,11 @@ class Wals(object):
         """Get data from Wals in JSON format.
 
         Returns dict
-            Keys: 'wals code', 'language', 'latitude', 'longitude', 'genus', 'family', 'area', [[name of the page1]], [[name of the page2]], ...
+            Keys: 'wals code', 'language', 'genus', 'family', 'area', 'coordinates', [[name of the page1]], [[name of the page2]], ...
             Names of the pages start with '_'.
         """
         df = self.get_df()
-
-        js = {}
-        for header in list(df):
-            if not header == 'latitude' and not header == 'longitude':
-                js[header] = list(df[header])
-
-        coordinates = list(zip(list(df.latitude), list(df.longitude)))
-        js['coordinates'] = coordinates
+        js = { header:list(df[header]) for header in list(df)}
         return js
 
 
@@ -127,34 +125,32 @@ year      = {2014}
         """Get data from Phoible in pandas.DataFrame format.
 
         Returns pandas.DataFrame
-            Headers: 'InventoryID', 'Source', 'LanguageCode',
-            'LanguageName', 'Trump', 'LanguageFamilyRoot',
-            'LanguageFamilyGenus', 'Country', 'Area', 'Population',
-            'Latitude', 'Longitude', 'Phonemes', 'Consonants', 'Tones', 'Vowels'.
+            Headers: 'iso', 'language', 'coordinates', 'phonemes', 'consonants', 'tones', 'vowels'.
         """
         if self.show_citation:
             print(self.citation)
         phoible_url = 'https://raw.githubusercontent.com/clld/phoible/master/data/phoible-aggregated.tsv'
-        df = pandas.read_csv(phoible_url, delimiter='\t', header=0)
-        df.LanguageName = df.LanguageName.str.capitalize()
+        original_df = pandas.read_csv(phoible_url, delimiter='\t', header=0)
+        
+        df = pandas.DataFrame(columns=['iso', 'language', 'coordinates', 'phonemes', 'consonants', 'tones', 'vowels'])
+        df.iso = original_df.LanguageCode
+        df.language = [glottolog.get_by_iso(iso) for iso in list(original_df.LanguageCode)]
+        df.coordinates = zip(list(original_df.Latitude), list(original_df.Longitude))
+        df.phonemes = original_df.Phonemes.astype(int)
+        df.consonants = original_df.Consonants.astype(int)
+        df.tones = original_df.Tones.astype(int)
+        df.vowels = original_df.Vowels.astype(int)
         return df
 
     def get_json(self):
         """Get data from Phoible in pandas.DataFrame format.
 
-        Returns pandas.DataFrame
-            Keys: 'InventoryID', 'Source', 'LanguageCode',
-            'LanguageName', 'Trump', 'LanguageFamilyRoot',
-            'LanguageFamilyGenus', 'Country', 'Area', 'Population',
-            'Latitude', 'Longitude', 'Phonemes', 'Consonants', 'Tones', 'Vowels'.
+        Returns dict
+            Keys: 'iso', 'language', 'coordinates', 'phonemes', 'consonants', 'tones', 'vowels'.
         """
         df = self.get_df()
-        js = {}
-        for header in list(df):
-            if not header == 'Latitude' and not header == 'Longitude':
-                js[header] = list(df[header])
-        coordinates = list(zip(list(df.Latitude), list(df.Longitude)))
+        js = { header:list(df[header]) for header in list(df)}
         return js
 
-#print(list(Wals('1a').get_json()))
+#print(Wals('1a').get_json())
 #print(list(Phoible().get_json()))
