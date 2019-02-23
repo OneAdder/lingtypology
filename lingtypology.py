@@ -18,6 +18,7 @@ import math
 #Local tools
 import glottolog
 from db_apis import Wals, Phoible
+from update_glottolog import *
 
 class LingMapError(Exception):
     """All special exceptions"""

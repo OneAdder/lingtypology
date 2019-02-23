@@ -1,8 +1,18 @@
 """Using data from Glottolog DB"""
 import pandas
+import os
 
-glottolog = pandas.read_csv('glottolog.csv', delimiter=',', header=0)
+
+def get_glottolog_table():
+    table_name = [file for file in os.listdir() if file.startswith('glottolog-languoids') and file.endswith('.csv')][0]
+    version = '-'.join(table_name.split('-')[-3:])[:-4]
+    return table_name, version
+    
+#---------------------------------------------------------------------------------
+path, version = get_glottolog_table()
+glottolog = pandas.read_csv(path, delimiter=',', header=0)
 warnings = []
+#---------------------------------------------------------------------------------
 
 
 def get_affiliations(languages):
@@ -39,7 +49,6 @@ def get_coordinates(language):
         #print('(get_coordinates) Warning: coordinates for {} not found'.format(language))
     else:
         return (float(latitude), float(longitude))
-
 
 
 def get_glot_id(language):

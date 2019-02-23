@@ -1311,6 +1311,8 @@ ngin1245,Nginyukwur,Africa,,,ngin1245,,heib1242/west2502/cent2049/koal1240,heib1
 ngem1256,Ngemere,Africa,,,ngem1256,,heib1242/west2502/cent2049/koal1240,heib1242,Heibanic,koal1240,Koalib-Rere,dialect,
 gara1269,Garrwa,Australia,-17.4504,137.72014,gara1269,wrk,garr1260,garr1260,Garrwan,gara1269,Garrwa,language,moribund
 wany1247,Wanyi,Australia,-18.6529,137.608,wany1247,wny,garr1260,garr1260,Garrwan,wany1247,Wanyi,language,nearly extinct
+west2904,Western Garrwa,,,,west2904,,garr1260/gara1269,garr1260,Garrwan,gara1269,Garrwa,dialect,
+kuni1269,Kunindirri,,,,kuni1269,,garr1260/gara1269,garr1260,Garrwan,gara1269,Garrwa,dialect,
 fiwa1240,Fiwaga,Papunesia,-6.66342,143.646,fiwa1240,fiw,east2499,east2499,East Kutubu,fiwa1240,Fiwaga,language,not endangered
 foii1241,Foi,Papunesia,-6.47258,143.495,foii1241,foi,east2499,east2499,East Kutubu,foii1241,Foi,language,not endangered
 mubi1239,Mubi (Foi),Papunesia,,,mubi1239,,east2499/foii1241,east2499,East Kutubu,foii1241,Foi,dialect,
@@ -3681,125 +3683,165 @@ sout2717,Southwestern,Eurasia,,,sout2717,,sino1245/bodi1256/kaik1248/ghal1247/ta
 nort2711,Northwestern,Eurasia,,,nort2711,,sino1245/bodi1256/kaik1248/ghal1247/tama1367/nucl1729/west2415,sino1245,Sino-Tibetan,west2415,Western Tamang,dialect,
 rasu1238,Rasuwa,Eurasia,,,rasu1238,,sino1245/bodi1256/kaik1248/ghal1247/tama1367/nucl1729/west2415,sino1245,Sino-Tibetan,west2415,Western Tamang,dialect,
 unun9962,Unclassified Bodish,,,,unun9962,,sino1245/bodi1256/bodi1257,sino1245,Sino-Tibetan,,,family,
-oldm1245,Old-Modern Tibetan,,,,oldm1245,,sino1245/bodi1256/bodi1257,sino1245,Sino-Tibetan,,,family,
+oldm1245,Early Old Tibetan,,,,oldm1245,,sino1245/bodi1256/bodi1257,sino1245,Sino-Tibetan,,,family,
 tsha1246,Tshangla-East Bodish,,,,tsha1246,,sino1245/bodi1256/bodi1257,sino1245,Sino-Tibetan,,,family,
 basu1243,Basum,Eurasia,,,basu1243,,sino1245/bodi1256/bodi1257/unun9962,sino1245,Sino-Tibetan,basu1243,Basum,language,
-tibe1276,Tibetic,,,,tibe1276,,sino1245/bodi1256/bodi1257/oldm1245,sino1245,Sino-Tibetan,,,family,
+tibe1276,Middle Old Tibetan,,,,tibe1276,,sino1245/bodi1256/bodi1257/oldm1245,sino1245,Sino-Tibetan,,,family,
 clas1254,Classical Tibetan,Eurasia,,,clas1254,xct,sino1245/bodi1256/bodi1257/oldm1245,sino1245,Sino-Tibetan,clas1254,Classical Tibetan,language,extinct
-laha1255,Lahauli-Spiti,,,,laha1255,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276,sino1245,Sino-Tibetan,,,family,
-kham1299,Kham-Hor,,,,kham1299,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276,sino1245,Sino-Tibetan,,,family,
-east2771,Eastern Tibetic,,,,east2771,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276,sino1245,Sino-Tibetan,,,family,
-sout3217,Southern Tibetic,,,,sout3217,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276,sino1245,Sino-Tibetan,,,family,
+lada1242,Western Archaic Tibetan,,,,lada1242,,sino1245/bodi1256/bodi1257/oldm1245,sino1245,Sino-Tibetan,,,family,
+late1253,Late Old Tibetan,,,,late1253,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276,sino1245,Sino-Tibetan,,,family,
 amdo1237,Amdo Tibetan,Eurasia,34.5177,100.485,amdo1237,adx,sino1245/bodi1256/bodi1257/oldm1245/tibe1276,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,language,not endangered
-tibe1272,Tibetan,Eurasia,28.3681,90.1872,tibe1272,bod,sino1245/bodi1256/bodi1257/oldm1245/tibe1276,sino1245,Sino-Tibetan,tibe1272,Tibetan,language,not endangered
-lada1242,North-Western Tibetic,,,,lada1242,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276,sino1245,Sino-Tibetan,,,family,
-sout3216,South-Western Tibetic,,,,sout3216,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276,sino1245,Sino-Tibetan,,,family,
-stod1241,Stod Bhoti,Eurasia,32.497,77.116,stod1241,sbu,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/laha1255,sino1245,Sino-Tibetan,stod1241,Stod Bhoti,language,not endangered
-bhot1235,Bhoti Kinnauri,Eurasia,31.8503,78.5728,bhot1235,nes,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/laha1255,sino1245,Sino-Tibetan,bhot1235,Bhoti Kinnauri,language,not endangered
-tukp1239,Tukpa,Eurasia,31.4925,78.1627,tukp1239,tpq,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/laha1255,sino1245,Sino-Tibetan,tukp1239,Tukpa,language,shifting
-spit1239,Spiti-Jad,,,,spit1239,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/laha1255,sino1245,Sino-Tibetan,,,family,
-maya1278,Mayar,Eurasia,,,maya1278,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/laha1255/stod1241,sino1245,Sino-Tibetan,stod1241,Stod Bhoti,dialect,
-stod1242,Stod,Eurasia,,,stod1242,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/laha1255/stod1241,sino1245,Sino-Tibetan,stod1241,Stod Bhoti,dialect,
-khok1238,Khoksar,Eurasia,,,khok1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/laha1255/stod1241,sino1245,Sino-Tibetan,stod1241,Stod Bhoti,dialect,
-jadd1243,Jad,Eurasia,30.241,79.153,jadd1243,jda,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/laha1255/spit1239,sino1245,Sino-Tibetan,jadd1243,Jad,language,shifting
-spit1240,Spiti Bhoti,Eurasia,32.526,77.833,spit1240,spt,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/laha1255/spit1239,sino1245,Sino-Tibetan,spit1240,Spiti Bhoti,language,shifting
-kham1283,Khamba,Eurasia,28.9930167,94.89439116,kham1283,kbg,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/kham1299,sino1245,Sino-Tibetan,kham1283,Khamba,language,shifting
-kham1282,Khams Tibetan,Eurasia,31.9313,91.7062,kham1282,khg,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/kham1299,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,language,not endangered
-tsek1238,Tseku,Eurasia,27.8046,89.1931,tsek1238,tsk,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/kham1299,sino1245,Sino-Tibetan,tsek1238,Tseku,language,not endangered
-jone1238,Jone,Eurasia,,,jone1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/kham1299/kham1282,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
-sout2714,Southern Khams,Eurasia,,,sout2714,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/kham1299/kham1282,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
-nort2707,Northern Khams,Eurasia,,,nort2707,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/kham1299/kham1282,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
-west2413,Western Khams,Eurasia,,,west2413,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/kham1299/kham1282,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
-east2344,Eastern Khams,Eurasia,,,east2344,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/kham1299/kham1282,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
-chon1285,Choni,Eurasia,27.7552,99.8255,chon1285,cda,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/east2771,sino1245,Sino-Tibetan,chon1285,Choni,language,not endangered
-zhon1235,Zhongu,Eurasia,32.43582,103.44179,zhon1235,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/east2771,sino1245,Sino-Tibetan,zhon1235,Zhongu,language,
-baim1244,Baima,Eurasia,33.1001,103.952,baim1244,bqh,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/east2771,sino1245,Sino-Tibetan,baim1244,Baima,language,shifting
-hbru1241,Hbrugchu,Eurasia,,,hbru1241,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/east2771/chon1285,sino1245,Sino-Tibetan,chon1285,Choni,dialect,
-sout2713,Southern Baima,Eurasia,,,sout2713,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/east2771/baim1244,sino1245,Sino-Tibetan,baim1244,Baima,dialect,
-nort2706,Northern Baima,Eurasia,,,nort2706,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/east2771/baim1244,sino1245,Sino-Tibetan,baim1244,Baima,dialect,
-west2412,Western Baima,Eurasia,,,west2412,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/east2771/baim1244,sino1245,Sino-Tibetan,baim1244,Baima,dialect,
-dzon1238,Dzongkhic,,,,dzon1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3217,sino1245,Sino-Tibetan,,,family,
-brok1249,Dur Brokkat,Eurasia,27.6544,90.648,brok1249,bro,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3217,sino1245,Sino-Tibetan,brok1249,Dur Brokkat,language,shifting
-brok1248,Brokpake,Eurasia,27.3438,91.9972,brok1248,sgt,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3217,sino1245,Sino-Tibetan,brok1248,Brokpake,language,shifting
-lakh1240,Lakha,Eurasia,27.6325,90.3336,lakh1240,lkh,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3217,sino1245,Sino-Tibetan,lakh1240,Lakha,language,shifting
-sikk1242,Sikkimese,Eurasia,27.85795,88.59153,sikk1242,sip,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3217/dzon1238,sino1245,Sino-Tibetan,sikk1242,Sikkimese,language,not endangered
-grom1238,Groma,Eurasia,27.6089,88.8541,grom1238,gro,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3217/dzon1238,sino1245,Sino-Tibetan,grom1238,Groma,language,not endangered
-choc1275,Chocangacakha,Eurasia,27.46961,91.21954,choc1275,cgk,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3217/dzon1238,sino1245,Sino-Tibetan,choc1275,Chocangacakha,language,threatened
-nucl1307,Nuclear Dzongkhic,,,,nucl1307,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3217/dzon1238,sino1245,Sino-Tibetan,,,family,
-lowe1398,Lower Groma,Eurasia,,,lowe1398,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3217/dzon1238/grom1238,sino1245,Sino-Tibetan,grom1238,Groma,dialect,
-uppe1409,Upper Groma,Eurasia,,,uppe1409,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3217/dzon1238/grom1238,sino1245,Sino-Tibetan,grom1238,Groma,dialect,
-dzon1239,Dzongkha,Eurasia,27.410786,89.581604,dzon1239,dzo,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3217/dzon1238/nucl1307,sino1245,Sino-Tibetan,dzon1239,Dzongkha,language,threatened
-laya1253,Layakha,Eurasia,28.0499,89.7177,laya1253,lya,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3217/dzon1238/nucl1307,sino1245,Sino-Tibetan,laya1253,Layakha,language,not endangered
-luna1243,Lunanakha,Eurasia,28.1288,90.1257,luna1243,luk,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3217/dzon1238/nucl1307,sino1245,Sino-Tibetan,luna1243,Lunanakha,language,not endangered
-nort2708,Northern Thimphu,Eurasia,,,nort2708,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3217/dzon1238/nucl1307/dzon1239,sino1245,Sino-Tibetan,dzon1239,Dzongkha,dialect,
-haaa1251,Ha (Bhutan),Eurasia,,,haaa1251,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3217/dzon1238/nucl1307/dzon1239,sino1245,Sino-Tibetan,dzon1239,Dzongkha,dialect,
-wang1287,Wang-The,Eurasia,,,wang1287,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3217/dzon1238/nucl1307/dzon1239,sino1245,Sino-Tibetan,dzon1239,Dzongkha,dialect,
-rong1262,Rongba,Eurasia,,,rong1262,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
-hbro1238,Hbrogpa,Eurasia,,,hbro1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
-rtah1238,Rtahu,Eurasia,,,rtah1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
-rong1261,Rongmahbrogpa,Eurasia,,,rong1261,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
-jadd1242,Jad Tibetan,Eurasia,,,jadd1242,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/tibe1272,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
-gtsa1238,Gtsang,Eurasia,,,gtsa1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/tibe1272,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
-hann1240,Hanniu,Eurasia,,,hann1240,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/tibe1272,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
-marc1244,Marchha,Eurasia,,,marc1244,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/tibe1272,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
-abaa1238,Aba,Eurasia,,,abaa1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/tibe1272,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
-utsa1239,Utsang,Eurasia,,,utsa1239,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/tibe1272,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
-kong1283,Kongbo,Eurasia,,,kong1283,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/tibe1272,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
-dart1238,Dartsemdo,Eurasia,,,dart1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/tibe1272,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
-ngan1292,Nganshuenkuan,Eurasia,,,ngan1292,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/tibe1272,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
-druu1238,Dru,Eurasia,,,druu1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/tibe1272,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
-paur1239,Paurong,Eurasia,,,paur1239,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/tibe1272,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
-dbus1238,Dbus,Eurasia,,,dbus1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/tibe1272,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
-mnga1238,Mngahris,Eurasia,,,mnga1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/tibe1272,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
-pana1291,Panakha-Panags,Eurasia,,,pana1291,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/tibe1272,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
-kenh1234,Kenhatic,,,,kenh1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/lada1242,sino1245,Sino-Tibetan,,,family,
-chan1309,Changthang,Eurasia,34.0662,78.2389,chan1309,cna,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/lada1242,sino1245,Sino-Tibetan,chan1309,Changthang,language,threatened
-sham1282,Shamskatic,,,,sham1282,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/lada1242,sino1245,Sino-Tibetan,,,family,
-zang1248,Zangskari,Eurasia,33.2397,77.4013,zang1248,zau,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/lada1242/kenh1234,sino1245,Sino-Tibetan,zang1248,Zangskari,language,shifting
-lada1244,Leh-Kenhat,Eurasia,33.468,80.6013,lada1244,lbj,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/lada1242/kenh1234,sino1245,Sino-Tibetan,lada1244,Leh-Kenhat,language,shifting
-nubr1242,Nubra Ladakhi,Eurasia,,,nubr1242,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/lada1242/kenh1234/lada1244,sino1245,Sino-Tibetan,lada1244,Leh-Kenhat,dialect,
-lehh1238,Leh,Eurasia,,,lehh1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/lada1242/kenh1234/lada1244,sino1245,Sino-Tibetan,lada1244,Leh-Kenhat,dialect,
-sham1264,Shamma,Eurasia,,,sham1264,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/lada1242/kenh1234/lada1244,sino1245,Sino-Tibetan,lada1244,Leh-Kenhat,dialect,
-balt1258,Balti,Eurasia,34.4491,77.2859,balt1258,bft,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/lada1242/sham1282,sino1245,Sino-Tibetan,balt1258,Balti,language,not endangered
-puri1258,Purik-Sham-Nubra,Eurasia,34.3386,76.0127,puri1258,prx,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/lada1242/sham1282,sino1245,Sino-Tibetan,puri1258,Purik-Sham-Nubra,language,not endangered
-lowa1242,Lowa,Eurasia,29.0324,83.8959,lowa1242,loy,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216,sino1245,Sino-Tibetan,lowa1242,Lowa,language,shifting
-walu1241,Walungge,Eurasia,27.695,87.2374,walu1241,ola,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216,sino1245,Sino-Tibetan,walu1241,Walungge,language,shifting
-mugo1238,Mugom,Eurasia,30.8983,79.4664,mugo1238,muk,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216,sino1245,Sino-Tibetan,mugo1238,Mugom,language,not endangered
-kyir1235,Kyirong-Kagate,,,,kyir1235,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216,sino1245,Sino-Tibetan,,,family,
-lhom1239,Lhomi,Eurasia,27.5948,87.7161,lhom1239,lhm,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216,sino1245,Sino-Tibetan,lhom1239,Lhomi,language,threatened
-sher1254,Sherpa-Jirel,,,,sher1254,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216,sino1245,Sino-Tibetan,,,family,
-huml1238,Humla,Eurasia,30.1451,81.5659,huml1238,hut,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216,sino1245,Sino-Tibetan,huml1238,Humla,language,shifting
-dolp1238,Dolpo-Tichurong,,,,dolp1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216,sino1245,Sino-Tibetan,,,family,
-bara1356,Baragaunle,Eurasia,,,bara1356,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/lowa1242,sino1245,Sino-Tibetan,lowa1242,Lowa,dialect,
-uppe1408,Upper Mustang,Eurasia,,,uppe1408,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/lowa1242,sino1245,Sino-Tibetan,lowa1242,Lowa,dialect,
-muga1241,Mugali,Eurasia,,,muga1241,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/mugo1238,sino1245,Sino-Tibetan,mugo1238,Mugom,dialect,
-kara1471,Karani,Eurasia,,,kara1471,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/mugo1238,sino1245,Sino-Tibetan,mugo1238,Mugom,dialect,
-gyal1235,Gyalsumdo-Nubri-Kyirong,,,,gyal1235,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/kyir1235,sino1245,Sino-Tibetan,,,family,
-tsum1240,Tsum,Eurasia,28.4719,85.0817,tsum1240,ttz,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/kyir1235,sino1245,Sino-Tibetan,tsum1240,Tsum,language,shifting
-yolm1234,Yolmo-Kagate,,,,yolm1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/kyir1235,sino1245,Sino-Tibetan,,,family,
-kyer1238,Kyerung,Eurasia,28.2922,85.4257,kyer1238,kgy,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/kyir1235/gyal1235,sino1245,Sino-Tibetan,kyer1238,Kyerung,language,shifting
-nubr1241,Gyalsumdo-Nubri,Eurasia,28.5092,84.7772,nubr1241,kte,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/kyir1235/gyal1235,sino1245,Sino-Tibetan,nubr1241,Gyalsumdo-Nubri,language,shifting
-gyal1236,Gyalsumdo,Eurasia,,,gyal1236,gyo,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/kyir1235/gyal1235/nubr1241,sino1245,Sino-Tibetan,nubr1241,Gyalsumdo-Nubri,dialect,
-nubr1243,Nubri,,,,nubr1243,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/kyir1235/gyal1235/nubr1241,sino1245,Sino-Tibetan,nubr1241,Gyalsumdo-Nubri,dialect,
-lhoo1238,Lho,Eurasia,,,lhoo1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/kyir1235/gyal1235/nubr1241/nubr1243,sino1245,Sino-Tibetan,nubr1241,Gyalsumdo-Nubri,dialect,
-sama1294,Sama (Nepal),Eurasia,,,sama1294,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/kyir1235/gyal1235/nubr1241/nubr1243,sino1245,Sino-Tibetan,nubr1241,Gyalsumdo-Nubri,dialect,
-prok1238,Prok,Eurasia,,,prok1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/kyir1235/gyal1235/nubr1241/nubr1243,sino1245,Sino-Tibetan,nubr1241,Gyalsumdo-Nubri,dialect,
-namr1238,Namrung,Eurasia,,,namr1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/kyir1235/gyal1235/nubr1241/nubr1243,sino1245,Sino-Tibetan,nubr1241,Gyalsumdo-Nubri,dialect,
-hela1238,Lamjung-Melamchi Yolmo,Eurasia,27.9212,85.6289,hela1238,scp,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/kyir1235/yolm1234,sino1245,Sino-Tibetan,hela1238,Lamjung-Melamchi Yolmo,language,shifting
-kaga1252,Kagate,Eurasia,27.4492,86.1675,kaga1252,syw,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/kyir1235/yolm1234,sino1245,Sino-Tibetan,kaga1252,Kagate,language,shifting
-west2411,Western Helambu Sherpa,Eurasia,,,west2411,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/kyir1235/yolm1234/hela1238,sino1245,Sino-Tibetan,hela1238,Lamjung-Melamchi Yolmo,dialect,
-east2343,Eastern Helambu Sherpa,Eurasia,,,east2343,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/kyir1235/yolm1234/hela1238,sino1245,Sino-Tibetan,hela1238,Lamjung-Melamchi Yolmo,dialect,
-lamj1247,Lamjung Yolmo,,,,lamj1247,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/kyir1235/yolm1234/hela1238,sino1245,Sino-Tibetan,hela1238,Lamjung-Melamchi Yolmo,dialect,
-ilam1239,Ilam Yolmo,,,,ilam1239,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/kyir1235/yolm1234/hela1238,sino1245,Sino-Tibetan,hela1238,Lamjung-Melamchi Yolmo,dialect,
-sher1260,Sherpaic,,,,sher1260,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/sher1254,sino1245,Sino-Tibetan,,,family,
-jire1238,Jirel,Eurasia,27.6931,86.3201,jire1238,jul,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/sher1254,sino1245,Sino-Tibetan,jire1238,Jirel,language,shifting
-sher1255,Solu-Khumbu Sherpa,Eurasia,27.674,86.9994,sher1255,xsr,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/sher1254/sher1260,sino1245,Sino-Tibetan,sher1255,Solu-Khumbu Sherpa,language,shifting
-naab1241,Naaba,Eurasia,27.6926,87.3409,naab1241,nao,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/sher1254/sher1260,sino1245,Sino-Tibetan,naab1241,Naaba,language,not endangered
-rame1238,Ramechap,Eurasia,,,rame1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/sher1254/sher1260/sher1255,sino1245,Sino-Tibetan,sher1255,Solu-Khumbu Sherpa,dialect,
-solu1238,Solu,Eurasia,,,solu1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/sher1254/sher1260/sher1255,sino1245,Sino-Tibetan,sher1255,Solu-Khumbu Sherpa,dialect,
-khum1246,Khumbu,Eurasia,,,khum1246,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/sher1254/sher1260/sher1255,sino1245,Sino-Tibetan,sher1255,Solu-Khumbu Sherpa,dialect,
-tich1238,Tichurong,Eurasia,28.9506,83.4672,tich1238,tcn,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/dolp1238,sino1245,Sino-Tibetan,tich1238,Tichurong,language,not endangered
-dolp1239,Dolpo,Eurasia,29.1957,83.2927,dolp1239,dre,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/sout3216/dolp1238,sino1245,Sino-Tibetan,dolp1239,Dolpo,language,shifting
+laha1255,Lahauli-Spiti,,,,laha1255,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253,sino1245,Sino-Tibetan,,,family,
+kham1299,Kham-Hor,,,,kham1299,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253,sino1245,Sino-Tibetan,,,family,
+east2771,Eastern Tibetic,,,,east2771,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253,sino1245,Sino-Tibetan,,,family,
+sout3217,Southern Tibetic,,,,sout3217,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253,sino1245,Sino-Tibetan,,,family,
+cent2346,Central Tibetan,,,,cent2346,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253,sino1245,Sino-Tibetan,,,family,
+stod1241,Stod Bhoti,Eurasia,32.497,77.116,stod1241,sbu,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/laha1255,sino1245,Sino-Tibetan,stod1241,Stod Bhoti,language,not endangered
+bhot1235,Bhoti Kinnauri,Eurasia,31.8503,78.5728,bhot1235,nes,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/laha1255,sino1245,Sino-Tibetan,bhot1235,Bhoti Kinnauri,language,not endangered
+tukp1239,Tukpa,Eurasia,31.4925,78.1627,tukp1239,tpq,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/laha1255,sino1245,Sino-Tibetan,tukp1239,Tukpa,language,shifting
+spit1239,Spiti-Jad,,,,spit1239,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/laha1255,sino1245,Sino-Tibetan,,,family,
+maya1278,Mayar,Eurasia,,,maya1278,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/laha1255/stod1241,sino1245,Sino-Tibetan,stod1241,Stod Bhoti,dialect,
+stod1242,Stod,Eurasia,,,stod1242,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/laha1255/stod1241,sino1245,Sino-Tibetan,stod1241,Stod Bhoti,dialect,
+khok1238,Khoksar,Eurasia,,,khok1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/laha1255/stod1241,sino1245,Sino-Tibetan,stod1241,Stod Bhoti,dialect,
+jadd1243,Jad,Eurasia,30.241,79.153,jadd1243,jda,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/laha1255/spit1239,sino1245,Sino-Tibetan,jadd1243,Jad,language,shifting
+spit1240,Spiti Bhoti,Eurasia,32.526,77.833,spit1240,spt,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/laha1255/spit1239,sino1245,Sino-Tibetan,spit1240,Spiti Bhoti,language,shifting
+jadd1242,Jadthang,Eurasia,,,jadd1242,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/laha1255/spit1239/jadd1243,sino1245,Sino-Tibetan,jadd1243,Jad,dialect,
+nila1245,Nilang,,,,nila1245,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/laha1255/spit1239/jadd1243,sino1245,Sino-Tibetan,jadd1243,Jad,dialect,
+kham1282,Khams Tibetan,Eurasia,31.9313,91.7062,kham1282,khg,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,language,not endangered
+tsek1238,Tseku,Eurasia,27.8046,89.1931,tsek1238,tsk,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299,sino1245,Sino-Tibetan,tsek1238,Tseku,language,not endangered
+cent2347,Central Khams,,,,cent2347,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299/kham1282,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
+sout2714,Southern Khams,Eurasia,,,sout2714,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299/kham1282,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
+nort2707,Nangchen Tibetan,Eurasia,,,nort2707,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299/kham1282,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
+west2413,Hor,Eurasia,,,west2413,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299/kham1282,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
+east2344,Sichuan Khams,Eurasia,,,east2344,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299/kham1282,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
+cham1333,Chamdo Tibetan,,,,cham1333,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299/kham1282/cent2347,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
+dagy1234,Dagyab Tibetan,,,,dagy1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299/kham1282/cent2347,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
+bach1244,Bachen of Hor,,,,bach1244,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299/kham1282/west2413,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
+gert1234,Gertse,,,,gert1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299/kham1282/west2413,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
+nakc1234,Nakchu of Hor,,,,nakc1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299/kham1282/west2413,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
+amdo1238,Amdo of Hor,,,,amdo1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299/kham1282/west2413,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
+horo1250,Hor of Hor,,,,horo1250,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299/kham1282/west2413,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
+nyar1249,Nyarong (Xinlong),,,,nyar1249,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299/kham1282/east2344,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
+mili1236,Mili Tibetan,,,,mili1236,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299/kham1282/east2344,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
+bath1249,Bathang (Batang),,,,bath1249,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299/kham1282/east2344,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
+kard1234,Kardze (Ganzi),,,,kard1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299/kham1282/east2344,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
+lith1253,Lithang (Litang),,,,lith1253,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299/kham1282/east2344,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
+dart1238,Dartsedo,Eurasia,,,dart1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299/kham1282/east2344,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
+derg1234,Derge (Dege),,,,derg1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/kham1299/kham1282/east2344,sino1245,Sino-Tibetan,kham1282,Khams Tibetan,dialect,
+chon1285,Choni,Eurasia,27.7552,99.8255,chon1285,cda,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/east2771,sino1245,Sino-Tibetan,chon1285,Choni,language,not endangered
+zhon1235,Zhongu,Eurasia,32.43582,103.44179,zhon1235,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/east2771,sino1245,Sino-Tibetan,zhon1235,Zhongu,language,
+baim1244,Baima,Eurasia,33.1001,103.952,baim1244,bqh,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/east2771,sino1245,Sino-Tibetan,baim1244,Baima,language,shifting
+hbru1241,Hbrugchu,Eurasia,,,hbru1241,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/east2771/chon1285,sino1245,Sino-Tibetan,chon1285,Choni,dialect,
+sout2713,Southern Baima,Eurasia,,,sout2713,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/east2771/baim1244,sino1245,Sino-Tibetan,baim1244,Baima,dialect,
+nort2706,Northern Baima,Eurasia,,,nort2706,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/east2771/baim1244,sino1245,Sino-Tibetan,baim1244,Baima,dialect,
+west2412,Western Baima,Eurasia,,,west2412,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/east2771/baim1244,sino1245,Sino-Tibetan,baim1244,Baima,dialect,
+dzon1238,Dzongkhic,,,,dzon1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/sout3217,sino1245,Sino-Tibetan,,,family,
+uncl1513,Unclassified Southern Tibetic,,,,uncl1513,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/sout3217,sino1245,Sino-Tibetan,,,family,
+brok1249,Dur Brokkat,Eurasia,27.6544,90.648,brok1249,bro,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/sout3217,sino1245,Sino-Tibetan,brok1249,Dur Brokkat,language,shifting
+brok1248,Brokpake,Eurasia,27.3438,91.9972,brok1248,sgt,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/sout3217,sino1245,Sino-Tibetan,brok1248,Brokpake,language,shifting
+lakh1240,Lakha,Eurasia,27.6325,90.3336,lakh1240,lkh,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/sout3217,sino1245,Sino-Tibetan,lakh1240,Lakha,language,shifting
+sikk1242,Sikkimese,Eurasia,27.85795,88.59153,sikk1242,sip,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/sout3217/dzon1238,sino1245,Sino-Tibetan,sikk1242,Sikkimese,language,not endangered
+grom1238,Groma,Eurasia,27.6089,88.8541,grom1238,gro,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/sout3217/dzon1238,sino1245,Sino-Tibetan,grom1238,Groma,language,not endangered
+choc1275,Chocangacakha,Eurasia,27.46961,91.21954,choc1275,cgk,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/sout3217/dzon1238,sino1245,Sino-Tibetan,choc1275,Chocangacakha,language,threatened
+nucl1307,Nuclear Dzongkhic,,,,nucl1307,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/sout3217/dzon1238,sino1245,Sino-Tibetan,,,family,
+lowe1398,Lower Groma,Eurasia,,,lowe1398,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/sout3217/dzon1238/grom1238,sino1245,Sino-Tibetan,grom1238,Groma,dialect,
+uppe1409,Upper Groma,Eurasia,,,uppe1409,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/sout3217/dzon1238/grom1238,sino1245,Sino-Tibetan,grom1238,Groma,dialect,
+dzon1239,Dzongkha,Eurasia,27.410786,89.581604,dzon1239,dzo,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/sout3217/dzon1238/nucl1307,sino1245,Sino-Tibetan,dzon1239,Dzongkha,language,threatened
+laya1253,Layakha,Eurasia,28.0499,89.7177,laya1253,lya,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/sout3217/dzon1238/nucl1307,sino1245,Sino-Tibetan,laya1253,Layakha,language,not endangered
+luna1243,Lunanakha,Eurasia,28.1288,90.1257,luna1243,luk,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/sout3217/dzon1238/nucl1307,sino1245,Sino-Tibetan,luna1243,Lunanakha,language,not endangered
+nort2708,Northern Thimphu,Eurasia,,,nort2708,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/sout3217/dzon1238/nucl1307/dzon1239,sino1245,Sino-Tibetan,dzon1239,Dzongkha,dialect,
+haaa1251,Ha (Bhutan),Eurasia,,,haaa1251,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/sout3217/dzon1238/nucl1307/dzon1239,sino1245,Sino-Tibetan,dzon1239,Dzongkha,dialect,
+wang1287,Wang-The,Eurasia,,,wang1287,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/sout3217/dzon1238/nucl1307/dzon1239,sino1245,Sino-Tibetan,dzon1239,Dzongkha,dialect,
+kham1283,Khamba,Eurasia,28.9930167,94.89439116,kham1283,kbg,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/sout3217/uncl1513,sino1245,Sino-Tibetan,kham1283,Khamba,language,shifting
+tibe1272,Tibetan,Eurasia,28.3681,90.1872,tibe1272,bod,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346,sino1245,Sino-Tibetan,tibe1272,Tibetan,language,not endangered
+sout3216,South-Western Tibetic,,,,sout3216,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346,sino1245,Sino-Tibetan,,,family,
+gtsa1238,Tsang,Eurasia,,,gtsa1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/tibe1272,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
+dbus1238,Ü,Eurasia,,,dbus1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/tibe1272,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
+mnga1238,Ngari (Tibetan Autonomous Region),Eurasia,,,mnga1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/tibe1272,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
+shig1238,Shigatse,,,,shig1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/tibe1272/gtsa1238,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
+ding1243,Dingri,,,,ding1243,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/tibe1272/gtsa1238,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
+kyir1236,Kyirong,,,,kyir1236,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/tibe1272/gtsa1238,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
+west2905,Western Drokpas,,,,west2905,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/tibe1272/gtsa1238,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
+lhok1239,Lhoka,,,,lhok1239,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/tibe1272/dbus1238,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
+utsa1239,Lhasa Tibetan,Eurasia,,,utsa1239,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/tibe1272/dbus1238,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
+drig1234,Drigung,,,,drig1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/tibe1272/dbus1238,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
+kong1283,Kongbo,Eurasia,,,kong1283,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/tibe1272/dbus1238,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
+pura1259,Purang,,,,pura1259,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/tibe1272/mnga1238,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
+ruth1234,Ruthok,,,,ruth1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/tibe1272/mnga1238,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
+gerg1239,Gergye,,,,gerg1239,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/tibe1272/mnga1238,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
+gart1234,Gar Tibetan,,,,gart1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/tibe1272/mnga1238,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
+tsho1241,Tshochen,,,,tsho1241,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/tibe1272/mnga1238,sino1245,Sino-Tibetan,tibe1272,Tibetan,dialect,
+lowa1242,Lowa,Eurasia,29.0324,83.8959,lowa1242,loy,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216,sino1245,Sino-Tibetan,lowa1242,Lowa,language,shifting
+walu1241,Walungge,Eurasia,27.695,87.2374,walu1241,ola,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216,sino1245,Sino-Tibetan,walu1241,Walungge,language,shifting
+mugo1238,Mugom,Eurasia,30.8983,79.4664,mugo1238,muk,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216,sino1245,Sino-Tibetan,mugo1238,Mugom,language,not endangered
+kyir1235,Kyirong-Kagate,,,,kyir1235,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216,sino1245,Sino-Tibetan,,,family,
+lhom1239,Lhomi,Eurasia,27.5948,87.7161,lhom1239,lhm,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216,sino1245,Sino-Tibetan,lhom1239,Lhomi,language,threatened
+sher1254,Sherpa-Jirel,,,,sher1254,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216,sino1245,Sino-Tibetan,,,family,
+huml1238,Humla,Eurasia,30.1451,81.5659,huml1238,hut,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216,sino1245,Sino-Tibetan,huml1238,Humla,language,shifting
+dolp1238,Dolpo-Tichurong,,,,dolp1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216,sino1245,Sino-Tibetan,,,family,
+bara1356,Baragaunle,Eurasia,,,bara1356,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/lowa1242,sino1245,Sino-Tibetan,lowa1242,Lowa,dialect,
+uppe1408,Upper Mustang,Eurasia,,,uppe1408,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/lowa1242,sino1245,Sino-Tibetan,lowa1242,Lowa,dialect,
+muga1241,Mugali,Eurasia,,,muga1241,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/mugo1238,sino1245,Sino-Tibetan,mugo1238,Mugom,dialect,
+kara1471,Karani,Eurasia,,,kara1471,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/mugo1238,sino1245,Sino-Tibetan,mugo1238,Mugom,dialect,
+gyal1235,Gyalsumdo-Nubri-Kyirong,,,,gyal1235,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/kyir1235,sino1245,Sino-Tibetan,,,family,
+tsum1240,Tsum,Eurasia,28.4719,85.0817,tsum1240,ttz,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/kyir1235,sino1245,Sino-Tibetan,tsum1240,Tsum,language,shifting
+yolm1234,Yolmo-Kagate,,,,yolm1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/kyir1235,sino1245,Sino-Tibetan,,,family,
+kyer1238,Kyerung,Eurasia,28.2922,85.4257,kyer1238,kgy,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/kyir1235/gyal1235,sino1245,Sino-Tibetan,kyer1238,Kyerung,language,shifting
+nubr1241,Gyalsumdo-Nubri,Eurasia,28.5092,84.7772,nubr1241,kte,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/kyir1235/gyal1235,sino1245,Sino-Tibetan,nubr1241,Gyalsumdo-Nubri,language,shifting
+gyal1236,Gyalsumdo,Eurasia,,,gyal1236,gyo,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/kyir1235/gyal1235/nubr1241,sino1245,Sino-Tibetan,nubr1241,Gyalsumdo-Nubri,dialect,
+nubr1243,Nubri,,,,nubr1243,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/kyir1235/gyal1235/nubr1241,sino1245,Sino-Tibetan,nubr1241,Gyalsumdo-Nubri,dialect,
+lhoo1238,Lho,Eurasia,,,lhoo1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/kyir1235/gyal1235/nubr1241/nubr1243,sino1245,Sino-Tibetan,nubr1241,Gyalsumdo-Nubri,dialect,
+sama1294,Sama (Nepal),Eurasia,,,sama1294,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/kyir1235/gyal1235/nubr1241/nubr1243,sino1245,Sino-Tibetan,nubr1241,Gyalsumdo-Nubri,dialect,
+prok1238,Prok,Eurasia,,,prok1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/kyir1235/gyal1235/nubr1241/nubr1243,sino1245,Sino-Tibetan,nubr1241,Gyalsumdo-Nubri,dialect,
+namr1238,Namrung,Eurasia,,,namr1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/kyir1235/gyal1235/nubr1241/nubr1243,sino1245,Sino-Tibetan,nubr1241,Gyalsumdo-Nubri,dialect,
+hela1238,Lamjung-Melamchi Yolmo,Eurasia,27.9212,85.6289,hela1238,scp,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/kyir1235/yolm1234,sino1245,Sino-Tibetan,hela1238,Lamjung-Melamchi Yolmo,language,shifting
+kaga1252,Kagate,Eurasia,27.4492,86.1675,kaga1252,syw,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/kyir1235/yolm1234,sino1245,Sino-Tibetan,kaga1252,Kagate,language,shifting
+west2411,Western Helambu Sherpa,Eurasia,,,west2411,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/kyir1235/yolm1234/hela1238,sino1245,Sino-Tibetan,hela1238,Lamjung-Melamchi Yolmo,dialect,
+east2343,Eastern Helambu Sherpa,Eurasia,,,east2343,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/kyir1235/yolm1234/hela1238,sino1245,Sino-Tibetan,hela1238,Lamjung-Melamchi Yolmo,dialect,
+lamj1247,Lamjung Yolmo,,,,lamj1247,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/kyir1235/yolm1234/hela1238,sino1245,Sino-Tibetan,hela1238,Lamjung-Melamchi Yolmo,dialect,
+ilam1239,Ilam Yolmo,,,,ilam1239,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/kyir1235/yolm1234/hela1238,sino1245,Sino-Tibetan,hela1238,Lamjung-Melamchi Yolmo,dialect,
+sher1260,Sherpaic,,,,sher1260,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/sher1254,sino1245,Sino-Tibetan,,,family,
+jire1238,Jirel,Eurasia,27.6931,86.3201,jire1238,jul,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/sher1254,sino1245,Sino-Tibetan,jire1238,Jirel,language,shifting
+sher1255,Solu-Khumbu Sherpa,Eurasia,27.674,86.9994,sher1255,xsr,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/sher1254/sher1260,sino1245,Sino-Tibetan,sher1255,Solu-Khumbu Sherpa,language,shifting
+naab1241,Naaba,Eurasia,27.6926,87.3409,naab1241,nao,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/sher1254/sher1260,sino1245,Sino-Tibetan,naab1241,Naaba,language,not endangered
+rame1238,Ramechap,Eurasia,,,rame1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/sher1254/sher1260/sher1255,sino1245,Sino-Tibetan,sher1255,Solu-Khumbu Sherpa,dialect,
+solu1238,Solu,Eurasia,,,solu1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/sher1254/sher1260/sher1255,sino1245,Sino-Tibetan,sher1255,Solu-Khumbu Sherpa,dialect,
+khum1246,Khumbu,Eurasia,,,khum1246,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/sher1254/sher1260/sher1255,sino1245,Sino-Tibetan,sher1255,Solu-Khumbu Sherpa,dialect,
+tich1238,Tichurong,Eurasia,28.9506,83.4672,tich1238,tcn,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/dolp1238,sino1245,Sino-Tibetan,tich1238,Tichurong,language,not endangered
+dolp1239,Dolpo,Eurasia,29.1957,83.2927,dolp1239,dre,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/late1253/cent2346/sout3216/dolp1238,sino1245,Sino-Tibetan,dolp1239,Dolpo,language,shifting
+rong1262,Conservative Amdo Farmer,Eurasia,,,rong1262,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+inno1234,Innovative Amdo Farmer,,,,inno1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+ndzo1234,Ndzorge,,,,ndzo1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+hbro1238,Conservative Amdo Nomad,Eurasia,,,hbro1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+shan1295,Shando,,,,shan1295,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237/rong1262,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+padm1234,Padma,,,,padm1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237/rong1262,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+huan1253,Huang-chung-hsien,,,,huan1253,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237/rong1262,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+rmas1234,Rmastod,,,,rmas1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237/inno1234,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+mdzo1234,Mdzorganrabar,,,,mdzo1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237/inno1234,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+nort3304,North Eastern Qinghai Amdo,,,,nort3304,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237/hbro1238,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+nort3305,Northern Sichuan Amdo,,,,nort3305,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237/hbro1238,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+east2830,Eastern Qinghai Amdo,,,,east2830,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237/hbro1238,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+rong1261,Labrang,Eurasia,,,rong1261,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237/hbro1238,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+mkha1234,Mkharmar,,,,mkha1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237/hbro1238/nort3304,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+rkan1234,Rkangtsha,,,,rkan1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237/hbro1238/nort3304,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+arik1266,Arik,,,,arik1266,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237/hbro1238/nort3304,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+them1242,Themchen,,,,them1242,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237/hbro1238/nort3304,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+sert1234,Sertha/Golok,,,,sert1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237/hbro1238/nort3305,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+abaa1238,Rngaba,Eurasia,,,abaa1238,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237/hbro1238/nort3305,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+rmag1234,Rmagsar,,,,rmag1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237/hbro1238/nort3305,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+rebk1234,Rebkong,,,,rebk1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237/hbro1238/east2830,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+chab1239,Chabcha,,,,chab1239,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237/hbro1238/east2830,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+rtse1234,Rtsekhog,,,,rtse1234,,sino1245/bodi1256/bodi1257/oldm1245/tibe1276/amdo1237/hbro1238/east2830,sino1245,Sino-Tibetan,amdo1237,Amdo Tibetan,dialect,
+kenh1234,Kenhatic,,,,kenh1234,,sino1245/bodi1256/bodi1257/oldm1245/lada1242,sino1245,Sino-Tibetan,,,family,
+chan1309,Changthang,Eurasia,34.0662,78.2389,chan1309,cna,sino1245/bodi1256/bodi1257/oldm1245/lada1242,sino1245,Sino-Tibetan,chan1309,Changthang,language,threatened
+sham1282,Shamskatic,,,,sham1282,,sino1245/bodi1256/bodi1257/oldm1245/lada1242,sino1245,Sino-Tibetan,,,family,
+zang1248,Zangskari,Eurasia,33.2397,77.4013,zang1248,zau,sino1245/bodi1256/bodi1257/oldm1245/lada1242/kenh1234,sino1245,Sino-Tibetan,zang1248,Zangskari,language,shifting
+lada1244,Leh-Kenhat,Eurasia,33.468,80.6013,lada1244,lbj,sino1245/bodi1256/bodi1257/oldm1245/lada1242/kenh1234,sino1245,Sino-Tibetan,lada1244,Leh-Kenhat,language,shifting
+nubr1242,Nubra Ladakhi,Eurasia,,,nubr1242,,sino1245/bodi1256/bodi1257/oldm1245/lada1242/kenh1234/lada1244,sino1245,Sino-Tibetan,lada1244,Leh-Kenhat,dialect,
+lehh1238,Leh,Eurasia,,,lehh1238,,sino1245/bodi1256/bodi1257/oldm1245/lada1242/kenh1234/lada1244,sino1245,Sino-Tibetan,lada1244,Leh-Kenhat,dialect,
+sham1264,Shamma,Eurasia,,,sham1264,,sino1245/bodi1256/bodi1257/oldm1245/lada1242/kenh1234/lada1244,sino1245,Sino-Tibetan,lada1244,Leh-Kenhat,dialect,
+balt1258,Balti,Eurasia,34.4491,77.2859,balt1258,bft,sino1245/bodi1256/bodi1257/oldm1245/lada1242/sham1282,sino1245,Sino-Tibetan,balt1258,Balti,language,not endangered
+puri1258,Purik-Sham-Nubra,Eurasia,34.3386,76.0127,puri1258,prx,sino1245/bodi1256/bodi1257/oldm1245/lada1242/sham1282,sino1245,Sino-Tibetan,puri1258,Purik-Sham-Nubra,language,not endangered
 east1469,East Bodish,,,,east1469,,sino1245/bodi1256/bodi1257/tsha1246,sino1245,Sino-Tibetan,,,family,
 tsha1247,Tshanglic,,,,tsha1247,,sino1245/bodi1256/bodi1257/tsha1246,sino1245,Sino-Tibetan,,,family,
 olek1239,Olekha,Eurasia,27.2079,90.5546,olek1239,ole,sino1245/bodi1256/bodi1257/tsha1246/east1469,sino1245,Sino-Tibetan,olek1239,Olekha,language,nearly extinct
@@ -7873,6 +7915,19 @@ ngon1269,Ngoni,Africa,-11.7794,37.4118,ngon1269,ngo,atla1278/volt1241/benu1247/b
 matu1257,Matumba,Africa,,,matu1257,,atla1278/volt1241/benu1247/bant1294/sout3152/narr1281/east2731/nort3203/sout3185/mand1475/mand1423,atla1278,Atlantic-Congo,mand1423,Manda-Matumba,dialect,
 hehe1240,Hehe,Africa,-7.71572,35.7255,hehe1240,heh,atla1278/volt1241/benu1247/bant1294/sout3152/narr1281/east2731/nort3203/sout3185/bena1273,atla1278,Atlantic-Congo,hehe1240,Hehe,language,not endangered
 bena1262,Bena (Tanzania),Africa,-9.26671,35.0364,bena1262,bez,atla1278/volt1241/benu1247/bant1294/sout3152/narr1281/east2731/nort3203/sout3185/bena1273,atla1278,Atlantic-Congo,bena1262,Bena (Tanzania),language,not endangered
+itip1234,Itipula,,-9.34988,35.21523,itip1234,,atla1278/volt1241/benu1247/bant1294/sout3152/narr1281/east2731/nort3203/sout3185/bena1273/bena1262,atla1278,Atlantic-Congo,bena1262,Bena (Tanzania),dialect,
+itam1234,Itambo,,-9.36073,35.32647,itam1234,,atla1278/volt1241/benu1247/bant1294/sout3152/narr1281/east2731/nort3203/sout3185/bena1273/bena1262,atla1278,Atlantic-Congo,bena1262,Bena (Tanzania),dialect,
+uten1234,Utengule,,-8.94924,34.76754,uten1234,,atla1278/volt1241/benu1247/bant1294/sout3152/narr1281/east2731/nort3203/sout3185/bena1273/bena1262,atla1278,Atlantic-Congo,bena1262,Bena (Tanzania),dialect,
+kana1293,Kanamalenga,,-8.91872,34.63776,kana1293,,atla1278/volt1241/benu1247/bant1294/sout3152/narr1281/east2731/nort3203/sout3185/bena1273/bena1262,atla1278,Atlantic-Congo,bena1262,Bena (Tanzania),dialect,
+maka1325,Makanjaula,,-9.52396,34.79638,maka1325,,atla1278/volt1241/benu1247/bant1294/sout3152/narr1281/east2731/nort3203/sout3185/bena1273/bena1262,atla1278,Atlantic-Congo,bena1262,Bena (Tanzania),dialect,
+ihan1234,Ihanja,,-9.10589,34.6563,ihan1234,,atla1278/volt1241/benu1247/bant1294/sout3152/narr1281/east2731/nort3203/sout3185/bena1273/bena1262,atla1278,Atlantic-Congo,bena1262,Bena (Tanzania),dialect,
+ujin1234,Ujindile,,-9.24553,34.50936,ujin1234,,atla1278/volt1241/benu1247/bant1294/sout3152/narr1281/east2731/nort3203/sout3185/bena1273/bena1262,atla1278,Atlantic-Congo,bena1262,Bena (Tanzania),dialect,
+lwan1234,Lwanzali,,-9.3404,35.27635,lwan1234,,atla1278/volt1241/benu1247/bant1294/sout3152/narr1281/east2731/nort3203/sout3185/bena1273/bena1262,atla1278,Atlantic-Congo,bena1262,Bena (Tanzania),dialect,
+liwe1234,Liwengi,,-9.58491,35.12116,liwe1234,,atla1278/volt1241/benu1247/bant1294/sout3152/narr1281/east2731/nort3203/sout3185/bena1273/bena1262,atla1278,Atlantic-Congo,bena1262,Bena (Tanzania),dialect,
+ukal1234,Ukalawa,,-9.18589,35.28047,ukal1234,,atla1278/volt1241/benu1247/bant1294/sout3152/narr1281/east2731/nort3203/sout3185/bena1273/bena1262,atla1278,Atlantic-Congo,bena1262,Bena (Tanzania),dialect,
+wang1302,Wangama,,-9.17368,34.497,wang1302,,atla1278/volt1241/benu1247/bant1294/sout3152/narr1281/east2731/nort3203/sout3185/bena1273/bena1262,atla1278,Atlantic-Congo,bena1262,Bena (Tanzania),dialect,
+utal1238,Utalingoro,,-9.4366,34.70918,utal1238,,atla1278/volt1241/benu1247/bant1294/sout3152/narr1281/east2731/nort3203/sout3185/bena1273/bena1262,atla1278,Atlantic-Congo,bena1262,Bena (Tanzania),dialect,
+ikun1241,Ikuna,,-9.13708,34.9083,ikun1241,,atla1278/volt1241/benu1247/bant1294/sout3152/narr1281/east2731/nort3203/sout3185/bena1273/bena1262,atla1278,Atlantic-Congo,bena1262,Bena (Tanzania),dialect,
 nucl1379,Kinga,Africa,-9.35868,34.2321,nucl1379,zga,atla1278/volt1241/benu1247/bant1294/sout3152/narr1281/east2731/nort3203/sout3185/king1258,atla1278,Atlantic-Congo,nucl1379,Kinga,language,not endangered
 mago1246,Magoma,Africa,-9.23498,33.9826,mago1246,gmx,atla1278/volt1241/benu1247/bant1294/sout3152/narr1281/east2731/nort3203/sout3185/king1258,atla1278,Atlantic-Congo,mago1246,Magoma,language,threatened
 maha1296,Mahanji,Africa,,,maha1296,,atla1278/volt1241/benu1247/bant1294/sout3152/narr1281/east2731/nort3203/sout3185/king1258/nucl1379,atla1278,Atlantic-Congo,nucl1379,Kinga,dialect,
@@ -15036,6 +15091,7 @@ antw1238,Antwerps,Eurasia,,,antw1238,,indo1319/germ1287/nort3152/west2793/fran12
 fran1265,Frans Vlaams,Eurasia,,,fran1265,,indo1319/germ1287/nort3152/west2793/fran1268/wese1235/macr1270/midd1347/mode1257/vlaa1240,indo1319,Indo-European,vlaa1240,Vlaams,dialect,
 west2365,Westvlaams,Eurasia,,,west2365,,indo1319/germ1287/nort3152/west2793/fran1268/wese1235/macr1270/midd1347/mode1257/vlaa1240,indo1319,Indo-European,vlaa1240,Vlaams,dialect,
 oost1241,Oost-Vlaams,Eurasia,,,oost1241,,indo1319/germ1287/nort3152/west2793/fran1268/wese1235/macr1270/midd1347/mode1257/dutc1256,indo1319,Indo-European,dutc1256,Dutch,dialect,
+town1239,Town Frisian,,,,town1239,,indo1319/germ1287/nort3152/west2793/fran1268/wese1235/macr1270/midd1347/mode1257/dutc1256,indo1319,Indo-European,dutc1256,Dutch,dialect,
 brab1243,Brabants,Eurasia,,,brab1243,,indo1319/germ1287/nort3152/west2793/fran1268/wese1235/macr1270/midd1347/mode1257/dutc1256,indo1319,Indo-European,dutc1256,Dutch,dialect,
 zeel1235,Zeelandic,,,,zeel1235,,indo1319/germ1287/nort3152/west2793/fran1268/wese1235/macr1270/midd1347/mode1257/dutc1256,indo1319,Indo-European,dutc1256,Dutch,dialect,
 sout2637,South Guelderish,Eurasia,,,sout2637,,indo1319/germ1287/nort3152/west2793/fran1268/wese1235/macr1270/midd1347/mode1257/dutc1256,indo1319,Indo-European,dutc1256,Dutch,dialect,
@@ -15068,11 +15124,11 @@ oldw1240,Old West Norse,,,,oldw1240,,indo1319/germ1287/nort3152/nort3160/west280
 oldn1246,Old Norn,,,,oldn1246,nrn,indo1319/germ1287/nort3152/nort3160/west2805/oldn1244,indo1319,Indo-European,oldn1244,Old Norse,dialect,
 dani1285,Danish,Eurasia,54.8655,9.36284,dani1285,dan,indo1319/germ1287/nort3152/nort3160/sout3248,indo1319,Indo-European,dani1285,Danish,language,not endangered
 juti1236,Jutish,Eurasia,54.911,9.38924,juti1236,jut,indo1319/germ1287/nort3152/nort3160/sout3248,indo1319,Indo-European,juti1236,Jutish,language,shifting
-scan1238,Scanian,Eurasia,56.5,14.0,scan1238,,indo1319/germ1287/nort3152/nort3160/sout3248,indo1319,Indo-European,scan1238,Scanian,language,threatened
-skan1239,Skånska,Eurasia,,,skan1239,,indo1319/germ1287/nort3152/nort3160/sout3248/scan1238,indo1319,Indo-European,scan1238,Scanian,dialect,
-hall1240,Halländska,Eurasia,,,hall1240,,indo1319/germ1287/nort3152/nort3160/sout3248/scan1238,indo1319,Indo-European,scan1238,Scanian,dialect,
-born1251,Bornholmska,Eurasia,,,born1251,,indo1319/germ1287/nort3152/nort3160/sout3248/scan1238,indo1319,Indo-European,scan1238,Scanian,dialect,
-blek1238,Blekingska,Eurasia,,,blek1238,,indo1319/germ1287/nort3152/nort3160/sout3248/scan1238,indo1319,Indo-European,scan1238,Scanian,dialect,
+scan1238,East Danish,Eurasia,56.5,14.0,scan1238,,indo1319/germ1287/nort3152/nort3160/sout3248,indo1319,Indo-European,scan1238,East Danish,language,threatened
+skan1239,Skånska,Eurasia,,,skan1239,,indo1319/germ1287/nort3152/nort3160/sout3248/scan1238,indo1319,Indo-European,scan1238,East Danish,dialect,
+hall1240,Halländska,Eurasia,,,hall1240,,indo1319/germ1287/nort3152/nort3160/sout3248/scan1238,indo1319,Indo-European,scan1238,East Danish,dialect,
+born1251,Bornholmska,Eurasia,,,born1251,,indo1319/germ1287/nort3152/nort3160/sout3248/scan1238,indo1319,Indo-European,scan1238,East Danish,dialect,
+blek1238,Blekingska,Eurasia,,,blek1238,,indo1319/germ1287/nort3152/nort3160/sout3248/scan1238,indo1319,Indo-European,scan1238,East Danish,dialect,
 gutn1238,Archaic Gutnish,Eurasia,,,gutn1238,,indo1319/germ1287/nort3152/nort3160/nort3266,indo1319,Indo-European,gutn1238,Archaic Gutnish,language,shifting
 narr1283,Narrow North Scandinavian,,,,narr1283,,indo1319/germ1287/nort3152/nort3160/nort3266,indo1319,Indo-European,,,family,
 east2780,East-Central Swedic,,,,east2780,,indo1319/germ1287/nort3152/nort3160/nort3266,indo1319,Indo-European,,,family,
@@ -15122,8 +15178,10 @@ flod1234,Floda,,,,flod1234,,indo1319/germ1287/nort3152/nort3160/nort3266/east278
 lima1249,Lima (Västerdalmål),,,,lima1249,,indo1319/germ1287/nort3152/nort3160/nort3266/east2780/dale1238/vast1234/ovre1234,indo1319,Indo-European,dale1238,Dalecarlian,dialect,
 malu1253,Malung,,,,malu1253,,indo1319/germ1287/nort3152/nort3160/nort3266/east2780/dale1238/vast1234/ovre1234,indo1319,Indo-European,dale1238,Dalecarlian,dialect,
 tran1291,Transtrand,,,,tran1291,,indo1319/germ1287/nort3152/nort3160/nort3266/east2780/dale1238/vast1234/ovre1234,indo1319,Indo-European,dale1238,Dalecarlian,dialect,
+esto1259,Estonian Swedish,,,,esto1259,,indo1319/germ1287/nort3152/nort3160/nort3266/east2780/east2781,indo1319,Indo-European,esto1259,Estonian Swedish,language,
 swed1254,Swedish,Eurasia,59.800634,17.389526,swed1254,swe,indo1319/germ1287/nort3152/nort3160/nort3266/east2780/east2781,indo1319,Indo-European,swed1254,Swedish,language,not endangered
 east2303,Archaic Finnish Swedish,Eurasia,,,east2303,,indo1319/germ1287/nort3152/nort3160/nort3266/east2780/east2781,indo1319,Indo-European,east2303,Archaic Finnish Swedish,language,
+gota1234,Götamål,,,,gota1234,,indo1319/germ1287/nort3152/nort3160/nort3266/east2780/east2781/swed1254,indo1319,Indo-European,swed1254,Swedish,dialect,
 stan1279,Standard Swedish,Eurasia,,,stan1279,,indo1319/germ1287/nort3152/nort3160/nort3266/east2780/east2781/swed1254,indo1319,Indo-European,swed1254,Swedish,dialect,
 svea1239,Sveamål,Eurasia,,,svea1239,,indo1319/germ1287/nort3152/nort3160/nort3266/east2780/east2781/swed1254,indo1319,Indo-European,swed1254,Swedish,dialect,
 olds1252,Old Swedish,,,,olds1252,,indo1319/germ1287/nort3152/nort3160/nort3266/east2780/east2781/swed1254,indo1319,Indo-European,swed1254,Swedish,dialect,
@@ -19860,7 +19918,7 @@ duma1254,Dumaring,Papunesia,,,duma1254,,aust1307/mala1545/basa1291/basa1286,aust
 bulu1254,Bulungan,Papunesia,,,bulu1254,,aust1307/mala1545/basa1291/basa1286,aust1307,Austronesian,basa1286,Basap,dialect,
 bina1272,Binatang,Papunesia,,,bina1272,,aust1307/mala1545/basa1291/basa1286,aust1307,Austronesian,basa1286,Basap,dialect,
 kara1491,Karangan,Papunesia,,,kara1491,,aust1307/mala1545/basa1291/basa1286,aust1307,Austronesian,basa1286,Basap,dialect,
-remo1247,Remontado Agta,Papunesia,14.6254,121.453,remo1247,agv,aust1307/mala1545/cent2080,aust1307,Austronesian,remo1247,Remontado Agta,language,moribund
+remo1247,Hatang Kayi,Papunesia,14.6254,121.453,remo1247,agv,aust1307/mala1545/cent2080,aust1307,Austronesian,remo1247,Hatang Kayi,language,moribund
 pamp1243,Pampanga,Papunesia,14.9603,120.502,pamp1243,pam,aust1307/mala1545/cent2080,aust1307,Austronesian,pamp1243,Pampanga,language,not endangered
 samb1319,Sambalic,,,,samb1319,,aust1307/mala1545/cent2080,aust1307,Austronesian,,,family,
 maga1270,Mag-Ayta,,,,maga1270,,aust1307/mala1545/cent2080/samb1319,aust1307,Austronesian,,,family,
@@ -22553,19 +22611,22 @@ laja1238,La Jalca,South America,,,laja1238,,quec1387/quec1388/quec1384/chac1250,
 lamu1256,Lamud,South America,,,lamu1256,,quec1387/quec1388/quec1384/chac1250,quec1387,Quechuan,chac1250,Chachapoyas Quechua,dialect,
 llak1238,Llakwash Chachapoyas,South America,,,llak1238,,quec1387/quec1388/quec1384/chac1250,quec1387,Quechuan,chac1250,Chachapoyas Quechua,dialect,
 gren1245,Grenada-Mendoza,South America,,,gren1245,,quec1387/quec1388/quec1384/chac1250,quec1387,Quechuan,chac1250,Chachapoyas Quechua,dialect,
-chim1302,Chimborazo Highland Quichua,South America,-1.36727,-78.8521,chim1302,qug,quec1387/quec1388/quec1384/colo1257,quec1387,Quechuan,chim1302,Chimborazo Highland Quichua,language,threatened
-imba1240,Imbabura Highland Quichua,South America,0.31776,-78.3729,imba1240,qvi,quec1387/quec1388/quec1384/colo1257,quec1387,Quechuan,imba1240,Imbabura Highland Quichua,language,threatened
-napo1242,Napo Lowland Quechua,South America,-0.072525,-76.3889,napo1242,qvo,quec1387/quec1388/quec1384/colo1257,quec1387,Quechuan,napo1242,Napo Lowland Quechua,language,threatened
-sala1272,Salasaca Highland Quichua,South America,-1.35447,-78.3953,sala1272,qxl,quec1387/quec1388/quec1384/colo1257,quec1387,Quechuan,sala1272,Salasaca Highland Quichua,language,shifting
-nort2973,Northern Pastaza Quichua,South America,-1.88573,-76.0389,nort2973,qvz,quec1387/quec1388/quec1384/colo1257,quec1387,Quechuan,nort2973,Northern Pastaza Quichua,language,threatened
-cald1236,Calderón Highland Quichua,South America,-0.36205,-78.2587,cald1236,qud,quec1387/quec1388/quec1384/colo1257,quec1387,Quechuan,cald1236,Calderón Highland Quichua,language,threatened
-cana1262,Cañar Highland Quichua,South America,-2.48314,-78.9672,cana1262,qxr,quec1387/quec1388/quec1384/colo1257,quec1387,Quechuan,cana1262,Cañar Highland Quichua,language,threatened
-sout2990,Southern Pastaza Quechua,South America,-3.32733,-76.527,sout2990,qup,quec1387/quec1388/quec1384/colo1257,quec1387,Quechuan,sout2990,Southern Pastaza Quechua,language,not endangered
-loja1235,Loja Highland Quichua,South America,-3.69352,-79.29151,loja1235,qvj,quec1387/quec1388/quec1384/colo1257,quec1387,Quechuan,loja1235,Loja Highland Quichua,language,threatened
-tena1240,Tena Lowland Quichua,South America,-0.76271,-77.5404,tena1240,quw,quec1387/quec1388/quec1384/colo1257,quec1387,Quechuan,tena1240,Tena Lowland Quichua,language,threatened
+ecua1249,Ecuadorian Quechua B,,,,ecua1249,,quec1387/quec1388/quec1384/colo1257,quec1387,Quechuan,,,family,
+ecua1248,Ecuadorian Quechua A,,,,ecua1248,,quec1387/quec1388/quec1384/colo1257,quec1387,Quechuan,,,family,
 inga1251,Ingan Quechua IIB,,,,inga1251,,quec1387/quec1388/quec1384/colo1257,quec1387,Quechuan,,,family,
-sant1430,Santa Rosa Quechua,South America,,,sant1430,,quec1387/quec1388/quec1384/colo1257/napo1242,quec1387,Quechuan,napo1242,Napo Lowland Quechua,dialect,
-tigr1253,Tigre Quechua,South America,,,tigr1253,,quec1387/quec1388/quec1384/colo1257/nort2973,quec1387,Quechuan,nort2973,Northern Pastaza Quichua,dialect,
+imba1240,Imbabura Highland Quichua,South America,0.31776,-78.3729,imba1240,qvi,quec1387/quec1388/quec1384/colo1257/ecua1249,quec1387,Quechuan,imba1240,Imbabura Highland Quichua,language,threatened
+ecua1250,Ecuadorian Lowland Quechua,,,,ecua1250,,quec1387/quec1388/quec1384/colo1257/ecua1249,quec1387,Quechuan,,,family,
+cana1262,Cañar Highland Quichua,South America,-2.48314,-78.9672,cana1262,qxr,quec1387/quec1388/quec1384/colo1257/ecua1249,quec1387,Quechuan,cana1262,Cañar Highland Quichua,language,threatened
+loja1235,Loja Highland Quichua,South America,-3.69352,-79.29151,loja1235,qvj,quec1387/quec1388/quec1384/colo1257/ecua1249,quec1387,Quechuan,loja1235,Loja Highland Quichua,language,threatened
+napo1242,Napo Lowland Quechua,South America,-0.072525,-76.3889,napo1242,qvo,quec1387/quec1388/quec1384/colo1257/ecua1249/ecua1250,quec1387,Quechuan,napo1242,Napo Lowland Quechua,language,threatened
+nort2973,Northern Pastaza Quichua,South America,-1.88573,-76.0389,nort2973,qvz,quec1387/quec1388/quec1384/colo1257/ecua1249/ecua1250,quec1387,Quechuan,nort2973,Northern Pastaza Quichua,language,threatened
+sout2990,Southern Pastaza Quechua,South America,-3.32733,-76.527,sout2990,qup,quec1387/quec1388/quec1384/colo1257/ecua1249/ecua1250,quec1387,Quechuan,sout2990,Southern Pastaza Quechua,language,not endangered
+tena1240,Tena Lowland Quichua,South America,-0.76271,-77.5404,tena1240,quw,quec1387/quec1388/quec1384/colo1257/ecua1249/ecua1250,quec1387,Quechuan,tena1240,Tena Lowland Quichua,language,threatened
+sant1430,Santa Rosa Quechua,South America,,,sant1430,,quec1387/quec1388/quec1384/colo1257/ecua1249/ecua1250/napo1242,quec1387,Quechuan,napo1242,Napo Lowland Quechua,dialect,
+tigr1253,Tigre Quechua,South America,,,tigr1253,,quec1387/quec1388/quec1384/colo1257/ecua1249/ecua1250/nort2973,quec1387,Quechuan,nort2973,Northern Pastaza Quichua,dialect,
+chim1302,Chimborazo Highland Quichua,South America,-1.36727,-78.8521,chim1302,qug,quec1387/quec1388/quec1384/colo1257/ecua1248,quec1387,Quechuan,chim1302,Chimborazo Highland Quichua,language,threatened
+sala1272,Salasaca Highland Quichua,South America,-1.35447,-78.3953,sala1272,qxl,quec1387/quec1388/quec1384/colo1257/ecua1248,quec1387,Quechuan,sala1272,Salasaca Highland Quichua,language,shifting
+cald1236,Calderón Highland Quichua,South America,-0.36205,-78.2587,cald1236,qud,quec1387/quec1388/quec1384/colo1257/ecua1248,quec1387,Quechuan,cald1236,Calderón Highland Quichua,language,threatened
 inga1252,Inga,South America,1.00313,-76.8606,inga1252,inb,quec1387/quec1388/quec1384/colo1257/inga1251,quec1387,Quechuan,inga1252,Inga,language,shifting
 jung1240,Jungle Inga,South America,0.88872,-76.6593,jung1240,inj,quec1387/quec1388/quec1384/colo1257/inga1251,quec1387,Quechuan,jung1240,Jungle Inga,language,shifting
 sant1431,Santiago Inga,South America,,,sant1431,,quec1387/quec1388/quec1384/colo1257/inga1251/inga1252,quec1387,Quechuan,inga1252,Inga,dialect,
