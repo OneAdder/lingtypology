@@ -5,4 +5,4 @@ It uses the same phylosophy and provides similar functionality.
 
 Now it uses 1.2.1-146-gdff21a77e4.csv version of the Glottolog database by default.
 
-The project is temporarily suspended until I pass through the exam session. I have a performance issue with maps when I draw many markers (>50). I tried using canvas instead of SVG but it did not help. If somebody knows leaflet and wants to help, that will be most appreciated.
+I'm back in the game. The optimization issue somehow solved itself. So, I'm adding new language database APIs
