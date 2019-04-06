@@ -101,7 +101,7 @@ class Wals(object):
         js = { header:list(df[header]) for header in list(df)}
         return js
 
-
+'''
 class Phoible(object):
     """Phoible
 
@@ -109,7 +109,7 @@ class Phoible(object):
         Whether to print the citation.
     """
     show_citation = True
-    citation =  '''
+    citation =  """
 Moran, Steven & McCloy, Daniel & Wright, Richard (eds.) 2014. PHOIBLE Online. Leipzig: Max Planck Institute for Evolutionary Anthropology. (Available online at http://phoible.org, Accessed on ...)
 A BibTeX entry for LaTeX users is
 @book{phoible,
@@ -120,7 +120,7 @@ title     = {PHOIBLE Online},
 url       = {http://phoible.org/},
 year      = {2014}
 }
-                '''
+                """
     def get_df(self):
         """Get data from Phoible in pandas.DataFrame format.
 
@@ -149,8 +149,9 @@ year      = {2014}
             Keys: 'iso', 'language', 'coordinates', 'phonemes', 'consonants', 'tones', 'vowels'.
         """
         df = self.get_df()
-        js = { header:list(df[header]) for header in list(df)}
+        js = {header: list(df[header]) for header in list(df)}
         return js
+'''
 
 #print(Wals('1a').get_json())
 #print(list(Phoible().get_json()))

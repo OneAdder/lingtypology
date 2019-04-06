@@ -122,16 +122,17 @@ def wals_heatmap_test():
     m.title = 'Large Consonant Inventories'
     m.save(os.path.join('examples', 'wals_heatmap'))
 
+'''
 def phoible_test():
     phoible_data = Phoible().get_df()
 
     m = LingMap(phoible_data.language)
     m.prefer_canvas = True
-    m.unstroked = False
+    #m.unstroked = False
     m.legend_title = 'Number of Phonemes'
     m.add_features(phoible_data.phonemes.astype(int), numeric=True)
     m.save(os.path.join('examples', 'phoible.html'))
-
+'''
 #simplest_test()
 #random_test()
 #circassian_test()
@@ -141,6 +142,5 @@ def phoible_test():
 #heatmap_test()
 #wals_test()
 #wals_heatmap_test()
-#phoible_test()
 
 
