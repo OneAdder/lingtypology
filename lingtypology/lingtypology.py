@@ -20,7 +20,7 @@ import os
 #Local tools
 import lingtypology.glottolog
 from lingtypology.db_apis import Wals#, Phoible
-from lingtypology.update_glottolog import update_glottolog
+from lingtypology._update_glottolog import update_glottolog
 
 class LingMapError(Exception):
     """All special exceptions"""

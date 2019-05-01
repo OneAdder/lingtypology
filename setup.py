@@ -15,6 +15,7 @@ setup(
           'branca',
           'jinja2',
           'pandas',
+          'pyglottolog',
     ],
     include_package_data=True,
 )  
