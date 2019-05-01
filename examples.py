@@ -134,7 +134,7 @@ def phoible_test():
     m.save(os.path.join('examples', 'phoible.html'))
 '''
 #simplest_test()
-#random_test()
+random_test()
 #circassian_test()
 #ejectives_test()
 #circassian2_test()

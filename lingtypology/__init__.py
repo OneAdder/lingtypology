@@ -1,0 +1,1 @@
+from lingtypology.lingtypology import * 
