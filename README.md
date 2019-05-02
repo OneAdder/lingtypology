@@ -9,14 +9,10 @@ With each new version of `lingtypology` Glottolog data is updated. Now it is usi
 You can update data from Glottolog by using `lingtypology.update_glottolog()` function. However, it is buggy and not recommended yet.
 
 # Installation
-Soon this package will be available in PyPI. For now you can install it following these steps:
-1) Clone the repository:  
-`git clone https://github.com/OneAdder/lingtypology`
-2) Enter the directory:  
-`cd lingtypology`
-3) Install the package:  
-Locally: `pip3 install . --user`  
-Globally (not recommended): `sudo pip3 install .`
+The package is available in PyPI.
+Therefore, you can install it by running:  
+Locally: `pip3 install lingtypology --user`  
+Globally (not recommended): `sudo pip3 install lingtypology`
 
 # Usage
 Lingtypology package contains `LingMap` class that allows to draw interactive maps, `glottolog` library that allows to interact with Glottolog data and `db_apis` that allows to interact with different other linguistic databases.  
