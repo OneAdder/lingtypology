@@ -20,4 +20,4 @@ Globally (not recommended): `sudo pip3 install .`
 
 # Usage
 Lingtypology package contains `LingMap` class that allows to draw interactive maps, `glottolog` library that allows to interact with Glottolog data and `db_apis` that allows to interact with different other linguistic databases.  
-For more informations consult `HOWTO.html` or `HOWTO.ipynb`.
+For more informations consult the [tutorial](https://github.com/OneAdder/lingtypology/blob/master/HOWTO.html) or docstrings from the code.
