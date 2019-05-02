@@ -9,6 +9,8 @@ setup(
     author_email='mikivo@list.ru',
     license='GPLv3',
     packages=['lingtypology'],
+    python_requires='>=3.5',
+    include_package_data=True,
     zip_safe=False,
     install_requires=[
           'folium',
@@ -17,5 +19,17 @@ setup(
           'pandas',
           'pyglottolog',
     ],
-    include_package_data=True,
-)  
+    extras_require={
+        'test': [
+            'pytest>=3.6',
+            'pytest-cov',
+            'coverage>=4.2',
+        ],
+    },
+    classifiers=[
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+    ],
+) 

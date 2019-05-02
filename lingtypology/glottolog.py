@@ -18,7 +18,7 @@ def get_glottolog_table(directory):
 #---------------------------------------------------------------------------------
 home = Path.home()
 try:
-    path, version = get_glottolog_table(os.path.join(home, '.lingtypology_data'))
+    path, version = get_glottolog_table(os.path.join(str(home), '.lingtypology_data'))
 except (FileNotFoundError, IndexError):
     module_directory = os.path.dirname(os.path.realpath(__file__))
     path, version = get_glottolog_table(module_directory)
