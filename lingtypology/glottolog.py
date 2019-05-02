@@ -66,7 +66,8 @@ def get_glot_id(language):
     """
     glot_id = tuple(glottolog[glottolog.Name == language].ID)
     if not glot_id:
-        print('(get_glot_id) Warning: Glottolog ID for {} not found'.format(language))
+        pass
+        #print('(get_glot_id) Warning: Glottolog ID for {} not found'.format(language))
     else:
         return glot_id[0]
 
