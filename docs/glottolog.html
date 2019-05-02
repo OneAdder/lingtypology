@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module glottolog</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>glottolog</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/misha/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B/lingtypology/lingtypology/lingtypology/glottolog.py">/home/misha/Проекты/lingtypology/lingtypology/lingtypology/glottolog.py</a></font></td></tr></table>
+    <p><tt>Using&nbsp;data&nbsp;from&nbsp;Glottolog&nbsp;DB</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="pandas.html">pandas</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-get_affiliations"><strong>get_affiliations</strong></a>(languages)</dt><dd><tt><a href="#-get_affiliations">get_affiliations</a>(('Russian',&nbsp;'English'))<br>
+&gt;&gt;&gt;&nbsp;['Indo-European,&nbsp;Balto-Slavic,&nbsp;Slavic,&nbsp;East&nbsp;Slavic',&nbsp;'Indo-European,&nbsp;...']</tt></dd></dl>
+ <dl><dt><a name="-get_by_glot_id"><strong>get_by_glot_id</strong></a>(glot_id)</dt><dd><tt><a href="#-get_by_glot_id">get_by_glot_id</a>('russ1263')<br>
+&gt;&gt;&gt;&nbsp;Russian</tt></dd></dl>
+ <dl><dt><a name="-get_by_iso"><strong>get_by_iso</strong></a>(iso)</dt><dd><tt><a href="#-get_by_iso">get_by_iso</a>('rus')<br>
+&gt;&gt;&gt;&nbsp;Russian</tt></dd></dl>
+ <dl><dt><a name="-get_coordinates"><strong>get_coordinates</strong></a>(language)</dt><dd><tt><a href="#-get_coordinates">get_coordinates</a>('Russian')<br>
+&gt;&gt;&gt;&nbsp;(59.0,&nbsp;50.0)</tt></dd></dl>
+ <dl><dt><a name="-get_glot_id"><strong>get_glot_id</strong></a>(language)</dt><dd><tt><a href="#-get_glot_id">get_glot_id</a>('Russian')<br>
+&gt;&gt;&gt;&nbsp;russ1263</tt></dd></dl>
+ <dl><dt><a name="-get_glot_id_by_iso"><strong>get_glot_id_by_iso</strong></a>(iso)</dt><dd><tt><a href="#-get_glot_id_by_iso">get_glot_id_by_iso</a>('rus')<br>
+&gt;&gt;&gt;&nbsp;russ1263</tt></dd></dl>
+ <dl><dt><a name="-get_glottolog_table"><strong>get_glottolog_table</strong></a>(directory)</dt><dd><tt>get&nbsp;name&nbsp;of&nbsp;the&nbsp;CSV&nbsp;and&nbsp;version<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;returns&nbsp;name&nbsp;and&nbsp;version&nbsp;of&nbsp;the&nbsp;proper&nbsp;CSV-file&nbsp;containing&nbsp;Glottolog&nbsp;data.<br>
+glottolog&nbsp;utility&nbsp;from&nbsp;pyglottolog&nbsp;package&nbsp;creates&nbsp;the&nbsp;CSV&nbsp;table&nbsp;and&nbsp;names&nbsp;it:<br>
+glottolog-languoids-pyglottolog-[version-version-version].csv</tt></dd></dl>
+ <dl><dt><a name="-get_iso"><strong>get_iso</strong></a>(language)</dt><dd><tt><a href="#-get_iso">get_iso</a>('Russian')<br>
+&gt;&gt;&gt;&nbsp;rus</tt></dd></dl>
+ <dl><dt><a name="-get_iso_by_glot_id"><strong>get_iso_by_glot_id</strong></a>(glot_id)</dt><dd><tt><a href="#-get_iso_by_glot_id">get_iso_by_glot_id</a>('russ1263')<br>
+&gt;&gt;&gt;&nbsp;rus</tt></dd></dl>
+ <dl><dt><a name="-get_macro_area"><strong>get_macro_area</strong></a>(language)</dt><dd><tt><a href="#-get_macro_area">get_macro_area</a>('Russian')<br>
+&gt;&gt;&gt;&nbsp;Eurasia</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>glottolog</strong> =              ID                      Name      M...ialect             NaN
+
+[24344 rows x 14 columns]<br>
+<strong>home</strong> = PosixPath('/home/misha')<br>
+<strong>module_directory</strong> = '/home/misha/Проекты/lingtypology/lingtypology/lingtypology'<br>
+<strong>path</strong> = '/home/misha/Проекты/lingtypology/lingtypology/li...pology/glottolog-languoids-v3.4-7-gfa9d1ec7c5.csv'<br>
+<strong>version</strong> = 'v3.4-7-gfa9d1ec7c5'<br>
+<strong>warnings</strong> = []</td></tr></table>
+</body></html>
