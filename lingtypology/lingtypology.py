@@ -852,3 +852,77 @@ class LingMap(object):
         """Renders the map returns it as HTML string"""
         return self._create_map().get_root().render()
 
+def map_feature(
+    languages,
+    custom_coordinates=None,
+    features=None,
+    stroke_features=None,
+    popups=None,
+    tooltips=None,
+    start_zoom=None,
+    start_location=None,
+    minimap=False,
+    legend_title=None,
+    legend_position=None,
+    stroke_legend_title=None,
+    stroke_legend_position=None,
+    save_html = None
+):
+    """Function that tries to look like agricolamz' map.feature. Its usage is discouraged
+    
+    This function does not allow much customization and lacks some cool features, DON'T USE IT IF YOU CAN.
+    Parameters:
+    ------------
+    languages: list, 
+    custom_coordinates=None: list,
+    features=None: list,
+    stroke_features=None: list,
+    popups=None: list,
+    tooltips=None: list,
+    start_zoom=None: int,
+    start_location=None: tuple of coordinates,
+    minimap=False: bool,
+    legend_title=None: str,
+    legend_position=None: str,
+    stroke_legend_title=None: str,
+    stroke_legend_position=None: str,
+    V   V   V   V   V   V   V
+    The function just passes the parameters as attributes to the LingMap class.
+    
+    If save_html is str:
+        Saves under save_html name
+    If None or '' or False:
+        Returns html as str
+    """
+    m = LingMap(languages)
+    if custom_coordinates:
+        m.add_custom_coordinates(custom_coordinates)
+    if not features is None:
+        m.add_features(features)
+    if not stroke_features is None:
+        m.add_stroke_features(stroke_features)
+    if not popups is None:
+        m.add_popups(popups)
+    if not tooltips is None:
+        m.add_tooltips(tooltips)
+    if start_zoom:
+        m.start_zoom = start_zoom
+    if start_location:
+        m.start_location = start_location
+    if minimap:
+        m.add_minimap()
+    if legend_title:
+        m.legend_title = legend_title
+    if legend_position:
+        m.legend_position = legend_position
+    if stroke_legend_title:
+        m.stroke_legend_title = stroke_legend_title
+    if stroke_legend_position:
+        m.stroke_legend_position = stroke_legend_position
+    if save_html:
+        m.save(save_html)
+    else:
+        return m.render()
+    
+    
+
