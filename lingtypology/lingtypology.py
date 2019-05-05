@@ -52,7 +52,7 @@ class LingMap(object):
     ---
     start_location: (float, float), default (0, 0)
         Coordinates of the map (latitude, longitude).
-    start_zoom: int, default 3
+    start_zoom: int, default 2
         Imitial zoom level.
     control_scale: bool, default True
         Whether to add control scale.
@@ -172,7 +172,7 @@ class LingMap(object):
         self.shapes = ['⬤', '◼', '▲', '◯', '◻', '△', '◉', '▣', '◐', '◧', '◭', '◍','▤', '▶']
         # Map
         self.start_location = (0, 0)
-        self.start_zoom = 3
+        self.start_zoom = 2
         self.control_scale = True
         self.prefer_canvas = False
         self.title = None
