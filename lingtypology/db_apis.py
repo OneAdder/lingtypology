@@ -152,11 +152,11 @@ class Autotyp(object):
         languages = []
         for LID in df.LID:
             try:
-                languages.append(self.mapping[str(LID)])
+                languages.append(lingtypology.glottolog.get_by_glot_id((self.mapping[str(LID)])))
             except KeyError:
                 warnings.warn('Unable to fing Glottocode for' + str(LID))
                 languages.append('')
-        df = df.assign(glot_id=languages)
+        df = df.assign(language=languages)
         return df
 
     def get_json(self):

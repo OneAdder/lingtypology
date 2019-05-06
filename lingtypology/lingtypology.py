@@ -836,8 +836,8 @@ class LingMap(object):
         if self.use_heatmap:
             self._create_heatmap(m, self.heatmap)
 
-        if lingtypology.glottolog.warnings:
-            print('(get_coordinates) Warning: coordinates for {} not found'.format(', '.join(lingtypology.glottolog.warnings)))
+        #if lingtypology.glottolog.warnings:
+        #    print('(get_coordinates) Warning: coordinates for {} not found'.format(', '.join(lingtypology.glottolog.warnings)))
         return m
 
     def save(self, path):

@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='lingtypology',
-    version='0.2',
+    version='0.3',
     description='A linguistic tool for interactive mapping.',
     url='https://github.com/OneAdder/lingtypology',
     author='Michael Voronov',
