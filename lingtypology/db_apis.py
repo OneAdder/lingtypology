@@ -5,8 +5,10 @@ import lingtypology.glottolog
 import warnings
 import json
 import re
+import os
 
 ur = urllib.request
+module_directory = os.path.dirname(os.path.realpath(__file__))
 
 class Wals(object):
     """Wals
@@ -109,15 +111,21 @@ class Wals(object):
             Names of the pages start with '_'.
         """
         df = self.get_df()
-        js = { header:list(df[header]) for header in list(df)}
+        js = {header:list(df[header]) for header in list(df)}
         return js
 
 class Autotyp(object):
     """Autotyp"""
-    def __init__(self, table):
+    def __init__(self, table=''):
         self.table = table
         self.show_citation = True
-        with open('autotyp_lang_mapping.json', 'r', encoding='utf-8') as f:
+        with open(
+            os.path.join(
+                module_directory,
+                'autotyp_lang_mapping.json'
+            ),
+            'r', encoding='utf-8'
+        ) as f:
             self.mapping = json.load(f)
 
     def _show_citation(self):
@@ -130,14 +138,33 @@ class Autotyp(object):
         )
 
     def tables_list(self):
-        github_page = ur.urlopen('https://github.com/autotyp/autotyp-data/tree/master/data').decode('utf-8')
-        return re.findall('title="(.*?)\.csv"')
+        github_page = ur.urlopen('https://github.com/autotyp/autotyp-data/tree/master/data').read().decode('utf-8')
+        return re.findall('title="(.*?)\.csv"', github_page)
 
     def get_df(self):
+        if not self.table:
+            warninngs.warn('No tables given!')
+            return
         if self.show_citation:
             self._show_citation()
+        df = pandas.read_csv('https://raw.githubusercontent.com/autotyp/autotyp-data/master/data/{}.csv'.format(self.table))
+        df.fillna('N/A', inplace=True)
+        languages = []
+        for LID in df.LID:
+            try:
+                languages.append(self.mapping[str(LID)])
+            except KeyError:
+                warnings.warn('Unable to fing Glottocode for' + str(LID))
+                languages.append('')
+        df = df.assign(glot_id=languages)
+        return df
+
+    def get_json(self):
+        df = self.get_df()
+        js = {header:list(df[header]) for header in list(df)}
+        return js
             
 
     
-#print(Wals('1af', '2a').get_df())
-print(Autotyp.tables_list())
+#print(Wals('1a', '2a').get_df())
+#print(Autotyp('Gender').get_df())
