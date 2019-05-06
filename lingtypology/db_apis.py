@@ -3,6 +3,8 @@ import pandas
 import urllib
 import lingtypology.glottolog
 import warnings
+import json
+import re
 
 ur = urllib.request
 
@@ -110,6 +112,32 @@ class Wals(object):
         js = { header:list(df[header]) for header in list(df)}
         return js
 
+class Autotyp(object):
+    """Autotyp"""
+    def __init__(self, table):
+        self.table = table
+        self.show_citation = True
+        with open('autotyp_lang_mapping.json', 'r', encoding='utf-8') as f:
+            self.mapping = json.load(f)
 
+    def _show_citation(self):
+        print(
+            'Bickel, Balthasar, Johanna Nichols, Taras Zakharko, '
+            'Alena Witzlack-Makarevich, Kristine Hildebrandt, Michael Rießler, '
+            'Lennart Bierkandt, Fernando Zúñiga & John B. Lowe. '
+            '2017. The AUTOTYP typological databases. '
+            'Version 0.1.0 https://github.com/autotyp/autotyp-data/tree/0.1.0'
+        )
+
+    def tables_list(self):
+        github_page = ur.urlopen('https://github.com/autotyp/autotyp-data/tree/master/data').decode('utf-8')
+        return re.findall('title="(.*?)\.csv"')
+
+    def get_df(self):
+        if self.show_citation:
+            self._show_citation()
+            
+
+    
 #print(Wals('1af', '2a').get_df())
-#print(list(Phoible().get_json()))
+print(Autotyp.tables_list())
