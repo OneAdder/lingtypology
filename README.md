@@ -21,5 +21,5 @@ or docstrings from the code.
 Lingtypology relies on data from the [Glottolog](https://glottolog.org/glottolog/language) database.
 With each new version of `lingtypology` Glottolog data is updated. Now it is using Glottolog `3.4-7`.
 You can update data from Glottolog. To get the instruction on how to do it, consult paragraph 5.2 of the tutorial
-([html (Github pages)](https://oneadder.github.io/lingtypology/) or
+([html (Github pages)](https://oneadder.github.io/lingtypology/#g_version) or
 [notebook](https://github.com/OneAdder/lingtypology/blob/master/docs/HOWTO.ipynb))
