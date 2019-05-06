@@ -12,7 +12,7 @@ class Wals(object):
     """
     show_citation = True
 
-    def __init__(self, features):
+    def __init__(self, *features):
         """init
 
         features: list of strings
