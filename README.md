@@ -1,5 +1,5 @@
 # lingtypology
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2669069.svg)](https://doi.org/10.5281/zenodo.2669069)  
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2669684.svg)](https://doi.org/10.5281/zenodo.2669684)  
 This library is a Python3 tool for linguistic interactive mapping.
 It is based on [R-package](https://github.com/ropensci/lingtypology) created by [Agrizolamz](https://github.com/agricolamz).
 It uses the same phylosophy and provides similar functionality.
