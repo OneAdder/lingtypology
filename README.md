@@ -1,5 +1,5 @@
 # lingtypology
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2669069.svg)](https://doi.org/10.5281/zenodo.2669069)  
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2669684.svg)](https://doi.org/10.5281/zenodo.2669684)  
 This library is a Python3 tool for linguistic interactive mapping.
 It is based on [R-package](https://github.com/ropensci/lingtypology) created by [Agrizolamz](https://github.com/agricolamz).
 It uses the same phylosophy and provides similar functionality.
@@ -23,3 +23,16 @@ With each new version of `lingtypology` Glottolog data is updated. Now it is usi
 You can update data from Glottolog. To get the instruction on how to do it, consult paragraph 5.2 of the tutorial
 ([html (Github pages)](https://oneadder.github.io/lingtypology/#g_version) or
 [notebook](https://github.com/OneAdder/lingtypology/blob/master/docs/HOWTO.ipynb))
+
+## Citation
+If you are using this package in a scientific publication, it will be most appreciated if you add the citation:
+```
+@misc{michael_voronov_2019_2669684,
+author       = {Michael Voronov},
+title        = {{lingtypology: a Python tool for linguistic interactive mapping}},
+month        = may,
+year         = 2019,
+doi          = {10.5281/zenodo.2669684},
+url          = {https://doi.org/10.5281/zenodo.2669684}
+}
+```
