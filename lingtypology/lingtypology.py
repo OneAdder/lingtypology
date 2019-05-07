@@ -61,6 +61,8 @@ class LingMap(object):
         If set to True, the map may be more responsive in case you have a lot of markers.
     title: str, default None
         You can add a title to the map.
+    start_location_mapping: dict,
+        Mapping between normal locations and coordinates.
     ---
 
     Legend
@@ -212,6 +214,17 @@ class LingMap(object):
         self.tooltips = None
         self.custom_coordinates = None
         self.stroke_features = None
+        self.start_location_mapping = {
+            'Central Europe': {'start_location': (50, 0), 'start_zoom': 4},
+            'Caucasus': {'start_location': (43, 42), 'start_zoom': 6},
+            'Australia & Oceania': {'start_location': (-16, 159), 'start_zoom': 3},
+            'Papua New Guinea': {'start_location': (-5, 141), 'start_zoom': 6},
+            'Africa': {'start_location': (3, 22), 'start_zoom': 3},
+            'Asia': {'start_location': (36, 100), 'start_zoom': 3},
+            'North America': {'start_location': (51, -102), 'start_zoom': 3},
+            'Central America': {'start_location': (19, -81), 'start_zoom': 4},
+            'South America': {'start_location': (-27, -49), 'start_zoom': 3},
+        }
 
     def _create_popups(self, marker, language, i, parse_html=False):
         """Creates popups.
@@ -726,6 +739,12 @@ class LingMap(object):
         ----------
         m: folium.Map
         """
+        if isinstance(self.start_location, str):
+            if not self.start_location in self.start_location_mapping:
+                raise LingMapError('No such start location shortcut. Try passing coordinates.')
+            mapped_location_and_zoom = self.start_location_mapping[self.start_location]
+            self.start_location = mapped_location_and_zoom['start_location']
+            self.start_zoom = mapped_location_and_zoom['start_zoom']
         m = folium.Map(location=self.start_location, zoom_start=self.start_zoom, control_scale=self.control_scale, prefer_canvas=self.prefer_canvas)
 
         default_group = folium.FeatureGroup()
