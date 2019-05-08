@@ -473,7 +473,7 @@ class LingMap(object):
                     groups.append(folium.FeatureGroup(name=features[i]))
             for i, feature in enumerate(clear_features):
                 mapping[feature] = (groups[i], colors[i])
-                data.append((feature, colors[i]))
+                data.append((str(feature), colors[i]))
             groups_features = [mapping[f] for f in features]
             data.sort()
             if use_shapes:
