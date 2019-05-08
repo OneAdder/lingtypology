@@ -191,6 +191,7 @@ class LingMap(object):
         # Markers
         self.use_shapes = False
         self.radius = 7
+        self.opacity = 1
         self.stroke_radius = 12
         self.stroked = True
         self.unstroked = True
@@ -344,7 +345,7 @@ class LingMap(object):
         fill: bool, default True,
         stroke: bool, default False,
         weight: int, default 1,
-        fill_opacity: int, default 1,
+        fill_opacity: float, default 1,
         color: str, default '#000000',
         fill_color: str, default '#DEB887',
         shape: str, default ''
@@ -544,25 +545,25 @@ class LingMap(object):
         s_stroke = ''
         if self.stroke_features:
             if self.unstroked:
-                marker = self._set_marker([coordinates[0], coordinates[1]], fill_color=color_shape)
-                stroke = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=self.radius*1.15, fill_color='#000000')
-                s_marker = self._set_marker([coordinates[0], coordinates[1]], radius=self.stroke_radius, fill_color=s_color)
-                s_stroke = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=self.radius*1.8, fill_color='#000000')
+                marker = self._set_marker([coordinates[0], coordinates[1]], radius=self.radius, fill_opacity=self.opacity, fill_color=color_shape)
+                stroke = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=self.radius*1.15, fill_opacity=self.opacity, fill_color='#000000')
+                s_marker = self._set_marker([coordinates[0], coordinates[1]], radius=self.stroke_radius, fill_opacity=self.stroke_opacity, fill_color=s_color)
+                s_stroke = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=self.stroke_radius*1.15, fill_opacity=self.stroke_opacity, fill_color='#000000')
             else:
-                marker = self._set_marker([coordinates[0], coordinates[1]], stroke=self.stroked, fill_color=color_shape)
-                s_marker = self._set_marker([coordinates[0], coordinates[1]], stroke=self.stroked, radius=self.stroke_radius, fill_color=s_color)
+                marker = self._set_marker([coordinates[0], coordinates[1]], stroke=self.stroked, fill_opacity=self.opacity, fill_color=color_shape)
+                s_marker = self._set_marker([coordinates[0], coordinates[1]], stroke=self.stroked, radius=self.stroke_radius, fill_opacity=self.stroke_opacity, fill_color=s_color)
         else:
             if self.use_shapes:
-                marker = self._set_marker([coordinates[0], coordinates[1]], fill_color='#000000', shape=color_shape)
+                marker = self._set_marker([coordinates[0], coordinates[1]], fill_color='#000000', fill_opacity=self.opacity, shape=color_shape)
             else:
                 if self.unstroked:
-                    marker = self._set_marker([coordinates[0], coordinates[1]], radius=self.radius, fill_color=color_shape)
-                    stroke = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=self.radius*1.15, fill_color='#000000')
+                    marker = self._set_marker([coordinates[0], coordinates[1]], radius=self.radius, fill_opacity=self.opacity, fill_color=color_shape)
+                    stroke = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=self.radius*1.15, fill_opacity=self.opacity, fill_color='#000000')
                 else:
-                    marker = self._set_marker([coordinates[0], coordinates[1]], stroke=self.stroked, radius=self.radius, fill_color=color_shape)
+                    marker = self._set_marker([coordinates[0], coordinates[1]], stroke=self.stroked, radius=self.radius, fill_opacity=self.opacity, fill_color=color_shape)
         return {'marker': marker, 'stroke': stroke, 's_marker': s_marker, 's_stroke': s_stroke}
 
-    def add_features(self, features, radius=7, numeric=False, control=False, use_shapes=False):
+    def add_features(self, features, radius=7, opacity=1, numeric=False, control=False, use_shapes=False):
         """Add features
 
         features: list of strings
@@ -590,6 +591,7 @@ class LingMap(object):
         self._sanity_check(features, feature_name='features')
         self.features = features
         self.radius = radius
+        self.opacity = opacity
         if numeric:
             self.numeric = True
         else:
@@ -599,7 +601,7 @@ class LingMap(object):
         if use_shapes:
             self.use_shapes = True
 
-    def add_stroke_features(self, features, radius=12, numeric=False, control=False):
+    def add_stroke_features(self, features, radius=12, opacity=1, numeric=False, control=False):
         """Add stroke features
 
         This function assigns features to strokes of markers.
@@ -618,13 +620,14 @@ class LingMap(object):
         features = tuple(features)
         self._sanity_check(features, feature_name='stroke features')
         self.stroke_features = features
+        self.stroke_opacity = opacity
         if numeric:
             self.s_numeric = True
         else:
             self.s_numeric = False
         if control:
             self.stroke_control = True
-        self.stroke_radius = 12
+        self.stroke_radius = radius
 
     def add_popups(self, popups, parse_html=False):
         """Add popups to markers
