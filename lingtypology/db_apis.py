@@ -123,8 +123,8 @@ class Wals(object):
 
 class Autotyp(object):
     """Autotyp"""
-    def __init__(self, table=''):
-        self.table = table
+    def __init__(self, *tables):
+        self.tables = tables
         self.show_citation = True
         self.citation = 'Bickel, Balthasar, Johanna Nichols, Taras Zakharko,\n' + \
                         'Alena Witzlack-Makarevich, Kristine Hildebrandt, Michael Rießler,\n' + \
@@ -145,30 +145,40 @@ class Autotyp(object):
         return re.findall('title="(.*?)\.csv"', github_page)
 
     def get_df(self):
-        if not self.table:
-            warninngs.warn('No tables given!')
+        if not self.tables:
+            warnings.warn('No tables given!')
             return
         if self.show_citation:
             print(self.citation)
-        df = pandas.read_csv('https://raw.githubusercontent.com/autotyp/autotyp-data/master/data/{}.csv'.format(self.table))
-        df.fillna('N/A', inplace=True)
-        languages = []
-        for LID in df.LID:
-            try:
-                languages.append(lingtypology.glottolog.get_by_glot_id((self.mapping[str(LID)])))
-            except KeyError:
-                warnings.warn('Unable to fing Glottocode for' + str(LID))
-                languages.append('')
-        df = df.assign(language=languages)
-        return df
+
+        merged_df = pandas.DataFrame()
+        for table in self.tables:
+            df = pandas.read_csv('https://raw.githubusercontent.com/autotyp/autotyp-data/master/data/{}.csv'.format(table))
+            df.fillna('N/A', inplace=True)
+            languages = []
+            for LID in df.LID:
+                try:
+                    languages.append(lingtypology.glottolog.get_by_glot_id((self.mapping[str(LID)])))
+                except KeyError:
+                    warnings.warn('Unable to fing Glottocode for' + str(LID))
+                    languages.append('')
+            df = df.assign(language=languages)
+            if merged_df.empty:
+                merged_df = df
+            else:
+                merged_df = pandas.merge(merged_df, df, on='LID')
+        return merged_df
 
     def get_json(self):
         df = self.get_df()
         js = {header:list(df[header]) for header in list(df)}
         return js
             
-
+class AfBo(object):
+    """AfBo database of borrowed affixes"""
+    def __init__(self):
+        print('')
     
 #print(Wals('1a', '2a').get_df())
 #print(Wals('1a', '2a').general_citation)
-#print(Autotyp('Gender').get_df())
+#print(Autotyp('Gender', 'Agreement').get_df())
