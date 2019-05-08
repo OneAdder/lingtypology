@@ -1054,8 +1054,8 @@ yewe1238,Yewena-Yongsu,Papunesia,,,yewe1238,,sent1261/nucl1631/tabl1243,sent1261
 tepe1277,Tepera,Papunesia,,,tepe1277,,sent1261/nucl1631/tabl1243,sent1261,Sentanic,tabl1243,Tabla,dialect,
 tupe1234,Tupe,,,,tupe1234,,ayma1253,ayma1253,Aymaran,,,family,
 nucl1667,Central-Southern Aymara,South America,,,nucl1667,aym,ayma1253,ayma1253,Aymaran,,,family,
-cauq1239,Cauqui,South America,,,cauq1239,,ayma1253/tupe1234,ayma1253,Aymaran,cauq1239,Cauqui,language,
-jaqa1244,Jaqaru,South America,-12.8823,-75.8958,jaqa1244,jqr,ayma1253/tupe1234,ayma1253,Aymaran,jaqa1244,Jaqaru,language,shifting
+cauq1239,Cauqui,South America,-12.71823,-75.913623,cauq1239,,ayma1253/tupe1234,ayma1253,Aymaran,cauq1239,Cauqui,language,nearly extinct
+jaqa1244,Jaqaru,South America,-12.741939,-75.809231,jaqa1244,jqr,ayma1253/tupe1234,ayma1253,Aymaran,jaqa1244,Jaqaru,language,shifting
 sout2996,Southern Aymara,South America,-17.1417,-70.3442,sout2996,ayc,ayma1253/nucl1667,ayma1253,Aymaran,sout2996,Southern Aymara,language,not endangered
 cent2142,Central Aymara,South America,-17.0,-68.5,cent2142,ayr,ayma1253/nucl1667,ayma1253,Aymaran,cent2142,Central Aymara,language,threatened
 gene1243,General Yokuts,,,,gene1243,,yoku1255,yoku1255,Yokutsan,,,family,
@@ -2598,6 +2598,9 @@ arin1243,Arin,Eurasia,57.0,93.0,arin1243,xrn,yeni1252/sout2751/arin1242,yeni1252
 pump1237,Pumpokol,Eurasia,58.5,92.0,pump1237,xpm,yeni1252/sout2751/arin1242,yeni1252,Yeniseian,pump1237,Pumpokol,language,extinct
 yugh1239,Yugh,Eurasia,60.8778,89.7479,yugh1239,yug,yeni1252/nort2746,yeni1252,Yeniseian,yugh1239,Yugh,language,nearly extinct
 kett1243,Ket,Eurasia,63.7551,87.5466,kett1243,ket,yeni1252/nort2746,yeni1252,Yeniseian,kett1243,Ket,language,shifting
+sout3307,Southern Ket,,,,sout3307,,yeni1252/nort2746/kett1243,yeni1252,Yeniseian,kett1243,Ket,dialect,
+nort3323,Northern Ket,,,,nort3323,,yeni1252/nort2746/kett1243,yeni1252,Yeniseian,kett1243,Ket,dialect,
+cent2358,Central Ket,,,,cent2358,,yeni1252/nort2746/kett1243,yeni1252,Yeniseian,kett1243,Ket,dialect,
 sout2758,Southern Tangkic,,,,sout2758,,tang1340,tang1340,Tangkic,,,family,
 lard1243,Lardil,Australia,-16.56152,139.4343,lard1243,lbz,tang1340,tang1340,Tangkic,lard1243,Lardil,language,nearly extinct
 gang1267,Ganggalida,Australia,-17.5446,139.426,gang1267,gcd,tang1340/sout2758,tang1340,Tangkic,gang1267,Ganggalida,language,nearly extinct
@@ -3237,7 +3240,20 @@ east2351,Eastern Muya,Eurasia,,,east2351,,sino1245/burm1265/naqi1236/qian1263/mu
 nort2723,Northern Pumi,Eurasia,28.6626,101.305,nort2723,pmi,sino1245/burm1265/naqi1236/qian1263/pumi1242,sino1245,Sino-Tibetan,nort2723,Northern Pumi,language,threatened
 sout2729,Southern Pumi,Eurasia,27.8408,100.622,sout2729,pmj,sino1245/burm1265/naqi1236/qian1263/pumi1242,sino1245,Sino-Tibetan,sout2729,Southern Pumi,language,threatened
 taob1238,Taoba,Eurasia,,,taob1238,,sino1245/burm1265/naqi1236/qian1263/pumi1242/nort2723,sino1245,Sino-Tibetan,nort2723,Northern Pumi,dialect,
-qing1238,Qinghua,Eurasia,,,qing1238,,sino1245/burm1265/naqi1236/qian1263/pumi1242/sout2729,sino1245,Sino-Tibetan,sout2729,Southern Pumi,dialect,
+zuos1234,Zuŏsuŏ,,,,zuos1234,,sino1245/burm1265/naqi1236/qian1263/pumi1242/nort2723,sino1245,Sino-Tibetan,nort2723,Northern Pumi,dialect,
+labo1245,Lābó Pumi,,,,labo1245,,sino1245/burm1265/naqi1236/qian1263/pumi1242/nort2723,sino1245,Sino-Tibetan,nort2723,Northern Pumi,dialect,
+sany1234,Sānyǎnlóng,,,,sany1234,,sino1245/burm1265/naqi1236/qian1263/pumi1242/nort2723,sino1245,Sino-Tibetan,nort2723,Northern Pumi,dialect,
+jisu1234,Jīsū,,,,jisu1234,,sino1245/burm1265/naqi1236/qian1263/pumi1242/nort2723,sino1245,Sino-Tibetan,nort2723,Northern Pumi,dialect,
+mudi1234,Mùdǐqīng Pumi,,,,mudi1234,,sino1245/burm1265/naqi1236/qian1263/pumi1242/nort2723,sino1245,Sino-Tibetan,nort2723,Northern Pumi,dialect,
+taob1239,Táobā,,,,taob1239,,sino1245/burm1265/naqi1236/qian1263/pumi1242/nort2723,sino1245,Sino-Tibetan,nort2723,Northern Pumi,dialect,
+tuoq1234,Tuōqī Pumi,,,,tuoq1234,,sino1245/burm1265/naqi1236/qian1263/pumi1242/nort2723,sino1245,Sino-Tibetan,nort2723,Northern Pumi,dialect,
+west2926,Western Pumi,,,,west2926,,sino1245/burm1265/naqi1236/qian1263/pumi1242/sout2729,sino1245,Sino-Tibetan,sout2729,Southern Pumi,dialect,
+cent2357,Central Pumi,,,,cent2357,,sino1245/burm1265/naqi1236/qian1263/pumi1242/sout2729,sino1245,Sino-Tibetan,sout2729,Southern Pumi,dialect,
+qing1238,Qinghua Pumi,Eurasia,,,qing1238,,sino1245/burm1265/naqi1236/qian1263/pumi1242/sout2729/west2926,sino1245,Sino-Tibetan,sout2729,Southern Pumi,dialect,
+daya1246,Dayang Pumi,,,,daya1246,,sino1245/burm1265/naqi1236/qian1263/pumi1242/sout2729/west2926,sino1245,Sino-Tibetan,sout2729,Southern Pumi,dialect,
+xich1234,Xichuan Pumi,,,,xich1234,,sino1245/burm1265/naqi1236/qian1263/pumi1242/sout2729/cent2357,sino1245,Sino-Tibetan,sout2729,Southern Pumi,dialect,
+xiny1234,Xinyingpan Pumi,,,,xiny1234,,sino1245/burm1265/naqi1236/qian1263/pumi1242/sout2729/cent2357,sino1245,Sino-Tibetan,sout2729,Southern Pumi,dialect,
+renh1234,Renhe Pumi,,,,renh1234,,sino1245/burm1265/naqi1236/qian1263/pumi1242/sout2729/cent2357,sino1245,Sino-Tibetan,sout2729,Southern Pumi,dialect,
 horp1241,Horpa-Khroskyabs,,,,horp1241,,sino1245/burm1265/naqi1236/qian1263/rgya1241,sino1245,Sino-Tibetan,,,family,
 core1262,Core Gyalrong,,,,core1262,,sino1245/burm1265/naqi1236/qian1263/rgya1241,sino1245,Sino-Tibetan,,,family,
 horp1240,Horpa,,,,horp1240,,sino1245/burm1265/naqi1236/qian1263/rgya1241/horp1241,sino1245,Sino-Tibetan,,,family,
@@ -6180,7 +6196,7 @@ kare1341,Kare (Papua New Guinea),Papunesia,-5.07674,145.499,kare1341,kmf,nucl170
 gumm1240,Gum,,,,gumm1240,,nucl1709/mada1298/croi1234/mabu1247,nucl1709,Nuclear Trans New Guinea,,,family,
 hans1243,Hanseman,,,,hans1243,,nucl1709/mada1298/croi1234/mabu1247,nucl1709,Nuclear Trans New Guinea,,,family,
 koko1271,Kokon,,,,koko1271,,nucl1709/mada1298/croi1234/mabu1247,nucl1709,Nuclear Trans New Guinea,,,family,
-siha1245,Sihan,Papunesia,-5.28029,145.574,siha1245,snr,nucl1709/mada1298/croi1234/mabu1247/gumm1240,nucl1709,Nuclear Trans New Guinea,siha1245,Sihan,language,not endangered
+siha1245,Sihan (Gum),Papunesia,-5.28029,145.574,siha1245,snr,nucl1709/mada1298/croi1234/mabu1247/gumm1240,nucl1709,Nuclear Trans New Guinea,siha1245,Sihan (Gum),language,not endangered
 amel1241,Amele,Papunesia,-5.29126,145.687,amel1241,aey,nucl1709/mada1298/croi1234/mabu1247/gumm1240,nucl1709,Nuclear Trans New Guinea,amel1241,Amele,language,threatened
 guma1255,Gumalu,Papunesia,-5.22189,145.618,guma1255,gmu,nucl1709/mada1298/croi1234/mabu1247/gumm1240,nucl1709,Nuclear Trans New Guinea,guma1255,Gumalu,language,not endangered
 pani1263,Panim-Isebe-Bau,,,,pani1263,,nucl1709/mada1298/croi1234/mabu1247/gumm1240,nucl1709,Nuclear Trans New Guinea,,,family,
@@ -18581,9 +18597,9 @@ komo1261,Komodo,Papunesia,-8.64518,119.477,komo1261,kvh,aust1307/mala1545/cent22
 waer1238,Waerana-Razong,,,,waer1238,,aust1307/mala1545/cent2237/cent2245/flor1240/flor1241/mang1430,aust1307,Austronesian,,,family,
 mang1436,Manggarai Khusus,,,,mang1436,,aust1307/mala1545/cent2237/cent2245/flor1240/flor1241/mang1430,aust1307,Austronesian,,,family,
 remb1250,Rembong-Wangka,Papunesia,-8.53361,120.973,remb1250,reb,aust1307/mala1545/cent2237/cent2245/flor1240/flor1241/mang1430,aust1307,Austronesian,remb1250,Rembong-Wangka,language,shifting
-kepo1237,Kepo',Papunesia,-8.58908,120.84,kepo1237,kuk,aust1307/mala1545/cent2237/cent2245/flor1240/flor1241/mang1430,aust1307,Austronesian,kepo1237,Kepo',language,shifting
-waer1237,Kolor,Papunesia,-8.74889,120.793,waer1237,wrx,aust1307/mala1545/cent2237/cent2245/flor1240/flor1241/mang1430/waer1238,aust1307,Austronesian,waer1237,Kolor,language,shifting
-rajo1237,Rajong,Papunesia,-8.78645,120.703,rajo1237,rjg,aust1307/mala1545/cent2237/cent2245/flor1240/flor1241/mang1430/waer1238,aust1307,Austronesian,rajo1237,Rajong,language,shifting
+kepo1237,Kepo',Papunesia,-8.603241,120.775273,kepo1237,kuk,aust1307/mala1545/cent2237/cent2245/flor1240/flor1241/mang1430,aust1307,Austronesian,kepo1237,Kepo',language,shifting
+waer1237,Kolor,Papunesia,-8.78645,120.70299,waer1237,wrx,aust1307/mala1545/cent2237/cent2245/flor1240/flor1241/mang1430/waer1238,aust1307,Austronesian,waer1237,Kolor,language,shifting
+rajo1237,Rajong,Papunesia,-8.658096,120.874418,rajo1237,rjg,aust1307/mala1545/cent2237/cent2245/flor1240/flor1241/mang1430/waer1238,aust1307,Austronesian,rajo1237,Rajong,language,shifting
 mang1405,Manggarai,Papunesia,-8.55748,120.329,mang1405,mqy,aust1307/mala1545/cent2237/cent2245/flor1240/flor1241/mang1430/mang1436,aust1307,Austronesian,mang1405,Manggarai,language,not endangered
 riun1237,Riung,Papunesia,-8.60342,121.122,riun1237,riu,aust1307/mala1545/cent2237/cent2245/flor1240/flor1241/mang1430/mang1436,aust1307,Austronesian,riun1237,Riung,language,not endangered
 west2537,Western Manggarai,Papunesia,,,west2537,,aust1307/mala1545/cent2237/cent2245/flor1240/flor1241/mang1430/mang1436/mang1405,aust1307,Austronesian,mang1405,Manggarai,dialect,
@@ -18601,7 +18617,7 @@ ngad1261,Ngad'a,Papunesia,-8.79508,120.976,ngad1261,nxg,aust1307/mala1545/cent22
 rong1269,Rongga,Papunesia,-8.84604,120.702,rong1269,ror,aust1307/mala1545/cent2237/cent2245/flor1240/flor1241/ngad1265/ngad1266/ngad1267,aust1307,Austronesian,rong1269,Rongga,language,shifting
 baja1259,Bajawa,Papunesia,,,baja1259,,aust1307/mala1545/cent2237/cent2245/flor1240/flor1241/ngad1265/ngad1266/ngad1267/ngad1261,aust1307,Austronesian,ngad1261,Ngad'a,dialect,
 sout2884,South Ngada,Papunesia,,,sout2884,,aust1307/mala1545/cent2237/cent2245/flor1240/flor1241/ngad1265/ngad1266/ngad1267/ngad1261,aust1307,Austronesian,ngad1261,Ngad'a,dialect,
-cent2074,Central Ngada,Papunesia,,,cent2074,ssq,aust1307/mala1545/cent2237/cent2245/flor1240/flor1241/ngad1265/ngad1266/ngad1267/ngad1261,aust1307,Austronesian,ngad1261,Ngad'a,dialect,
+cent2074,Central Ngada,Papunesia,-8.6778,121.04764,cent2074,ssq,aust1307/mala1545/cent2237/cent2245/flor1240/flor1241/ngad1265/ngad1266/ngad1267/ngad1261,aust1307,Austronesian,ngad1261,Ngad'a,dialect,threatened
 east2464,Eastern Ngad'a,Papunesia,-8.82745,121.121,east2464,nea,aust1307/mala1545/cent2237/cent2245/flor1240/flor1241/ngad1265/ngad1266/ngad1267/ngad1261,aust1307,Austronesian,ngad1261,Ngad'a,dialect,not endangered
 ende1246,Ende,Papunesia,-8.70998,121.555,ende1246,end,aust1307/mala1545/cent2237/cent2245/flor1240/flor1241/ngad1265/ngad1266/ende1245,aust1307,Austronesian,ende1246,Ende,language,not endangered
 nage1238,Nage-Keo,,,,nage1238,,aust1307/mala1545/cent2237/cent2245/flor1240/flor1241/ngad1265/ngad1266/ende1245,aust1307,Austronesian,,,family,
@@ -19508,7 +19524,7 @@ puna1272,Punan Batu 2,Papunesia,,,puna1272,,aust1307/mala1545/nort3253/sara1342/
 puna1271,Punan Sajau,Papunesia,,,puna1271,,aust1307/mala1545/nort3253/sara1342/puna1279/puna1280/buki1252/puna1281/saja1241,aust1307,Austronesian,saja1241,Sajau-Latti,dialect,
 puna1278,Punan Batu 1,Papunesia,2.65327,113.93,puna1278,pnm,aust1307/mala1545/nort3253/sara1342/puna1279/puna1280/aput1239,aust1307,Austronesian,puna1278,Punan Batu 1,language,moribund
 puna1268,Punan Merah,Papunesia,0.50763,115.588,puna1268,puf,aust1307/mala1545/nort3253/sara1342/puna1279/puna1280/aput1239,aust1307,Austronesian,puna1268,Punan Merah,language,shifting
-sian1255,Sian,Papunesia,2.66154,113.843,sian1255,spg,aust1307/mala1545/nort3253/sara1342/puna1279/puna1280/aput1239,aust1307,Austronesian,sian1255,Sian,language,moribund
+sian1255,Sihan,Papunesia,2.66154,113.843,sian1255,spg,aust1307/mala1545/nort3253/sara1342/puna1279/puna1280/aput1239,aust1307,Austronesian,sian1255,Sihan,language,moribund
 puna1267,Punan Aput,Papunesia,1.38035,116.089,puna1267,pud,aust1307/mala1545/nort3253/sara1342/puna1279/puna1280/aput1239,aust1307,Austronesian,puna1267,Punan Aput,language,threatened
 seka1248,Sekapan,Papunesia,2.47567,113.562,seka1248,skp,aust1307/mala1545/nort3253/sara1342/kaja1255,aust1307,Austronesian,seka1248,Sekapan,language,threatened
 kaja1256,Kajaman-Lahanan,,,,kaja1256,,aust1307/mala1545/nort3253/sara1342/kaja1255,aust1307,Austronesian,,,family,
