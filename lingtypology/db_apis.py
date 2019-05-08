@@ -6,6 +6,7 @@ import warnings
 import json
 import re
 import os
+from datetime import datetime
 
 ur = urllib.request
 module_directory = os.path.dirname(os.path.realpath(__file__))
@@ -15,8 +16,9 @@ class Wals(object):
 
     show_citation: bool, default True
         Whether to print the citation.
+    general_citation: str<
+        General citation of the whole WALS.
     """
-    show_citation = True
 
     def __init__(self, *features):
         """init
@@ -25,6 +27,11 @@ class Wals(object):
             Wals pages you want to use.
         """
         self.features = features
+        self.show_citation = True
+        self.general_citation = 'Dryer, Matthew S. & Haspelmath, Martin (eds.) 2013.\n' + \
+        'The World Atlas of Language Structures Online.\n' + \
+        'Leipzig: Max Planck Institute for Evolutionary Anthropology.\n' + \
+        '(Available online at http://wals.info, Accessed on {}.)'.format(datetime.now().strftime('%Y-%m-%d'))
 
     def _get_wals_template(self):
         """Makes pandas.DaraFrame with all the data except for the pages.
@@ -119,6 +126,11 @@ class Autotyp(object):
     def __init__(self, table=''):
         self.table = table
         self.show_citation = True
+        self.citation = 'Bickel, Balthasar, Johanna Nichols, Taras Zakharko,\n' + \
+                        'Alena Witzlack-Makarevich, Kristine Hildebrandt, Michael Rießler,\n' + \
+                        'Lennart Bierkandt, Fernando Zúñiga & John B. Lowe.\n' + \
+                        '2017. The AUTOTYP typological databases.\n' + \
+                        'Version 0.1.0 https://github.com/autotyp/autotyp-data/tree/0.1.0'
         with open(
             os.path.join(
                 module_directory,
@@ -127,15 +139,6 @@ class Autotyp(object):
             'r', encoding='utf-8'
         ) as f:
             self.mapping = json.load(f)
-
-    def _show_citation(self):
-        print(
-            'Bickel, Balthasar, Johanna Nichols, Taras Zakharko, '
-            'Alena Witzlack-Makarevich, Kristine Hildebrandt, Michael Rießler, '
-            'Lennart Bierkandt, Fernando Zúñiga & John B. Lowe. '
-            '2017. The AUTOTYP typological databases. '
-            'Version 0.1.0 https://github.com/autotyp/autotyp-data/tree/0.1.0'
-        )
 
     def tables_list(self):
         github_page = ur.urlopen('https://github.com/autotyp/autotyp-data/tree/master/data').read().decode('utf-8')
@@ -146,7 +149,7 @@ class Autotyp(object):
             warninngs.warn('No tables given!')
             return
         if self.show_citation:
-            self._show_citation()
+            print(self.citation)
         df = pandas.read_csv('https://raw.githubusercontent.com/autotyp/autotyp-data/master/data/{}.csv'.format(self.table))
         df.fillna('N/A', inplace=True)
         languages = []
@@ -167,4 +170,5 @@ class Autotyp(object):
 
     
 #print(Wals('1a', '2a').get_df())
+#print(Wals('1a', '2a').general_citation)
 #print(Autotyp('Gender').get_df())
