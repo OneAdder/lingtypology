@@ -147,7 +147,7 @@ class Autotyp(object):
 
         tables: list
             List of tables that the user wants to access.
-        show_citation: bool
+        show_citation: bool, default True
             Whether to display citation for Autoyp or not.
         citation:
             Citation for Autotyp.
@@ -238,7 +238,7 @@ class AfBo(object):
 
         features: list
             List of features that the user wants to access.
-        show_citation: bool
+        show_citation: bool, default True
             Whether to display citation for Autoyp or not.
         citaion:
             Citation for AfBo.
@@ -298,6 +298,7 @@ class AfBo(object):
         df = self.get_df()
         js = {header:list(df[header]) for header in list(df)}
         return js
+
         
 class Sails(object):
     """Sails dataset
@@ -310,7 +311,7 @@ class Sails(object):
         1) Setting attributes:
             features: list
                 User-defined features.
-            show_citation: bool
+            show_citation: bool, default True
                 Whether to show the citation.
             citation: str
                 Citation.
@@ -397,6 +398,71 @@ class Sails(object):
         js = {header:list(df[header]) for header in list(df)}
         return js
 
+
+class Phoible(object):
+    """Phoible"""
+    def __init__(self, subset='all'):
+        """init
+
+        show_citation: bool, default True
+            Whether to display citation for Autoyp or not.
+        citaion:
+            Citation for Phoible.
+        subset: str, default 'all'
+            Subset of Phoible (all, only UPSID, only SPA etc.)
+        subsets_list: list
+            List of available subsets of Phoible.
+        """
+        self.show_citation = True
+        self.citation = 'Moran, Steven & McCloy, Daniel (eds.) 2019.\nPHOIBLE 2.0.\n' + \
+                        'Jena: Max Planck Institute for the Science of Human History.\n' + \
+                        '(Available online at http://phoible.org, Accessed on {}.)'.format(datetime.now().strftime('%Y-%m-%d'))
+        self.subsets_list = ['all', 'UPSID', 'SPA', 'AA', 'PH', 'GM', 'RA', 'SAPHON']
+        
+        self.subset = subset
+        self.inventories = pandas.read_csv('https://phoible.org/inventories.csv', sep=',', header=0)
+        self.languages = pandas.read_csv('https://phoible.org/languages.csv', sep=',', header=0)
+        #if include_everything:
+        #    self.raw_data = pandas.read_csv('https://raw.githubusercontent.com/phoible/dev/master/data/phoible.csv', sep=',', header=0, low_memory=False)
+
+    def get_df(self):
+        """Get data from Phoible in pandas.DataFrame format.
+
+        Returns pandas.DataFrame
+            Headers: 'contribution_name', 'language', 'coordinates', 'glottocode', 'macroarea', 'consonants', 'vowels', 'source', 'inventory_page'
+        """
+        if self.show_citation:
+            print(self.citation)
+        inventories = self.inventories[['name', 'count_consonant', 'count_tone', 'count_vowel', 'language_pk', 'source_url']]
+        if self.subset != 'all':
+            subset = self.subset.upper()
+            inventories = inventories[inventories.name.str.contains(subset)]
+        languages = self.languages[['id', 'latitude', 'longitude', 'macroarea', 'name', 'pk']]
+        languages = languages.rename(columns={'name': 'language'})
+        pre_df = pandas.merge(languages, inventories, left_on='pk', right_on='language_pk')
+        df = pandas.DataFrame({
+            'contribution_name': pre_df.name,
+            'language': pre_df.language,
+            'coordinates': list(zip(pre_df.latitude, pre_df.longitude)),
+            'glottocode': pre_df.id,
+            'macroarea': pre_df.macroarea,
+            'consonants': pre_df.count_consonant,
+            'vowels': pre_df.count_vowel,
+            'source': pre_df.source_url,
+            'inventory_page': 'https://phoible.org/languages/' + pre_df.id
+        })
+        return df
+
+    def get_json(self):
+        """Get data from Phoible in JSON format.
+
+        Returns dict
+            Keys: 'contribution_name', 'language', 'coordinates', 'glottocode', 'macroarea', 'consonants', 'vowels', 'source', 'inventory_page'
+        """
+        df = self.get_df()
+        js = {header:list(df[header]) for header in list(df)}
+        return js
+    
 #print(Wals('1a', '2a').get_df())
 #print(Wals('1a', '2a').general_citation)
 #print(Wals().features_list)
@@ -408,3 +474,4 @@ class Sails(object):
 #print(Sails('ICU10', 'ICU11').get_df())
 #print(Sails().features_descriptions)
 #print(Sails().feature_descriptions('ICU10', 'ICU11'))
+#print(Phoible(subset='upsid').get_df())
