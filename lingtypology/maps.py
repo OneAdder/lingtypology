@@ -19,7 +19,6 @@ import os
 
 #Local tools
 import lingtypology.glottolog
-from lingtypology.db_apis import Wals#, Phoible
 
 class LingMapError(Exception):
     """All special exceptions"""
