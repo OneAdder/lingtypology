@@ -202,7 +202,7 @@ class Autotyp(object):
             except urllib.error.HTTPError:
                 warnings.warn('Unable to find table ' + table)
                 continue
-            df.fillna('N/A', inplace=True)
+            df.fillna('~N/A~', inplace=True)
 
             if merged_df.empty:
                 languages = []
@@ -213,7 +213,7 @@ class Autotyp(object):
                         warnings.warn('Unable to find Glottocode for' + str(LID))
                         languages.append('')
                 languages_df = pandas.DataFrame()
-                languages_df = languages_df.assign(Language=languages)
+                languages_df = languages_df.assign(language=languages)
                 merged_df = languages_df.join(df)
             else:
                 merged_df = pandas.merge(merged_df, df, on='LID')
@@ -277,8 +277,8 @@ class AfBo(object):
 
         df = pandas.DataFrame()
         df = df.assign(
-            Recipient_name = self.afbo_data['Recipient name'],
-            Donor_name = self.afbo_data['Donor name'],
+            language_recipient = self.afbo_data['Recipient name'],
+            language_donor = self.afbo_data['Donor name'],
             reliability = self.afbo_data['reliability'],
         )
 
@@ -377,15 +377,15 @@ class Sails(object):
             latitudes = [list(self.languages[self.languages['Name'] == lang].Latitude)[0] for lang in languages]
             longitudes = [list(self.languages[self.languages['Name'] == lang].Longitude)[0] for lang in languages]
             coordinates = list(zip(latitudes, longitudes))
-            new_df['Language'] = languages
-            new_df['Coordinates'] = coordinates
+            new_df['language'] = languages
+            new_df['coordinates'] = coordinates
             new_df[feature] = list(df.Value)
             new_df[feature + '_desc'] = list(df.Value.replace(['0', '1', '?'], ['No', 'Yes', '?']))
             if merged_df.empty:
                 merged_df = new_df
             else:
-                merged_df = pandas.merge(merged_df, new_df, how='outer', on=['Language', 'Coordinates'])
-        merged_df.fillna('N/A', inplace=True)
+                merged_df = pandas.merge(merged_df, new_df, how='outer', on=['language', 'coordinates'])
+        merged_df.fillna('~N/A~', inplace=True)
         return merged_df
 
     def get_json(self):
@@ -448,9 +448,11 @@ class Phoible(object):
             'macroarea': pre_df.macroarea,
             'consonants': pre_df.count_consonant,
             'vowels': pre_df.count_vowel,
+            'tones': pre_df.count_tone,
             'source': pre_df.source_url,
             'inventory_page': 'https://phoible.org/languages/' + pre_df.id
         })
+        df.fillna('~N/A~', inplace=True)
         return df
 
     def get_json(self):
