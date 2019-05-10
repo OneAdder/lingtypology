@@ -446,6 +446,7 @@ class Phoible(object):
             'coordinates': list(zip(pre_df.latitude, pre_df.longitude)),
             'glottocode': pre_df.id,
             'macroarea': pre_df.macroarea,
+            'phonemes': pre_df.count_consonant + pre_df.count_vowel,
             'consonants': pre_df.count_consonant,
             'vowels': pre_df.count_vowel,
             'tones': pre_df.count_tone,
