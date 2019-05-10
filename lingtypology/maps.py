@@ -458,24 +458,33 @@ class LingMap(object):
                                                       vmin=features[0],
                                                       vmax=features[-1],
                                                       caption=self.legend_title)
+            
+            colormap_features = list(range(features[0], features[-1], features[-1] // 10))
+            funny_round = lambda x, base: base * round(x/base)
+            if features[-1] >= 5:
+                base = 0.5
+            else:
+                base = 0.01
+            if features[-1] >= 10:
+                base = 1
+            if features[-1] >= 50:
+                base = 5
+            if features[-1] >= 100:
+                base = 10
+            if features[-1] >= 1000:
+                base = 100
+            colormap_features = [funny_round(n, base) for n in colormap_features]
             groups_features = [(0, colormap(feature)) for feature in features]
-            template =  '''
-                        <style>
-                            .grad {
-                                height: 200px;
-                                width: 20px;
-                                background: linear-gradient({{ color0 }}, {{ color1 }});
-                                }
-                        </style>
-                        <div class="grad"/>
-                        <li style="margin-left: 35px;">{{ feature0 }}</li>
-                        <li style="margin-left: 35px; margin-top: 170px;">{{ feature1 }}</li>
-                        '''
+            data = ''
+            for cf in colormap_features:
+                data += '<li><span style="background: {};opacity:0.7;"></span>{}</li>'.format(colormap(cf), cf)
+            '''
             template = jinja2.Template(template)
             data = template.render(color0=self.colormap_colors[0],
                                    color1=self.colormap_colors[1],
                                    feature0=features[0],
                                    feature1=features[-1])
+            '''
         else:
             mapping = {}
             clear_features = []
