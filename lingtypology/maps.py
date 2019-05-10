@@ -16,6 +16,7 @@ import os
 import re
 import matplotlib.pyplot as plt
 from colour import Color
+from collections import deque
 
 #Local tools
 import lingtypology.glottolog
@@ -173,7 +174,7 @@ class LingMap(object):
         self.stroke_colors = ['#ffffff', '#000000', '#800000', '#BC8F8F', '#FFE4C4', '#6495ED', '#4682B4',
                          '#FF6347', '#778899', '#40E0D0', '#00FFFF', '#F08080', '#6495ED', '#FF7F50',
                          '#D2691E', '#7FFF00', '#5F9EA0', '#DEB887', '#A52A2A', '#8A2BE2', '#0000FF']
-        self.colors = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6',
+        self.colors = ['#e6194b', '#19e6b4', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6',
                   '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8','#800000',
                   '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000']
         self.shapes = ['⬤', '◼', '▲', '◯', '◻', '△', '◉', '▣', '◐', '◧', '◭', '◍','▤', '▶']
@@ -738,35 +739,53 @@ class LingMap(object):
         self.use_heatmap = True
         self.heatmap = tuple(heatmap)
 
-    def add_minicharts(self, *minicharts, typ='pie', size=0.8, names=[], labels=False):
+    def add_minicharts(self, *minicharts, typ='pie', size=0.6, names=[], labels=False, startangle=90, colors=[], bar_width=1):
         self.minichart_names = names
         self.minicharts_data = minicharts
+        self.popups = []
+        
+        fig = plt.figure(figsize=(size, size))
+        
         if typ == 'pie':
-            fig = plt.figure(figsize=(size, size))
             fig.patch.set_alpha(0)
-            ax = fig.add_subplot(111)
-            
-            for minichart in list(zip(*minicharts)):
-                sizes = minichart
-                colors = self.colors[:len(minichart)]
-
+        elif typ == 'bar':
+            fig.patch.set_visible(False)
+        else:
+            raise LingMapError('{}: unknown type of chart. You can use either "pie" or "bar"')
+        
+        ax = fig.add_subplot(111)
+        
+        for minichart in list(zip(*minicharts)):
+            sizes = minichart
+            if colors:
+                self.colors = colors
+            else:
+                colors = self.colors
+            if typ == 'pie':
                 if labels:
                     #I'm not allowed to simply pass sizes! I have to take percentages and then turn them back to sizes. Matplotlib sucks :(
-                    ax.pie(sizes, colors=colors, startangle=140, autopct=lambda p: '{}'.format(int(p * sum(sizes)//100)))
+                    ax.pie(sizes, colors=colors, startangle=startangle, autopct=lambda p: '{}'.format(int(p * sum(sizes)//100)))
                 else:
-                    ax.pie(sizes, colors=colors, startangle=140)
+                    ax.pie(sizes, colors=colors, startangle=startangle)
+            elif typ == 'bar':
+                ax.bar(self.minichart_names, height=sizes, color=colors, width=bar_width)
+                ax.axis('off')
+            buff = io.StringIO()
+            plt.savefig(buff, format='SVG')
+            buff.seek(0)
+            plt.cla()
 
-                buff = io.StringIO()
-                plt.savefig(buff, format='SVG')
-                buff.seek(0)
-                plt.cla()
+            svg = buff.read()
+            size = (float(re.findall('height="(.*?)pt"', svg)[0]), float(re.findall('width="(.*?)pt"', svg)[0]))
+            center = ((size[0] / 2)*1.31, (size[1] / 2)*1.31)
 
-                svg = buff.read()
-                size = (float(re.findall('height="(.*?)pt"', svg)[0]), float(re.findall('width="(.*?)pt"', svg)[0]))
-                center = ((size[0] / 2)*1.31, (size[1] / 2)*1.31)
-
-                self.minicharts.append(folium.DivIcon(html=svg.replace('\n', ''), icon_anchor=center))
-
+            self.minicharts.append(folium.DivIcon(html=svg.replace('\n', ''), icon_anchor=center))
+            popup = '<br>'
+            for name, value in zip(names, minichart):
+                popup += '{}: {}<br>'.format(name, str(value))
+            self.popups.append(popup)
+        plt.clf()
+        plt.close()
 
     def _sanity_check(self, features, feature_name='corresponding lists'):
         """Checks if length of features, popups and tooltips is equal to the length of languages
@@ -834,9 +853,11 @@ class LingMap(object):
                     if self.languages_in_popups:
                         popup_href = '''<a href="https://glottolog.org/resource/languoid/id/{}" onclick="this.target='_blank';">{}</a>'''
                         popup_contents += popup_href.format(lingtypology.glottolog.get_glot_id(language), language)
-                    popup = folium.Popup(popup_contents)
-                    popup.add_to(marker)
-                marker.add_to(m)
+                    if self.popups:
+                        marker.add_child(folium.Popup(popup_contents + self.popups[i]))
+                    else:
+                        marker.add_child(folium.Popup(popup_contents))
+                m.add_child(marker)
                 
             if self.minichart_names:
                 legend_data = ''
