@@ -190,7 +190,7 @@ class LingMap(object):
         self.legend_title = 'Legend'
         self.stroke_legend_title = 'Legend'
         self.legend_position = 'bottomright'
-        self.stroke_legend_position = 'bottomleft'
+        self.stroke_legend_position = 'topright'
         # Popups
         self.languages_in_popups = True
         self.html_popups = False
@@ -206,7 +206,7 @@ class LingMap(object):
         self.stroke_control = False
         self.control_position = 'topright'
         # Colormap
-        self.colormap_colors = ('#ffffff','#4a008f')
+        self.colormap_colors = ('white','green')
         # Heat map
         self.use_heatmap = False
         self.heatmap = []
@@ -748,7 +748,8 @@ class LingMap(object):
         self.use_heatmap = True
         self.heatmap = tuple(heatmap)
 
-    def add_minicharts(self, *minicharts, typ='pie', size=0.6, names=[], labels=False, startangle=90, colors=[], bar_width=1):
+    def add_minicharts(self, *minicharts, typ='pie', size=0.6, names=None,
+                       textprops=None, labels=False, startangle=90, colors=[], bar_width=1):
         """Create minicharts using maplotlib
         
         How it works:
@@ -757,6 +758,11 @@ class LingMap(object):
         * Create markers with SVG DivIcon.
         * Create popups with data from the plots.
         """
+        if names is None:
+            if all(isinstance(minichart, pandas.Series) for minichart in minicharts):
+                names = [serie.name for serie in minicharts]
+            else:
+                raise LingMap('You shound either pass names or use pandas.Series')
         self.minichart_names = names
         self.minicharts_data = minicharts
         self.popups = []
@@ -781,7 +787,11 @@ class LingMap(object):
             if typ == 'pie':
                 if labels:
                     #I'm not allowed to simply pass sizes! I have to take percentages and then turn them back to sizes. Matplotlib sucks :(
-                    ax.pie(sizes, colors=colors, startangle=startangle, autopct=lambda p: '{}'.format(int(p * sum(sizes)//100)))
+                    ax.pie(
+                        sizes, colors=colors, startangle=startangle,
+                        autopct=lambda p: '{}'.format(int(p * sum(sizes)//100)),
+                        textprops=textprops
+                    )
                 else:
                     ax.pie(sizes, colors=colors, startangle=startangle)
             elif typ == 'bar':
