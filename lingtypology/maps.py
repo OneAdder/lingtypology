@@ -8,14 +8,14 @@ import folium.plugins
 import branca.colormap
 import branca.element
 
-#Jinja2
 import jinja2
-#Pandas
 import pandas
-#Math
 import math
-#os
+import io
 import os
+import re
+import matplotlib.pyplot as plt
+from colour import Color
 
 #Local tools
 import lingtypology.glottolog
@@ -27,6 +27,10 @@ class LingMapError(Exception):
     def __str__(self):
         return self.msg
 
+def gradient(iterations, color1='white', color2='black'):
+    color1 = Color(color1)
+    colors = [color.get_hex() for color in color1.range_to(Color(color2), iterations)]
+    return colors
 
 class LingMap(object):
     """Lingtypology map object
@@ -143,6 +147,8 @@ class LingMap(object):
         If set to true no markers will be rendered.
     colormap_colors: tuple, default ('#ffffff','#4a008f')
         Default colors for the colormap.
+    minicharts: list, defaule []
+        List of folium.DivIcon for minicharts
     ---
     """
     
@@ -225,6 +231,8 @@ class LingMap(object):
             'Central America': {'start_location': (19, -81), 'start_zoom': 4},
             'South America': {'start_location': (-27, -49), 'start_zoom': 3},
         }
+        self.minicharts = []
+        self.minichart_names = []
 
     def _create_popups(self, marker, language, i, parse_html=False):
         """Creates popups.
@@ -390,8 +398,13 @@ class LingMap(object):
                 attrs_r.append(attr)
             else:
                 attrs_r.append(length)
-        al = list(zip(features, *attrs_r))
-        al.sort(key=lambda element: element[0])
+        try:
+            al = list(zip(features, *attrs_r))
+            al.sort(key=lambda element: element[0])
+        except TypeError:
+            #In case of different types, fall back to sorting as srt
+            al = list(zip(map(str, features), *attrs_r))
+            al.sort(key=lambda element: element[0])
         features = []
         self.languages = []
         self.popups = []
@@ -437,8 +450,8 @@ class LingMap(object):
             colors = self.shapes
         if stroke:
             colors = self.stroke_colors
+        features = self._sort_all(features)
         if self.numeric and not stroke:
-            features = self._sort_all(features)
             colormap = branca.colormap.LinearColormap(colors=self.colormap_colors,
                                                       index=[features[0], features[-1]],
                                                       vmin=features[0],
@@ -466,16 +479,24 @@ class LingMap(object):
             mapping = {}
             clear_features = []
             groups = []
-            data = []
+            #Two datas are needed so that I can first try sorting as numeric, then fallback to strings
+            data_as_str = []
+            data_as_num = []
             for i, feature in enumerate(features):
                 if feature not in clear_features:
                     clear_features.append(feature)
                     groups.append(folium.FeatureGroup(name=features[i]))
             for i, feature in enumerate(clear_features):
                 mapping[feature] = (groups[i], colors[i])
-                data.append((str(feature), colors[i]))
+                data_as_str.append((str(feature), colors[i]))
+                data_as_num.append((feature, colors[i]))
             groups_features = [mapping[f] for f in features]
-            data.sort()
+            try:
+                data_as_num.sort()
+                data = data_as_num
+            except Exception:
+                data_as_str.sort()
+                data = data_as_str
             if use_shapes:
                 html = '<li><span style="color: #000000; text-align: center; opacity:0.7;">{}</span>{}</li>'
             else:
@@ -679,11 +700,6 @@ class LingMap(object):
         """
         self.minimap = {'position': position, 'width': width, 'height': height, 'collapsed_width': collapsed_width, 'collapsed_height': collapsed_height, 'zoom_animation': zoom_animation}
 
-    def add_minichart(self, data):
-        """Not implemented"""
-        self._sanity_check(data, feature_name='minicharts')
-        self.minicharts = data
-
     def add_rectangle(self, locations, tooltip='', popup='', color='black'):
         """Add one rectangle
 
@@ -722,6 +738,36 @@ class LingMap(object):
         self.use_heatmap = True
         self.heatmap = tuple(heatmap)
 
+    def add_minicharts(self, *minicharts, typ='pie', size=0.8, names=[], labels=False):
+        self.minichart_names = names
+        self.minicharts_data = minicharts
+        if typ == 'pie':
+            fig = plt.figure(figsize=(size, size))
+            fig.patch.set_alpha(0)
+            ax = fig.add_subplot(111)
+            
+            for minichart in list(zip(*minicharts)):
+                sizes = minichart
+                colors = self.colors[:len(minichart)]
+
+                if labels:
+                    #I'm not allowed to simply pass sizes! I have to take percentages and then turn them back to sizes. Matplotlib sucks :(
+                    ax.pie(sizes, colors=colors, startangle=140, autopct=lambda p: '{}'.format(int(p * sum(sizes)//100)))
+                else:
+                    ax.pie(sizes, colors=colors, startangle=140)
+
+                buff = io.StringIO()
+                plt.savefig(buff, format='SVG')
+                buff.seek(0)
+                plt.cla()
+
+                svg = buff.read()
+                size = (float(re.findall('height="(.*?)pt"', svg)[0]), float(re.findall('width="(.*?)pt"', svg)[0]))
+                center = ((size[0] / 2)*1.31, (size[1] / 2)*1.31)
+
+                self.minicharts.append(folium.DivIcon(html=svg.replace('\n', ''), icon_anchor=center))
+
+
     def _sanity_check(self, features, feature_name='corresponding lists'):
         """Checks if length of features, popups and tooltips is equal to the length of languages
 
@@ -732,7 +778,7 @@ class LingMap(object):
         if len(self.languages) != len(features):
             raise LingMapError("Length of languages and {} does not match".format(feature_name))
     
-    def _create_map(self):
+    def create_map(self):
         """Draw the map
 
         Gets all necessary attributes and draws everything on the map.
@@ -770,6 +816,33 @@ class LingMap(object):
             if self.heatmap:
                 self._create_heatmap(m, self.heatmap)
             #If we don't draw markers, we're done here
+            return m
+
+        if self.minicharts:
+            #we'll draw minicharts separately
+            for i, language in enumerate(self.languages):
+                if self.custom_coordinates:
+                    coordinates = self.custom_coordinates[i]
+                else:
+                    coordinates = lingtypology.glottolog.get_coordinates(language)
+                    if not coordinates or math.isnan(coordinates[0]) or math.isnan(coordinates[1]):
+                        continue
+                marker = folium.Marker(coordinates, self.minicharts[i])
+
+                if self.languages_in_popups or self.minichart_names:
+                    popup_contents = ''
+                    if self.languages_in_popups:
+                        popup_href = '''<a href="https://glottolog.org/resource/languoid/id/{}" onclick="this.target='_blank';">{}</a>'''
+                        popup_contents += popup_href.format(lingtypology.glottolog.get_glot_id(language), language)
+                    popup = folium.Popup(popup_contents)
+                    popup.add_to(marker)
+                marker.add_to(m)
+                
+            if self.minichart_names:
+                legend_data = ''
+                for i, name in enumerate(self.minichart_names):
+                    legend_data += '<li><span style="background: {};opacity:0.7;"></span>{}</li>\n'.format(self.colors[i], self.minichart_names[i])
+                self._create_legend(m, legend_data, title=self.legend_title, position=self.legend_position)
             return m
 
         if self.features:
@@ -867,11 +940,11 @@ class LingMap(object):
         path: str
             Path to the output HTML file.
         """
-        self._create_map().save(path)
+        self.create_map().save(path)
 
     def render(self):
         """Renders the map returns it as HTML string"""
-        return self._create_map().get_root().render()
+        return self.create_map().get_root().render()
 
 def map_feature(
     languages,
@@ -944,6 +1017,3 @@ def map_feature(
         m.save(save_html)
     else:
         return m.render()
-    
-    
-

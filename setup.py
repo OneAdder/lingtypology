@@ -18,6 +18,8 @@ setup(
           'jinja2',
           'pandas',
           'pyglottolog',
+          'colour',
+          'matplotlib',
     ],
     extras_require={
         'test': [
