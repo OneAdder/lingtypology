@@ -740,6 +740,14 @@ class LingMap(object):
         self.heatmap = tuple(heatmap)
 
     def add_minicharts(self, *minicharts, typ='pie', size=0.6, names=[], labels=False, startangle=90, colors=[], bar_width=1):
+        """Create minicharts using maplotlib
+        
+        How it works:
+        * Draw plots using matplotlib.
+        * Save it as SVG but catch the stream.
+        * Create markers with SVG DivIcon.
+        * Create popups with data from the plots.
+        """
         self.minichart_names = names
         self.minicharts_data = minicharts
         self.popups = []
@@ -801,6 +809,51 @@ class LingMap(object):
         """Draw the map
 
         Gets all necessary attributes and draws everything on the map.
+        
+        How it works:
+        * Set up start location and zoom if start_location is passed as shortcut.
+        * Create folium.Map object using [self.start_location, zoom_start=self.start_zoom,
+            control_scale=self.control_scale, prefer_canvas=self.prefer_canvas]
+        * Create default_group (folium.FeatureGroup)
+        * Declare lists: markers, strokes, s_markers, s_strokes
+        * Check whether minimap, rectangles, lines and title are here and draw them.
+        * If the user sets self.heatmap_only to True, draw it and return the map.
+            {{first ending}}
+        * If user passes minicharts:
+            * Walk in self.languages:
+                * Apply custom coordinates or the ones from Glottolog.
+                * Set folium.Marker with plot SVG as folium.DivIcon
+                * Create popups with links to Glottolog (if necessary) and
+                    data from plots.
+                * Draw the logend using names from plots and colors.
+                * Return the map.
+                {{ second ending }}
+        * If features are given, prepare them (_prepare_features). This includes:
+            * Creating folium.FeatureGroup.
+            * Creating data for legend.
+            * Storing info on features as list of tuples (len = 2)
+                * The first element: color (HEX) of shape (Unicode)
+                * The second element: folium.FeatureGroup
+        * If stroke features are given, prepare them as well.
+        * Walk in languages:
+            * Apply custom coordinates or the ones from Glottolog.
+            * Create unified marker using:
+                coordinates, color/shape for features and color for stroke features.
+                Unified marker is a dict that consists of information necessary
+                to draw 1-4 markers (more look in docstring for _create_unified_marker.
+            * Create popup for the marker (_create_popups method).
+            * Create tooltips.
+            * Append the unified_marker to the the folium.FeatureGroup.
+        * If features are numeric:
+            * Add them to the default FeatureGroup.
+            * Draw the legend (_create_legend).
+        * If not:
+            * Add them to proper FeatureGroups.
+            * If LayerControl if asked for, draw it.
+            * Draw the legend (_create_legend).
+        * If heatmap is asked for, draw it (_create_heatmap).
+        * Return the map.
+        {{true ending}}
 
         Returns
         ----------
