@@ -929,6 +929,9 @@ class LingMap(object):
                         marker.add_child(folium.Popup(popup_contents + self.popups[i]))
                     else:
                         marker.add_child(folium.Popup(popup_contents))
+                if self.tooltips:
+                    tooltip = folium.Tooltip(self.tooltips[i])
+                    tooltip.add_to(marker)
                 m.add_child(marker)
                 
             if self.minichart_names:
