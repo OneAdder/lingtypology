@@ -234,6 +234,7 @@ class LingMap(object):
         }
         self.minicharts = []
         self.minichart_names = []
+        self.marker_groups = []
 
     def _create_popups(self, marker, language, i, parse_html=False):
         """Creates popups.
@@ -813,6 +814,12 @@ class LingMap(object):
             self.popups.append(popup)
         plt.clf()
         plt.close()
+    
+    def add_overlapping_features(self, marker_groups, radius=7, radius_increment=4, mapping=None):
+        self.marker_groups = marker_groups
+        self.radius = radius
+        self.radius_increment = radius_increment
+        self.custom_mapping = mapping
 
     def _sanity_check(self, features, feature_name='corresponding lists'):
         """Checks if length of features, popups and tooltips is equal to the length of languages
@@ -940,6 +947,52 @@ class LingMap(object):
                     legend_data += '<li><span style="background: {};opacity:0.7;"></span>{}</li>\n'.format(self.colors[i], self.minichart_names[i])
                 self._create_legend(m, legend_data, title=self.legend_title, position=self.legend_position)
             return m
+        
+        if self.marker_groups:
+            #Separately too
+            if self.custom_mapping:
+                color_mapping = self.custom_mapping
+            else:
+                color_mapping = {}
+                i = 0
+                for mark in self.marker_groups:
+                    for feat in mark:
+                        if not feat in color_mapping:
+                            color_mapping[feat] = self.colors[i]
+                            i += 1
+            for i, language in enumerate(self.languages):
+                if self.custom_coordinates:
+                    coordinates = self.custom_coordinates[i]
+                else:
+                    coordinates = lingtypology.glottolog.get_coordinates(language)
+                    if not coordinates or math.isnan(coordinates[0]) or math.isnan(coordinates[1]):
+                        continue
+                
+                if len(self.marker_groups[i]) == 1:
+                    radius = self.radius
+                else:
+                    radius = len(self.marker_groups[i]) * self.radius_increment
+                for marker_data in self.marker_groups[i]:
+                    marker = folium.CircleMarker(
+                        location=coordinates,
+                        radius=radius,
+                        fill=True,
+                        fill_opacity=1,
+                        color=color_mapping[marker_data],
+                    )
+                    radius -= self.radius_increment
+                    if self.tooltips:
+                        tooltip = folium.Tooltip(self.tooltips[i])
+                        tooltip.add_to(marker)
+                    self._create_popups(marker, language, i, parse_html=self.html_popups)
+                    markers.append(marker)
+            deque(map(m.add_child, markers))
+            legend_data = ''
+            for feature in color_mapping:
+                legend_data += '<li><span style="background: {};opacity:0.7;"></span>{}</li>\n'.format(color_mapping[feature], feature)
+            self._create_legend(m, legend_data, title=self.legend_title, position=self.legend_position)
+            return m
+                
 
         if self.features:
             prepared = self._prepare_features(self.features, use_shapes=self.use_shapes)
