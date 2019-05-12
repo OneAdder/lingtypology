@@ -71,6 +71,8 @@ class LingMap(object):
     
     Map
     ---
+    base_map: folium.Map, default None
+        In case you want to draw something on particular folium.Map.
     start_location: (float, float), default (0, 0)
         Coordinates of the map (latitude, longitude).
     start_zoom: int, default 2
@@ -196,6 +198,7 @@ class LingMap(object):
                   '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000']
         self.shapes = ['⬤', '◼', '▲', '◯', '◻', '△', '◉', '▣', '◐', '◧', '◭', '◍','▤', '▶']
         # Map
+        self.base_map = None
         self.start_location = (0, 0)
         self.start_zoom = 2
         self.control_scale = True
@@ -905,7 +908,10 @@ class LingMap(object):
             mapped_location_and_zoom = self.start_location_mapping[self.start_location]
             self.start_location = mapped_location_and_zoom['start_location']
             self.start_zoom = mapped_location_and_zoom['start_zoom']
-        m = folium.Map(location=self.start_location, zoom_start=self.start_zoom, control_scale=self.control_scale, prefer_canvas=self.prefer_canvas)
+        if self.base_map:
+            m = self.base_map
+        else:
+            m = folium.Map(location=self.start_location, zoom_start=self.start_zoom, control_scale=self.control_scale, prefer_canvas=self.prefer_canvas)
 
         default_group = folium.FeatureGroup()
         markers = []
