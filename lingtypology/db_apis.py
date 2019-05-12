@@ -104,6 +104,13 @@ class Wals(object):
         _citation = 'Citation for feature {}:\n{}\n'
         citation = _citation.format(feature, '\n'.join(wals_page.content.decode('utf-8').split('\n')[:5]))
         return citation
+    
+    @property
+    def citation(self):
+        cit = ''
+        for feature in self.features:
+            cit += self._get_citation(feature.upper()) + '\n'
+        return cit
 
     def get_df(self):
         """Get data from Wals in pandas.DataFrame format.
@@ -183,7 +190,7 @@ class Autotyp(object):
         github_page = requests.get('https://github.com/autotyp/autotyp-data/tree/master/data').content.decode('utf-8')
         return re.findall('title="(.*?)\.csv"', github_page)
 
-    def get_df(self):
+    def get_df(self, strip_na=[]):
         """Get data from Autotyp in pandas.DataFrame format.
 
         Returns pandas.DataFrame
@@ -217,16 +224,18 @@ class Autotyp(object):
                 merged_df = languages_df.join(df)
             else:
                 merged_df = pandas.merge(merged_df, df, on='LID')
-        merged_df.fillna('', inplace=True)
+        merged_df.fillna('~N/A~', inplace=True)
+        for column in strip_na:
+            merged_df = merged_df[merged_df[column] != '~N/A~']
         return merged_df
 
-    def get_json(self):
+    def get_json(self, strip_na=[]):
         """Get data from Autotyp in JSON format.
 
         Returns dict
             Keys: 'Language', 'LID', [[features columns]]
         """
-        df = self.get_df()
+        df = self.get_df(strip_na=strip_na)
         js = {header:list(df[header]) for header in list(df)}
         return js
 
@@ -240,7 +249,7 @@ class AfBo(object):
             List of features that the user wants to access.
         show_citation: bool, default True
             Whether to display citation for Autoyp or not.
-        citaion:
+        citation:
             Citation for AfBo.
         features_list: list
             List of available tables from AfBo.
@@ -406,7 +415,7 @@ class Phoible(object):
 
         show_citation: bool, default True
             Whether to display citation for Autoyp or not.
-        citaion:
+        citation:
             Citation for Phoible.
         subset: str, default 'all'
             Subset of Phoible (all, only UPSID, only SPA etc.)
@@ -425,7 +434,7 @@ class Phoible(object):
         #if include_everything:
         #    self.raw_data = pandas.read_csv('https://raw.githubusercontent.com/phoible/dev/master/data/phoible.csv', sep=',', header=0, low_memory=False)
 
-    def get_df(self):
+    def get_df(self, strip_na=[]):
         """Get data from Phoible in pandas.DataFrame format.
 
         Returns pandas.DataFrame
@@ -454,20 +463,23 @@ class Phoible(object):
             'inventory_page': 'https://phoible.org/languages/' + pre_df.id
         })
         df.fillna('~N/A~', inplace=True)
+        for column in strip_na:
+            df = df[df[column] != '~N/A~']
         return df
 
-    def get_json(self):
+    def get_json(self, strip_na=[]):
         """Get data from Phoible in JSON format.
 
         Returns dict
             Keys: 'contribution_name', 'language', 'coordinates', 'glottocode', 'macroarea', 'consonants', 'vowels', 'source', 'inventory_page'
         """
-        df = self.get_df()
+        df = self.get_df(strip_na=strip_na)
         js = {header:list(df[header]) for header in list(df)}
         return js
     
 #print(Wals('1a', '2a').get_df())
 #print(Wals('1a', '2a').general_citation)
+#print(Wals('1a', '2a').citation)
 #print(Wals().features_list)
 #print(list(Autotyp('Gender', 'Agreement').get_df()))
 #print(Autotyp().features_list)
@@ -477,4 +489,4 @@ class Phoible(object):
 #print(Sails('ICU10', 'ICU11').get_df())
 #print(Sails().features_descriptions)
 #print(Sails().feature_descriptions('ICU10', 'ICU11'))
-#print(Phoible(subset='upsid').get_df())
+#print(Phoible().get_df(strip_na=['tones']))
