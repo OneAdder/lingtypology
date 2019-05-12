@@ -28,10 +28,27 @@ class LingMapError(Exception):
     def __str__(self):
         return self.msg
 
-def gradient(iterations, color1='white', color2='black'):
+def gradient(iterations, color1='white', color2='green'):
+    """Makes a color gradient
+    
+    Parameters:
+    -----------
+    iterations: int
+        Length of gradient.
+    color1: str, default 'white'
+        First color.
+    color2: str, default 'green'
+        Second color.
+    """
     color1 = Color(color1)
     colors = [color.get_hex() for color in color1.range_to(Color(color2), iterations)]
     return colors
+
+def frange(start, stop, step):
+    """range for floats"""
+    while start < stop:
+        yield start
+        start += step
 
 class LingMap(object):
     """Lingtypology map object
@@ -146,7 +163,7 @@ class LingMap(object):
     ---
     heatmap_only: bool, default False
         If set to true no markers will be rendered.
-    colormap_colors: tuple, default ('#ffffff','#4a008f')
+    colormap_colors: tuple, default ('white','green')
         Default colors for the colormap.
     minicharts: list, defaule []
         List of folium.DivIcon for minicharts
@@ -206,7 +223,7 @@ class LingMap(object):
         self.stroke_control = False
         self.control_position = 'topright'
         # Colormap
-        self.colormap_colors = ('white','green')
+        self.colormap_colors = ('white', 'green')
         # Heat map
         self.use_heatmap = False
         self.heatmap = []
@@ -454,38 +471,35 @@ class LingMap(object):
             colors = self.stroke_colors
         features = self._sort_all(features)
         if self.numeric and not stroke:
+            if not all(isinstance(f, int) or isinstance(f, float) for f in features):
+                try:
+                    features = [int(el) for el in features]
+                except ValueError:
+                    features = [float(el) for el in features]
+                    if all(el.is_integer() for el in features):
+                        features = [int(el) for el in features]
+            else:
+                if isinstance(features[0], float):
+                    if all(el.is_integer() for el in features):
+                        features = [int(el) for el in features]
+
             colormap = branca.colormap.LinearColormap(colors=self.colormap_colors,
                                                       index=[features[0], features[-1]],
                                                       vmin=features[0],
                                                       vmax=features[-1],
                                                       caption=self.legend_title)
-            
-            colormap_features = list(range(features[0], features[-1], features[-1] // 10))
-            funny_round = lambda x, base: base * round(x/base)
-            if features[-1] >= 5:
-                base = 0.5
+            if isinstance(features[-1], int):
+                if features[-1] // 10 == 0:
+                    colormap_features = list(range(features[0], features[-1])) + [features[-1]]
+                else:
+                    colormap_features = list(range(features[0], features[-1], features[-1] // 10))
             else:
-                base = 0.01
-            if features[-1] >= 10:
-                base = 1
-            if features[-1] >= 50:
-                base = 5
-            if features[-1] >= 100:
-                base = 10
-            if features[-1] >= 1000:
-                base = 100
-            colormap_features = [funny_round(n, base) for n in colormap_features]
+                colormap_features = list(frange(features[0], features[-1], features[-1] / 10))
+            
             groups_features = [(0, colormap(feature)) for feature in features]
             data = ''
             for cf in colormap_features:
                 data += '<li><span style="background: {};opacity:0.7;"></span>{}</li>'.format(colormap(cf), cf)
-            '''
-            template = jinja2.Template(template)
-            data = template.render(color0=self.colormap_colors[0],
-                                   color1=self.colormap_colors[1],
-                                   feature0=features[0],
-                                   feature1=features[-1])
-            '''
         else:
             mapping = {}
             clear_features = []
@@ -972,14 +986,10 @@ class LingMap(object):
                     radius = self.radius
                 else:
                     radius = len(self.marker_groups[i]) * self.radius_increment
+                
+                opacity = self.opacity
                 for marker_data in self.marker_groups[i]:
-                    marker = folium.CircleMarker(
-                        location=coordinates,
-                        radius=radius,
-                        fill=True,
-                        fill_opacity=1,
-                        color=color_mapping[marker_data],
-                    )
+                    marker = self._set_marker(coordinates, stroke=self.stroked, radius=radius, fill_opacity=self.opacity, fill_color=color_mapping[marker_data])
                     radius -= self.radius_increment
                     if self.tooltips:
                         tooltip = folium.Tooltip(self.tooltips[i])
