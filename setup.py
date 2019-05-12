@@ -1,8 +1,9 @@
 from setuptools import setup
+from lingtypology import __version__
 
 setup(
     name='lingtypology',
-    version='0.5',
+    version=__version__,
     description='A linguistic tool for interactive mapping.',
     url='https://github.com/OneAdder/lingtypology',
     author='Michael Voronov',
