@@ -1032,12 +1032,12 @@ class LingMap(object):
             if self.features:
                 color_shape = groups_features[i][1]
             else:
-                color_shape = '#DEB887'
+                color_shape = self.colors[0]
 
             if self.stroke_features:
                 s_color = s_groups_features[i][1]
             else:
-                s_color = '#000000'
+                s_color = self.stroke_colors[0]
                 
             unified_marker = self._create_unified_marker(coordinates, color_shape, s_color)
             
