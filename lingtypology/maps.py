@@ -755,7 +755,12 @@ class LingMap(object):
         smooth_factor: float, default 1.0
         """
         locations = tuple(locations)
-        self.lines.append({'locations': locations, 'tooltip': tooltip, 'popup': popup, 'color': color, 'smooth_factor': smooth_factor})
+        line = {'locations': locations, 'color': color, 'smooth_factor': smooth_factor}
+        if tooltip:
+            line['tooltip'] = tooltip
+        if popup:
+            line['popup'] = popup
+        self.lines.append(line)
 
     def add_heatmap(self, heatmap=[]):
         """Add heatmap
@@ -807,8 +812,10 @@ class LingMap(object):
                     #I'm not allowed to simply pass sizes! I have to take percentages and then turn them back to sizes. Matplotlib sucks :(
                     ax.pie(
                         sizes, colors=colors, startangle=startangle,
-                        autopct=lambda p: '{}'.format(int(p * sum(sizes)//100)),
-                        textprops=textprops
+                        #autopct=lambda p: '{}'.format(int(p * sum(sizes)//100)),
+                        textprops=textprops,
+                        labels=sizes,
+                        labeldistance=0.2
                     )
                 else:
                     ax.pie(sizes, colors=colors, startangle=startangle)
