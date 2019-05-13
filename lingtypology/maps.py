@@ -71,6 +71,16 @@ class LingMap(object):
     
     Map
     ---
+    tiles: str, default 'OpenStreetMap'
+        Tiles for the map. You can use one of these tiles:
+            “OpenStreetMap”
+            “Mapbox Bright” (Limited levels of zoom for free tiles)
+            “Mapbox Control Room” (Limited levels of zoom for free tiles)
+            “Stamen” (Terrain, Toner, and Watercolor)
+            “Cloudmade” (Must pass API key)
+            “Mapbox” (Must pass API key)
+            “CartoDB” (positron and dark_matter)
+        or pass the custum URL.
     base_map: folium.Map, default None
         In case you want to draw something on particular folium.Map.
     start_location: (float, float), default (0, 0)
@@ -198,6 +208,7 @@ class LingMap(object):
                   '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000']
         self.shapes = ['⬤', '◼', '▲', '◯', '◻', '△', '◉', '▣', '◐', '◧', '◭', '◍','▤', '▶']
         # Map
+        self.tiles = 'OpenStreetMap'
         self.base_map = None
         self.start_location = (0, 0)
         self.start_zoom = 2
@@ -868,7 +879,7 @@ class LingMap(object):
         * Declare lists: markers, strokes, s_markers, s_strokes
         * Check whether minimap, rectangles, lines and title are here and draw them.
         * If the user sets self.heatmap_only to True, draw it and return the map.
-            {{first ending}}
+            {{ first ending }}
         * If user passes minicharts:
             * Walk in self.languages:
                 * Apply custom coordinates or the ones from Glottolog.
@@ -877,7 +888,14 @@ class LingMap(object):
                     data from plots.
                 * Draw the logend using names from plots and colors.
                 * Return the map.
-                {{ second ending }}
+            {{ second ending }}
+        * If user passes overlapping_features (LingMap().marker_groups):
+            * If color_mapping is not given, make it.
+            * Walk in languages:
+                * Get coordinates if not given.
+                * Set markers, popups and tooltips.
+            * Create legend.
+            {{ third ending }}
         * If features are given, prepare them (_prepare_features). This includes:
             * Creating folium.FeatureGroup.
             * Creating data for legend.
@@ -918,7 +936,8 @@ class LingMap(object):
         if self.base_map:
             m = self.base_map
         else:
-            m = folium.Map(location=self.start_location, zoom_start=self.start_zoom, control_scale=self.control_scale, prefer_canvas=self.prefer_canvas)
+            m = folium.Map(location=self.start_location, zoom_start=self.start_zoom, control_scale=self.control_scale,
+                           prefer_canvas=self.prefer_canvas, tiles=self.tiles)
 
         default_group = folium.FeatureGroup()
         markers = []
