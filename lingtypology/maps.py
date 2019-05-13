@@ -1136,6 +1136,19 @@ class LingMap(object):
     def render(self):
         """Renders the map returns it as HTML string"""
         return self.create_map().get_root().render()
+    
+    def save_static(self, fname=None):
+        """Save as PNG
+        
+        If fname is not given, returns the image as bytes.
+        """
+        mappa = self.create_map()
+        png = mappa._to_png()
+        if fname:
+            with open(fname, 'wb') as f:
+                f.write(png)
+        else:
+            return png
 
 def map_feature(
     languages,
