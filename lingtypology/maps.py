@@ -201,6 +201,7 @@ class LingMap(object):
         else:
             self.heatmap_only = True
         self.glottocode = glottocode
+        self.warnings_enabled = False
         # Feature representation
         self.stroke_colors = ['#ffffff', '#000000', '#800000', '#BC8F8F', '#FFE4C4', '#6495ED', '#4682B4',
                          '#FF6347', '#778899', '#40E0D0', '#00FFFF', '#F08080', '#6495ED', '#FF7F50',
@@ -311,6 +312,9 @@ class LingMap(object):
             Whether to use Folium.IFrame to add content to the popup
         """
         popup_href = '''<a href="https://glottolog.org/resource/languoid/id/{}" onclick="this.target='_blank';">{}</a><br>'''
+        href_link = lingtypology.glottolog.get_glot_id(language) if not self.glottocode else language
+        href_content = language if not self.glottocode else lingtypology.glottolog.get_by_glot_id(language)
+        popup_href = popup_href.format(href_link, href_content)
         if self.languages_in_popups:
             if self.popups:
                 if parse_html:
@@ -318,9 +322,9 @@ class LingMap(object):
                                        It is impossible to add both language links and large HTML strings.
                                        You can either not use html_popups option or set ling_map_object.languages_in_popups = False.
                                        ''')
-                popup = folium.Popup(popup_href.format(lingtypology.glottolog.get_glot_id(language), language) + self.popups[i])
+                popup = folium.Popup(popup_href + self.popups[i])
             else:
-                popup = folium.Popup(popup_href.format(lingtypology.glottolog.get_glot_id(language), language))
+                popup = folium.Popup(popup_href)
             popup.add_to(marker)
         else:
             if self.popups:
@@ -372,38 +376,37 @@ class LingMap(object):
         title: str
             Title.
         """
-        template = '''
-                    <div
-                        style='position: absolute;
-                        z-index:9999;
-                        border:2px solid grey;
-                        background-color:rgba(255, 255, 255, 0.8);
-                        border-radius:6px;
-                        padding: 10px;
-                        font-size:20px;
-                        top: 20px;
-                        left: 50%;'
-                    >
-                    {{ title }}
-                    </div>
-                   '''
-        template = jinja2.Template(template)
-        template = template.render(title=title)
-        template = '{% macro html(this, kwargs) %}' + template + '{% endmacro %}'
+        legend_title =\
+            '{% macro html(this, kwargs) %}' \
+            '<div' \
+                'style=' \
+                '"position: absolute;' \
+                'z-index:9999;' \
+                'border:2px solid grey;' \
+                'background-color:rgba(255, 255, 255, 0.8);' \
+                'border-radius:6px;' \
+                'padding: 10px;' \
+                'font-size:20px;' \
+                'top: 20px;' \
+                'left: 50%;"' \
+            '>' +\
+                title + \
+            '</div>' \
+            '{% endmacro %}'
         macro = branca.element.MacroElement()
-        macro._template = branca.element.Template(template)
+        macro._template = branca.element.Template(legend_title)
         m.get_root().add_child(macro)    
 
     def _set_marker(self,
                     location,
-                    radius=7,
-                    fill=True,
-                    stroke=False,
-                    weight=1,
-                    fill_opacity=1,
-                    color='#000000',
-                    fill_color='#DEB887',
-                    shape=''):
+                    radius = 7,
+                    fill = True,
+                    stroke = False,
+                    weight = 1,
+                    fill_opacity = 1,
+                    color = '#000000',
+                    fill_color = '#DEB887',
+                    shape = ''):
         """Sets marker
 
         Parameters
@@ -428,14 +431,15 @@ class LingMap(object):
             marker = folium.Marker(location=location, icon=div)
         else:
             marker = folium.CircleMarker(
-                location=location,
-                radius=radius,
-                fill=fill,
-                stroke=stroke,
-                weight=weight,
-                fill_opacity=fill_opacity,
-                color=color,
-                fill_color=fill_color)
+                location = location,
+                radius = radius,
+                fill = fill,
+                stroke = stroke,
+                weight = weight,
+                fill_opacity = fill_opacity,
+                color = color,
+                fill_color = fill_color
+            )
         return marker
 
     
@@ -464,7 +468,7 @@ class LingMap(object):
             al = list(zip(features, *attrs_r))
             al.sort(key=lambda element: element[0])
         except TypeError:
-            #In case of different types, fall back to sorting as srt
+            #In case of different types, fall back to sorting as str
             al = list(zip(map(str, features), *attrs_r))
             al.sort(key=lambda element: element[0])
         features = []
@@ -507,11 +511,13 @@ class LingMap(object):
         data: str
             HTML string of data for legend.
         """
-        colors = self.colors
         if use_shapes:
             colors = self.shapes
-        if stroke:
+        elif stroke:
             colors = self.stroke_colors
+        else:
+            colors = self.colors
+            
         features = self._sort_all(features)
         if self.numeric and not stroke:
             if not all(isinstance(f, int) or isinstance(f, float) for f in features):
@@ -526,11 +532,13 @@ class LingMap(object):
                     if all(el.is_integer() for el in features):
                         features = [int(el) for el in features]
 
-            colormap = branca.colormap.LinearColormap(colors=self.colormap_colors,
-                                                      index=[features[0], features[-1]],
-                                                      vmin=features[0],
-                                                      vmax=features[-1],
-                                                      caption=self.legend_title)
+            colormap = branca.colormap.LinearColormap(
+                colors = self.colormap_colors,
+                index = [features[0], features[-1]],
+                vmin = features[0],
+                vmax = features[-1],
+                caption = self.legend_title
+            )
             if isinstance(features[-1], int):
                 if features[-1] // 10 == 0:
                     colormap_features = list(range(features[0], features[-1])) + [features[-1]]
@@ -565,10 +573,8 @@ class LingMap(object):
             except Exception:
                 data_as_str.sort()
                 data = data_as_str
-            if use_shapes:
-                html = '<li><span style="color: #000000; text-align: center; opacity:0.7;">{}</span>{}</li>'
-            else:
-                html = '<li><span style="background: {};opacity:0.7;"></span>{}</li>'
+            html = '<li><span style="color: #000000; text-align: center; opacity:0.7;">{}</span>{}</li>' if use_shapes \
+                else '<li><span style="background: {};opacity:0.7;"></span>{}</li>'
             data = '\n'.join([html.format(d[1], d[0]) for d in data])
         return (groups_features, data)
 
@@ -633,22 +639,77 @@ class LingMap(object):
         s_stroke = ''
         if self.stroke_features:
             if self.unstroked:
-                marker = self._set_marker([coordinates[0], coordinates[1]], radius=self.radius, fill_opacity=self.opacity, fill_color=color_shape)
-                stroke = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=self.radius*1.15, fill_opacity=self.opacity, fill_color='#000000')
-                s_marker = self._set_marker([coordinates[0], coordinates[1]], radius=self.stroke_radius, fill_opacity=self.stroke_opacity, fill_color=s_color)
-                s_stroke = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=self.stroke_radius*1.15, fill_opacity=self.stroke_opacity, fill_color='#000000')
+                marker = self._set_marker(
+                    [coordinates[0], coordinates[1]],
+                    radius = self.radius,
+                    fill_opacity = self.opacity,
+                    fill_color = color_shape
+                )
+                stroke = self._set_marker(
+                    [coordinates[0], coordinates[1]],
+                    stroke = True,
+                    radius = self.radius * 1.15,
+                    fill_opacity = self.opacity,
+                    fill_color = '#000000'
+                )
+                s_marker = self._set_marker(
+                    [coordinates[0], coordinates[1]],
+                    radius = self.stroke_radius,
+                    fill_opacity = self.stroke_opacity,
+                    fill_color = s_color
+                )
+                s_stroke = self._set_marker(
+                    [coordinates[0], coordinates[1]],
+                    stroke = True,
+                    radius = self.stroke_radius * 1.15,
+                    fill_opacity = self.stroke_opacity,
+                    fill_color = '#000000'
+                )
             else:
-                marker = self._set_marker([coordinates[0], coordinates[1]], stroke=self.stroked, fill_opacity=self.opacity, fill_color=color_shape)
-                s_marker = self._set_marker([coordinates[0], coordinates[1]], stroke=self.stroked, radius=self.stroke_radius, fill_opacity=self.stroke_opacity, fill_color=s_color)
+                marker = self._set_marker(
+                    [coordinates[0], coordinates[1]],
+                    stroke = self.stroked,
+                    fill_opacity = self.opacity,
+                    fill_color = color_shape
+                )
+                s_marker = self._set_marker(
+                    [coordinates[0], coordinates[1]],
+                    stroke = self.stroked,
+                    radius = self.stroke_radius,
+                    fill_opacity = self.stroke_opacity,
+                    fill_color = s_color
+                )
         else:
             if self.use_shapes:
-                marker = self._set_marker([coordinates[0], coordinates[1]], fill_color='#000000', fill_opacity=self.opacity, shape=color_shape)
+                marker = self._set_marker(
+                    [coordinates[0], coordinates[1]],
+                    fill_color = '#000000',
+                    fill_opacity = self.opacity,
+                    shape = color_shape
+                )
             else:
                 if self.unstroked:
-                    marker = self._set_marker([coordinates[0], coordinates[1]], radius=self.radius, fill_opacity=self.opacity, fill_color=color_shape)
-                    stroke = self._set_marker([coordinates[0], coordinates[1]], stroke=True, radius=self.radius*1.15, fill_opacity=self.opacity, fill_color='#000000')
+                    marker = self._set_marker(
+                        [coordinates[0], coordinates[1]],
+                        radius = self.radius,
+                        fill_opacity = self.opacity,
+                        fill_color = color_shape
+                    )
+                    stroke = self._set_marker(
+                        [coordinates[0], coordinates[1]],
+                        stroke = True,
+                        radius = self.radius * 1.15,
+                        fill_opacity = self.opacity,
+                        fill_color = '#000000'
+                    )
                 else:
-                    marker = self._set_marker([coordinates[0], coordinates[1]], stroke=self.stroked, radius=self.radius, fill_opacity=self.opacity, fill_color=color_shape)
+                    marker = self._set_marker(
+                        [coordinates[0], coordinates[1]],
+                        stroke = self.stroked,
+                        radius = self.radius,
+                        fill_opacity = self.opacity,
+                        fill_color = color_shape
+                    )
         return {'marker': marker, 'stroke': stroke, 's_marker': s_marker, 's_stroke': s_stroke}
 
     def add_features(self, features, radius=7, opacity=1, numeric=False, control=False, use_shapes=False):
@@ -680,14 +741,10 @@ class LingMap(object):
         self.features = features
         self.radius = radius
         self.opacity = opacity
-        if numeric:
-            self.numeric = True
-        else:
-            self.numeric = False
-        if control:
-            self.control = True
-        if use_shapes:
-            self.use_shapes = True
+        
+        self.numeric = numeric
+        self.control = control
+        self.use_shapes = use_shapes
 
     def add_stroke_features(self, features, radius=12, opacity=1, numeric=False, control=False):
         """Add stroke features
@@ -708,14 +765,12 @@ class LingMap(object):
         features = tuple(features)
         self._sanity_check(features, feature_name='stroke features')
         self.stroke_features = features
-        self.stroke_opacity = opacity
-        if numeric:
-            self.s_numeric = True
-        else:
-            self.s_numeric = False
-        if control:
-            self.stroke_control = True
         self.stroke_radius = radius
+        self.stroke_opacity = opacity
+        
+        self.s_numeric = numeric
+        self.stroke_control = control
+        
 
     def add_popups(self, popups, parse_html=False):
         """Add popups to markers
@@ -729,8 +784,7 @@ class LingMap(object):
         popups = tuple(popups)
         self._sanity_check(popups, feature_name='popups')
         self.popups = popups
-        if parse_html:
-            self.html_popups=True
+        self.html_popups = parse_html
 
     def add_tooltips(self, tooltips):
         """Add tooltips to markers
@@ -755,7 +809,8 @@ class LingMap(object):
         self._sanity_check(custom_coordinates, feature_name='custom_coordinates')
         self.custom_coordinates = custom_coordinates
 
-    def add_minimap(self, position='bottomleft', width=150, height=150, collapsed_width=25, collapsed_height=25, zoom_animation=True):
+    def add_minimap(self, position='bottomleft', width=150, height=150,
+                    collapsed_width=25, collapsed_height=25, zoom_animation=True):
         """Add minimap
 
         position: str, default 'bottomleft'
@@ -766,7 +821,13 @@ class LingMap(object):
         zoom_animation: bool, default True
             You can disable zoom animation for better performance.
         """
-        self.minimap = {'position': position, 'width': width, 'height': height, 'collapsed_width': collapsed_width, 'collapsed_height': collapsed_height, 'zoom_animation': zoom_animation}
+        self.minimap = {
+            'position': position, 'width': width,
+            'height': height,
+            'collapsed_width': collapsed_width,
+            'collapsed_height': collapsed_height,
+            'zoom_animation': zoom_animation
+        }
 
     def add_rectangle(self, locations, tooltip='', popup='', color='black'):
         """Add one rectangle
@@ -780,7 +841,8 @@ class LingMap(object):
         color: str, default 'black'
         """
         locations = tuple(locations)
-        self.rectangles.append({'bounds': locations, 'tooltip': tooltip, 'popup': popup, 'color': color})
+        self.rectangles.append({'bounds': locations, 'tooltip': tooltip,
+                                'popup': popup, 'color': color})
 
     def add_line(self, locations, tooltip='', popup='', color='black', smooth_factor=1.0):
         """Add one line
@@ -967,17 +1029,24 @@ class LingMap(object):
             mapped_location_and_zoom = self.start_location_mapping[self.start_location]
             self.start_location = mapped_location_and_zoom['start_location']
             self.start_zoom = mapped_location_and_zoom['start_zoom']
+
         if self.base_map:
             m = self.base_map
         else:
-            m = folium.Map(location=self.start_location, zoom_start=self.start_zoom, control_scale=self.control_scale,
-                           prefer_canvas=self.prefer_canvas, tiles=self.tiles)
+            m = folium.Map(
+                location=self.start_location,
+                zoom_start=self.start_zoom,
+                control_scale=self.control_scale,
+                prefer_canvas=self.prefer_canvas,
+                tiles=self.tiles
+            )
 
         default_group = folium.FeatureGroup()
         markers = []
         strokes = []
         s_markers = []
         s_strokes = []
+        
         if self.minimap:
             minimap = folium.plugins.MiniMap(**self.minimap)
             m.add_child(minimap)
@@ -1037,6 +1106,7 @@ class LingMap(object):
                         if not feat in color_mapping:
                             color_mapping[feat] = self.colors[i]
                             i += 1
+
             for i, language in enumerate(self.languages):
                 coordinates = self._get_coordinates(language, i)
                 if not coordinates:
@@ -1056,13 +1126,13 @@ class LingMap(object):
                         tooltip.add_to(marker)
                     self._create_popups(marker, language, i, parse_html=self.html_popups)
                     markers.append(marker)
+
             deque(map(m.add_child, markers))
             legend_data = ''
             for feature in color_mapping:
                 legend_data += '<li><span style="background: {};opacity:0.7;"></span>{}</li>\n'.format(color_mapping[feature], feature)
             self._create_legend(m, legend_data, title=self.legend_title, position=self.legend_position)
             return m
-                
 
         if self.features:
             prepared = self._prepare_features(self.features, use_shapes=self.use_shapes)
@@ -1073,6 +1143,7 @@ class LingMap(object):
             prepared = self._prepare_features(self.stroke_features, stroke=True, use_shapes=self.use_shapes)
             s_groups_features = prepared[0]
             s_data = prepared[1]
+
         for i, language in enumerate(self.languages):
             stroke_marker = False
             coordinates = self._get_coordinates(language, i)
@@ -1081,15 +1152,13 @@ class LingMap(object):
             
             self.heatmap.append(coordinates)
             
-            if self.features:
-                color_shape = groups_features[i][1]
-            else:
-                color_shape = self.colors[0]
-
-            if self.stroke_features:
-                s_color = s_groups_features[i][1]
-            else:
-                s_color = self.stroke_colors[0]
+            color_shape = groups_features[i][1] \
+                if self.features \
+                else self.colors[0]
+            
+            s_color = s_groups_features[i][1] \
+                if self.stroke_features \
+                else self.stroke_colors[0]
                 
             unified_marker = self._create_unified_marker(coordinates, color_shape, s_color)
             
@@ -1116,12 +1185,12 @@ class LingMap(object):
 
         #This order is important
         if s_strokes:
-            [s_stroke[0].add_to(s_stroke[1]) for s_stroke in s_strokes]
+            deque((s_stroke[0].add_to(s_stroke[1]) for s_stroke in s_strokes))
         if s_markers:
-            [s_mark[0].add_to(s_mark[1]) for s_mark in s_markers]
+            deque((s_mark[0].add_to(s_mark[1]) for s_mark in s_markers))
         if strokes:
-            [stroke[0].add_to(stroke[1]) for stroke in strokes]
-        [mark[0].add_to(mark[1]) for mark in markers]
+            deque((stroke[0].add_to(stroke[1]) for stroke in strokes))
+        deque((mark[0].add_to(mark[1]) for mark in markers))
         
         if self.features:
             if self.numeric:
@@ -1129,10 +1198,10 @@ class LingMap(object):
                 self._create_legend(m, data, title=self.legend_title, position=self.legend_position)
             else:
                 if self.control:
-                    [m.add_child(fg[0]) for fg in groups_features]
+                    deque((m.add_child(fg[0]) for fg in groups_features))
                     folium.LayerControl(collapsed=False, position=self.control_position).add_to(m)
                 elif self.stroke_control:
-                    [m.add_child(fg[0]) for fg in s_groups_features]
+                    deque((m.add_child(fg[0]) for fg in s_groups_features))
                     folium.LayerControl(collapsed=False, position=self.control_position).add_to(m)
                 else:
                     m.add_child(default_group)
@@ -1147,8 +1216,8 @@ class LingMap(object):
         if self.use_heatmap:
             self._create_heatmap(m, self.heatmap)
 
-        #if lingtypology.glottolog.warnings:
-        #    print('(get_coordinates) Warning: coordinates for {} not found'.format(', '.join(lingtypology.glottolog.warnings)))
+        if lingtypology.glottolog.warnings and self.warnings_enabled:
+            print('(get_coordinates) Warning: coordinates for {} not found'.format(', '.join(lingtypology.glottolog.warnings)))
         return m
 
     def save(self, path):

@@ -30,10 +30,11 @@ class Wals(object):
         """
         self.features = features
         self.show_citation = True
-        self.general_citation = 'Dryer, Matthew S. & Haspelmath, Martin (eds.) 2013.\n' + \
-        'The World Atlas of Language Structures Online.\n' + \
-        'Leipzig: Max Planck Institute for Evolutionary Anthropology.\n' + \
-        '(Available online at http://wals.info, Accessed on {}.)'.format(datetime.now().strftime('%Y-%m-%d'))
+        self.general_citation = \
+            'Dryer, Matthew S. & Haspelmath, Martin (eds.) 2013.\n' \
+            'The World Atlas of Language Structures Online.\n' \
+            'Leipzig: Max Planck Institute for Evolutionary Anthropology.\n' \
+            '(Available online at http://wals.info, Accessed on {}.)'.format(datetime.now().strftime('%Y-%m-%d'))
         self.features_list = [
             '1A', '2A', '3A', '4A', '5A', '6A', '7A', '8A', '9A', '10A', '10B', '11A', '12A', '13A', '14A',
             '15A', '16A', '17A', '18A', '19A', '20A', '21A', '21B', '22A', '23A', '24A', '25A', '25B', '26A',
@@ -143,7 +144,7 @@ class Wals(object):
             Names of the pages start with '_'.
         """
         df = self.get_df()
-        js = {header:list(df[header]) for header in list(df)}
+        js = {header: list(df[header]) for header in list(df)}
         return js
 
 
@@ -174,13 +175,7 @@ class Autotyp(object):
     @property
     def mapping(self):
         """Get mapping from Autotyp LID to Glottocode"""
-        with open(
-            os.path.join(
-                module_directory,
-                'autotyp_lang_mapping.json'
-            ),
-            'r', encoding='utf-8'
-        ) as f:
+        with open(module_directory + os.path.sep + 'autotyp_lang_mapping.json', 'r', encoding='utf-8') as f:
             mapping = json.load(f)
         return mapping
     
@@ -236,7 +231,7 @@ class Autotyp(object):
             Keys: 'Language', 'LID', [[features columns]]
         """
         df = self.get_df(strip_na=strip_na)
-        js = {header:list(df[header]) for header in list(df)}
+        js = {header: list(df[header]) for header in list(df)}
         return js
 
 
@@ -305,7 +300,7 @@ class AfBo(object):
             Keys: 'Recipient_name', 'Donor_name', [[feature1]], [[feature2]], ...
         """
         df = self.get_df()
-        js = {header:list(df[header]) for header in list(df)}
+        js = {header: list(df[header]) for header in list(df)}
         return js
 
         
@@ -404,7 +399,7 @@ class Sails(object):
             Keys: 'Language', 'Coordinates', [[feature 1]], [[feature 1 human_readable]], [[feature 2]], ...
         """
         df = self.get_df()
-        js = {header:list(df[header]) for header in list(df)}
+        js = {header: list(df[header]) for header in list(df)}
         return js
 
 
@@ -481,7 +476,7 @@ class Phoible(object):
             Keys: 'contribution_name', 'language', 'coordinates', 'glottocode', 'macroarea', 'consonants', 'vowels', 'source', 'inventory_page'
         """
         df = self.get_df(strip_na=strip_na)
-        js = {header:list(df[header]) for header in list(df)}
+        js = {header: list(df[header]) for header in list(df)}
         return js
     
 #print(Wals('1a', '2a').get_df())
