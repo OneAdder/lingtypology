@@ -34,7 +34,7 @@
 {% elif position == 'bottomleft'%}
 <div id='maplegend{{ legend_id }}' class='maplegend' 
     style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
-     border-radius:6px; padding: 10px; font-size:14px; left: 20px; bottom: 20px;'>
+     border-radius:6px; padding: 10px; font-size:14px; left: 20px; bottom: 40px;'>
 {% elif position == 'topright'%}
 <div id='maplegend{{ legend_id }}' class='maplegend' 
     style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
@@ -42,15 +42,15 @@
 {% elif position == 'topleft'%}
 <div id='maplegend{{ legend_id }}' class='maplegend' 
     style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
-     border-radius:6px; padding: 10px; font-size:14px; left: 20px; top: 20px;'>
+     border-radius:6px; padding: 10px; font-size:14px; left: 50px; top: 20px;'>
 {% elif position == 'top'%}
 <div id='maplegend{{ legend_id }}' class='maplegend' 
     style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
-     border-radius:6px; padding: 10px; font-size:14px; top: 20px; left: 50%;'>
+     border-radius:6px; padding: 10px; font-size:14px; top: 20px; left: 40%;'>
 {% elif position == 'bottom'%}
 <div id='maplegend{{ legend_id }}' class='maplegend' 
     style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
-     border-radius:6px; padding: 10px; font-size:14px; bottom: 20px; left: 50%;'>
+     border-radius:6px; padding: 10px; font-size:14px; bottom: 20px; left: 40%;'>
 {% elif position == 'right'%}
 <div id='maplegend{{ legend_id }}' class='maplegend' 
     style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
@@ -60,8 +60,9 @@
     style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
      border-radius:6px; padding: 10px; font-size:14px; top: 50%; left: 20px;'>
 {% endif %}
-     
+
 <div class='legend-title'>{{ title }}</div>
+{% if not it_is_title %}
 <div class='legend-scale'>
   <ul class='legend-labels'>
 
@@ -70,7 +71,7 @@
   </ul>
 </div>
 </div>
- 
+{% endif %}
 </body>
 </html>
 

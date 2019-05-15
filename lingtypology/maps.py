@@ -44,6 +44,38 @@ def gradient(iterations, color1='white', color2='green'):
     colors = [color.get_hex() for color in color1.range_to(Color(color2), iterations)]
     return colors
 
+def merge(*maps, autoset_legends=True):
+    def generate_new():
+        new_legend_position = ''
+        for legend_position in legend_positions:
+            if not legend_position in occupied_legend_positions:
+                new_legend_position = legend_position
+                break
+        if new_legend_position:
+            return new_legend_position
+        else:
+            return 'topright'
+    legend_positions = ['topright', 'topleft', 'bottomright',
+                        'bottomleft', 'bottom', 'right', 'left']
+    occupied_legend_positions = set()
+    base_map = maps[0].create_map()
+    legend_id = maps[0]._legend_id
+    for i, m in enumerate(maps):
+        if not m == maps[0]:
+            legend_id += m._legend_id
+            m.base_map = maps[i - 1].create_map()
+            m.legend_id = legend_id
+        if autoset_legends:
+            if m.legend_position in occupied_legend_positions:
+                m.legend_position = generate_new()
+                occupied_legend_positions.add(m.legend_position)
+            if m.stroke_legend_position in occupied_legend_positions:
+                m.stroke_legend_position = generate_new()
+                occupied_legend_positions.add(m.stroke_legend_position)
+            occupied_legend_positions.add(m.legend_position)
+    return m
+        
+
 def frange(start, stop, step):
     """range for floats"""
     while start < stop:
@@ -368,7 +400,7 @@ class LingMap(object):
         """
         folium.plugins.HeatMap(heatmap).add_to(m)
 
-    def _create_title(self, m, title):
+    def _create_title(self, m, title, position='top'):
         """Creates title and adds it to the map
 
         m: folium.Map
@@ -376,26 +408,16 @@ class LingMap(object):
         title: str
             Title.
         """
-        legend_title =\
-            '{% macro html(this, kwargs) %}' \
-            '<div' \
-                'style=' \
-                '"position: absolute;' \
-                'z-index:9999;' \
-                'border:2px solid grey;' \
-                'background-color:rgba(255, 255, 255, 0.8);' \
-                'border-radius:6px;' \
-                'padding: 10px;' \
-                'font-size:20px;' \
-                'top: 20px;' \
-                'left: 50%;"' \
-            '>' +\
-                title + \
-            '</div>' \
-            '{% endmacro %}'
+        module_directory = os.path.dirname(os.path.realpath(__file__))
+        with open(os.path.join(module_directory, 'legend.html'), 'r', encoding='utf-8') as f:
+            template = f.read()
+        template = jinja2.Template(template)
+        template = template.render(position=position, title=title, legend_id=self._legend_id, it_is_title=True)
+        template = '{% macro html(this, kwargs) %}' + template + '{% endmacro %}'
         macro = branca.element.MacroElement()
-        macro._template = branca.element.Template(legend_title)
-        m.get_root().add_child(macro)    
+        macro._template = branca.element.Template(template)
+        m.get_root().add_child(macro)
+        self._legend_id += 1
 
     def _set_marker(self,
                     location,
