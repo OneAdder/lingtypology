@@ -182,11 +182,12 @@ class LingMap(object):
     ---
     """
     
-    def __init__(self, languages=[]):
+    def __init__(self, languages=[], glottocode=False):
         """__init__
 
         Sets self.languages turning it into a tuple.
         If no languages are given, sets self.heatmap_only to true.
+        If glottocode is True, languages will not be converted to glottocodes
         Then it sets everything else.
         """
         if isinstance(languages, str):
@@ -199,6 +200,7 @@ class LingMap(object):
             self.heatmap_only = False
         else:
             self.heatmap_only = True
+        self.glottocode = glottocode
         # Feature representation
         self.stroke_colors = ['#ffffff', '#000000', '#800000', '#BC8F8F', '#FFE4C4', '#6495ED', '#4682B4',
                          '#FF6347', '#778899', '#40E0D0', '#00FFFF', '#F08080', '#6495ED', '#FF7F50',
@@ -266,6 +268,33 @@ class LingMap(object):
         self.minicharts = []
         self.minichart_names = []
         self.marker_groups = []
+        
+    def _get_coordinates(self, language, i):
+        """Get coordinates either from:
+            self.custom_coordinates or
+            self.languages as language names or
+            self.languages as glottocode.
+        
+        Parameters:
+        -----------
+        language: str
+            Either language name or glottocode.
+        i: int
+            Iteration of the cicle.
+        
+        Returns: tuple of two ints (coordinates).
+        """
+        if self.custom_coordinates:
+            coordinates = self.custom_coordinates[i]
+        else:
+            if self.glottocode:
+                coordinates = lingtypology.glottolog.get_coordinates_by_glot_id(language)
+            else:
+                coordinates = lingtypology.glottolog.get_coordinates(language)
+        if not coordinates or math.isnan(coordinates[0]) or math.isnan(coordinates[1]):
+            return
+        else:
+            return coordinates
 
     def _create_popups(self, marker, language, i, parse_html=False):
         """Creates popups.
@@ -300,7 +329,7 @@ class LingMap(object):
                     popup = folium.Popup(iframe)
                 else:
                     popup = folium.Popup(self.popups[i])
-                popup.add_to(marker)
+                popup.add_to(marker)            
 
     def _create_legend(self, m, legend_data, title='Legend', position='bottomright'):
         """Creates legend and adds it to the map
@@ -851,6 +880,11 @@ class LingMap(object):
         plt.close()
     
     def add_overlapping_features(self, marker_groups, radius=7, radius_increment=4, mapping=None):
+        """Add overlapping features
+        
+        For example, if you want to draw on map whether language 'is ergative', 'is slavic', 'is spoken in Russia'.
+        It will draw several markers of different size for each location.
+        """
         self.marker_groups = marker_groups
         self.radius = radius
         self.radius_increment = radius_increment
@@ -965,12 +999,9 @@ class LingMap(object):
         if self.minicharts:
             #we'll draw minicharts separately
             for i, language in enumerate(self.languages):
-                if self.custom_coordinates:
-                    coordinates = self.custom_coordinates[i]
-                else:
-                    coordinates = lingtypology.glottolog.get_coordinates(language)
-                    if not coordinates or math.isnan(coordinates[0]) or math.isnan(coordinates[1]):
-                        continue
+                coordinates = self._get_coordinates(language, i)
+                if not coordinates:
+                    continue
                 marker = folium.Marker(coordinates, self.minicharts[i])
 
                 if self.languages_in_popups or self.minichart_names:
@@ -1007,12 +1038,9 @@ class LingMap(object):
                             color_mapping[feat] = self.colors[i]
                             i += 1
             for i, language in enumerate(self.languages):
-                if self.custom_coordinates:
-                    coordinates = self.custom_coordinates[i]
-                else:
-                    coordinates = lingtypology.glottolog.get_coordinates(language)
-                    if not coordinates or math.isnan(coordinates[0]) or math.isnan(coordinates[1]):
-                        continue
+                coordinates = self._get_coordinates(language, i)
+                if not coordinates:
+                    continue
                 
                 if len(self.marker_groups[i]) == 1:
                     radius = self.radius
@@ -1047,13 +1075,11 @@ class LingMap(object):
             s_data = prepared[1]
         for i, language in enumerate(self.languages):
             stroke_marker = False
-            if self.custom_coordinates:
-                coordinates = self.custom_coordinates[i]
-            else:
-                coordinates = lingtypology.glottolog.get_coordinates(language)
-                if not coordinates or math.isnan(coordinates[0]) or math.isnan(coordinates[1]):
-                    continue
-                self.heatmap.append(coordinates)
+            coordinates = self._get_coordinates(language, i)
+            if not coordinates:
+                continue
+            
+            self.heatmap.append(coordinates)
             
             if self.features:
                 color_shape = groups_features[i][1]
@@ -1138,7 +1164,7 @@ class LingMap(object):
         return self.create_map().get_root().render()
     
     def save_static(self, fname=None):
-        """Save as PNG
+        """Save as PNG (requires 'geckodriver')
         
         If fname is not given, returns the image as bytes.
         """
