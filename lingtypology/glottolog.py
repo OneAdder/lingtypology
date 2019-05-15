@@ -63,6 +63,19 @@ def get_coordinates(language):
     else:
         return (float(latitude), float(longitude))
 
+def get_coordinates_by_glot_id(glot_id):
+    """
+    >>> get_coordinates_by_glot_id('russ1263')
+    (59.0, 50.0)
+    """
+    latitude = glottolog[glottolog.ID == glot_id].Latitude
+    longitude = glottolog[glottolog.ID == glot_id].Longitude
+    try:
+        coordinates = (float(latitude), float(longitude))
+    except TypeError:
+        pass
+    else:
+        return coordinates
 
 def get_glot_id(language):
     """
