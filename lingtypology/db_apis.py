@@ -410,7 +410,7 @@ class Sails(object):
 
 class Phoible(object):
     """Phoible"""
-    def __init__(self, subset='all'):
+    def __init__(self, subset='all', aggregated=True):
         """init
 
         show_citation: bool, default True
@@ -429,10 +429,12 @@ class Phoible(object):
         self.subsets_list = ['all', 'UPSID', 'SPA', 'AA', 'PH', 'GM', 'RA', 'SAPHON']
         
         self.subset = subset
-        self.inventories = pandas.read_csv('https://phoible.org/inventories.csv', sep=',', header=0)
-        self.languages = pandas.read_csv('https://phoible.org/languages.csv', sep=',', header=0)
-        #if include_everything:
-        #    self.raw_data = pandas.read_csv('https://raw.githubusercontent.com/phoible/dev/master/data/phoible.csv', sep=',', header=0, low_memory=False)
+        self.aggregated = aggregated
+        if aggregated:
+            self.inventories = pandas.read_csv('https://phoible.org/inventories.csv', sep=',', header=0)
+            self.languages = pandas.read_csv('https://phoible.org/languages.csv', sep=',', header=0)
+        else:
+            self.full_data = pandas.read_csv('https://raw.githubusercontent.com/phoible/dev/master/data/phoible.csv', sep=',', header=0, low_memory=False)
 
     def get_df(self, strip_na=[]):
         """Get data from Phoible in pandas.DataFrame format.
@@ -442,26 +444,30 @@ class Phoible(object):
         """
         if self.show_citation:
             print(self.citation)
-        inventories = self.inventories[['name', 'count_consonant', 'count_tone', 'count_vowel', 'language_pk', 'source_url']]
-        if self.subset != 'all':
-            subset = self.subset.upper()
-            inventories = inventories[inventories.name.str.contains(subset)]
-        languages = self.languages[['id', 'latitude', 'longitude', 'macroarea', 'name', 'pk']]
-        languages = languages.rename(columns={'name': 'language'})
-        pre_df = pandas.merge(languages, inventories, left_on='pk', right_on='language_pk')
-        df = pandas.DataFrame({
-            'contribution_name': pre_df.name,
-            'language': pre_df.language,
-            'coordinates': list(zip(pre_df.latitude, pre_df.longitude)),
-            'glottocode': pre_df.id,
-            'macroarea': pre_df.macroarea,
-            'phonemes': pre_df.count_consonant + pre_df.count_vowel,
-            'consonants': pre_df.count_consonant,
-            'vowels': pre_df.count_vowel,
-            'tones': pre_df.count_tone,
-            'source': pre_df.source_url,
-            'inventory_page': 'https://phoible.org/languages/' + pre_df.id
-        })
+        if self.aggregated:
+            inventories = self.inventories[['name', 'count_consonant', 'count_tone', 'count_vowel', 'language_pk', 'source_url']]
+            if self.subset != 'all':
+                subset = self.subset.upper()
+                inventories = inventories[inventories.name.str.contains(subset)]
+            languages = self.languages[['id', 'latitude', 'longitude', 'macroarea', 'name', 'pk']]
+            languages = languages.rename(columns={'name': 'language'})
+            pre_df = pandas.merge(languages, inventories, left_on='pk', right_on='language_pk')
+            df = pandas.DataFrame({
+                'contribution_name': pre_df.name,
+                'language': pre_df.language,
+                'coordinates': list(zip(pre_df.latitude, pre_df.longitude)),
+                'glottocode': pre_df.id,
+                'macroarea': pre_df.macroarea,
+                'phonemes': pre_df.count_consonant + pre_df.count_vowel,
+                'consonants': pre_df.count_consonant,
+                'vowels': pre_df.count_vowel,
+                'tones': pre_df.count_tone,
+                'source': pre_df.source_url,
+                'inventory_page': 'https://phoible.org/languages/' + pre_df.id
+            })
+        else:
+            df = self.full_data
+            
         df.fillna('~N/A~', inplace=True)
         for column in strip_na:
             df = df[df[column] != '~N/A~']
@@ -490,3 +496,4 @@ class Phoible(object):
 #print(Sails().features_descriptions)
 #print(Sails().feature_descriptions('ICU10', 'ICU11'))
 #print(Phoible().get_df(strip_na=['tones']))
+#print(Phoible(aggregated=False).get_df().head())
