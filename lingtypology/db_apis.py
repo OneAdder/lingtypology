@@ -467,7 +467,8 @@ class Phoible(object):
             })
         else:
             df = self.full_data
-            
+            if self.subset != 'all':
+                df = df[df.Source == self.subset.lower()]
         df.fillna('~N/A~', inplace=True)
         for column in strip_na:
             df = df[df[column] != '~N/A~']
