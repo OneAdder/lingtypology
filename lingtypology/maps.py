@@ -1,15 +1,24 @@
-"""This module draws a map"""
+"""This module consist of classes and function for maps
 
-#Folium tools
+Variables:
+---------
+MODULE_DIRECTORY: str
+    Directory of the package (with separator).
+
+Classes: LingMap, LingMapError
+
+Functions: gradient, merge, get_elevations, frange
+"""
+
 import folium
 import folium.plugins
 
-#Branca tools
 import branca.colormap
 import branca.element
 
 import jinja2
 import pandas
+import json
 import math
 import io
 import os
@@ -18,8 +27,9 @@ import matplotlib.pyplot as plt
 from colour import Color
 from collections import deque
 
-#Local tools
 import lingtypology.glottolog
+
+MODULE_DIRECTORY = os.path.dirname(os.path.realpath(__file__)) + os.path.sep
 
 class LingMapError(Exception):
     """All special exceptions"""
@@ -45,6 +55,15 @@ def gradient(iterations, color1='white', color2='green'):
     return colors
 
 def merge(*maps, autoset_legends=True):
+    """Merge several LingMap objects
+    
+    Parameters:
+    -----------
+    *maps: list of LingMap
+        List of LingMap objects.
+    autoset_legends: bool, default True
+        If set to True, legends will automatically move to free spaces
+    """
     def generate_new():
         new_legend_position = ''
         for legend_position in legend_positions:
@@ -68,13 +87,27 @@ def merge(*maps, autoset_legends=True):
         if autoset_legends:
             if m.legend_position in occupied_legend_positions:
                 m.legend_position = generate_new()
-                occupied_legend_positions.add(m.legend_position)
             if m.stroke_legend_position in occupied_legend_positions:
                 m.stroke_legend_position = generate_new()
-                occupied_legend_positions.add(m.stroke_legend_position)
             occupied_legend_positions.add(m.legend_position)
+            occupied_legend_positions.add(m.stroke_legend_position)
     return m
-        
+
+def get_elevations(languages):
+    """Get elevation data for list of languages"""
+    with open(MODULE_DIRECTORY + 'language_elevation_mapping.json') as f:
+        j = json.load(f)
+    elevations = []
+    not_okay = []
+    for language in languages:
+        try:
+            elevations.append(j[language])
+        except KeyError:
+            elevations.append('')
+            not_okay.append(language)
+    if not_okay:
+        print('Elevations for these languages were not found:\n' + '\n'.join(not_okay))
+    return elevations
 
 def frange(start, stop, step):
     """range for floats"""
@@ -379,8 +412,7 @@ class LingMap(object):
         position: str, default 'bottomright'
             Legend position.
         """
-        module_directory = os.path.dirname(os.path.realpath(__file__))
-        with open(os.path.join(module_directory, 'legend.html'), 'r', encoding='utf-8') as f:
+        with open(MODULE_DIRECTORY + 'legend.html', 'r', encoding='utf-8') as f:
             template = f.read()
         template = jinja2.Template(template)
         template = template.render(data=legend_data, position=position, title=title, use_shapes=self.use_shapes, legend_id=self._legend_id)
@@ -408,8 +440,7 @@ class LingMap(object):
         title: str
             Title.
         """
-        module_directory = os.path.dirname(os.path.realpath(__file__))
-        with open(os.path.join(module_directory, 'legend.html'), 'r', encoding='utf-8') as f:
+        with open(MODULE_DIRECTORY + 'legend.html', 'r', encoding='utf-8') as f:
             template = f.read()
         template = jinja2.Template(template)
         template = template.render(position=position, title=title, legend_id=self._legend_id, it_is_title=True)
