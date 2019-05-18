@@ -1,0 +1,195 @@
+,language,raisedLarynxEjective,elevation
+amha1245,Amharic,10,3440
+cent2144,Central Mazahua,6,2941
+chip1261,Chipewyan,6,258
+haus1257,Hausa,3,600
+hupa1239,Hupa,7,123
+iraq1241,Iraqw,1,1767
+iton1250,Itonama,3,169
+jaqa1244,Jaqaru,8,2766
+kaba1278,Kabardian,10,1234
+kwak1269,Kwak'wala,7,112
+lakk1252,Lak,10,2018
+lako1247,Lakota,7,834
+mezq1235,Mezquital Otomi,6,2391
+nava1243,Navajo,4,2140
+nezp1238,Nez Perce,5,1041
+nort2938,Northern Haida,7,80
+nort2952,Northeast Maidu,4,1271
+nucl1235,Eastern Armenian,5,1912
+nucl1302,Georgian,6,1338
+nuuc1236,Nuu-chah-nulth,8,614
+shua1257,Shuar,1,1256
+sout2961,Southern Tiwa,4,1532
+sout2982,Southeastern Pomo,6,439
+sout2991,South Bolivian Quechua,5,4156
+squa1248,Squamish,8,50
+stra1244,Northern Straits Salish,8,490
+taba1266,Tabasco Chontal,5,3
+tewa1260,Rio Grande Tewa,6,1687
+tigr1270,Tigre,8,2112
+tolo1259,Tolowa-Chetco,6,81
+tzel1254,Tzeltal,5,2091
+wich1260,Wichita,2,390
+yuch1247,Yuchi,9,247
+zulu1248,Zulu,5,537
+zuni1245,Zuni,12,2210
+0,Korean,0,154
+1,Ket,0,176
+2,Burushaski,0,3309
+3,Kurukh,0,284
+4,Telugu,0,440
+5,Kota (India),0,1456
+6,Mundari,0,50
+7,Kharia,0,376
+8,Khasi,0,38
+9,Sedang,0,1287
+10,Central Khmer,0,26
+11,Vietnamese,0,8
+12,Mandarin Chinese,0,88
+13,Wu Chinese,0,205
+14,Hakka Chinese,0,365
+15,Yue Chinese,0,-3
+16,Iu Mien,0,1299
+17,Nyishi-Hill Miri,0,996
+18,Burmese,0,711
+19,Lahu,0,1476
+20,Garo,0,114
+21,S'gaw Karen,0,246
+22,Lakkia,0,767
+23,Thai,0,3
+24,Bouyei,0,774
+25,Western Cham,0,35
+26,Atayal,0,1882
+27,Plateau Malagasy,0,1653
+28,Standard Malay,0,54
+29,Batak Toba,0,948
+30,Sa'ban,0,1002
+31,Sundanese,0,493
+32,Javanese,0,112
+33,Tagalog,0,93
+34,Chamorro,0,69
+35,Iaai,0,21
+37,Adzera,0,207
+38,Maori,0,451
+39,Hawaiian,0,2020
+40,Antakarinya,0,178
+41,Nyangumarta,0,260
+42,Kunjen,0,162
+43,Maranunggu,0,23
+44,Mawng,0,28
+45,Wubuy,0,6
+46,Alawa,0,147
+47,Wik-Mungkan,0,32
+48,Sentani,0,74
+49,Kwoma,0,31
+50,Tamnim Citak,0,19
+51,Telefol,0,2130
+52,Gadsup,0,1311
+53,Awiyaana,0,1917
+54,Kunimaipa,0,1857
+55,Selepet,0,759
+56,Naasioi,0,1855
+57,Aleut,0,82
+58,Kalaallisut,0,0
+59,Eastern Ojibwa,0,213
+60,Unami,0,415
+61,Seneca,0,427
+62,Oneida,0,375
+63,Alabama,0,89
+64,Tunica,0,40
+65,Copainalá Zoque,0,526
+66,Papantla Totonac,0,89
+67,Purepecha,0,2340
+68,Karok,0,676
+69,Tipai,0,297
+70,Luiseno,0,742
+71,Hopi,0,1713
+72,Tohono O'odham,0,640
+73,Chiquihuitlán Mazatec,0,1897
+74,San Miguel El Grande Mixtec,0,2279
+75,Cha'palaa,0,122
+76,Páez,0,3472
+77,Mapudungun,0,1538
+78,Island Carib,0,758
+79,Wapishana,0,130
+80,Wayuu,0,37
+81,Asháninka,0,497
+82,Ignaciano,0,159
+83,Yanesha',0,2474
+84,Waimaha,0,167
+85,Ticuna,0,150
+86,Galibi Carib,0,6
+87,Ocaina,0,114
+88,Sirionó,0,182
+89,Paraguayan Guaraní,0,184
+90,Amahuaca,0,429
+91,Chácobo,0,185
+92,Apinayé,0,229
+93,Tarifiyt-Beni-Iznasen-Eastern Middle Atlas Berber,0,408
+94,Ngas,0,1130
+95,Marghi Central,0,426
+96,Somali,0,211
+97,Awngi,0,2024
+98,Egyptian Arabic,0,6
+99,Moroccan Arabic,0,352
+100,Maltese,0,44
+101,Modern Hebrew,0,515
+103,Liberia Kpelle,0,285
+104,Wolof,0,53
+105,Dagbani,0,181
+106,Akan,0,166
+107,Ga,0,94
+108,Ewe,0,114
+109,Igbo,0,8
+110,Beembe,0,358
+111,Swahili,0,200
+112,Luvale,0,1078
+113,Gbaya-Bossangoa,0,476
+114,Koyraboro Senni Songhai,0,261
+115,Central Kanuri,0,314
+116,Lugbara,0,1225
+117,Nobiin,0,277
+118,Luo (Kenya and Tanzania),0,1467
+119,Masai,0,1187
+121,Irish,0,88
+122,Breton,0,143
+123,Icelandic,0,0
+124,Norwegian Bokmål,0,20
+125,English,0,22
+126,German,0,368
+127,French,0,124
+128,Portuguese,0,445
+129,Spanish,0,1202
+130,Romanian,0,348
+131,Russian,0,185
+132,Bulgarian,0,98
+133,Lithuanian,0,54
+134,Northern Tosk Albanian,0,88
+135,Modern Greek,0,190
+136,Western Farsi,0,2174
+137,Central Pashto,0,1057
+138,Kashmiri,0,1623
+139,Eastern Panjabi,0,227
+140,Hindi,0,416
+141,Bengali,0,8
+142,Sinhala,0,51
+143,Basque,0,362
+144,Finnish,0,66
+145,Eastern Mari,0,45
+146,Komi-Zyrian,0,125
+147,Hungarian,0,110
+148,Kazym-Berezover-Suryskarer Khanty,0,54
+149,Tundra Nenets,0,0
+150,Turkish,0,1138
+151,North Azerbaijani,0,276
+152,Kirghiz,0,3699
+153,Chuvash,0,95
+154,Sakha,0,875
+155,Halh Mongolian,0,1305
+156,Even,0,0
+157,Northern Yukaghir,0,0
+158,Nivkh,0,365
+159,Chukchi,0,0
+160,Hokkaido Ainu,0,216
+161,Japanese,0,127

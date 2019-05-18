@@ -1,0 +1,195 @@
+,language,loweredLarynxImplosive,elevation
+cent1989,Central Khmer,2,26
+cent2144,Central Mazahua,2,2941
+gbay1287,Gbaya-Bossangoa,2,476
+haus1257,Hausa,2,600
+iraq1241,Iraqw,2,1767
+marg1265,Marghi Central,2,426
+masa1300,Masai,4,1187
+mezq1235,Mezquital Otomi,2,2391
+ngas1240,Ngas,3,1130
+nort2952,Northeast Maidu,2,1271
+nucl1417,Igbo,3,8
+sgaw1245,S'gaw Karen,2,246
+soma1255,Somali,2,211
+swah1253,Swahili,4,200
+viet1252,Vietnamese,2,8
+zulu1248,Zulu,1,537
+0,Korean,0,154
+1,Ket,0,176
+2,Lak,0,2018
+3,Kabardian,0,1234
+4,Georgian,0,1338
+5,Burushaski,0,3309
+6,Kurukh,0,284
+7,Telugu,0,440
+8,Kota (India),0,1456
+9,Mundari,0,50
+10,Kharia,0,376
+11,Khasi,0,38
+12,Sedang,0,1287
+13,Mandarin Chinese,0,88
+14,Wu Chinese,0,205
+15,Hakka Chinese,0,365
+16,Yue Chinese,0,-3
+17,Iu Mien,0,1299
+18,Nyishi-Hill Miri,0,996
+19,Burmese,0,711
+20,Lahu,0,1476
+21,Garo,0,114
+22,Lakkia,0,767
+23,Thai,0,3
+24,Bouyei,0,774
+25,Western Cham,0,35
+26,Atayal,0,1882
+27,Plateau Malagasy,0,1653
+28,Standard Malay,0,54
+29,Batak Toba,0,948
+30,Sa'ban,0,1002
+31,Sundanese,0,493
+32,Javanese,0,112
+33,Tagalog,0,93
+34,Chamorro,0,69
+35,Iaai,0,21
+37,Adzera,0,207
+38,Maori,0,451
+39,Hawaiian,0,2020
+40,Antakarinya,0,178
+41,Nyangumarta,0,260
+42,Kunjen,0,162
+43,Maranunggu,0,23
+44,Mawng,0,28
+45,Wubuy,0,6
+46,Alawa,0,147
+47,Wik-Mungkan,0,32
+48,Sentani,0,74
+49,Kwoma,0,31
+50,Tamnim Citak,0,19
+51,Telefol,0,2130
+52,Gadsup,0,1311
+53,Awiyaana,0,1917
+54,Kunimaipa,0,1857
+55,Selepet,0,759
+56,Naasioi,0,1855
+57,Aleut,0,82
+58,Kalaallisut,0,0
+59,Chipewyan,0,258
+60,Tolowa-Chetco,0,81
+61,Hupa,0,123
+62,Navajo,0,2140
+63,Northern Haida,0,80
+64,Squamish,0,50
+65,Northern Straits Salish,0,490
+66,Nuu-chah-nulth,0,614
+67,Kwak'wala,0,112
+68,Eastern Ojibwa,0,213
+69,Unami,0,415
+70,Wichita,0,390
+71,Lakota,0,834
+72,Seneca,0,427
+73,Oneida,0,375
+74,Yuchi,0,247
+75,Alabama,0,89
+76,Tunica,0,40
+77,Nez Perce,0,1041
+78,Copainalá Zoque,0,526
+79,Papantla Totonac,0,89
+80,Tabasco Chontal,0,3
+81,Tzeltal,0,2091
+82,Purepecha,0,2340
+83,Karok,0,676
+84,Southeastern Pomo,0,439
+85,Tipai,0,297
+86,Zuni,0,2210
+87,Southern Tiwa,0,1532
+88,Rio Grande Tewa,0,1687
+89,Luiseno,0,742
+90,Hopi,0,1713
+91,Tohono O'odham,0,640
+92,Chiquihuitlán Mazatec,0,1897
+93,San Miguel El Grande Mixtec,0,2279
+94,Cha'palaa,0,122
+95,Páez,0,3472
+96,Itonama,0,169
+97,South Bolivian Quechua,0,4156
+98,Jaqaru,0,2766
+99,Mapudungun,0,1538
+100,Island Carib,0,758
+101,Wapishana,0,130
+102,Wayuu,0,37
+103,Asháninka,0,497
+104,Ignaciano,0,159
+105,Yanesha',0,2474
+106,Shuar,0,1256
+107,Waimaha,0,167
+108,Ticuna,0,150
+109,Galibi Carib,0,6
+110,Ocaina,0,114
+111,Sirionó,0,182
+112,Paraguayan Guaraní,0,184
+113,Amahuaca,0,429
+114,Chácobo,0,185
+115,Apinayé,0,229
+116,Tarifiyt-Beni-Iznasen-Eastern Middle Atlas Berber,0,408
+117,Awngi,0,2024
+118,Tigre,0,2112
+119,Amharic,0,3440
+120,Egyptian Arabic,0,6
+121,Moroccan Arabic,0,352
+122,Maltese,0,44
+123,Modern Hebrew,0,515
+124,Liberia Kpelle,0,285
+125,Wolof,0,53
+126,Dagbani,0,181
+127,Akan,0,166
+128,Ga,0,94
+129,Ewe,0,114
+130,Beembe,0,358
+131,Luvale,0,1078
+132,Koyraboro Senni Songhai,0,261
+133,Central Kanuri,0,314
+134,Lugbara,0,1225
+135,Nobiin,0,277
+136,Luo (Kenya and Tanzania),0,1467
+138,Irish,0,88
+139,Breton,0,143
+140,Icelandic,0,0
+141,Norwegian Bokmål,0,20
+142,English,0,22
+143,German,0,368
+144,French,0,124
+145,Portuguese,0,445
+146,Spanish,0,1202
+147,Romanian,0,348
+148,Russian,0,185
+149,Bulgarian,0,98
+150,Lithuanian,0,54
+151,Northern Tosk Albanian,0,88
+152,Modern Greek,0,190
+153,Eastern Armenian,0,1912
+154,Western Farsi,0,2174
+155,Central Pashto,0,1057
+156,Kashmiri,0,1623
+157,Eastern Panjabi,0,227
+158,Hindi,0,416
+159,Bengali,0,8
+160,Sinhala,0,51
+161,Basque,0,362
+162,Finnish,0,66
+163,Eastern Mari,0,45
+164,Komi-Zyrian,0,125
+165,Hungarian,0,110
+166,Kazym-Berezover-Suryskarer Khanty,0,54
+167,Tundra Nenets,0,0
+168,Turkish,0,1138
+169,North Azerbaijani,0,276
+170,Kirghiz,0,3699
+171,Chuvash,0,95
+172,Sakha,0,875
+173,Halh Mongolian,0,1305
+174,Even,0,0
+175,Northern Yukaghir,0,0
+176,Nivkh,0,365
+177,Chukchi,0,0
+178,Hokkaido Ainu,0,216
+179,Japanese,0,127
