@@ -106,7 +106,7 @@ def get_elevations(languages):
             elevations.append('')
             not_okay.append(language)
     if not_okay:
-        print('Elevations for these languages were not found:\n' + '\n'.join(not_okay))
+        print('Elevations for these languages were not found: ' + ', '.join(list(set(not_okay))))
     return elevations
 
 def frange(start, stop, step):
