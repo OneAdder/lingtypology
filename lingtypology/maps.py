@@ -705,7 +705,7 @@ class LingMap(object):
                 s_stroke = self._set_marker(
                     [coordinates[0], coordinates[1]],
                     stroke = True,
-                    radius = self.stroke_radius * 1.15,
+                    radius = self.stroke_radius * 1.12,
                     fill_opacity = self.stroke_opacity,
                     fill_color = '#000000'
                 )
