@@ -4,7 +4,7 @@ from lingtypology import __version__
 setup(
     name='lingtypology',
     version=__version__,
-    description='A for linguistic typology.',
+    description='A tool for linguistic typology.',
     url='https://github.com/OneAdder/lingtypology',
     author='Michael Voronov',
     author_email='mikivo@list.ru',
@@ -30,9 +30,11 @@ setup(
         ],
     },
     classifiers=[
-        'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3 :: Only',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        'Topic :: Scientific/Engineering',
+        'Topic :: Scientific/Engineering :: Visualization',
+        'Topic :: Text Processing :: Linguistic',
     ],
 ) 
