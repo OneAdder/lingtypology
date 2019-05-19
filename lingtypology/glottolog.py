@@ -147,7 +147,7 @@ def get_by_glot_id(glot_id):
     """
     language = tuple(glottolog[glottolog.ID == glot_id].Name)
     if not language:
-        print('(get_by_glot_id) Warning: language by {} not found'.format(glot_id))
+        warnings.append('(get_by_glot_id) Warning: language by {} not found'.format(glot_id))
     else:
         return language[0]
 
