@@ -133,7 +133,8 @@ class Wals(object):
             wals_feature = self._get_wals_data(feature)
             if not wals_feature is None:
                 wals_feature = wals_feature.rename(columns={'description': '_' + feature})
-                df = pandas.merge(df, wals_feature, on="wals code")
+                df = pandas.merge(df, wals_feature, how='outer', on="wals code")
+                df.dropna(subset=['language'], inplace=True)
         return df
 
     def get_json(self):
