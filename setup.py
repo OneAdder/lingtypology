@@ -4,7 +4,7 @@ from lingtypology import __version__
 setup(
     name='lingtypology',
     version=__version__,
-    description='A linguistic tool for interactive mapping.',
+    description='A for linguistic typology.',
     url='https://github.com/OneAdder/lingtypology',
     author='Michael Voronov',
     author_email='mikivo@list.ru',

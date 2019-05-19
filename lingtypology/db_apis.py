@@ -212,7 +212,7 @@ class Autotyp(object):
                     try:
                         languages.append(lingtypology.glottolog.get_by_glot_id((self.mapping[str(LID)])))
                     except KeyError:
-                        warnings.warn('Unable to find Glottocode for' + str(LID))
+                        warnings.warn('Unable to find Glottocode for ' + str(LID))
                         languages.append('')
                 languages_df = pandas.DataFrame()
                 languages_df = languages_df.assign(language=languages)
