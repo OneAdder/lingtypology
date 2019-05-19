@@ -608,24 +608,15 @@ class LingMap(object):
             mapping = {}
             clear_features = []
             groups = []
-            #Two datas are needed so that I can first try sorting as numeric, then fallback to strings
-            data_as_str = []
-            data_as_num = []
+            data = []
             for i, feature in enumerate(features):
                 if feature not in clear_features:
                     clear_features.append(feature)
                     groups.append(folium.FeatureGroup(name=features[i]))
             for i, feature in enumerate(clear_features):
                 mapping[feature] = (groups[i], colors[i])
-                data_as_str.append((str(feature), colors[i]))
-                data_as_num.append((feature, colors[i]))
+                data.append((feature, colors[i]))
             groups_features = [mapping[f] for f in features]
-            try:
-                data_as_num.sort()
-                data = data_as_num
-            except Exception:
-                data_as_str.sort()
-                data = data_as_str
             html = '<li><span style="color: #000000; text-align: center; opacity:0.7;">{}</span>{}</li>' if use_shapes \
                 else '<li><span style="background: {};opacity:0.7;"></span>{}</li>'
             data = '\n'.join([html.format(d[1], d[0]) for d in data])
