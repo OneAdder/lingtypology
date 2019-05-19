@@ -53,25 +53,6 @@ class Wals(object):
             '144S', '144T', '144U', '144V', '144W', '144X', '144Y'
         ]
 
-    def _get_wals_template(self):
-        """Makes pandas.DaraFrame with all the data except for the pages.
-
-        Returns:
-        ---------
-        df: pandas.DataFrame
-            Headers: 'wals code', 'language', 'genus', 'family', 'area', 'coordinates'.
-        """
-        wals_url = 'http://wals.info/feature/1A.tab'
-        df = pandas.read_csv(wals_url, delimiter='\t', skiprows=7)
-        coordinates = zip(list(df.latitude), list(df.longitude))
-        df.drop('latitude', axis=1, inplace=True)
-        df.drop('longitude', axis=1, inplace=True)
-        df = df.assign(coordinates=pandas.Series(coordinates))
-        df.drop('value', axis=1, inplace=True)
-        df.drop('description', axis=1, inplace=True)
-        df.rename(columns={'name': 'language'}, inplace=True)
-        return df
-
     def _get_wals_data(self, feature):
         """Loads data from Wals
 
@@ -87,7 +68,21 @@ class Wals(object):
         except urllib.error.HTTPError:
             warnings.warn('(Wals) Warning: cannot read Wals feature ' + feature)
         else:
-            return df_feature[['wals code','description']]
+            df = df_feature[['wals code', 'name', 'genus', 'family', 'area',
+                             'latitude', 'longitude', 'value', 'description']]
+            final_df = pandas.DataFrame({
+                'wals_code': df['wals code'],
+                'language': df.name,
+                'genus': df.genus,
+                'family': df.family,
+                'area': df.area,
+                'coordinates': tuple(zip(df.latitude, df.longitude)),
+                '_' + feature: ['{num}. {desc}'.format(num=num, desc=desc) \
+                                for num, desc in zip(df.value, df.description)],
+                '_{}_num'.format(feature): df.value.astype(int),
+                '_{}_desc'.format(feature): df.description,
+            })
+            return final_df
 
     def _get_citation(self, feature):
         """Loads citation from Wals
@@ -113,7 +108,7 @@ class Wals(object):
             cit += self._get_citation(feature.upper()) + '\n'
         return cit
 
-    def get_df(self):
+    def get_df(self, join_how='inner'):
         """Get data from Wals in pandas.DataFrame format.
 
         Returns pandas.DataFrame
@@ -123,7 +118,7 @@ class Wals(object):
         features = self.features
         if isinstance(features, str):
             features = (features,)
-        df = self._get_wals_template()
+        dataframes = []
         for feature in features:
             feature = feature.upper()
             if self.show_citation:
@@ -132,19 +127,22 @@ class Wals(object):
                     print(citation)
             wals_feature = self._get_wals_data(feature)
             if not wals_feature is None:
-                wals_feature = wals_feature.rename(columns={'description': '_' + feature})
-                df = pandas.merge(df, wals_feature, how='outer', on="wals code")
-                df.dropna(subset=['language'], inplace=True)
+                dataframes.append(wals_feature)
+        if len(dataframes) == 1:
+            df = dataframes[0]
+        else:
+            df = pandas.merge(*dataframes, how=join_how, on=['wals_code', 'language', 'genus', 'family', 'area', 'coordinates'])
+        df.dropna(subset=['language'], inplace=True)
         return df
 
-    def get_json(self):
+    def get_json(self, join_how='inner'):
         """Get data from Wals in JSON format.
 
         Returns dict
             Keys: 'wals code', 'language', 'genus', 'family', 'area', 'coordinates', [[name of the page1]], [[name of the page2]], ...
             Names of the pages start with '_'.
         """
-        df = self.get_df()
+        df = self.get_df(join_how=join_how)
         js = {header: list(df[header]) for header in list(df)}
         return js
 
