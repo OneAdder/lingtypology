@@ -379,7 +379,7 @@ class LingMap(object):
         popup_href = '''<a href="https://glottolog.org/resource/languoid/id/{}" onclick="this.target='_blank';">{}</a><br>'''
         href_link = lingtypology.glottolog.get_glot_id(language) if not self.glottocode else language
         href_content = language if not self.glottocode else lingtypology.glottolog.get_by_glot_id(language)
-        popup_href = popup_href.format(href_link, href_content)
+        popup_href = popup_href.format(href_link, href_content) if href_link else href_content
         if self.languages_in_popups:
             if self.popups:
                 if parse_html:
