@@ -9,6 +9,7 @@ import re
 import os
 import io
 import zipfile
+from functools import reduce
 from datetime import datetime
 
 module_directory = os.path.dirname(os.path.realpath(__file__))
@@ -75,8 +76,8 @@ class Wals(object):
                 'language': df.name,
                 'genus': df.genus,
                 'family': df.family,
-                'area': df.area,
                 'coordinates': tuple(zip(df.latitude, df.longitude)),
+                '_{}_area'.format(feature): df.area,
                 '_' + feature: ['{num}. {desc}'.format(num=num, desc=desc) \
                                 for num, desc in zip(df.value, df.description)],
                 '_{}_num'.format(feature): df.value.astype(int),
@@ -116,8 +117,6 @@ class Wals(object):
             Names of the pages start with '_'.
         """
         features = self.features
-        if isinstance(features, str):
-            features = (features,)
         dataframes = []
         for feature in features:
             feature = feature.upper()
@@ -131,7 +130,11 @@ class Wals(object):
         if len(dataframes) == 1:
             df = dataframes[0]
         else:
-            df = pandas.merge(*dataframes, how=join_how, on=['wals_code', 'language', 'genus', 'family', 'area', 'coordinates'])
+            df = reduce(lambda left, right: pandas.merge(
+                left, right, how=join_how, on=['wals_code', 'language', 'genus', 'family', 'coordinates']
+            ), dataframes)
+        #df = df.reindex(['wals_code', 'language', 'genus', 'family', 'area',
+        #                 'coordinates'] + sorted(list(df.columns)[6:]), axis=1)
         df.dropna(subset=['language'], inplace=True)
         return df
 
@@ -170,6 +173,7 @@ class Autotyp(object):
                         'Lennart Bierkandt, Fernando Zúñiga & John B. Lowe.\n' + \
                         '2017. The AUTOTYP typological databases.\n' + \
                         'Version 0.1.0 https://github.com/autotyp/autotyp-data/tree/0.1.0'
+        self._pages = []
 
     @property
     def mapping(self):
@@ -478,7 +482,7 @@ class Phoible(object):
         js = {header: list(df[header]) for header in list(df)}
         return js
     
-#print(Wals('1a', '2a').get_df())
+#print(Wals('1a', '20a', '3a').get_df(join_how='outer'))
 #print(Wals('1a', '2a').general_citation)
 #print(Wals('1a', '2a').citation)
 #print(Wals().features_list)
