@@ -41,10 +41,14 @@ def get_affiliations(languages):
             print('(get_affiliations) Warning: affiliation for {} not found'.format(language))
         else:
             affiliation = []
-            affiliation_id = affiliation_id[0].split('/')
-            for taxon in affiliation_id:
-                affiliation.append(tuple(glottolog[glottolog.ID == taxon].Name)[0])
-            affiliation = ', '.join(affiliation)
+            try:
+                affiliation_id = affiliation_id[0].split('/')
+            except AttributeError:
+                affiliation = ''
+            else:
+                for taxon in affiliation_id:
+                    affiliation.append(tuple(glottolog[glottolog.ID == taxon].Name)[0])
+                affiliation = ', '.join(affiliation)
         affiliations.append(affiliation)
     return affiliations
 
