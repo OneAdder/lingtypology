@@ -1,6 +1,36 @@
 # lingtypology
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2669068.svg)](https://doi.org/10.5281/zenodo.2669068)  
-This library is a Python3 tool for linguistic interactive mapping.
+<table>
+  <tr>
+    <td>Latest Release</td>
+    <td>
+      <a href="https://pypi.org/project/lingtypology/"/>
+      <img src="https://img.shields.io/pypi/v/lingtypology.svg"/>
+    </td>
+  </tr>
+  <tr>
+    <td> Build Status </td>
+    <td>
+      <a href="https://travis-ci.org/OneAdder/lingtypology"/>
+      <img src="https://img.shields.io/travis/OneAdder/lingtypology.svg"/>
+    </td>
+  </tr>
+  <tr>
+    <td>License</td>
+    <td>
+      <a href="https://github.com/OneAdder/lingtypology/blob/master/LICENSE.md"/>
+      <img src="https://img.shields.io/github/license/OneAdder/lingtypology.svg"/>
+    </td>
+  </tr>
+  <tr>
+    <td>DOI</td>
+    <td>
+      <a href="https://doi.org/10.5281/zenodo.2669068"/>
+      <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.2669068.svg"/>
+    </td>
+  </tr>
+</table>
+
+Lingtypology is a Python3 tool for linguistic interactive mapping.
 It is inspired by [R-package](https://github.com/ropensci/lingtypology) created by [Agrizolamz](https://github.com/agricolamz).
 It uses the same phylosophy and provides similar functionality.  
 
@@ -23,7 +53,7 @@ You can update data from Glottolog. To get the instruction on how to do it, cons
 ## Citation
 If you are using this package in a scientific publication, it will be most appreciated if you add the citation:
 ```
-@misc{michael_voronov_2019_2669068,
+@misc{MichaelVoronov2669068,
 author       = {Michael Voronov},
 title        = {{lingtypology: a Python tool for linguistic interactive mapping}},
 month        = may,

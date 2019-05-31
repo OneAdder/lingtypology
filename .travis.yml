@@ -1,0 +1,21 @@
+language: python
+python:
+  - "3.5"
+  - "3.6"
+notifications:
+  email:
+    on_success: never
+    on_failure: never
+before_install:
+  - "pip install -U pip"
+  - "export PYTHONPATH=$PYTHONPATH:$(pwd)"
+install:
+  - pip install folium
+  - pip install branca
+  - pip install jinja2
+  - pip install pandas
+  - pip install pyglottolog
+  - pip install colour
+  - pip install matplotlib
+script:
+- pytest
