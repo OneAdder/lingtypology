@@ -56,7 +56,7 @@ If you are using this package in a scientific publication, it will be most appre
 @misc{MichaelVoronov2669068,
     author = {Michael Voronov},
     title = {{lingtypology: a Python tool for linguistic interactive mapping}},
-    month = may,
+    month = june,
     year = 2019,
     doi = {10.5281/zenodo.2669068},
     url = {https://doi.org/10.5281/zenodo.2669068}
