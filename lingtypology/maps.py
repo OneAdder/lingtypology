@@ -415,7 +415,8 @@ class LingMap(object):
         with open(MODULE_DIRECTORY + 'legend.html', 'r', encoding='utf-8') as f:
             template = f.read()
         template = jinja2.Template(template)
-        template = template.render(data=legend_data, position=position, title=title, use_shapes=self.use_shapes, legend_id=self._legend_id)
+        template = template.render(data=legend_data, position=position, title=title,
+                                   use_shapes=self.use_shapes, legend_id=self._legend_id)
         template = '{% macro html(this, kwargs) %}' + template + '{% endmacro %}'
         macro = branca.element.MacroElement()
         macro._template = branca.element.Template(template)
@@ -443,7 +444,8 @@ class LingMap(object):
         with open(MODULE_DIRECTORY + 'legend.html', 'r', encoding='utf-8') as f:
             template = f.read()
         template = jinja2.Template(template)
-        template = template.render(position=position, title=title, legend_id=self._legend_id, it_is_title=True)
+        template = template.render(position=position, title=title,
+                                   legend_id=self._legend_id, it_is_title=True)
         template = '{% macro html(this, kwargs) %}' + template + '{% endmacro %}'
         macro = branca.element.MacroElement()
         macro._template = branca.element.Template(template)
@@ -955,7 +957,6 @@ class LingMap(object):
                 colors = self.colors
             if typ == 'pie':
                 if labels:
-                    #I'm not allowed to simply pass sizes! I have to take percentages and then turn them back to sizes. Matplotlib sucks :(
                     ax.pie(
                         sizes, colors=colors, startangle=startangle,
                         #autopct=lambda p: '{}'.format(int(p * sum(sizes)//100)),
@@ -1131,7 +1132,7 @@ class LingMap(object):
                     tooltip.add_to(marker)
                 m.add_child(marker)
                 
-            if self.minichart_names:
+            if self.minichart_names and self.legend:
                 legend_data = ''
                 for i, name in enumerate(self.minichart_names):
                     legend_data += '<li><span style="background: {};opacity:0.7;"></span>{}</li>\n'.format(self.colors[i], self.minichart_names[i])
@@ -1172,10 +1173,12 @@ class LingMap(object):
                     markers.append(marker)
 
             deque(map(m.add_child, markers))
-            legend_data = ''
-            for feature in color_mapping:
-                legend_data += '<li><span style="background: {};opacity:0.7;"></span>{}</li>\n'.format(color_mapping[feature], feature)
-            self._create_legend(m, legend_data, title=self.legend_title, position=self.legend_position)
+            
+            if self.legend:
+                legend_data = ''
+                for feature in color_mapping:
+                    legend_data += '<li><span style="background: {};opacity:0.7;"></span>{}</li>\n'.format(color_mapping[feature], feature)
+                self._create_legend(m, legend_data, title=self.legend_title, position=self.legend_position)
             return m
 
         if self.features:
