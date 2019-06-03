@@ -30,7 +30,7 @@
   </tr>
 </table>
 
-Lingtypology is a Python3 tool for linguistic interactive mapping.
+Lingtypology is a Python3 tool for linguistic interactive mapping and online linguistic databases API.
 It is inspired by [R-package](https://github.com/ropensci/lingtypology) created by [Agrizolamz](https://github.com/agricolamz).
 It uses the same phylosophy and provides similar functionality.  
 
