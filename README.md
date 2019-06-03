@@ -47,18 +47,18 @@ or docstrings from the code.
 
 ## Glottolog
 Lingtypology relies on data from the [Glottolog](https://glottolog.org/glottolog/language) database.
-With each new version of `lingtypology` Glottolog data is updated. Now it is using Glottolog `3.4-16`.
+With each new version of `lingtypology` Glottolog data is updated. Now it is using Glottolog `3.4-32`.
 You can update data from Glottolog. To get the instruction on how to do it, consult the [tutorial](https://oneadder.github.io/lingtypology/glottolog#g_version).
 
 ## Citation
 If you are using this package in a scientific publication, it will be most appreciated if you add the citation:
 ```
 @misc{MichaelVoronov2669068,
-author       = {Michael Voronov},
-title        = {{lingtypology: a Python tool for linguistic interactive mapping}},
-month        = may,
-year         = 2019,
-doi          = {10.5281/zenodo.2669068},
-url          = {https://doi.org/10.5281/zenodo.2669068}
+    author = {Michael Voronov},
+    title = {{lingtypology: a Python tool for linguistic interactive mapping}},
+    month = may,
+    year = 2019,
+    doi = {10.5281/zenodo.2669068},
+    url = {https://doi.org/10.5281/zenodo.2669068}
 }
 ```
