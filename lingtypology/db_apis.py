@@ -432,7 +432,10 @@ class Phoible(object):
             self.inventories = pandas.read_csv('https://phoible.org/inventories.csv', sep=',', header=0)
             self.languages = pandas.read_csv('https://phoible.org/languages.csv', sep=',', header=0)
         else:
-            self.full_data = pandas.read_csv('https://raw.githubusercontent.com/phoible/dev/master/data/phoible.csv', sep=',', header=0, low_memory=False)
+            self.full_data = pandas.read_csv(
+                'https://raw.githubusercontent.com/phoible/dev/master/data/phoible.csv',
+                sep=',', header=0, low_memory=False
+            )
 
     def get_df(self, strip_na=[]):
         """Get data from Phoible in pandas.DataFrame format.
@@ -467,7 +470,7 @@ class Phoible(object):
             df = self.full_data
             if self.subset != 'all':
                 df = df[df.Source == self.subset.lower()]
-        df.fillna('~N/A~', inplace=True)
+        df = df.fillna('~N/A~')
         for column in strip_na:
             df = df[df[column] != '~N/A~']
         return df
@@ -496,3 +499,4 @@ class Phoible(object):
 #print(Sails().feature_descriptions('ICU10', 'ICU11'))
 #print(Phoible().get_df(strip_na=['tones']))
 #print(Phoible(aggregated=False).get_df().head())
+#print(Phoible(subset='UPSID', aggregated=False).get_df())
