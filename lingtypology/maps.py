@@ -338,25 +338,27 @@ class LingMap(object):
     
     def _check_and_generate_colors(self):
         """Checks whether amount of some unique features is larger that the amount of colors"""
-        colors = len(self.colors)
-        features = len(set(features))
+        if self.features:
+            colors = len(self.colors)
+            features = len(set(self.features))
+            
+            if colors < features:
+                new_colors = [
+                    '#{:06x}'.format(random.randint(0, 256**3)) \
+                        for x in range(features-colors)
+                ]
+                self.colors += new_colors
         
-        if colors < features:
-            new_colors = [
-                '#{:06x}'.format(random.randint(0, 256**3)) \
-                    for x in range(features-colors)
-            ]
-            self.colors += new_colors
-        
-        stroke_colors = len(self.stroke_colors)
-        stroke_features = len(set(self.stroke_features))
-        
-        if stroke_colors < stroke_features:
-            new_colors = [
-                '#{:06x}'.format(random.randint(0, 256**3)) \
-                    for x in range(stroke_features-stroke_colors)
-            ]
-            self.stroke_colors += new_colors
+        if self.stroke_features:
+            stroke_colors = len(self.stroke_colors)
+            stroke_features = len(set(self.stroke_features))
+            
+            if stroke_colors < stroke_features:
+                new_colors = [
+                    '#{:06x}'.format(random.randint(0, 256**3)) \
+                        for x in range(stroke_features-stroke_colors)
+                ]
+                self.stroke_colors += new_colors
         
     def _get_coordinates(self, language, i):
         """Get coordinates either from:
