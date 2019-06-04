@@ -23,6 +23,7 @@ import math
 import io
 import os
 import re
+import random
 import matplotlib.pyplot as plt
 from colour import Color
 from collections import deque
@@ -334,6 +335,28 @@ class LingMap(object):
         self.minicharts = []
         self.minichart_names = []
         self.marker_groups = []
+    
+    def _check_and_generate_colors(self):
+        """Checks whether amount of some unique features is larger that the amount of colors"""
+        colors = len(self.colors)
+        features = len(set(features))
+        
+        if colors < features:
+            new_colors = [
+                '#{:06x}'.format(random.randint(0, 256**3)) \
+                    for x in range(features-colors)
+            ]
+            self.colors += new_colors
+        
+        stroke_colors = len(self.stroke_colors)
+        stroke_features = len(set(self.stroke_features))
+        
+        if stroke_colors < stroke_features:
+            new_colors = [
+                '#{:06x}'.format(random.randint(0, 256**3)) \
+                    for x in range(stroke_features-stroke_colors)
+            ]
+            self.stroke_colors += new_colors
         
     def _get_coordinates(self, language, i):
         """Get coordinates either from:
@@ -803,7 +826,7 @@ class LingMap(object):
             "stroke_legend" attribute to False.
             To change the title of the legend use "stroke_legend_title" attribute.
         radius: int, default 12
-            Marker radius.
+            Marker radius.31
         control: bool, default False
             Whether to add LayerControls to the map.
             It allows interactive turning on/off given features.
@@ -818,7 +841,7 @@ class LingMap(object):
         self.stroke_control = control
         
 
-    def add_popups(self, popups, parse_html=False):
+    def add_popups(self, popups, parse_html=False, glottolog_links=True):
         """Add popups to markers
 
         popups: list of strings
@@ -826,11 +849,14 @@ class LingMap(object):
         parse_html: bool, default False
             By default (False) you can add small pieces of html code.
             If you need to add full html pages to popups, you need to set the option to True.
+        glottolog_links: bool, default True
+            Whether to include links to Glottolog in popups.
         """
         popups = tuple(popups)
         self._sanity_check(popups, feature_name='popups')
         self.popups = popups
         self.html_popups = parse_html
+        self.languages_in_popups = glottolog_links if not parse_html else False
 
     def add_tooltips(self, tooltips):
         """Add tooltips to markers
@@ -1068,6 +1094,8 @@ class LingMap(object):
         ----------
         m: folium.Map
         """
+        self._check_and_generate_colors()
+        
         if isinstance(self.start_location, str):
             if not self.start_location in self.start_location_mapping:
                 raise LingMapError('No such start location shortcut. Try passing coordinates.')

@@ -168,11 +168,12 @@ class Autotyp(object):
         """
         self.tables = tables
         self.show_citation = True
-        self.citation = 'Bickel, Balthasar, Johanna Nichols, Taras Zakharko,\n' + \
-                        'Alena Witzlack-Makarevich, Kristine Hildebrandt, Michael Rießler,\n' + \
-                        'Lennart Bierkandt, Fernando Zúñiga & John B. Lowe.\n' + \
-                        '2017. The AUTOTYP typological databases.\n' + \
-                        'Version 0.1.0 https://github.com/autotyp/autotyp-data/tree/0.1.0'
+        self.citation = \
+            'Bickel, Balthasar, Johanna Nichols, Taras Zakharko,\n' \
+            'Alena Witzlack-Makarevich, Kristine Hildebrandt, Michael Rießler,\n' \
+            'Lennart Bierkandt, Fernando Zúñiga & John B. Lowe.\n' \
+            '2017. The AUTOTYP typological databases.\n' \
+            'Version 0.1.0 https://github.com/autotyp/autotyp-data/tree/0.1.0'
         self._pages = []
 
     @property
@@ -254,10 +255,12 @@ class AfBo(object):
         """
         self.features = features
         self.show_citation = True
-        self.citation = 'Seifart, Frank. 2013.\n' + \
-                        'AfBo: A world-wide survey of affix borrowing.\n' + \
-                        'Leipzig: Max Planck Institute for Evolutionary Anthropology.\n' + \
-                        '(Available online at http://afbo.info, Accessed on {}.)'.format(datetime.now().strftime('%Y-%m-%d'))
+        self.citation = \
+            'Seifart, Frank. 2013.\n' \
+            'AfBo: A world-wide survey of affix borrowing.\n' \
+            'Leipzig: Max Planck Institute for Evolutionary Anthropology.\n' \
+            '(Available online at http://afbo.info, ' \
+                'Accessed on {}.)'.format(datetime.now().strftime('%Y-%m-%d'))
 
         response = requests.get('https://cdstar.shh.mpg.de/bitstreams/EAEA0-59C8-38F2-28DC-0/afbo_pair.csv.zip')
         with zipfile.ZipFile(io.BytesIO(response.content)) as thezip:
