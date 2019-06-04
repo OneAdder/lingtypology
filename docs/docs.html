@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>Lingtypology</title>
+<title>docs</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13116,30 +13116,486 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="LingTypology">LingTypology<a class="anchor-link" href="#LingTypology">&#182;</a></h2><p>LingTypology is a package that tries to bring functionality of the R
-<a href="https://github.com/ropensci/lingtypology">package</a>
-of the same name.<br>
-By now <code>lingtypology</code> is able to create interactive linguistic maps and has API for several linguistic databases.<br>
-There is a tutorial that allows to start using <code>lingtypology</code>:</p>
-<ol>
-<li><a href="https://oneadder.github.io/lingtypology/maps">Interactive linguistic maps</a></li>
-<li><a href="https://oneadder.github.io/lingtypology/glottolog">Glottolog</a></li>
-<li><a href="https://oneadder.github.io/lingtypology/db_apis">API for Wals, Autotyp etc.</a></li>
-<li><a href="https://oneadder.github.io/lingtypology/docs">Documentation</a></li>
-</ol>
-<h2 id="Credits-">Credits <a name="credits" /><a class="anchor-link" href="#Credits-">&#182;</a></h2><p>This Python package is inspired by the <a href="https://github.com/ropensci/lingtypology">R package</a> made by <a href="https://github.com/agricolamz">agricolamz</a>.<br>
-Also this module uses JavaScript library <a href="https://leafletjs.com/">Leaflet</a> and its Python-wrapper <a href="https://github.com/python-visualization/folium">Folium</a> and <a href="https://github.com/python-visualization/branca">Branca</a>.<br>
-Also, special thanks to <a href="https://github.com/xrotwang">Xrotwang</a> for helping me with the package.</p>
-<h2 id="Citation-">Citation <a name="citation" /><a class="anchor-link" href="#Citation-">&#182;</a></h2><p>It will be most appreciated if you cite <code>lingtypology</code>. To find out the recommended way to do so, consult the <a href="https://github.com/OneAdder/lingtypology/blob/master/README.md">readme</a>.</p>
-<h2 id="License-">License <a name="license" /><a class="anchor-link" href="#License-">&#182;</a></h2><p>Copyright (C) 2018-2019  Michael Voronov</p>
-<p>This program is free software: you can redistribute it and/or modify<br>
-it under the terms of the GNU General Public License as published by<br>
-the Free Software Foundation, either version 3 of the License, or<br>
-(at your option) any later version.</p>
-<p>This program is distributed in the hope that it will be useful,<br>
-but WITHOUT ANY WARRANTY; without even the implied warranty of<br>
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the<br>
-<a href="https://github.com/OneAdder/lingtypology/blob/master/LICENSE.md">GNU General Public License</a> for more details.</p>
+<hr>
+<hr>
+<h1 id="Documentation">Documentation<a class="anchor-link" href="#Documentation">&#182;</a></h1><p>In this part I will provide full guide for <code>lingtypology</code> package. It is
+divided into four parts: Installation, Interactive Maps, Glottolog
+functions and the API for databases.</p>
+<h2 id="Installation">Installation<a class="anchor-link" href="#Installation">&#182;</a></h2><p>The package is uploaded to PyPI software repository, therefore it can be
+installed with the <code>pip</code> utility with the following command:</p>
+<p><code>pip3 install lingtypology –user</code></p>
+<h2 id="Interactive-Maps">Interactive Maps<a class="anchor-link" href="#Interactive-Maps">&#182;</a></h2><p>Interactive maps can be created with <code>lingtypology.maps</code> module.</p>
+<h3 id="LingMap-Class">LingMap Class<a class="anchor-link" href="#LingMap-Class">&#182;</a></h3><p><em>class</em> lingtypology.maps.<strong>LingMap</strong> <em>(languages=[],
+glottocode=False)</em></p>
+<p>Bases: <em>object</em></p>
+<p><strong>Parameters</strong>:</p>
+<p><strong>languages</strong>: <em>list</em> or <em>pandas.Series</em> of strings, default <em>[]</em>.</p>
+<p>A list of languages. The language names should correspond to their names
+from Glottolog unless you use <em>add_custom_coordinates</em> method.</p>
+<p>Instead of language names you could use Glottocodes (language ID in
+Glottolog). In this case you need to set <em>glottocode</em> parameter to true.</p>
+<p><strong>glottocode</strong>: <em>bool</em>, default <em>False</em>.</p>
+<p>Whether to treat <em>languages</em> as Glottocodes.</p>
+<p><strong>Attributes</strong>:</p>
+<ul>
+<li><p><strong>tiles</strong>: <em>str</em>, default <em>'OpenStreetMap'</em></p>
+<p>Tiles for the map. You can use one of these tiles (list of tiles is
+borrowed from the Folium Documentation:</p>
+<ul>
+<li><p>"OpenStreetMap"</p>
+</li>
+<li><p>"Mapbox Bright" (Limited levels of zoom for free tiles)</p>
+</li>
+<li><p>"Mapbox Control Room" (Limited levels of zoom for free tiles)</p>
+</li>
+<li><p>"Stamen" (Terrain, Toner, and Watercolor)</p>
+</li>
+<li><p>"Cloudmade" (Must pass API key)</p>
+</li>
+<li><p>"Mapbox" (Must pass API key)</p>
+</li>
+<li><p>"CartoDB" (positron and dark_matter)</p>
+</li>
+<li><p>or pass the custum URL.</p>
+</li>
+</ul>
+</li>
+<li><p><strong>start_location</strong>: <em>(float, float)</em> or <em>str</em>, default <em>(0, 0)</em></p>
+<p>Coordinates of the start location for the map <em>(latitude,
+longitude)</em> or a text shortcut. List of available shortcuts:
+<em>\"Central Europe\", \"Caucasus\", \"Australia &amp; Oceania\", \"Papua
+New Guinea\", \"Africa\", \"Asia\", \"North America\", \"Central
+America\", \"South America\"</em>.</p>
+</li>
+<li><p><strong>start_zoom</strong>: <em>int</em>, default <em>2</em></p>
+<p>Initial zoom level. Bypassed if you are using a shortcut
+<em>start_location</em>.</p>
+</li>
+<li><p><strong>control_scale</strong>: <em>bool</em>, default <em>True</em></p>
+<p>Whether to add control scale.</p>
+</li>
+<li><p><strong>prefer_canvas</strong>: <em>bool</em>, default <em>False</em></p>
+<p>Use canvas instead of SVG. If set to True, the map may be more
+responsive in case you have a lot of markers.</p>
+</li>
+<li><p><strong>base_map</strong>: <em>folium.Map</em>, default <em>None</em></p>
+<p>In case you want to draw something on particular <em>folium.Map</em>.</p>
+</li>
+<li><p><strong>title</strong>: <em>str</em>, default <em>None</em></p>
+<p>You can add a title to the map.</p>
+</li>
+<li><p><strong>legend</strong>: <em>bool</em>, default <em>True</em></p>
+<p>Whether to add legend for features (<em>add_features</em> method).</p>
+</li>
+<li><p><strong>stroke_legend</strong>: <em>bool</em>, default <em>True</em>.</p>
+<p>Whether to add legend for stroke features (<em>add_stroke_features</em>
+method)</p>
+</li>
+<li><p><strong>legend_title</strong>: <em>str</em>, default <em>'Legend'</em></p>
+<p>Legend title.</p>
+</li>
+<li><p><strong>stroke_legend_title</strong>: <em>str</em>, default <em>'Legend'</em></p>
+<p>Stroke legend title.</p>
+</li>
+<li><p><strong>legend_position</strong>: <em>str</em>, default <em>'bottomright'</em></p>
+<p>Legend position. Available values: 'right', 'left', 'top', 'bottom',
+'bottomright', 'bottomleft', 'topright', 'topleft'.</p>
+</li>
+<li><p><strong>stroke_legend_position</strong>: <em>str</em>, default <em>'bottomleft'</em></p>
+<p>Stroke legend position. Available values: 'right', 'left', 'top',
+'bottom', 'bottomright', 'bottomleft', 'topright', 'topleft'.</p>
+</li>
+<li><p><strong>colors</strong>: <em>list</em> of html codes for colors (<em>str</em>).</p>
+<p>Colors that represent features. You can either use the 20 default
+colors or set yours.</p>
+</li>
+<li><p><strong>stroke_colors</strong>: <em>list</em> of html codes for colors (<em>str</em>)</p>
+<p>Colors that represent additional (stroke) features.</p>
+</li>
+<li><p><strong>shapes</strong>: <em>list</em> of characters (<em>str</em>)</p>
+<p>If you use shapes instead of colors, you can either use the default
+shapes or set yours. Shapes are Unicode symbols.</p>
+</li>
+<li><p><strong>stroked</strong>: <em>bool</em>, default <em>True</em></p>
+<p>Whether to add stroke to markers.</p>
+</li>
+<li><p><strong>unstroked</strong>: <em>bool</em>, default <em>True</em></p>
+<p>If set to True, circle marker will merge if you zoom out without
+stroke between them. It multiplies the number of markers by 2. For
+better performance set it to False. More information and examples in
+Chapter 2, Paragraph 4.4.</p>
+</li>
+<li><p><strong>languages_in_popups</strong>: <em>bool</em>, default <em>True</em></p>
+<p>Whether to show links to Glottolog website in popups.</p>
+</li>
+<li><p><strong>control</strong>: <em>bool</em>, default <em>False</em></p>
+<p>Whether to add LayerControls and group by features.</p>
+</li>
+<li><p><strong>stroke_control</strong>: <em>bool</em>, default <em>False</em></p>
+<p>Whether to add LayerControls and group by stroke features.</p>
+</li>
+<li><p><strong>control_position</strong>: <em>str</em>, default <em>'topright'</em></p>
+<p>Position of LayerControls. May be 'topleft', 'topright',
+'bottomleft' or 'bottomright'.</p>
+</li>
+<li><p><strong>colormap_colors</strong>: <em>tuple</em>, default <em>('white', 'green')</em></p>
+<p>Colors for the colormap.</p>
+</li>
+</ul>
+<p>\bigskip
+<strong>Methods</strong>:</p>
+<ul>
+<li><p><strong>add_custom_coordinates</strong> <em>(custom_coordinates)</em></p>
+<p>Set custom coordinates. By default cooordinates for the languages
+are taken from the Glottolog database. If you have coordinates and
+want to use them, use this function.</p>
+<p>It could be useful if you are using data from a dataset which
+provides coordinates and you do not need to rely on the Glottolog
+data.</p>
+<p><strong>Parameter</strong> custom_coordinates: <em>list</em> of custom_coordinates
+(<em>tuples</em>)</p>
+<p>Length of the list should equal to length of languages.</p>
+</li>
+<li><p><strong>add_features*</strong>(features, radius=7, opacity=1, numeric=False,
+control=False, use_shapes=False)*</p>
+<p>Add features to the map.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><p><strong>features</strong>: <em>list</em></p>
+<p>List of features. Amount of features should be equal to the
+amount of languages. By default, if you add features, a legend
+will appear. To shut it down set <em>legend</em> attribute to <em>False</em>.
+To change the title of the legend use <em>legend_title</em> attribute.
+To change legend position use use <em>legend_position</em> attribute.</p>
+</li>
+<li><p><strong>radius</strong>: <em>int</em>, default <em>7</em></p>
+<p>Marker radius.</p>
+</li>
+<li><p><strong>numeric</strong>: <em>bool</em>, default <em>False</em></p>
+<p>Whether to assign different color to each feature (<em>False</em>), or
+to assign a color from colormap (<em>True</em>). You can set it to True
+only in case your features are numeric and stroke features are
+not given. To change the default colors of the color scale use
+<em>colormap_colors</em> attribute.</p>
+</li>
+<li><p><strong>control</strong>: <em>bool</em>, default <em>False</em></p>
+<p>Whether to add LayerControls to the map. It allows interactive
+turning on/off given features.</p>
+</li>
+<li><p><strong>use_shapes</strong>: <em>bool</em>, default <em>False</em></p>
+<p>Whether to use shapes instead of colors. This option allows to
+represent features as shapes. Shapes are Unicode charaters. You
+can replace or add to default symbols by changing <em>shapes</em>
+attribute. If colors are not a viable option for you, you can
+set this option to True.</p>
+</li>
+</ul>
+</li>
+<li><p><strong>add_stroke_features*</strong>(features, radius=12, opacity=1,
+numeric=False, control=False)*:</p>
+<p>Add additional set of features that look like strokes around
+markers.</p>
+<ul>
+<li><p><strong>features</strong>: <em>list</em></p>
+<p>List of additional features. Amount of features should be equal
+to the amount of languages. By default, if you add stroke
+features, a legend will appear. To shut it down set
+<em>stroke_legend</em> attribute to <em>False</em>. To change the title of
+the legend use <em>stroke_legend_title</em> attribute. To change
+legend position use use <em>stroke_legend_position</em> attribute.</p>
+</li>
+<li><p><strong>radius</strong>: <em>int</em>, default <em>12</em></p>
+<p>Marker radius. Note that this radius is absolute as well.</p>
+</li>
+<li><p><strong>control</strong>: <em>bool</em>, default <em>False</em></p>
+<p>Whether to add LayerControls to the map. It allows interactive
+turning on/off given stroke features.</p>
+</li>
+</ul>
+</li>
+<li><p><strong>add_overlapping_features</strong> <em>(features, radius=7,
+radius_increment=4, mapping=None)</em>:</p>
+<p>Add overlapping features. For example, if you want to draw on map
+whether language 'is ergative', 'is slavic', 'is spoken in Russia'.
+It will draw several markers of different size for each feature.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><p><strong>features</strong>: <em>list</em> of lists</p>
+<p>List of features. Amount of features should be equal to the
+amount of languages.</p>
+</li>
+<li><p><strong>radius</strong>: <em>int</em>, default 7</p>
+<p>Radius of the smallest circle.</p>
+</li>
+<li><p><strong>radius_increment</strong>: <em>int</em>, default <em>4</em></p>
+<p>Step by which the size of the marker for each feature will be
+incremented.</p>
+</li>
+<li><p><strong>mapping</strong>: <em>dict</em>, default <em>None</em></p>
+<p>Mapping for the legend.</p>
+</li>
+</ul>
+</li>
+<li><p><strong>add_minicharts</strong> <em>(\</em>minicharts, typ='pie', size=0.6, names=None,
+textprops=None, labels=False, colors=[], startangle=90)*:</p>
+<p>Create minicharts using Maplotlib.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><p><strong>*minicharts</strong>: list-like objects</p>
+<p>Data for minicharts. Two list-like objects.</p>
+</li>
+<li><p><strong>typ</strong>: <em>str</em>, default <em>pie</em></p>
+<p>Type of the minicharts. Either <em>pie</em> or <em>bar</em>.</p>
+</li>
+<li><p><strong>size</strong>: <em>float</em></p>
+<p>Size of the minicharts.</p>
+</li>
+<li><p><strong>texprops</strong>: <em>dict</em>, default <em>None</em></p>
+<p>Textprops for Matplotlib.</p>
+</li>
+<li><p><strong>labels</strong>: <em>bool</em>, default <em>False</em></p>
+<p>Whether to display labels.</p>
+</li>
+<li><p><strong>colors</strong>: <em>list</em>, default <em>[]</em></p>
+<p>Minicharts colors.</p>
+</li>
+<li><p><strong>startange</strong>: <em>int</em>, default <em>90</em></p>
+<p>Start angle of pie-charts (pie-charts only).</p>
+</li>
+</ul>
+</li>
+<li><p><strong>add_heatmap</strong>: <em>(heatmap=[])</em></p>
+<p>Add heatmap.</p>
+<p><strong>Parameter</strong> heatmap: list-like object with tuples</p>
+<p>Coordinates for the heatmap. To create a heatmap-only map, do not
+pass any languages.</p>
+</li>
+<li><p><strong>add_popups</strong> <em>(popups, parse_html=False)</em></p>
+<p>Add popups to markers.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><p><strong>popups</strong>: <em>list</em> of strings List of popups. Length of the list
+should equal to length of languages.</p>
+</li>
+<li><p><strong>parse_html</strong>: <em>bool</em>, default <em>False</em> By default (<em>False</em>)
+you can add HTML elements. If you need to add full HTML pages to
+popups, you need to set the option to <em>True</em>.</p>
+</li>
+</ul>
+</li>
+<li><p><strong>add_tooltips</strong> <em>(tooltips)</em>:</p>
+<p>Add tooltips to markers.</p>
+<p><strong>Parameter</strong> tooltips: <em>list</em> of strings</p>
+<p>List of tooltips. Length of the list should equal to length of
+languages.</p>
+</li>
+<li><p><strong>add_minimap</strong> <em>(position='bottomleft', width=150, height=150,
+collapsed_width=25, collapsed_height=25, zoom_animation=True)</em></p>
+<p>Add minimap.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><p><strong>position</strong>: <em>str</em>, default <em>'bottomleft'</em></p>
+</li>
+<li><p><strong>width</strong> and <strong>height</strong>: <em>int</em>, default <em>150</em></p>
+</li>
+<li><p><strong>collapsed_width</strong> and <strong>collapsed_height</strong>: <em>int</em>, default
+<em>25</em></p>
+</li>
+<li><p><strong>zoom_animation</strong>: <em>bool</em>, default <em>True</em></p>
+<p>You can disable zoom animation for better performance.</p>
+</li>
+</ul>
+</li>
+<li><p><strong>add_line</strong> and <strong>add_rectangle</strong> <em>(locations, tooltip=",
+popup=", color='black')</em></p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><p><strong>locations</strong>: list-like object of tuples</p>
+<p>Coordinates necessary ro draw the figure.</p>
+</li>
+<li><p><strong>tooltip</strong>: <em>str</em>, default "</p>
+<p>Tooltip for the figure.</p>
+</li>
+<li><p><strong>popup</strong>: <em>str</em>, default "</p>
+<p>Popup for the figure.</p>
+</li>
+<li><p><strong>color</strong>: <strong>str</strong>, default 'black'</p>
+<p>Color of the figure.</p>
+</li>
+</ul>
+</li>
+<li><p><strong>create_map</strong> <em>()</em></p>
+<p>Create the map. To display the map in Jupyter Notebook, use this
+method.</p>
+<p><strong>Returns</strong> folium.Map</p>
+</li>
+<li><p><strong>render*</strong>()*</p>
+<p><strong>Returns</strong> the HTML code as <em>str</em>. It might be useful in case you
+want to implement it into a website.</p>
+</li>
+<li><p><strong>save</strong> <em>(path)</em></p>
+<p>Save the map as HTML. It is useful when you need to include a map
+into a web-publication.</p>
+<p><strong>Parameter</strong> path, <em>str</em></p>
+<p>Path to the file.</p>
+</li>
+<li><p><strong>save_static</strong> <em>(path=None)</em></p>
+<p>Save the map as PNG. Experimental function. Requires additional
+Python package Selenium and additional application Geckodriver.</p>
+<p>It is useful for handouts, presentations and publications in paper
+journals.</p>
+<p>If path is not given <strong>returns</strong> the PNG as <em>bytes</em>.</p>
+</li>
+</ul>
+<h3 id="Functions">Functions<a class="anchor-link" href="#Functions">&#182;</a></h3><p><em>function</em> lingtypology.maps.<strong>merge</strong> <em>(\</em>maps)*</p>
+<p>Accepts <em>LingMap</em> objects and creates map of them.</p>
+<p>It is impossible to add, for example, features and minicharts. If you
+need it, you can create two <em>LingMap</em> objects and then use the <em>merge</em>
+function.</p>
+<p><strong>Parameter</strong> *maps: <em>lingtypology.maps.LingMap</em> objects.</p>
+<p><strong>Returns</strong> lingtypology.maps.LingMap</p>
+<p><em>function</em> lingtypology.maps.<strong>get_elevations</strong> <em>(languages)</em></p>
+<p>Get data on elevation for languages. More information in Chapter 2,
+Paragraph 4.2.</p>
+<p><strong>Parameter</strong> lagnauges: <em>list</em> of strings</p>
+<p><strong>Returns</strong> list</p>
+<p><em>function</em> lingtypology.maps.<strong>gradient</strong> <em>(iterations, color1='white',
+color2='green')</em></p>
+<p>Creates color gradient of given length.</p>
+<p><strong>Returns</strong> list of HEX-colors</p>
+<h2 id="Glottolog">Glottolog<a class="anchor-link" href="#Glottolog">&#182;</a></h2><h3 id="Functions">Functions<a class="anchor-link" href="#Functions">&#182;</a></h3><p>Glottolog module includes various functions to work with Glottolog data.</p>
+<p>The only funcntion that accepts list-like objects and returns <em>list</em> is
+<strong>get_affiliations</strong>. Its <strong>parameter</strong> is language names, it
+<strong>returns</strong> the genealogical information for the given languages.</p>
+<p>The <strong>parameter</strong> of all the other functions is <em>str</em> and they
+<strong>return</strong> <em>str</em>.</p>
+<p>The following functions use language name as the <strong>parameter</strong> and
+<strong>return</strong> coordinates, Glottocode, macro area and ISO code
+respectively:</p>
+<ul>
+<li><p>lingtypology.glottolog.<strong>get_coordinates</strong></p>
+</li>
+<li><p>lingtypology.glottolog.<strong>get_glot_id</strong></p>
+</li>
+<li><p>lingtypology.glottolog.<strong>get_macroarea</strong></p>
+</li>
+<li><p>lingtypology.glottolog.<strong>get_iso</strong></p>
+</li>
+</ul>
+<p>The following functions use Glottocode as the <strong>parameter</strong> and
+<strong>return</strong> coordinates, language name and ISO code respectively:</p>
+<ul>
+<li><p>lingtypology.glottolog.<strong>get_coordinates_by_glot_id</strong></p>
+</li>
+<li><p>lingtypology.glottolog.<strong>get_by_glot_id</strong></p>
+</li>
+<li><p>lingtypology.glottolog.<strong>get_iso_by_glot_id</strong></p>
+</li>
+</ul>
+<p>The following functions use ISO code as the <strong>parameter</strong> and <strong>return</strong>
+language name and Glottocode respectively.</p>
+<ul>
+<li><p>lingtypology.glottolog.<strong>get_by_iso</strong></p>
+</li>
+<li><p>lingtypology.glottolog.<strong>get_glot_id_by_iso</strong></p>
+</li>
+</ul>
+<h3 id="Versions">Versions<a class="anchor-link" href="#Versions">&#182;</a></h3><p>Processed Glottolog data is stored statically in the package directory.
+It is updated with each new release of <code>lingtypology</code>.</p>
+<p>The version of the Glottolog data which is currently used is stored in
+lingtypology.glottolog.<strong>version</strong> variable.</p>
+<p>It is possible to use local Glottolog data. To do so, it is necessary to
+perform the following steps:</p>
+<ul>
+<li><p>Download the current version of the Glottolog data.</p>
+</li>
+<li><p>Create directory <code>.lingtypology_data</code> in your home directory.</p>
+</li>
+<li><p>Move <code>glottolog</code> to <code>.lingtypology_data</code>.</p>
+</li>
+<li><p>Run the following command: <code>glottolog –repos=glottolog languoids</code></p>
+</li>
+<li><p>It will generate two small files (csv and json). Now you can delete
+everything except for these files from the directory.</p>
+</li>
+<li><p>Lingtypology will automatically use the local data.</p>
+</li>
+</ul>
+<h2 id="Databases-API">Databases API<a class="anchor-link" href="#Databases-API">&#182;</a></h2><h3 id="General">General<a class="anchor-link" href="#General">&#182;</a></h3><p>One of the objectives of LingTypology is to provide a simple interface
+for linguistic databases. Therefore, classes used for acccessing them
+have unified API: most attributes and methods overlap among all of them.
+In this subsection I will describe this universal interface.</p>
+<p><strong>Attributes</strong>:</p>
+<ul>
+<li><p><strong>citation</strong>: <em>str</em></p>
+<p>Citation for the database.</p>
+</li>
+<li><p><strong>show_citation</strong>: <em>bool</em>, default <em>True</em></p>
+<p>Whether to print the citation when <em>get_df</em> method is called.</p>
+</li>
+<li><p><strong>features_list</strong> or <strong>subsets_list</strong>: <em>list</em> of strings</p>
+<p>List of available features for all the databases except for
+<em>Phoible</em>. In the case of <em>Phoible</em> it is list of available subsets
+(UPSID, SPA etc.).</p>
+</li>
+</ul>
+<p><strong>Methods</strong>:</p>
+<ul>
+<li><p><strong>get_df</strong></p>
+<p>In all cases <strong>parameters</strong> are optional. They depend on the
+particular class.</p>
+<p>In the case of <em>Wals</em> it has optional <em>str</em> parameter <em>join_how</em>:
+the way multiple WALS pages will be joined (either <em>'inner'</em> or
+<em>'outer'</em>). If the value is <em>'inner'</em>, the resulting table will only
+contain data for languages mentioned in all the given pages. Else,
+the resulting table will contain values mentioned in at least one of
+the pages. Default: <em>'inner'</em>.</p>
+<p>In the case of <em>Autotyp</em> and <em>Phoible</em> it has optional <em>list</em>
+parameter <em>strip_na</em>. It is a list of columns. If this parameter is
+given, the rows where some values in the given columns are not
+present will be dropped. Default: <em>[]</em>.</p>
+<p><strong>Returns</strong> the dataset as <em>pandas.DataFrame</em>.</p>
+</li>
+<li><p><strong>get_json</strong></p>
+<p>It works the same way as <em>get_df</em> but it <strong>returns</strong> <em>dict</em> object
+where keys are headers of the table.</p>
+</li>
+</ul>
+<h3 id="WALS">WALS<a class="anchor-link" href="#WALS">&#182;</a></h3><p><em>class</em> lingtypology.db_apis.<strong>Wals</strong> <em>(\</em>features)*</p>
+<p><strong>Parameter</strong> features, <em>list</em></p>
+<p>List of WALS pages that will be present in the resulting table. E.g.
+<em>['1A']</em></p>
+<p><strong>Additional attribite</strong> general_citation, <em>str</em></p>
+<p>The general citation for <strong>all</strong> the WALS pages.</p>
+<h3 id="Autotyp">Autotyp<a class="anchor-link" href="#Autotyp">&#182;</a></h3><p><em>class</em> lingtypology.db_apis.<strong>Autotyp</strong> <em>(\</em>tables)*</p>
+<p><strong>Parameter</strong> *tables: <em>list</em> of strings</p>
+<p>List of the Autoptyp tables that will be merged in the resulting table.
+E.g. <em>['gender']</em></p>
+<h3 id="AfBo">AfBo<a class="anchor-link" href="#AfBo">&#182;</a></h3><p><em>class</em> lingtypology.db_apis.<strong>AfBo</strong> <em>(\</em>features)*</p>
+<p><strong>Parameter</strong> *features: <em>list</em> of strings</p>
+<p>List of Autotyp features that will be present in the resulting table.
+E.g. <em>['adjectivizer']</em>.</p>
+<h3 id="SAILS">SAILS<a class="anchor-link" href="#SAILS">&#182;</a></h3><p><em>class</em> lingtypology.db_apis.<strong>Sails</strong> <em>(\</em>features)*</p>
+<p><strong>Parameter</strong> *features: <em>list</em> of strings</p>
+<p>List of SAILS pages that will be included in the resulting table.</p>
+<p><strong>Additional attribute</strong> feature<strong>s</strong>_descriptions: <em>pandas.DataFrame</em></p>
+<p>Table that contain description for all the SAILS pages.</p>
+<p><strong>Additional method</strong> feature_descriptions <em>(\</em>features)*</p>
+<p><strong>Returns</strong> table with description for each given <strong>feature</strong>.</p>
+<h3 id="PHOIBLE">PHOIBLE<a class="anchor-link" href="#PHOIBLE">&#182;</a></h3><p><em>class</em> lingtypology.db_apis.<strong>Phoible</strong> <em>(subset='all',
+aggregated=True)</em></p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><p><strong>subset</strong>: <em>str</em>, default <em>'all'</em></p>
+<p>One of the PHOIBLE datasets or all of them.</p>
+</li>
+<li><p><strong>aggregated</strong>: <em>bool</em>, default <em>True</em></p>
+<p>If is <em>True</em> only aggregated data (e.g. amount of consonants) will
+be included into the resulting table. The table will be small and
+easy to operate.</p>
+<p>Else, full PHOIBLE data will be included.</p>
+</li>
+</ul>
 
 </div>
 </div>
