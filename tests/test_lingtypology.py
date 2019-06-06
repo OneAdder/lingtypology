@@ -56,9 +56,12 @@ def test_LingMap_features2(ejective_and_n_consonants):
     data = ejective_and_n_consonants
 
     m = LingMap(data.language)
-    m.legend_title='Amount of consonants'
+    m.legend_title = 'Amount of Consonants'
+    m.stroke_legend_title = 'Amount of Vowels'
+    m.colormap_colors = ('white', 'blue')
     m.add_tooltips(data.consonants)
     m.add_features(data.consonants, numeric=True)
+    m.add_stroke_features(data.vowels, numeric = True)
     m.create_map()
 
 def test_LingMap_features3():

@@ -306,7 +306,10 @@ class LingMap(object):
         self.stroke_control = False
         self.control_position = 'topright'
         # Colormap
+        self.numeric = False
+        self.s_numeric = False
         self.colormap_colors = ('white', 'green')
+        self.stroke_colormap_colors = ('white', 'red')
         # Heat map
         self.use_heatmap = False
         self.heatmap = []
@@ -598,8 +601,11 @@ class LingMap(object):
         else:
             colors = self.colors
             
+        numeric = self.s_numeric if stroke else self.numeric
+        colormap_colors = self.stroke_colormap_colors if stroke else self.colormap_colors
+            
         features = self._sort_all(features)
-        if self.numeric and not stroke:
+        if numeric:
             if not all(isinstance(f, int) or isinstance(f, float) for f in features):
                 try:
                     features = [int(el) for el in features]
@@ -613,11 +619,10 @@ class LingMap(object):
                         features = [int(el) for el in features]
 
             colormap = branca.colormap.LinearColormap(
-                colors = self.colormap_colors,
+                colors = colormap_colors,
                 index = [features[0], features[-1]],
                 vmin = features[0],
                 vmax = features[-1],
-                caption = self.legend_title
             )
             if isinstance(features[-1], int):
                 if features[-1] // 10 == 0:
@@ -1270,9 +1275,12 @@ class LingMap(object):
         deque((mark[0].add_to(mark[1]) for mark in markers))
         
         if self.features:
-            if self.numeric:
+            if self.numeric or self.s_numeric:
                 m.add_child(default_group)
-                self._create_legend(m, data, title=self.legend_title, position=self.legend_position)
+                if self.numeric:
+                    self._create_legend(m, data, title=self.legend_title, position=self.legend_position)
+                if self.s_numeric:
+                    self._create_legend(m, s_data, title=self.stroke_legend_title, position=self.stroke_legend_position)
             else:
                 if self.control:
                     deque((m.add_child(fg[0]) for fg in groups_features))
