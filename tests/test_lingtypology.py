@@ -13,8 +13,6 @@ def circassian():
         delimiter=',',
         header=0)
 
-
-
 @pytest.fixture
 def ejective_and_n_consonants():
     return pandas.read_csv(
