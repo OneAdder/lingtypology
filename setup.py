@@ -40,6 +40,7 @@ setup(
           'pyglottolog',
           'colour',
           'matplotlib',
+          'selenium'
     ],
     extras_require={
         'test': [

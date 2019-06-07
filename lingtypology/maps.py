@@ -778,7 +778,6 @@ class LingMap(object):
                         '<li><span ' \
                             'style="background: {};opacity:0.7;"' \
                         '></span>{}</li>'
-            print(data)
             data = '\n'.join([html.format(d[1], d[0]) for d in data])
         return (groups_features, data)
 
@@ -1531,12 +1530,21 @@ class LingMap(object):
         If fname is not given, returns the image as bytes.
         """
         mappa = self.create_map()
-        png = mappa._to_png()
-        if fname:
-            with open(fname, 'wb') as f:
-                f.write(png)
+        try:
+            png = mappa._to_png()
+        except Exception:
+            print(
+                'It seems that GeckoDriver is not installed.\n'
+                'Method "save_static" requires it.\n'
+                'You could find it here:\n'
+                'https://github.com/mozilla/geckodriver'
+            )
         else:
-            return png
+            if fname:
+                with open(fname, 'wb') as f:
+                    f.write(png)
+            else:
+                return png
 
 def map_feature(
     languages,
