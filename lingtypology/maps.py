@@ -52,7 +52,9 @@ def gradient(iterations, color1='white', color2='green'):
         Second color.
     """
     color1 = Color(color1)
-    colors = [color.get_hex() for color in color1.range_to(Color(color2), iterations)]
+    colors = [
+        color.get_hex() for color in color1.range_to(Color(color2), iterations)
+    ]
     return colors
 
 def merge(*maps, autoset_legends=True):
@@ -269,13 +271,26 @@ class LingMap(object):
         self.glottocode = glottocode
         self.warnings_enabled = False
         # Feature representation
-        self.stroke_colors = ['#ffffff', '#000000', '#800000', '#BC8F8F', '#FFE4C4', '#6495ED', '#4682B4',
-                         '#FF6347', '#778899', '#40E0D0', '#00FFFF', '#F08080', '#6495ED', '#FF7F50',
-                         '#D2691E', '#7FFF00', '#5F9EA0', '#DEB887', '#A52A2A', '#8A2BE2', '#0000FF']
-        self.colors = ['#e6194b', '#19e6b4', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6',
-                  '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8','#800000',
-                  '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000']
-        self.shapes = ['⬤', '◼', '▲', '◯', '◻', '△', '◉', '▣', '◐', '◧', '◭', '◍','▤', '▶']
+        self.stroke_colors = [
+            '#ffffff', '#000000', '#800000',
+            '#BC8F8F', '#FFE4C4', '#6495ED',
+            '#4682B4', '#FF6347', '#778899',
+            '#40E0D0', '#00FFFF', '#F08080',
+            '#6495ED', '#FF7F50', '#D2691E',
+            '#7FFF00', '#5F9EA0', '#DEB887',
+            '#A52A2A', '#8A2BE2', '#0000FF',
+        ]
+        self.colors = [
+            '#e6194b', '#19e6b4', '#ffe119',
+            '#4363d8', '#f58231', '#911eb4',
+            '#46f0f0', '#f032e6', '#bcf60c',
+            '#fabebe', '#008080', '#e6beff',
+            '#9a6324', '#fffac8', '#800000',
+            '#aaffc3', '#808000', '#ffd8b1',
+            '#000075', '#808080', '#ffffff',
+        ]
+        self.shapes = ['⬤', '◼', '▲', '◯', '◻', '△', '◉',
+                       '▣', '◐', '◧', '◭', '◍','▤', '▶']
         # Map
         self.tiles = 'OpenStreetMap'
         self.base_map = None
@@ -382,10 +397,14 @@ class LingMap(object):
             coordinates = self.custom_coordinates[i]
         else:
             if self.glottocode:
-                coordinates = lingtypology.glottolog.get_coordinates_by_glot_id(language)
+                coordinates = \
+                    lingtypology.glottolog.get_coordinates_by_glot_id(language)
             else:
-                coordinates = lingtypology.glottolog.get_coordinates(language)
-        if not coordinates or math.isnan(coordinates[0]) or math.isnan(coordinates[1]):
+                coordinates = \
+                    lingtypology.glottolog.get_coordinates(language)
+        if not coordinates \
+            or math.isnan(coordinates[0]) \
+            or math.isnan(coordinates[1]):
             return
         else:
             return coordinates
@@ -404,17 +423,32 @@ class LingMap(object):
         parse_html: bool, default False
             Whether to use Folium.IFrame to add content to the popup
         """
-        popup_href = '''<a href="https://glottolog.org/resource/languoid/id/{}" onclick="this.target='_blank';">{}</a><br>'''
-        href_link = lingtypology.glottolog.get_glot_id(language) if not self.glottocode else language
-        href_content = language if not self.glottocode else lingtypology.glottolog.get_by_glot_id(language)
-        popup_href = popup_href.format(href_link, href_content) if href_link else href_content
+        popup_href = \
+            '<a ' \
+                'href="https://glottolog.org/resource/languoid/id/{}"' \
+                '''onclick="this.target='_blank';"''' \
+            '>' \
+                '{}'\
+            '</a>'\
+            '<br>'
+        href_link = lingtypology.glottolog.get_glot_id(language) \
+            if not self.glottocode \
+            else language
+        href_content = language \
+            if not self.glottocode \
+            else lingtypology.glottolog.get_by_glot_id(language)
+        popup_href = popup_href.format(href_link, href_content) \
+            if href_link \
+            else href_content
         if self.languages_in_popups:
             if self.popups:
                 if parse_html:
-                    raise LingMapError('''
-                                       It is impossible to add both language links and large HTML strings.
-                                       You can either not use html_popups option or set ling_map_object.languages_in_popups = False.
-                                       ''')
+                    raise LingMapError(
+                        'It is impossible to add both language links' \
+                        'and large HTML strings.\n' \
+                        'You can either not use html_popups option ' \
+                        'or set ling_map_object.languages_in_popups = False.'
+                    )
                 popup = folium.Popup(popup_href + self.popups[i])
             else:
                 popup = folium.Popup(popup_href)
@@ -443,8 +477,10 @@ class LingMap(object):
         with open(MODULE_DIRECTORY + 'legend.html', 'r', encoding='utf-8') as f:
             template = f.read()
         template = jinja2.Template(template)
-        template = template.render(data=legend_data, position=position, title=title,
-                                   use_shapes=self.use_shapes, legend_id=self._legend_id)
+        template = template.render(
+            data=legend_data, position=position, title=title,
+            use_shapes=self.use_shapes, legend_id=self._legend_id
+        )
         template = '{% macro html(this, kwargs) %}' + template + '{% endmacro %}'
         macro = branca.element.MacroElement()
         macro._template = branca.element.Template(template)
@@ -539,7 +575,8 @@ class LingMap(object):
         ----------
         features: str
         """
-        attrs = [self.languages, self.popups, self.tooltips, self.custom_coordinates]
+        attrs = [self.languages, self.popups,
+                 self.tooltips, self.custom_coordinates]
         length = [False for n in range(len(features))]
         attrs_r = []
         for attr in attrs:
@@ -592,7 +629,7 @@ class LingMap(object):
                 return -2
             elif n / 10 > 1:
                 return -1
-            elif n > 1 and isinstance(l[-1], float):
+            elif n > 1 and isinstance(n, float):
                 return 0
             return None
             
@@ -610,17 +647,21 @@ class LingMap(object):
         
         if isinstance(features[-1], int):
             if features[-1] // 10 == 0:
+                step = 1
                 colormap_features = list(range(minimum, maximum)) + [maximum]
             else:
-                colormap_features = list(range(minimum, maximum, maximum // 10))
+                step = maximum // 10
+                colormap_features = list(range(minimum, maximum, step))
         else:
-            colormap_features = list(frange(minimum, maximum, maximum / 10))
+            step = maximum / 10
+            colormap_features = list(frange(minimum, maximum, step))
 
         # Crazy stuff below draws SVGs with color gradient
         groups_features = [(0, colormap(feature)) for feature in features]
         color_data = ''
         text = ''
         i = 0
+        '''
         for x in range(8):
             #This loop ensures that the minimal value is displayed
             color_data += '<line x1="0" y1="{pos}" x2="20" y2="{pos}"' \
@@ -631,6 +672,7 @@ class LingMap(object):
         text += '<text x="5" y="{pos}" dx="0" dy="0ex">- {text}</text>'.format(
             pos=i+3, text=colormap_features[0]
         )
+        '''
         for ind, cf in enumerate(colormap_features):
             color_data += '<line x1="0" y1="{pos}" x2="20" y2="{pos}"' \
                 'style="stroke:{color};stroke-width:3;" />'.format(
@@ -642,7 +684,7 @@ class LingMap(object):
                     pos=i, text=cf
                 )
             if not ind + 1 == len(colormap_features):
-                gr = gradient(20, colormap(cf), colormap(colormap_features[ind + 1]))
+                gr = [colormap(f) for f in frange(cf, colormap_features[ind + 1], step / 20)][1:-2]
                 for c in gr:
                     i += 1
                     color_data += '<line x1="0" y1="{pos}" x2="20" y2="{pos}"' \
@@ -687,10 +729,11 @@ class LingMap(object):
             colors = self.colors
             
         numeric = self.s_numeric if stroke else self.numeric
-        colormap_colors = self.stroke_colormap_colors if stroke else self.colormap_colors
+        colormap_colors = self.stroke_colormap_colors \
+            if stroke \
+            else self.colormap_colors
             
         features = self._sort_all(features)
-        #Below 'if numeric' there is the most stupid and the most beautiful code I've ever made
         if numeric:
             if not all(isinstance(f, int) or isinstance(f, float) for f in features):
                 try:
@@ -703,7 +746,8 @@ class LingMap(object):
                 if isinstance(features[0], float):
                     if all(el.is_integer() for el in features):
                         features = [int(el) for el in features]
-            data, groups_features = self._make_colormap(features, colormap_colors)
+            data, groups_features = \
+                self._make_colormap(features, colormap_colors)
         else:
             mapping = {}
             clear_features = []
@@ -717,8 +761,24 @@ class LingMap(object):
                 mapping[feature] = (groups[i], colors[i])
                 data.append((feature, colors[i]))
             groups_features = [mapping[f] for f in features]
-            html = '<li><span style="color: #000000; text-align: center; opacity:0.7;">{}</span>{}</li>' if use_shapes \
-                else '<li><span style="background: {};opacity:0.7;"></span>{}</li>'
+            html = \
+                '<li>' \
+                    '<span ' \
+                        'style="' \
+                            'color: #000000;' \
+                            'text-align: center;' \
+                            'opacity:0.7;' \
+                        '">' \
+                            '{}' \
+                    '</span>' \
+                        '{}' \
+                '</li>' \
+                    if use_shapes \
+                    else \
+                        '<li><span ' \
+                            'style="background: {};opacity:0.7;"' \
+                        '></span>{}</li>'
+            print(data)
             data = '\n'.join([html.format(d[1], d[0]) for d in data])
         return (groups_features, data)
 
@@ -854,9 +914,11 @@ class LingMap(object):
                         fill_opacity = self.opacity,
                         fill_color = color_shape
                     )
-        return {'marker': marker, 'stroke': stroke, 's_marker': s_marker, 's_stroke': s_stroke}
+        return {'marker': marker, 'stroke': stroke,
+                's_marker': s_marker, 's_stroke': s_stroke}
 
-    def add_features(self, features, radius=7, opacity=1, numeric=False, control=False, use_shapes=False):
+    def add_features(self, features, radius=7, opacity=1,
+                     numeric=False, control=False, use_shapes=False):
         """Add features
 
         features: list of strings
@@ -890,7 +952,8 @@ class LingMap(object):
         self.control = control
         self.use_shapes = use_shapes
 
-    def add_stroke_features(self, features, radius=12, opacity=1, numeric=False, control=False):
+    def add_stroke_features(self, features, radius=12,
+                            opacity=1, numeric=False, control=False):
         """Add stroke features
 
         This function assigns features to strokes of markers.
@@ -931,7 +994,8 @@ class LingMap(object):
         self._sanity_check(popups, feature_name='popups')
         self.popups = popups
         self.html_popups = parse_html
-        self.languages_in_popups = glottolog_links if not parse_html else False
+        self.languages_in_popups = glottolog_links \
+            if not parse_html else False
 
     def add_tooltips(self, tooltips):
         """Add tooltips to markers
@@ -991,7 +1055,8 @@ class LingMap(object):
         self.rectangles.append({'bounds': locations, 'tooltip': tooltip,
                                 'popup': popup, 'color': color})
 
-    def add_line(self, locations, tooltip='', popup='', color='black', smooth_factor=1.0):
+    def add_line(self, locations, tooltip='',
+                 popup='', color='black', smooth_factor=1.0):
         """Add one line
 
         To add several lines, use this function several times.
@@ -1004,7 +1069,8 @@ class LingMap(object):
         smooth_factor: float, default 1.0
         """
         locations = tuple(locations)
-        line = {'locations': locations, 'color': color, 'smooth_factor': smooth_factor}
+        line = {'locations': locations, 'color': color,
+                'smooth_factor': smooth_factor}
         if tooltip:
             line['tooltip'] = tooltip
         if popup:
@@ -1020,8 +1086,10 @@ class LingMap(object):
         self.use_heatmap = True
         self.heatmap = tuple(heatmap)
 
-    def add_minicharts(self, *minicharts, typ='pie', size=0.6, names=None,
-                       textprops=None, labels=False, startangle=90, colors=[], bar_width=1):
+    def add_minicharts(self, *minicharts, typ='pie',
+                       size=0.6, names=None,
+                       textprops=None, labels=False,
+                       startangle=90, colors=[], bar_width=1):
         """Create minicharts using maplotlib
         
         How it works:
@@ -1046,7 +1114,9 @@ class LingMap(object):
         elif typ == 'bar':
             fig.patch.set_visible(False)
         else:
-            raise LingMapError('{}: unknown type of chart. You can use either "pie" or "bar"')
+            raise LingMapError(
+                '{}: unknown type of chart. You can use either "pie" or "bar"'
+            )
         
         ax = fig.add_subplot(111)
         
@@ -1060,7 +1130,6 @@ class LingMap(object):
                 if labels:
                     ax.pie(
                         sizes, colors=colors, startangle=startangle,
-                        #autopct=lambda p: '{}'.format(int(p * sum(sizes)//100)),
                         textprops=textprops,
                         labels=sizes,
                         labeldistance=0.2
@@ -1068,7 +1137,8 @@ class LingMap(object):
                 else:
                     ax.pie(sizes, colors=colors, startangle=startangle)
             elif typ == 'bar':
-                ax.bar(self.minichart_names, height=sizes, color=colors, width=bar_width)
+                ax.bar(self.minichart_names, height=sizes,
+                       color=colors, width=bar_width)
                 ax.axis('off')
             buff = io.StringIO()
             plt.savefig(buff, format='SVG')
@@ -1076,10 +1146,13 @@ class LingMap(object):
             plt.cla()
 
             svg = buff.read()
-            size = (float(re.findall('height="(.*?)pt"', svg)[0]), float(re.findall('width="(.*?)pt"', svg)[0]))
+            size = (float(re.findall('height="(.*?)pt"', svg)[0]),
+                    float(re.findall('width="(.*?)pt"', svg)[0]))
             center = ((size[0] / 2)*1.31, (size[1] / 2)*1.31)
 
-            self.minicharts.append(folium.DivIcon(html=svg.replace('\n', ''), icon_anchor=center))
+            self.minicharts.append(
+                folium.DivIcon(html=svg.replace('\n', ''), icon_anchor=center)
+            )
             popup = '<br>'
             for name, value in zip(names, minichart):
                 popup += '{}: {}<br>'.format(name, str(value))
@@ -1087,7 +1160,8 @@ class LingMap(object):
         plt.clf()
         plt.close()
     
-    def add_overlapping_features(self, marker_groups, radius=7, radius_increment=4, mapping=None):
+    def add_overlapping_features(self, marker_groups, radius=7,
+                                 radius_increment=4, mapping=None):
         """Add overlapping features
         
         For example, if you want to draw on map whether language 'is ergative', 'is slavic', 'is spoken in Russia'.
@@ -1173,10 +1247,15 @@ class LingMap(object):
         
         if isinstance(self.start_location, str):
             if not self.start_location in self.start_location_mapping:
-                raise LingMapError('No such start location shortcut. Try passing coordinates.')
-            mapped_location_and_zoom = self.start_location_mapping[self.start_location]
-            self.start_location = mapped_location_and_zoom['start_location']
-            self.start_zoom = mapped_location_and_zoom['start_zoom']
+                raise LingMapError(
+                    'No such start location shortcut. Try passing coordinates.'
+                )
+            mapped_location_and_zoom = \
+                self.start_location_mapping[self.start_location]
+            self.start_location = \
+                mapped_location_and_zoom['start_location']
+            self.start_zoom = \
+                mapped_location_and_zoom['start_zoom']
 
         if self.base_map:
             m = self.base_map
@@ -1224,12 +1303,23 @@ class LingMap(object):
                 if self.languages_in_popups or self.minichart_names:
                     popup_contents = ''
                     if self.languages_in_popups:
-                        popup_href = '''<a href="https://glottolog.org/resource/languoid/id/{}" onclick="this.target='_blank';">{}</a>'''
-                        popup_contents += popup_href.format(lingtypology.glottolog.get_glot_id(language), language)
+                        popup_href = \
+                            '<a' \
+                                'href="https://glottolog.org/resource/languoid/id/{}"' \
+                                '''onclick="this.target='_blank';"''' \
+                            '>{}</a>'
+                        popup_contents += popup_href.format(
+                            lingtypology.glottolog.get_glot_id(language),
+                            language
+                        )
                     if self.popups:
-                        marker.add_child(folium.Popup(popup_contents + self.popups[i]))
+                        marker.add_child(
+                            folium.Popup(popup_contents + self.popups[i])
+                        )
                     else:
-                        marker.add_child(folium.Popup(popup_contents))
+                        marker.add_child(
+                            folium.Popup(popup_contents)
+                        )
                 if self.tooltips:
                     tooltip = folium.Tooltip(self.tooltips[i])
                     tooltip.add_to(marker)
@@ -1238,8 +1328,16 @@ class LingMap(object):
             if self.minichart_names and self.legend:
                 legend_data = ''
                 for i, name in enumerate(self.minichart_names):
-                    legend_data += '<li><span style="background: {};opacity:0.7;"></span>{}</li>\n'.format(self.colors[i], self.minichart_names[i])
-                self._create_legend(m, legend_data, title=self.legend_title, position=self.legend_position)
+                    legend_data += \
+                        '<li>' \
+                            '<span style="background: {};opacity:0.7;">' \
+                            '</span>' \
+                            '{}' \
+                        '</li>\n'.format(
+                            self.colors[i], self.minichart_names[i]
+                        )
+                self._create_legend(m, legend_data, title=self.legend_title,
+                                    position=self.legend_position)
             return m
         
         if self.marker_groups:
@@ -1267,12 +1365,17 @@ class LingMap(object):
                 
                 opacity = self.opacity
                 for marker_data in self.marker_groups[i]:
-                    marker = self._set_marker(coordinates, stroke=self.stroked, radius=radius, fill_opacity=self.opacity, fill_color=color_mapping[marker_data])
+                    marker = self._set_marker(
+                        coordinates, stroke=self.stroked, radius=radius,
+                        fill_opacity=self.opacity,
+                        fill_color=color_mapping[marker_data]
+                    )
                     radius -= self.radius_increment
                     if self.tooltips:
                         tooltip = folium.Tooltip(self.tooltips[i])
                         tooltip.add_to(marker)
-                    self._create_popups(marker, language, i, parse_html=self.html_popups)
+                    self._create_popups(marker, language, i,
+                                        parse_html=self.html_popups)
                     markers.append(marker)
 
             deque(map(m.add_child, markers))
@@ -1280,17 +1383,27 @@ class LingMap(object):
             if self.legend:
                 legend_data = ''
                 for feature in color_mapping:
-                    legend_data += '<li><span style="background: {};opacity:0.7;"></span>{}</li>\n'.format(color_mapping[feature], feature)
-                self._create_legend(m, legend_data, title=self.legend_title, position=self.legend_position)
+                    legend_data += \
+                        '<li>' \
+                            '<span style="background: {};opacity:0.7;">' \
+                            '</span>' \
+                            '{}' \
+                        '</li>\n'.format(color_mapping[feature], feature)
+                self._create_legend(m, legend_data, title=self.legend_title,
+                                    position=self.legend_position)
             return m
 
         if self.features:
-            prepared = self._prepare_features(self.features, use_shapes=self.use_shapes)
+            prepared = self._prepare_features(
+                self.features, use_shapes=self.use_shapes
+            )
             groups_features = prepared[0]
             data = prepared[1]
 
         if self.stroke_features:
-            prepared = self._prepare_features(self.stroke_features, stroke=True, use_shapes=self.use_shapes)
+            prepared = self._prepare_features(
+                self.stroke_features, stroke=True, use_shapes=self.use_shapes
+            )
             s_groups_features = prepared[0]
             s_data = prepared[1]
 
@@ -1310,9 +1423,15 @@ class LingMap(object):
                 if self.stroke_features \
                 else self.stroke_colors[0]
                 
-            unified_marker = self._create_unified_marker(coordinates, color_shape, s_color)
+            unified_marker = \
+                self._create_unified_marker(
+                    coordinates, color_shape, s_color
+                )
             
-            self._create_popups(unified_marker['marker'], language, i, parse_html=self.html_popups)
+            self._create_popups(
+                unified_marker['marker'], language,
+                i, parse_html=self.html_popups
+            )
 
             if self.features and not self.numeric and self.control:
                 group = groups_features[i][0]
@@ -1346,23 +1465,40 @@ class LingMap(object):
             if self.numeric or self.s_numeric:
                 m.add_child(default_group)
                 if self.numeric:
-                    self._create_legend(m, data, title=self.legend_title, position=self.legend_position)
+                    self._create_legend(m, data, title=self.legend_title,
+                                        position=self.legend_position)
                 if self.s_numeric:
-                    self._create_legend(m, s_data, title=self.stroke_legend_title, position=self.stroke_legend_position)
+                    self._create_legend(
+                        m, s_data,
+                        title=self.stroke_legend_title,
+                        position=self.stroke_legend_position,
+                    )
             else:
                 if self.control:
                     deque((m.add_child(fg[0]) for fg in groups_features))
-                    folium.LayerControl(collapsed=False, position=self.control_position).add_to(m)
+                    folium.LayerControl(
+                        collapsed=False,
+                        position=self.control_position
+                    ).add_to(m)
                 elif self.stroke_control:
                     deque((m.add_child(fg[0]) for fg in s_groups_features))
-                    folium.LayerControl(collapsed=False, position=self.control_position).add_to(m)
+                    folium.LayerControl(
+                        collapsed=False,
+                        position=self.control_position
+                    ).add_to(m)
                 else:
                     m.add_child(default_group)
                 
                 if self.legend:
-                    self._create_legend(m, data, title=self.legend_title, position=self.legend_position)
+                    self._create_legend(
+                        m, data, title=self.legend_title,
+                        position=self.legend_position
+                    )
                 if self.stroke_features and self.stroke_legend:
-                    self._create_legend(m, s_data, title=self.stroke_legend_title, position=self.stroke_legend_position)
+                    self._create_legend(
+                        m, s_data, title=self.stroke_legend_title,
+                        position=self.stroke_legend_position
+                    )
         else:
             m.add_child(default_group)
             
@@ -1370,7 +1506,11 @@ class LingMap(object):
             self._create_heatmap(m, self.heatmap)
 
         if lingtypology.glottolog.warnings and self.warnings_enabled:
-            print('(get_coordinates) Warning: coordinates for {} not found'.format(', '.join(lingtypology.glottolog.warnings)))
+            print(
+                '(get_coordinates) '
+                'Warning: coordinates for '
+                '{} not found'.format(', '.join(lingtypology.glottolog.warnings))
+            )
         return m
 
     def save(self, path):
@@ -1469,3 +1609,17 @@ def map_feature(
         m.save(save_html)
     else:
         return m.render()
+
+df = lingtypology.db_apis.Phoible(subset='UPSID', aggregated=False).get_df()
+#Get all languages with ejectives
+df = df[df.raisedLarynxEjective == '+']
+#Remove duplicates
+df = df.drop_duplicates(subset='Glottocode')
+languages = map(lingtypology.glottolog.get_by_glot_id, df.Glottocode)
+affiliations = lingtypology.glottolog.get_affiliations(languages)
+families = [aff.split(',')[0] for aff in affiliations]
+
+m = LingMap(df.Glottocode, glottocode=True)
+m.title = 'Languages with Ejectives'
+m.add_features(families)
+m.save('test.html')
