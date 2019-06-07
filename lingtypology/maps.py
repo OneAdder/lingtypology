@@ -605,6 +605,7 @@ class LingMap(object):
         colormap_colors = self.stroke_colormap_colors if stroke else self.colormap_colors
             
         features = self._sort_all(features)
+        #Below 'if numeric' there is the most stupid and the most beautiful code I've ever made
         if numeric:
             if not all(isinstance(f, int) or isinstance(f, float) for f in features):
                 try:
@@ -632,10 +633,44 @@ class LingMap(object):
             else:
                 colormap_features = list(frange(features[0], features[-1], features[-1] / 10))
             
+            # Crazy stuff below draws SVGs with color gradient
             groups_features = [(0, colormap(feature)) for feature in features]
-            data = ''
-            for cf in colormap_features:
-                data += '<li><span style="background: {};opacity:0.7;"></span>{}</li>'.format(colormap(cf), cf)
+            color_data = ''
+            text = ''
+            i = 0
+            for x in range(7):
+                #This loop ensures that the minimal value is displayed
+                color_data += '<line x1="0" y1="{pos}" x2="20" y2="{pos}"' \
+                    'style="stroke:{color};stroke-width:3;" />'.format(
+                        pos=i, color=colormap(colormap_features[0])
+                    )
+                i += 1
+            text += '<text x="5" y="{pos}" dx="0" dy="0ex">- {text}</text>'.format(
+                pos=i+3, text=colormap_features[0]
+            )
+            for ind, cf in enumerate(colormap_features):
+                color_data += '<line x1="0" y1="{pos}" x2="20" y2="{pos}"' \
+                    'style="stroke:{color};stroke-width:3;" />'.format(
+                        pos=i, color=colormap(cf)
+                    )
+                i += 1
+                if not ind == 0:
+                    text += '<text x="5" y="{pos}" dx="0" dy="0ex">- {text}</text>'.format(
+                        pos=i, text=cf
+                    )
+                if not ind + 1 == len(colormap_features):
+                    gr = gradient(20, colormap(cf), colormap(colormap_features[ind + 1]))
+                    for c in gr:
+                        i += 1
+                        color_data += '<line x1="0" y1="{pos}" x2="20" y2="{pos}"' \
+                            'style="stroke:{color};stroke-width:3;" />'.format(
+                                pos=i, color=c
+                            )
+            gradient_templ = '<svg height="' + str(i) + '" width="20">{}</svg>'
+            text_templ = '<svg height="' + str(i) + '" width="50">{}</svg>'
+            data = \
+                gradient_templ.format(color_data) + \
+                text_templ.format(text)
         else:
             mapping = {}
             clear_features = []

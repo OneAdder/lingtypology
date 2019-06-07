@@ -11,18 +11,17 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   
   <script>
-  $( function() {
-    $( "#maplegend{{ legend_id }}" ).draggable({
-                    start: function (event, ui) {
-                        $(this).css({
-                            right: "auto",
-                            top: "auto",
-                            bottom: "auto"
-                        });
-                    }
+    $(function(){
+        $("#maplegend{{ legend_id }}").draggable({
+            start: function (event, ui) {
+                $(this).css({
+                    right: "auto",
+                    top: "auto",
+                    bottom: "auto"
                 });
-});
-
+            }
+        });
+    });
   </script>
 </head>
 <body>
