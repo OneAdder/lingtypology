@@ -1609,17 +1609,3 @@ def map_feature(
         m.save(save_html)
     else:
         return m.render()
-
-df = lingtypology.db_apis.Phoible(subset='UPSID', aggregated=False).get_df()
-#Get all languages with ejectives
-df = df[df.raisedLarynxEjective == '+']
-#Remove duplicates
-df = df.drop_duplicates(subset='Glottocode')
-languages = map(lingtypology.glottolog.get_by_glot_id, df.Glottocode)
-affiliations = lingtypology.glottolog.get_affiliations(languages)
-families = [aff.split(',')[0] for aff in affiliations]
-
-m = LingMap(df.Glottocode, glottocode=True)
-m.title = 'Languages with Ejectives'
-m.add_features(families)
-m.save('test.html')
