@@ -571,6 +571,91 @@ class LingMap(object):
                 self.custom_coordinates.append(el[4])
         self.features = features
         return features
+    
+    def _make_colormap(self, features, colormap_colors):
+        def round_up(a, digits=0):
+            if digits is None:
+                return a
+            n = 10** - digits
+            return round(math.ceil(a / n) * n, digits)
+        def round_down(a, digits=0):
+            if digits is None:
+                return a
+            n = 10** - digits
+            return round(math.floor(a / n) * n, digits)
+        def how_round(n):
+            if n / 10000 > 1:
+                return -4
+            elif n / 1000 > 1:
+                return -3
+            elif n / 100 > 1:
+                return -2
+            elif n / 10 > 1:
+                return -1
+            elif n > 1 and isinstance(l[-1], float):
+                return 0
+            return None
+            
+        #Round features so that they look handsome
+        digits = how_round(features[-1])
+        minimum = round_down(features[0], digits)
+        maximum = round_up(features[-1], digits)
+        
+        colormap = branca.colormap.LinearColormap(
+            colors = colormap_colors,
+            index = [minimum, maximum],
+            vmin = minimum,
+            vmax = maximum,
+        )
+        
+        if isinstance(features[-1], int):
+            if features[-1] // 10 == 0:
+                colormap_features = list(range(minimum, maximum)) + [maximum]
+            else:
+                colormap_features = list(range(minimum, maximum, maximum // 10))
+        else:
+            colormap_features = list(frange(minimum, maximum, maximum / 10))
+
+        # Crazy stuff below draws SVGs with color gradient
+        groups_features = [(0, colormap(feature)) for feature in features]
+        color_data = ''
+        text = ''
+        i = 0
+        for x in range(8):
+            #This loop ensures that the minimal value is displayed
+            color_data += '<line x1="0" y1="{pos}" x2="20" y2="{pos}"' \
+                'style="stroke:{color};stroke-width:3;" />'.format(
+                    pos=i, color=colormap(colormap_features[0])
+                )
+            i += 1
+        text += '<text x="5" y="{pos}" dx="0" dy="0ex">- {text}</text>'.format(
+            pos=i+3, text=colormap_features[0]
+        )
+        for ind, cf in enumerate(colormap_features):
+            color_data += '<line x1="0" y1="{pos}" x2="20" y2="{pos}"' \
+                'style="stroke:{color};stroke-width:3;" />'.format(
+                    pos=i, color=colormap(cf)
+                )
+            i += 1
+            if not ind == 0:
+                text += '<text x="5" y="{pos}" dx="0" dy="0ex">- {text}</text>'.format(
+                    pos=i, text=cf
+                )
+            if not ind + 1 == len(colormap_features):
+                gr = gradient(20, colormap(cf), colormap(colormap_features[ind + 1]))
+                for c in gr:
+                    i += 1
+                    color_data += '<line x1="0" y1="{pos}" x2="20" y2="{pos}"' \
+                        'style="stroke:{color};stroke-width:3;" />'.format(
+                            pos=i, color=c
+                        )
+        
+        gradient_templ = '<svg height="' + str(i) + '" width="20">{}</svg>'
+        text_templ = '<svg height="' + str(i) + '" width="50">{}</svg>'
+        data = \
+            gradient_templ.format(color_data) + \
+            text_templ.format(text)
+        return data, groups_features
 
     def _prepare_features(self, features, stroke=False, use_shapes=False):
         """Creates data for legend (depending on type of features) and creates features groups if needed
@@ -618,59 +703,7 @@ class LingMap(object):
                 if isinstance(features[0], float):
                     if all(el.is_integer() for el in features):
                         features = [int(el) for el in features]
-
-            colormap = branca.colormap.LinearColormap(
-                colors = colormap_colors,
-                index = [features[0], features[-1]],
-                vmin = features[0],
-                vmax = features[-1],
-            )
-            if isinstance(features[-1], int):
-                if features[-1] // 10 == 0:
-                    colormap_features = list(range(features[0], features[-1])) + [features[-1]]
-                else:
-                    colormap_features = list(range(features[0], features[-1], features[-1] // 10))
-            else:
-                colormap_features = list(frange(features[0], features[-1], features[-1] / 10))
-            
-            # Crazy stuff below draws SVGs with color gradient
-            groups_features = [(0, colormap(feature)) for feature in features]
-            color_data = ''
-            text = ''
-            i = 0
-            for x in range(7):
-                #This loop ensures that the minimal value is displayed
-                color_data += '<line x1="0" y1="{pos}" x2="20" y2="{pos}"' \
-                    'style="stroke:{color};stroke-width:3;" />'.format(
-                        pos=i, color=colormap(colormap_features[0])
-                    )
-                i += 1
-            text += '<text x="5" y="{pos}" dx="0" dy="0ex">- {text}</text>'.format(
-                pos=i+3, text=colormap_features[0]
-            )
-            for ind, cf in enumerate(colormap_features):
-                color_data += '<line x1="0" y1="{pos}" x2="20" y2="{pos}"' \
-                    'style="stroke:{color};stroke-width:3;" />'.format(
-                        pos=i, color=colormap(cf)
-                    )
-                i += 1
-                if not ind == 0:
-                    text += '<text x="5" y="{pos}" dx="0" dy="0ex">- {text}</text>'.format(
-                        pos=i, text=cf
-                    )
-                if not ind + 1 == len(colormap_features):
-                    gr = gradient(20, colormap(cf), colormap(colormap_features[ind + 1]))
-                    for c in gr:
-                        i += 1
-                        color_data += '<line x1="0" y1="{pos}" x2="20" y2="{pos}"' \
-                            'style="stroke:{color};stroke-width:3;" />'.format(
-                                pos=i, color=c
-                            )
-            gradient_templ = '<svg height="' + str(i) + '" width="20">{}</svg>'
-            text_templ = '<svg height="' + str(i) + '" width="50">{}</svg>'
-            data = \
-                gradient_templ.format(color_data) + \
-                text_templ.format(text)
+            data, groups_features = self._make_colormap(features, colormap_colors)
         else:
             mapping = {}
             clear_features = []
