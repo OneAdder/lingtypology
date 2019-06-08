@@ -364,7 +364,7 @@ class Sails(object):
     def feature_descriptions(self, *features):
         """Get the description for a particular feature."""
         descriptions = []
-        for i, feature in enumerate(features):
+        for feature in features:
             descriptions += list(self.parameters[self.parameters.ID == feature].Name)
         return pandas.DataFrame({'Feature': features, 'Description': descriptions})
 

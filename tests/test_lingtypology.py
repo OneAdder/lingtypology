@@ -101,6 +101,11 @@ def test_LingMap_empty():
     """It has to work, lol"""
     LingMap().create_map()
 
+def test_LingMap_merge():
+    m1 = LingMap('Russian')
+    m2 = LingMap('English')
+    merge(m1, m2).create_map()
+
 def test_Glottolog():
     languages = set()
     glottocodes = set()

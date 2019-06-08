@@ -80,7 +80,6 @@ def merge(*maps, autoset_legends=True):
     legend_positions = ['topright', 'topleft', 'bottomright',
                         'bottomleft', 'bottom', 'right', 'left']
     occupied_legend_positions = set()
-    base_map = maps[0].create_map()
     legend_id = maps[0]._legend_id
     for i, m in enumerate(maps):
         if not m == maps[0]:
@@ -1326,7 +1325,7 @@ class LingMap(object):
                 
             if self.minichart_names and self.legend:
                 legend_data = ''
-                for i, name in enumerate(self.minichart_names):
+                for i in range(len(self.minichart_names)):
                     legend_data += \
                         '<li>' \
                             '<span style="background: {};opacity:0.7;">' \
@@ -1362,7 +1361,6 @@ class LingMap(object):
                 else:
                     radius = len(self.marker_groups[i]) * self.radius_increment
                 
-                opacity = self.opacity
                 for marker_data in self.marker_groups[i]:
                     marker = self._set_marker(
                         coordinates, stroke=self.stroked, radius=radius,
