@@ -119,19 +119,6 @@ def get_iso(language):
         return iso[0]
 
 #---------------------------------------------------------------------------------
-
-'''
-get_by_affiliation('Indo-European, Slavic, East')
->>> ('Ukrainian', 'Rusyn', 'Russian', 'Belarusian')
-def get_by_affiliation(affiliation):
-    languages = tuple(glottolog[glottolog.affiliation == affiliation].language)
-    if not languages:
-        print('(get_by_affiliation) Warning: languages by {} not found'.format(affiliation))
-    else:
-        return languages
-'''
-
-
 def get_by_iso(iso):
     """
     get_by_iso('rus')

@@ -1100,7 +1100,7 @@ class LingMap(object):
             if all(isinstance(minichart, pandas.Series) for minichart in minicharts):
                 names = [serie.name for serie in minicharts]
             else:
-                raise LingMap('You shound either pass names or use pandas.Series')
+                raise LingMapError('You shound either pass names or use pandas.Series')
         self.minichart_names = names
         self.minicharts_data = minicharts
         self.popups = []
