@@ -15,6 +15,13 @@
     </td>
   </tr>
   <tr>
+    <td>Code Quality</td>
+    <td>
+      <a href="https://app.codacy.com/app/OneAdder/lingtypology?utm_source=github.com&utm_medium=referral&utm_content=OneAdder/lingtypology&utm_campaign=Badge_Grade_Dashboard"/>
+      <img src="https://api.codacy.com/project/badge/Grade/abe7b99539d141c4acbd3b485fd80959"/>
+    </td>
+  </tr>
+  <tr>
     <td>License</td>
     <td>
       <a href="https://github.com/OneAdder/lingtypology/blob/master/LICENSE.md"/>
