@@ -1,4 +1,7 @@
 # lingtypology
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/abe7b99539d141c4acbd3b485fd80959)](https://app.codacy.com/app/OneAdder/lingtypology?utm_source=github.com&utm_medium=referral&utm_content=OneAdder/lingtypology&utm_campaign=Badge_Grade_Dashboard)
+
 <table>
   <tr>
     <td>Latest Release</td>
