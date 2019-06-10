@@ -10,7 +10,11 @@ def get_glottolog_table(directory):
     glottolog utility from pyglottolog package creates the CSV table and names it:
     glottolog-languoids-pyglottolog-[version-version-version].csv
     """
-    table_name = [file for file in os.listdir(directory) if file.startswith('glottolog-languoids') and file.endswith('.csv')][0]
+    table_name = [
+        f for f in os.listdir(directory) \
+            if f.startswith('glottolog-languoids') \
+                and f.endswith('.csv')
+    ][0]
     version = '-'.join(table_name.split('-')[-3:])[:-4]
     path = os.path.join(directory, table_name)
     return path, version
@@ -18,7 +22,9 @@ def get_glottolog_table(directory):
 #---------------------------------------------------------------------------------
 home = Path.home()
 try:
-    path, version = get_glottolog_table(os.path.join(str(home), '.lingtypology_data'))
+    path, version = get_glottolog_table(
+        os.path.join(str(home), '.lingtypology_data')
+    )
 except (FileNotFoundError, IndexError):
     module_directory = os.path.dirname(os.path.realpath(__file__))
     path, version = get_glottolog_table(module_directory)
@@ -35,10 +41,16 @@ def get_affiliations(languages):
     """
     affiliations = []
     for language in languages:
-        affiliation_id = tuple(glottolog[glottolog.Name == language].Classification)
+        affiliation_id = tuple(
+            glottolog[glottolog.Name == language].Classification
+        )
         if not affiliation_id:
             affiliation = ''
-            print('(get_affiliations) Warning: affiliation for {} not found'.format(language))
+            print(
+                '(get_affiliations) ' \
+                'Warning: affiliation for ' \
+                '{} not found'.format(language)
+            )
         else:
             affiliation = []
             try:
@@ -47,7 +59,9 @@ def get_affiliations(languages):
                 affiliation = ''
             else:
                 for taxon in affiliation_id:
-                    affiliation.append(tuple(glottolog[glottolog.ID == taxon].Name)[0])
+                    affiliation.append(
+                        tuple(glottolog[glottolog.ID == taxon].Name)[0]
+                    )
                 affiliation = ', '.join(affiliation)
         affiliations.append(affiliation)
     return affiliations
@@ -63,7 +77,6 @@ def get_coordinates(language):
     if not list(latitude) or not list(longitude):
         global warnings
         warnings.append(language)
-        #print('(get_coordinates) Warning: coordinates for {} not found'.format(language))
     else:
         return (float(latitude), float(longitude))
 
@@ -89,7 +102,6 @@ def get_glot_id(language):
     glot_id = tuple(glottolog[glottolog.Name == language].ID)
     if not glot_id:
         pass
-        #print('(get_glot_id) Warning: Glottolog ID for {} not found'.format(language))
     else:
         return glot_id[0]
 
@@ -101,7 +113,11 @@ def get_macro_area(language):
     """
     macro_area = tuple(glottolog[glottolog.Name == language].Macroarea)
     if not macro_area:
-        print('(get_macro_area) Warning: Macro area for {} not found'.format(language))
+        print(
+            '(get_macro_area) ' \
+            'Warning: Macro area for ' \
+            '{} not found'.format(language)
+        )
     else:
         return macro_area[0]
 
@@ -114,7 +130,11 @@ def get_iso(language):
     """
     iso = tuple(glottolog[glottolog.Name == language].ISO639P3code)
     if not iso:
-        print('(get_iso) Warning: ISO for {} not found'.format(language))
+        print(
+            '(get_iso) ' \
+            'Warning: ISO for ' \
+            '{} not found'.format(language)
+        )
     else:
         return iso[0]
 
@@ -138,7 +158,11 @@ def get_by_glot_id(glot_id):
     """
     language = tuple(glottolog[glottolog.ID == glot_id].Name)
     if not language:
-        warnings.append('(get_by_glot_id) Warning: language by {} not found'.format(glot_id))
+        warnings.append(
+            '(get_by_glot_id) ' \
+            'Warning: language by ' \
+            '{} not found'.format(glot_id)
+        )
     else:
         return language[0]
 
@@ -152,7 +176,11 @@ def get_glot_id_by_iso(iso):
     """
     glot_id = tuple(glottolog[glottolog.ISO639P3code == iso].ID)
     if not glot_id:
-        print('(get_glot_id_by_iso) Warning: glot_id by {} not found'.format(iso))
+        print(
+            '(get_glot_id_by_iso) ' \
+            'Warning: glot_id by {} ' \
+            'not found'.format(iso)
+        )
     else:
         return glot_id[0]
 

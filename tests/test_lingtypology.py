@@ -16,7 +16,9 @@ def circassian():
 @pytest.fixture
 def ejective_and_n_consonants():
     return pandas.read_csv(
-        os.path.join(os.path.dirname(__file__), 'data', 'ejective_and_n_consonants.csv'),
+        os.path.join(
+            os.path.dirname(__file__), 'data', 'ejective_and_n_consonants.csv'
+        ),
         delimiter=',',
         header=0)
 
@@ -41,7 +43,11 @@ def test_LingMap_features1(circassian):
     m.add_popups(popups)
     m.add_tooltips(languages)
     m.add_custom_coordinates(coordinates)
-    m.add_rectangle(((44.443206, 42.735694), (42.927524, 44.577277)), tooltip='Square Enix', popup='FFX', color='green')
+    m.add_rectangle(
+        ((44.443206, 42.735694), (42.927524, 44.577277)),
+        tooltip='Square Enix',
+        popup='FFX', color='green'
+    )
     m.add_line(((44.5, 39), (43, 43)))
     m.stroke_legend_position = 'topright'
     m.stroke_legend_title = 'Languages'
@@ -65,18 +71,20 @@ def test_LingMap_features2(ejective_and_n_consonants):
 def test_LingMap_features3():
     """LingMap with features (shapes + control)"""
     languages = ["Adyghe", "Kabardian", "Polish", "Russian", "Bulgarian"]
-    features = ["Agglutinative", "Agglutinative", "Inflected", "Inflected", "Analytic"]
+    features = ["Agglutinative", "Agglutinative",
+                "Inflected", "Inflected", "Analytic"]
     contents = ('Caucasus', 'Caucasus', 'Europe', 'Europe', 'Europe')
     
     m = LingMap(languages)
     html = \
-        '''
-        <a href="https://en.wikipedia.org/wiki/{data}" target="_blank">
-        {data}
-        </a>
-        '''
+        '<a href="https://en.wikipedia.org/wiki/{data}" target="_blank">' \
+            '{data}' \
+        '</a>'
     m.languages_in_popups = False
-    m.add_popups([html.format(data=popup) for popup in contents], parse_html=True)
+    m.add_popups(
+        [html.format(data=popup) for popup in contents],
+        parse_html=True
+    )
     m.add_features(features, use_shapes=True, control=True)
     m.create_map()
 
@@ -149,7 +157,10 @@ def test_autotyp():
     db_apis.Autotyp('Gender', 'Agreement').get_df()
 
 def test_afbo():
-    db_apis.AfBo('adverbializer', 'case: non-locative peripheral case').get_df()
+    db_apis.AfBo(
+        'adverbializer',
+        'case: non-locative peripheral case'
+    ).get_df()
 
 def test_sails():
     db_apis.Sails('ICU10', 'ICU11').get_df()

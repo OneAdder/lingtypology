@@ -1,7 +1,7 @@
 from lingtypology.maps import *
 import lingtypology.db_apis
 
-__version__ = '0.8.3'
+__version__ = '0.8.3.dev'
 __citation__ = \
     '@misc{MichaelVoronov2669068,\n' \
     '    author = {Michael Voronov},\n' \
