@@ -545,7 +545,9 @@ class LingMap(object):
         marker: folium.CircleMarker
         """
         if shape:
-            div = folium.DivIcon(html=('<div style="font-size: 170%">' + str(shape) + '</div>'))
+            div = folium.DivIcon(
+                html='<div style="font-size: 170%">' + str(shape) + '</div>'
+            )
             marker = folium.Marker(location=location, icon=div)
         else:
             marker = folium.CircleMarker(
@@ -660,18 +662,6 @@ class LingMap(object):
         color_data = ''
         text = ''
         i = 0
-        '''
-        for x in range(8):
-            #This loop ensures that the minimal value is displayed
-            color_data += '<line x1="0" y1="{pos}" x2="20" y2="{pos}"' \
-                'style="stroke:{color};stroke-width:3;" />'.format(
-                    pos=i, color=colormap(colormap_features[0])
-                )
-            i += 1
-        text += '<text x="5" y="{pos}" dx="0" dy="0ex">- {text}</text>'.format(
-            pos=i+3, text=colormap_features[0]
-        )
-        '''
         for ind, cf in enumerate(colormap_features):
             color_data += '<line x1="0" y1="{pos}" x2="20" y2="{pos}"' \
                 'style="stroke:{color};stroke-width:3;" />'.format(
@@ -683,7 +673,12 @@ class LingMap(object):
                     pos=i, text=cf
                 )
             if not ind + 1 == len(colormap_features):
-                gr = [colormap(f) for f in frange(cf, colormap_features[ind + 1], step / 20)][1:-2]
+                gr = [
+                    colormap(f) \
+                        for f in frange(
+                            cf, colormap_features[ind + 1], step / 20
+                        )
+                ][1:-2]
                 for c in gr:
                     i += 1
                     color_data += '<line x1="0" y1="{pos}" x2="20" y2="{pos}"' \
