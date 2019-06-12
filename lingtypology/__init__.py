@@ -3,7 +3,7 @@ import lingtypology.datasets
 from lingtypology import datasets as db_apis
 import lingtypology.glottolog
 
-__version__ = '0.8.4.dev'
+__version__ = '0.8.4'
 __citation__ = \
     '@misc{MichaelVoronov2669068,\n' \
     '    author = {Michael Voronov},\n' \

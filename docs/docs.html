@@ -13163,9 +13163,9 @@ borrowed from the Folium Documentation:</p>
 <li><p><strong>start_location</strong>: <em>(float, float)</em> or <em>str</em>, default <em>(0, 0)</em></p>
 <p>Coordinates of the start location for the map <em>(latitude,
 longitude)</em> or a text shortcut. List of available shortcuts:
-<em>\"Central Europe\", \"Caucasus\", \"Australia &amp; Oceania\", \"Papua
-New Guinea\", \"Africa\", \"Asia\", \"North America\", \"Central
-America\", \"South America\"</em>.</p>
+<em>"Central Europe", "Caucasus", "Australia &amp; Oceania", "Papua
+New Guinea", "Africa", "Asia", "North America", "Central
+America", "South America"</em>.</p>
 </li>
 <li><p><strong>start_zoom</strong>: <em>int</em>, default <em>2</em></p>
 <p>Initial zoom level. Bypassed if you are using a shortcut
@@ -13205,13 +13205,12 @@ method)</p>
 <p>Stroke legend position. Available values: 'right', 'left', 'top',
 'bottom', 'bottomright', 'bottomleft', 'topright', 'topleft'.</p>
 </li>
-<li><p><strong>colors</strong>: <em>list</em> of html codes for colors (<em>str</em>).</p>
+<li><p><strong>colors</strong>: <em>list</em> of html codes for colors (<em>str</em>), default <em>None</em></p>
 <p>Colors that represent features. You can either use the 20 default
-colors or set yours.</p>
+colors(if <em>None</em>) or set yours(else).</p>
 </li>
-<li><p><strong>stroke_colors</strong>: <em>list</em> of html codes for colors (<em>str</em>)</p>
-<p>Colors that represent additional (stroke) features.</p>
-</li>
+</ul>
+<ul>
 <li><p><strong>shapes</strong>: <em>list</em> of characters (<em>str</em>)</p>
 <p>If you use shapes instead of colors, you can either use the default
 shapes or set yours. Shapes are Unicode symbols.</p>
@@ -13224,9 +13223,6 @@ shapes or set yours. Shapes are Unicode symbols.</p>
 stroke between them. It multiplies the number of markers by 2. For
 better performance set it to False. More information and examples in
 Chapter 2, Paragraph 4.4.</p>
-</li>
-<li><p><strong>languages_in_popups</strong>: <em>bool</em>, default <em>True</em></p>
-<p>Whether to show links to Glottolog website in popups.</p>
 </li>
 <li><p><strong>control</strong>: <em>bool</em>, default <em>False</em></p>
 <p>Whether to add LayerControls and group by features.</p>
@@ -13242,8 +13238,7 @@ Chapter 2, Paragraph 4.4.</p>
 <p>Colors for the colormap.</p>
 </li>
 </ul>
-<p>\bigskip
-<strong>Methods</strong>:</p>
+<p><strong>Methods</strong>:</p>
 <ul>
 <li><p><strong>add_custom_coordinates</strong> <em>(custom_coordinates)</em></p>
 <p>Set custom coordinates. By default cooordinates for the languages
@@ -13256,7 +13251,7 @@ data.</p>
 (<em>tuples</em>)</p>
 <p>Length of the list should equal to length of languages.</p>
 </li>
-<li><p><strong>add_features*</strong>(features, radius=7, opacity=1, numeric=False,
+<li><p><strong>add_features*</strong>(features, radius=7, opacity=1, colors=None, numeric=False,
 control=False, use_shapes=False)*</p>
 <p>Add features to the map.</p>
 <p><strong>Parameters</strong>:</p>
@@ -13270,6 +13265,13 @@ To change legend position use use <em>legend_position</em> attribute.</p>
 </li>
 <li><p><strong>radius</strong>: <em>int</em>, default <em>7</em></p>
 <p>Marker radius.</p>
+</li>
+<li><p><strong>opacity</strong>: <em>float</em>, default <em>1</em></p>
+<p>Marker opacity: a number between 0(invisible) and 1(not transparent).</p>
+</li>
+<li><p><strong>colors</strong>: <em>list</em> of html codes for colors (<em>str</em>), default <em>None</em></p>
+<p>Colors that represent features. You can either use the 20 default
+colors(if <em>None</em>) or set yours(else).</p>
 </li>
 <li><p><strong>numeric</strong>: <em>bool</em>, default <em>False</em></p>
 <p>Whether to assign different color to each feature (<em>False</em>), or
@@ -13291,7 +13293,7 @@ set this option to True.</p>
 </li>
 </ul>
 </li>
-<li><p><strong>add_stroke_features*</strong>(features, radius=12, opacity=1,
+<li><p><strong>add_stroke_features*</strong>(features, radius=12, opacity=1, colors=None,
 numeric=False, control=False)*:</p>
 <p>Add additional set of features that look like strokes around
 markers.</p>
@@ -13307,6 +13309,13 @@ legend position use use <em>stroke_legend_position</em> attribute.</p>
 <li><p><strong>radius</strong>: <em>int</em>, default <em>12</em></p>
 <p>Marker radius. Note that this radius is absolute as well.</p>
 </li>
+<li><p><strong>opacity</strong>: <em>float</em>, default <em>1</em></p>
+<p>Marker opacity: a number between 0(invisible) and 1(not transparent).</p>
+</li>
+<li><p><strong>colors</strong>: <em>list</em> of html codes for colors (<em>str</em>), default <em>None</em></p>
+<p>Colors that represent stroke features. You can either use the 20 default
+colors(if <em>None</em>) or set yours(else).</p>
+</li>
 <li><p><strong>control</strong>: <em>bool</em>, default <em>False</em></p>
 <p>Whether to add LayerControls to the map. It allows interactive
 turning on/off given stroke features.</p>
@@ -13314,7 +13323,7 @@ turning on/off given stroke features.</p>
 </ul>
 </li>
 <li><p><strong>add_overlapping_features</strong> <em>(features, radius=7,
-radius_increment=4, mapping=None)</em>:</p>
+radius_increment=4, colors=None, mapping=None)</em>:</p>
 <p>Add overlapping features. For example, if you want to draw on map
 whether language 'is ergative', 'is slavic', 'is spoken in Russia'.
 It will draw several markers of different size for each feature.</p>
@@ -13331,13 +13340,17 @@ amount of languages.</p>
 <p>Step by which the size of the marker for each feature will be
 incremented.</p>
 </li>
+<li><p><strong>colors</strong>: <em>list</em> of html codes for colors (<em>str</em>), default <em>None</em></p>
+<p>Colors that represent features. You can either use the 20 default
+colors(if <em>None</em>) or set yours(else).</p>
+</li>
 <li><p><strong>mapping</strong>: <em>dict</em>, default <em>None</em></p>
 <p>Mapping for the legend.</p>
 </li>
 </ul>
 </li>
-<li><p><strong>add_minicharts</strong> <em>(\</em>minicharts, typ='pie', size=0.6, names=None,
-textprops=None, labels=False, colors=[], startangle=90)*:</p>
+<li><p><strong>add_minicharts</strong> <em>(&ast;minicharts, typ='pie', size=0.6, names=None,
+textprops=None, labels=False, colors=None , startangle=90)</em>:</p>
 <p>Create minicharts using Maplotlib.</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -13356,7 +13369,7 @@ textprops=None, labels=False, colors=[], startangle=90)*:</p>
 <li><p><strong>labels</strong>: <em>bool</em>, default <em>False</em></p>
 <p>Whether to display labels.</p>
 </li>
-<li><p><strong>colors</strong>: <em>list</em>, default <em>[]</em></p>
+<li><p><strong>colors</strong>: <em>list</em>, default <em>None</em></p>
 <p>Minicharts colors.</p>
 </li>
 <li><p><strong>startange</strong>: <em>int</em>, default <em>90</em></p>
@@ -13370,7 +13383,7 @@ textprops=None, labels=False, colors=[], startangle=90)*:</p>
 <p>Coordinates for the heatmap. To create a heatmap-only map, do not
 pass any languages.</p>
 </li>
-<li><p><strong>add_popups</strong> <em>(popups, parse_html=False)</em></p>
+<li><p><strong>add_popups</strong> <em>(popups, parse_html=False, glottolog_links=True)</em></p>
 <p>Add popups to markers.</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -13378,8 +13391,11 @@ pass any languages.</p>
 should equal to length of languages.</p>
 </li>
 <li><p><strong>parse_html</strong>: <em>bool</em>, default <em>False</em> By default (<em>False</em>)
-you can add HTML elements. If you need to add full HTML pages to
+you can add HTML elements. If you need to add full HTML pages(e.g. with JavaScript code) to
 popups, you need to set the option to <em>True</em>.</p>
+</li>
+<li><p><strong>glottolog_links</strong>: <em>bool</em>, default <em>True</em></p>
+<p>Whether to show links to Glottolog website in popups. Automatically disabled when <em>parse_html</em> is used.</p>
 </li>
 </ul>
 </li>
@@ -13447,12 +13463,12 @@ journals.</p>
 <p>If path is not given <strong>returns</strong> the PNG as <em>bytes</em>.</p>
 </li>
 </ul>
-<h3 id="Functions">Functions<a class="anchor-link" href="#Functions">&#182;</a></h3><p><em>function</em> lingtypology.maps.<strong>merge</strong> <em>(\</em>maps)*</p>
+<h3 id="Functions">Functions<a class="anchor-link" href="#Functions">&#182;</a></h3><p><em>function</em> lingtypology.maps.<strong>merge</strong> <em>(&ast;maps)</em></p>
 <p>Accepts <em>LingMap</em> objects and creates map of them.</p>
 <p>It is impossible to add, for example, features and minicharts. If you
 need it, you can create two <em>LingMap</em> objects and then use the <em>merge</em>
 function.</p>
-<p><strong>Parameter</strong> *maps: <em>lingtypology.maps.LingMap</em> objects.</p>
+<p><strong>Parameter</strong> <em>maps: </em>lingtypology.maps.LingMap* objects.</p>
 <p><strong>Returns</strong> lingtypology.maps.LingMap</p>
 <p><em>function</em> lingtypology.maps.<strong>get_elevations</strong> <em>(languages)</em></p>
 <p>Get data on elevation for languages. More information in Chapter 2,
@@ -13463,7 +13479,8 @@ Paragraph 4.2.</p>
 color2='green')</em></p>
 <p>Creates color gradient of given length.</p>
 <p><strong>Returns</strong> list of HEX-colors</p>
-<h2 id="Glottolog">Glottolog<a class="anchor-link" href="#Glottolog">&#182;</a></h2><h3 id="Functions">Functions<a class="anchor-link" href="#Functions">&#182;</a></h3><p>Glottolog module includes various functions to work with Glottolog data.</p>
+<h2 id="Glottolog">Glottolog<a class="anchor-link" href="#Glottolog">&#182;</a></h2><p><code>lingtypology.glottolog</code></p>
+<h3 id="Functions">Functions<a class="anchor-link" href="#Functions">&#182;</a></h3><p>Glottolog module includes various functions to work with Glottolog data.</p>
 <p>The only funcntion that accepts list-like objects and returns <em>list</em> is
 <strong>get_affiliations</strong>. Its <strong>parameter</strong> is language names, it
 <strong>returns</strong> the genealogical information for the given languages.</p>
@@ -13521,7 +13538,8 @@ everything except for these files from the directory.</p>
 <li><p>Lingtypology will automatically use the local data.</p>
 </li>
 </ul>
-<h2 id="Databases-API">Databases API<a class="anchor-link" href="#Databases-API">&#182;</a></h2><h3 id="General">General<a class="anchor-link" href="#General">&#182;</a></h3><p>One of the objectives of LingTypology is to provide a simple interface
+<h2 id="Databases-API">Databases API<a class="anchor-link" href="#Databases-API">&#182;</a></h2><p><code>lingtypology.datasets</code></p>
+<h3 id="General">General<a class="anchor-link" href="#General">&#182;</a></h3><p>One of the objectives of LingTypology is to provide a simple interface
 for linguistic databases. Therefore, classes used for acccessing them
 have unified API: most attributes and methods overlap among all of them.
 In this subsection I will describe this universal interface.</p>
@@ -13561,28 +13579,28 @@ present will be dropped. Default: <em>[]</em>.</p>
 where keys are headers of the table.</p>
 </li>
 </ul>
-<h3 id="WALS">WALS<a class="anchor-link" href="#WALS">&#182;</a></h3><p><em>class</em> lingtypology.db_apis.<strong>Wals</strong> <em>(\</em>features)*</p>
-<p><strong>Parameter</strong> features, <em>list</em></p>
+<h3 id="WALS">WALS<a class="anchor-link" href="#WALS">&#182;</a></h3><p><em>class</em> lingtypology.datasets.<strong>Wals</strong> <em>(&ast;features)</em></p>
+<p><strong>Parameter</strong> &ast;features, <em>list</em></p>
 <p>List of WALS pages that will be present in the resulting table. E.g.
 <em>['1A']</em></p>
 <p><strong>Additional attribite</strong> general_citation, <em>str</em></p>
 <p>The general citation for <strong>all</strong> the WALS pages.</p>
-<h3 id="Autotyp">Autotyp<a class="anchor-link" href="#Autotyp">&#182;</a></h3><p><em>class</em> lingtypology.db_apis.<strong>Autotyp</strong> <em>(\</em>tables)*</p>
-<p><strong>Parameter</strong> *tables: <em>list</em> of strings</p>
+<h3 id="Autotyp">Autotyp<a class="anchor-link" href="#Autotyp">&#182;</a></h3><p><em>class</em> lingtypology.datasets.<strong>Autotyp</strong> <em>(&ast;tables)</em></p>
+<p><strong>Parameter</strong> &ast;tables: <em>list</em> of strings</p>
 <p>List of the Autoptyp tables that will be merged in the resulting table.
 E.g. <em>['gender']</em></p>
-<h3 id="AfBo">AfBo<a class="anchor-link" href="#AfBo">&#182;</a></h3><p><em>class</em> lingtypology.db_apis.<strong>AfBo</strong> <em>(\</em>features)*</p>
-<p><strong>Parameter</strong> *features: <em>list</em> of strings</p>
+<h3 id="AfBo">AfBo<a class="anchor-link" href="#AfBo">&#182;</a></h3><p><em>class</em> lingtypology.datasets.<strong>AfBo</strong> <em>(&ast;features)</em></p>
+<p><strong>Parameter</strong> &ast;features: <em>list</em> of strings</p>
 <p>List of Autotyp features that will be present in the resulting table.
 E.g. <em>['adjectivizer']</em>.</p>
-<h3 id="SAILS">SAILS<a class="anchor-link" href="#SAILS">&#182;</a></h3><p><em>class</em> lingtypology.db_apis.<strong>Sails</strong> <em>(\</em>features)*</p>
-<p><strong>Parameter</strong> *features: <em>list</em> of strings</p>
+<h3 id="SAILS">SAILS<a class="anchor-link" href="#SAILS">&#182;</a></h3><p><em>class</em> lingtypology.datasets.<strong>Sails</strong> <em>(&ast;features)</em></p>
+<p><strong>Parameter</strong> &ast;features: <em>list</em> of strings</p>
 <p>List of SAILS pages that will be included in the resulting table.</p>
 <p><strong>Additional attribute</strong> feature<strong>s</strong>_descriptions: <em>pandas.DataFrame</em></p>
 <p>Table that contain description for all the SAILS pages.</p>
-<p><strong>Additional method</strong> feature_descriptions <em>(\</em>features)*</p>
+<p><strong>Additional method</strong> feature_descriptions <em>(</em>features)*</p>
 <p><strong>Returns</strong> table with description for each given <strong>feature</strong>.</p>
-<h3 id="PHOIBLE">PHOIBLE<a class="anchor-link" href="#PHOIBLE">&#182;</a></h3><p><em>class</em> lingtypology.db_apis.<strong>Phoible</strong> <em>(subset='all',
+<h3 id="PHOIBLE">PHOIBLE<a class="anchor-link" href="#PHOIBLE">&#182;</a></h3><p><em>class</em> lingtypology.datasets.<strong>Phoible</strong> <em>(subset='all',
 aggregated=True)</em></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
