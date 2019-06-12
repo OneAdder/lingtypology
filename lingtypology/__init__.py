@@ -1,5 +1,6 @@
-from lingtypology.maps import *
-import lingtypology.db_apis
+from lingtypology.maps import LingMap, merge, gradient, get_elevations
+import lingtypology.datasets
+import lingtypology.glottolog
 
 __version__ = '0.8.4.dev'
 __citation__ = \
