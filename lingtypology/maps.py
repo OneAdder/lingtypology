@@ -459,7 +459,7 @@ class LingMap(object):
                     popup = folium.Popup(iframe)
                 else:
                     popup = folium.Popup(self.popups[i])
-                popup.add_to(marker)            
+                popup.add_to(marker)
 
     def _create_legend(self, m, legend_data, title='Legend', position='bottomright'):
         """Creates legend and adds it to the map
@@ -910,7 +910,7 @@ class LingMap(object):
         return {'marker': marker, 'stroke': stroke,
                 's_marker': s_marker, 's_stroke': s_stroke}
 
-    def add_features(self, features, radius=7, opacity=1,
+    def add_features(self, features, radius=7, opacity=1, colors=None,
                      numeric=False, control=False, use_shapes=False):
         """Add features
 
@@ -921,6 +921,11 @@ class LingMap(object):
             To change the title of the legend use "legend_title" attribute.
         radius: int, default 7
             Marker radius.
+        opacity: float, default 1
+            Marker opacity: a number between 0(invisible) and 1(not transparent).
+        colors: list of html codes for colors (str), default None
+            Colors that represent features. You can either use the 20 default
+            colors(if None) or set yours(else).
         numeric: bool, default False
             Whether to assign different color to each feature (False),
             or to assign a color from colormap (True).
@@ -940,13 +945,15 @@ class LingMap(object):
         self.features = features
         self.radius = radius
         self.opacity = opacity
+        if colors:
+            self.colors = colors
         
         self.numeric = numeric
         self.control = control
         self.use_shapes = use_shapes
 
-    def add_stroke_features(self, features, radius=12,
-                            opacity=1, numeric=False, control=False):
+    def add_stroke_features(self, features, radius=12, opacity=1,
+                            colors=None, numeric=False, control=False):
         """Add stroke features
 
         This function assigns features to strokes of markers.
@@ -956,6 +963,11 @@ class LingMap(object):
             By default, if you add features, a legend will appear. To shut it down set
             "stroke_legend" attribute to False.
             To change the title of the legend use "stroke_legend_title" attribute.
+        opacity: float, default 1
+            Marker opacity: a number between 0(invisible) and 1(not transparent).
+        colors: list of html codes for colors (str), default None
+            Colors that represent stroke features. You can either use the 20 default
+            colors(if None) or set yours(else).
         radius: int, default 12
             Marker radius.31
         control: bool, default False
@@ -967,6 +979,8 @@ class LingMap(object):
         self.stroke_features = features
         self.stroke_radius = radius
         self.stroke_opacity = opacity
+        if colors:
+            self.stroke_colors = colors
         
         self.s_numeric = numeric
         self.stroke_control = control
@@ -1079,10 +1093,11 @@ class LingMap(object):
         self.use_heatmap = True
         self.heatmap = tuple(heatmap)
 
-    def add_minicharts(self, *minicharts, typ='pie',
-                       size=0.6, names=None,
-                       textprops=None, labels=False,
-                       startangle=90, colors=[], bar_width=1):
+    def add_minicharts(self, *minicharts,
+                       typ='pie', size=0.6,
+                       names=None, textprops=None,
+                       labels=False, startangle=90,
+                       colors=None, bar_width=1):
         """Create minicharts using maplotlib
         
         How it works:
@@ -1155,16 +1170,35 @@ class LingMap(object):
         plt.clf()
         plt.close()
     
-    def add_overlapping_features(self, marker_groups, radius=7,
-                                 radius_increment=4, mapping=None):
+    def add_overlapping_features(self, marker_groups,
+                                 radius=7, radius_increment=4,
+                                 colors=None, mapping=None):
         """Add overlapping features
         
         For example, if you want to draw on map whether language 'is ergative', 'is slavic', 'is spoken in Russia'.
         It will draw several markers of different size for each location.
+        
+        Parameters:
+        -----------
+        features: list of lists
+            List of features. Amount of features should be equal to the
+            amount of languages.
+        radius: int, default 7
+            Radius of the smallest circle.
+        radius_increment: int, default 4
+            Step by which the size of the marker for each feature will be
+            incremented.
+        colors: list of html codes for colors (str), default None
+            Colors that represent features. You can either use the 20 default
+            colors(if *None*) or set yours(else).
+        mapping: dict, default None
+            Mapping for the legend.
         """
         self.marker_groups = marker_groups
         self.radius = radius
         self.radius_increment = radius_increment
+        if colors:
+            self.colors = colors
         self.custom_mapping = mapping
 
     def _sanity_check(self, features, feature_name='corresponding lists'):
