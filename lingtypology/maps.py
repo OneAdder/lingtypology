@@ -424,7 +424,7 @@ class LingMap(object):
         """
         popup_href = \
             '<a ' \
-                'href="https://glottolog.org/resource/languoid/id/{}"' \
+                'href="https://glottolog.org/resource/languoid/id/{}" ' \
                 '''onclick="this.target='_blank';"''' \
             '>' \
                 '{}'\
@@ -1108,7 +1108,8 @@ class LingMap(object):
             fig.patch.set_visible(False)
         else:
             raise LingMapError(
-                '{}: unknown type of chart. You can use either "pie" or "bar"'
+                '{}: unknown type of chart.\n' \
+                'You can use either "pie" or "bar"'.format(typ)
             )
         
         ax = fig.add_subplot(111)
@@ -1146,7 +1147,7 @@ class LingMap(object):
             self.minicharts.append(
                 folium.DivIcon(html=svg.replace('\n', ''), icon_anchor=center)
             )
-            popup = '<br>'
+            popup = ''
             for name, value in zip(names, minichart):
                 popup += '{}: {}<br>'.format(name, str(value))
             self.popups.append(popup)
@@ -1293,26 +1294,8 @@ class LingMap(object):
                     continue
                 marker = folium.Marker(coordinates, self.minicharts[i])
 
-                if self.languages_in_popups or self.minichart_names:
-                    popup_contents = ''
-                    if self.languages_in_popups:
-                        popup_href = \
-                            '<a' \
-                                'href="https://glottolog.org/resource/languoid/id/{}"' \
-                                '''onclick="this.target='_blank';"''' \
-                            '>{}</a>'
-                        popup_contents += popup_href.format(
-                            lingtypology.glottolog.get_glot_id(language),
-                            language
-                        )
-                    if self.popups:
-                        marker.add_child(
-                            folium.Popup(popup_contents + self.popups[i])
-                        )
-                    else:
-                        marker.add_child(
-                            folium.Popup(popup_contents)
-                        )
+                self._create_popups(marker, language, i,
+                                    parse_html=self.html_popups)
                 if self.tooltips:
                     tooltip = folium.Tooltip(self.tooltips[i])
                     tooltip.add_to(marker)
