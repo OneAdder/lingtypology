@@ -151,20 +151,20 @@ def test_Glottolog():
     assert assertion
     
 def test_wals():
-    db_apis.Wals('1a', '20a', '3a').get_df(join_how='outer')
+    datasets.Wals('1a', '20a', '3a').get_df(join_how='outer')
 
 def test_autotyp():
-    db_apis.Autotyp('Gender', 'Agreement').get_df()
+    datasets.Autotyp('Gender', 'Agreement').get_df()
 
 def test_afbo():
-    db_apis.AfBo(
+    datasets.AfBo(
         'adverbializer',
         'case: non-locative peripheral case'
     ).get_df()
 
 def test_sails():
-    db_apis.Sails('ICU10', 'ICU11').get_df()
+    datasets.Sails('ICU10', 'ICU11').get_df()
 
 def test_phoible():
-    db_apis.Phoible().get_df(strip_na=['tones'])
-    db_apis.Phoible(aggregated=False).get_df()
+    datasets.Phoible().get_df(strip_na=['tones'])
+    datasets.Phoible(aggregated=False).get_df()
