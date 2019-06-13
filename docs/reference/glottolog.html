@@ -1,0 +1,163 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>lingtypology.glottolog &#8212; LingTypology 0.8.4 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="lingtypology.datasets" href="datasets.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="datasets.html" title="lingtypology.datasets"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">LingTypology 0.8.4 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="lingtypology-glottolog">
+<span id="glottolog"></span><h1><code class="docutils literal notranslate"><span class="pre">lingtypology.glottolog</span></code><a class="headerlink" href="#lingtypology-glottolog" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="functions">
+<span id="functions-1"></span><h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<p>Glottolog module includes various functions to work with Glottolog data.</p>
+<p>The only funcntion that accepts list-like objects and returns <em>list</em> is
+<strong>get_affiliations</strong>. Its <strong>parameter</strong> is language names, it
+<strong>returns</strong> the genealogical information for the given languages.</p>
+<p>The <strong>parameter</strong> of all the other functions is <em>str</em> and they
+<strong>return</strong> <em>str</em>.</p>
+<p>The following functions use language name as the <strong>parameter</strong> and
+<strong>return</strong> coordinates, Glottocode, macro area and ISO code
+respectively:</p>
+<ul class="simple">
+<li>lingtypology.glottolog.<strong>get_coordinates</strong></li>
+<li>lingtypology.glottolog.<strong>get_glot_id</strong></li>
+<li>lingtypology.glottolog.<strong>get_macroarea</strong></li>
+<li>lingtypology.glottolog.<strong>get_iso</strong></li>
+</ul>
+<p>The following functions use Glottocode as the <strong>parameter</strong> and
+<strong>return</strong> coordinates, language name and ISO code respectively:</p>
+<ul class="simple">
+<li>lingtypology.glottolog.<strong>get_coordinates_by_glot_id</strong></li>
+<li>lingtypology.glottolog.<strong>get_by_glot_id</strong></li>
+<li>lingtypology.glottolog.<strong>get_iso_by_glot_id</strong></li>
+</ul>
+<p>The following functions use ISO code as the <strong>parameter</strong> and <strong>return</strong>
+language name and Glottocode respectively.</p>
+<ul class="simple">
+<li>lingtypology.glottolog.<strong>get_by_iso</strong></li>
+<li>lingtypology.glottolog.<strong>get_glot_id_by_iso</strong></li>
+</ul>
+</div>
+<div class="section" id="versions">
+<h2>Versions<a class="headerlink" href="#versions" title="Permalink to this headline">¶</a></h2>
+<p>Processed Glottolog data is stored statically in the package directory.
+It is updated with each new release of <code class="docutils literal notranslate"><span class="pre">lingtypology</span></code>.</p>
+<p>The version of the Glottolog data which is currently used is stored in
+lingtypology.glottolog.<strong>version</strong> variable.</p>
+<p>It is possible to use local Glottolog data. To do so, it is necessary to
+perform the following steps:</p>
+<ul class="simple">
+<li>Download the current version of the Glottolog data.</li>
+<li>Create directory <code class="docutils literal notranslate"><span class="pre">.lingtypology_data</span></code> in your home directory.</li>
+<li>Move <code class="docutils literal notranslate"><span class="pre">glottolog</span></code> to <code class="docutils literal notranslate"><span class="pre">.lingtypology_data</span></code>.</li>
+<li>Run the following command:</li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>glottolog –repos<span class="o">=</span>glottolog languoids
+</pre></div>
+</div>
+<ul class="simple">
+<li>It will generate two small files (<code class="docutils literal notranslate"><span class="pre">csv</span></code> and <code class="docutils literal notranslate"><span class="pre">json</span></code>). Now you can delete
+everything except for these files from the directory.</li>
+<li>LingTypology will automatically use the local data.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">lingtypology.glottolog</span></code></a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#versions">Versions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="datasets.html"
+                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">lingtypology.datasets</span></code></a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/reference/glottolog.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="datasets.html" title="lingtypology.datasets"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">LingTypology 0.8.4 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Michael Voronov.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>
