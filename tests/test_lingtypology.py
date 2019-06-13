@@ -114,6 +114,15 @@ def test_LingMap_merge():
     m2 = LingMap('English')
     merge(m1, m2).create_map()
 
+def test_LingMapError():
+    try:
+        m = lingtypology.LingMap('Russian')
+        m.add_features(('inflected', 'agglutinative'))
+    except lingtypology_exceptions.LingMapError:
+        pass
+    else:
+        raise(lingtypology_exceptions.LingMapError('The error did not rise!'))
+
 def test_Glottolog():
     languages = set()
     glottocodes = set()
