@@ -56,462 +56,674 @@
 <dl class="class">
 <dt id="lingtypology.maps.LingMap">
 <em class="property">class </em><code class="descclassname">lingtypology.maps.</code><code class="descname">LingMap</code><span class="sig-paren">(</span><em>languages=[]</em>, <em>glottocode=False</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lingtypology map object
-Parameter languages: list of strings, default []</p>
-<p>Features
-—
-colors: list of html codes for colors</p>
-<blockquote>
-<div>Colors that represent features.
-You can either use the default colors or set yours.</div></blockquote>
-<dl class="docutils">
-<dt>stroke_colors: list of html codes for colors</dt>
-<dd>Colors that represent additional (stroke) features.
-You can either use the default colors or set yours.</dd>
-<dt>shapes: list of characters</dt>
-<dd>If you use shapes instead of colors, you can either use the default shapes or set yours.
-Shapes are Unicode symbols.</dd>
-</dl>
-<p>—</p>
-<dl class="docutils">
-<dt>tiles: str, default ‘OpenStreetMap’</dt>
-<dd><dl class="first docutils">
-<dt>Tiles for the map. You can use one of these tiles:</dt>
-<dd>“OpenStreetMap”
-“Mapbox Bright” (Limited levels of zoom for free tiles)
-“Mapbox Control Room” (Limited levels of zoom for free tiles)
-“Stamen” (Terrain, Toner, and Watercolor)
-“Cloudmade” (Must pass API key)
-“Mapbox” (Must pass API key)
-“CartoDB” (positron and dark_matter)</dd>
-</dl>
-<p class="last">or pass the custum URL.</p>
-</dd>
-<dt>base_map: folium.Map, default None</dt>
-<dd>In case you want to draw something on particular folium.Map.</dd>
-<dt>start_location: (float, float), default (0, 0)</dt>
-<dd>Coordinates of the map (latitude, longitude).</dd>
-<dt>start_zoom: int, default 2</dt>
-<dd>Imitial zoom level.</dd>
-<dt>control_scale: bool, default True</dt>
-<dd>Whether to add control scale.</dd>
-<dt>prefer_canvas: bool, default False</dt>
-<dd>Use canvas instead of SVG.
-If set to True, the map may be more responsive in case you have a lot of markers.</dd>
-<dt>title: str, default None</dt>
-<dd>You can add a title to the map.</dd>
-<dt>start_location_mapping: dict,</dt>
-<dd>Mapping between normal locations and coordinates.</dd>
-</dl>
-<p>—</p>
-<p>Legend
-—
-legend: bool, default True</p>
-<blockquote>
-<div>Whether to add legend</div></blockquote>
-<dl class="docutils">
-<dt>stroke_legend: bool True</dt>
-<dd>Whether to add stroke legend</dd>
-<dt>legend_title: str, default Legend</dt>
-<dd>Legend title</dd>
-<dt>stroke_legend_title: str, default Legend</dt>
-<dd>Stroke legend title</dd>
-<dt>legend_position: str, default ‘bottomright’</dt>
-<dd>Legend position.
-Available values: ‘right’, ‘left’, ‘top’, ‘bottom’, ‘bottomright’, ‘bottomleft’, ‘topright’, ‘topleft’</dd>
-<dt>stroke_legend_position: str, default ‘bottomleft’</dt>
-<dd>Stroke legend position.
-Available values: ‘right’, ‘left’, ‘top’, ‘bottom’, ‘bottomright’, ‘bottomleft’, ‘topright’, ‘topleft’</dd>
-</dl>
-<p>—</p>
-<p>Markers
-—
-use_shapes: bool, default False</p>
-<blockquote>
-<div>Whether to use shapes instead of colors.</div></blockquote>
-<dl class="docutils">
-<dt>radius: int, default 7</dt>
-<dd>Circle marker radius.</dd>
-<dt>stroke_radius: int, default 12</dt>
-<dd>Radius of markers if you use stroke features.</dd>
-<dt>stroked: bool, default True</dt>
-<dd>Whether to add stroke to markers.</dd>
-<dt>unstroked: bool, default True</dt>
-<dd><p class="first">If set to True, circle marker will merge if you zoom out without stroke between them.
-It multiplies the number of markers by 2. For better performance set it to False.
-To understand how it looks see the example below.</p>
-<dl class="last docutils">
-<dt>unstroked = True (default):</dt>
-<dd><p class="first">┌——————————┐
-│ ▒▒▒▒▒▒▒▒ │
-│ ▒▒▒▒▒▒▒▒ └—————┐
-│ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ │
-│ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ │
-└—————┐ ▒▒▒▒▒▒▒▒ │</p>
-<blockquote class="last">
-<div>│ ▒▒▒▒▒▒▒▒ │
-└——————————┘</div></blockquote>
-</dd>
-<dt>unstroked = False:</dt>
-<dd><p class="first">┌——————————┐
-│ ▒▒▒▒▒▒▒▒ │
-│ ▒▒▒▒▒┌———┴——————┐
-│ ▒▒▒▒▒│ ▒▒▒▒▒▒▒▒ │
-│ ▒▒▒▒▒│ ▒▒▒▒▒▒▒▒ │
-└——————┤ ▒▒▒▒▒▒▒▒ │</p>
-<blockquote class="last">
-<div>│ ▒▒▒▒▒▒▒▒ │
-└——————————┘</div></blockquote>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>—</p>
-<p>Popups
-—
-languages_in_popups: bool, default True</p>
-<blockquote>
-<div>Whether to show links to Glottolog website in popups</div></blockquote>
-<dl class="docutils">
-<dt>html_popups: bool, default False</dt>
-<dd>Setting it to True allows to put full html pages into popups (using folium.IFrame).</dd>
-</dl>
-<p>—</p>
-<p>Control
-—
-control: bool, default False</p>
-<blockquote>
-<div>Whether to add LayerControls and group by features.</div></blockquote>
-<dl class="docutils">
-<dt>stroke_control: bool, default False</dt>
-<dd>Whether to add LayerControls and group by stroke features.</dd>
-<dt>control_position: str, default ‘topright’</dt>
-<dd>Position of LayerControls.
-May be ‘topleft’, ‘topright’, ‘bottomleft’ or ‘bottomright’.</dd>
-</dl>
-<p>—</p>
-<p>Other
-—
-heatmap_only: bool, default False</p>
-<blockquote>
-<div>If set to true no markers will be rendered.</div></blockquote>
-<dl class="docutils">
-<dt>colormap_colors: tuple, default (‘white’,’green’)</dt>
-<dd>Default colors for the colormap.</dd>
-<dt>minicharts: list, defaule []</dt>
-<dd>List of folium.DivIcon for minicharts</dd>
-</dl>
-<p>—</p>
-<dl class="method">
-<dt id="lingtypology.maps.LingMap.add_features">
-<code class="descname">add_features</code><span class="sig-paren">(</span><em>features</em>, <em>radius=7</em>, <em>opacity=1</em>, <em>colors=None</em>, <em>numeric=False</em>, <em>control=False</em>, <em>use_shapes=False</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.add_features" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add features</p>
-<dl class="docutils">
-<dt>features: list of strings</dt>
-<dd>List of features. Length of the list should equal to length of languages.
-By default, if you add features, a legend will appear. To shut it down set
-“legend” attribute to False.
-To change the title of the legend use “legend_title” attribute.</dd>
-<dt>radius: int, default 7</dt>
-<dd>Marker radius.</dd>
-<dt>opacity: float, default 1</dt>
-<dd>Marker opacity: a number between 0(invisible) and 1(not transparent).</dd>
-<dt>colors: list of html codes for colors (str), default None</dt>
-<dd>Colors that represent features. You can either use the 20 default
-colors(if None) or set yours(else).</dd>
-<dt>numeric: bool, default False</dt>
-<dd>Whether to assign different color to each feature (False),
-or to assign a color from colormap (True).
-You can set it to True only in case your features are numeric,
-for example “Number of phonemes”, and stroke features are not given.</dd>
-<dt>control: bool, default False</dt>
-<dd>Whether to add LayerControls to the map.
-It allows interactive turning on/off given features.</dd>
-<dt>use_shapes: bool, default False</dt>
-<dd>Whether to use shapes instead of colors. This option allows to represent features as shapes.
-Shapes are Unicode charaters like ⬤ or ◼. You can replace or add to default symbols by
-changing attribute “shapes”.
-If colors are not a viable option for you, you can set this option to True.</dd>
-</dl>
+<dd><p>Lingtypology map object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>languages</strong> (<em>list of strings</em><em>, </em><em>default</em><em> [</em><em>]</em>) – <p>A list of languages.</p>
+<p>The language names should correspond to their names from Glottolog unless you use <em>add_custom_coordinates</em> method. Instead of language names you could use Glottocodes (language ID in Glottolog). In this case you need to set <em>glottocode</em> parameter to true.</p>
+</li>
+<li><strong>glottocodes</strong> (<em>bool</em><em>, </em><em>default False</em>) – Whether to treat languages as Glottocodes.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.tiles">
+<code class="descname">tiles</code><a class="headerlink" href="#lingtypology.maps.LingMap.tiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tiles for the map.</p>
+<p>You can use one of these tiles (list of tiles is borrowed from the Folium Documentation):</p>
+<ul class="simple">
+<li>“OpenStreetMap”</li>
+<li>“Mapbox Bright” (Limited levels of zoom for free tiles)</li>
+<li>“Mapbox Control Room” (Limited levels of zoom for free tiles)</li>
+<li>“Stamen” (Terrain, Toner, and Watercolor)</li>
+<li>“Cloudmade” (Must pass API key)</li>
+<li>“Mapbox” (Must pass API key)</li>
+<li>“CartoDB” (positron and dark_matter)</li>
+<li>or pass the custum URL.</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str, default ‘OpenStreetMap’</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="method">
-<dt id="lingtypology.maps.LingMap.add_stroke_features">
-<code class="descname">add_stroke_features</code><span class="sig-paren">(</span><em>features</em>, <em>radius=12</em>, <em>opacity=1</em>, <em>colors=None</em>, <em>numeric=False</em>, <em>control=False</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.add_stroke_features" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add stroke features</p>
-<p>This function assigns features to strokes of markers.</p>
-<dl class="docutils">
-<dt>features: list of strings</dt>
-<dd>List of features. Length of the list should equal to length of languages.
-By default, if you add features, a legend will appear. To shut it down set
-“stroke_legend” attribute to False.
-To change the title of the legend use “stroke_legend_title” attribute.</dd>
-<dt>opacity: float, default 1</dt>
-<dd>Marker opacity: a number between 0(invisible) and 1(not transparent).</dd>
-<dt>colors: list of html codes for colors (str), default None</dt>
-<dd>Colors that represent stroke features. You can either use the 20 default
-colors(if None) or set yours(else).</dd>
-<dt>radius: int, default 12</dt>
-<dd>Marker radius.31</dd>
-<dt>control: bool, default False</dt>
-<dd>Whether to add LayerControls to the map.
-It allows interactive turning on/off given features.</dd>
-</dl>
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.start_location">
+<code class="descname">start_location</code><a class="headerlink" href="#lingtypology.maps.LingMap.start_location" title="Permalink to this definition">¶</a></dt>
+<dd><p>Coordinates of the start location for the map (latitude, longitude) or a text shortcut.</p>
+<p>List of available shortcuts:</p>
+<ul class="simple">
+<li>“Central Europe”</li>
+<li>“Caucasus”</li>
+<li>“Australia &amp; Oceania”</li>
+<li>“Papua New Guinea”</li>
+<li>“Africa”</li>
+<li>“Asia”</li>
+<li>“North America”</li>
+<li>“Central America”</li>
+<li>“South America”</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">(float, float), default (0, 0)</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="method">
-<dt id="lingtypology.maps.LingMap.add_popups">
-<code class="descname">add_popups</code><span class="sig-paren">(</span><em>popups</em>, <em>parse_html=False</em>, <em>glottolog_links=True</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.add_popups" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add popups to markers</p>
-<dl class="docutils">
-<dt>popups: list of strings</dt>
-<dd>List of popups. Length of the list should equal to length of languages.</dd>
-<dt>parse_html: bool, default False</dt>
-<dd>By default (False) you can add small pieces of html code.
-If you need to add full html pages to popups, you need to set the option to True.</dd>
-<dt>glottolog_links: bool, default True</dt>
-<dd>Whether to include links to Glottolog in popups.</dd>
-</dl>
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.start_zoom">
+<code class="descname">start_zoom</code><a class="headerlink" href="#lingtypology.maps.LingMap.start_zoom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial zoom level.</p>
+<p>Bypassed if you are using a start_location shortcut.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int, default 2</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="method">
-<dt id="lingtypology.maps.LingMap.add_tooltips">
-<code class="descname">add_tooltips</code><span class="sig-paren">(</span><em>tooltips</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.add_tooltips" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add tooltips to markers</p>
-<dl class="docutils">
-<dt>tooltips: list of strings</dt>
-<dd>List of tooltips. Length of the list should equal to length of languages.</dd>
-</dl>
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.control_scale">
+<code class="descname">control_scale</code><a class="headerlink" href="#lingtypology.maps.LingMap.control_scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether to add control scale.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool, default True</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.base_map">
+<code class="descname">base_map</code><a class="headerlink" href="#lingtypology.maps.LingMap.base_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>In case you want to draw something on particular folium.Map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">folium.Map, default None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.colors">
+<code class="descname">colors</code><a class="headerlink" href="#lingtypology.maps.LingMap.colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Colors that represent features.
+You can either use the default colors or set yours.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of html codes for colors</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.stroke_colors">
+<code class="descname">stroke_colors</code><a class="headerlink" href="#lingtypology.maps.LingMap.stroke_colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Colors that represent additional (stroke) features.
+You can either use the default colors or set yours.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of html codes for colors</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.shapes">
+<code class="descname">shapes</code><a class="headerlink" href="#lingtypology.maps.LingMap.shapes" title="Permalink to this definition">¶</a></dt>
+<dd><p>If you use shapes instead of colors, you can either use the default shapes or set yours.
+Shapes are Unicode symbols.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of characters</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.prefer_canvas">
+<code class="descname">prefer_canvas</code><a class="headerlink" href="#lingtypology.maps.LingMap.prefer_canvas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use canvas instead of SVG.</p>
+<p>If set to True, the map may be more responsive in case you have a lot of markers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool, default False</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">base_map</code></dt>
+<dd><p>In case you want to draw something on particular folium.Map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">folium.Map, default None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.title">
+<code class="descname">title</code><a class="headerlink" href="#lingtypology.maps.LingMap.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>You can add a title to the map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str, default None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.legend">
+<code class="descname">legend</code><a class="headerlink" href="#lingtypology.maps.LingMap.legend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether to add legend for features (add_features method).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool, default True</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.stroke_legend">
+<code class="descname">stroke_legend</code><a class="headerlink" href="#lingtypology.maps.LingMap.stroke_legend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether to add legend for stroke features (add_stroke_features method).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool, default True.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.legend_title">
+<code class="descname">legend_title</code><a class="headerlink" href="#lingtypology.maps.LingMap.legend_title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Legend title.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str, default ‘Legend’</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.stroke_legend_title">
+<code class="descname">stroke_legend_title</code><a class="headerlink" href="#lingtypology.maps.LingMap.stroke_legend_title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stroke legend title.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str, default ‘Legend’</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.legend_position">
+<code class="descname">legend_position</code><a class="headerlink" href="#lingtypology.maps.LingMap.legend_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Legend position.</p>
+<p>Available values: ‘right’, ‘left’, ‘top’, ‘bottom’, ‘bottomright’, ‘bottomleft’, ‘topright’, ‘topleft’.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str, default ‘bottomright’</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.stroke_legend_position">
+<code class="descname">stroke_legend_position</code><a class="headerlink" href="#lingtypology.maps.LingMap.stroke_legend_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stroke legend position.</p>
+<p>Available values: ‘right’, ‘left’, ‘top’, ‘bottom’, ‘bottomright’, ‘bottomleft’, ‘topright’, ‘topleft’.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str, default ‘bottomleft’</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">colors</code></dt>
+<dd><p>Colors that represent features.</p>
+<p>You can either use the 20 default colors(if None) or set yours(else).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of html codes for colors (str), default None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">stroke_colors</code></dt>
+<dd><p>Colors that represent stroke features.</p>
+<p>You can either use the 20 default colors(if None) or set yours(else).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of html codes for colors (str), default None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.colormap_colors">
+<code class="descname">colormap_colors</code><a class="headerlink" href="#lingtypology.maps.LingMap.colormap_colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Colors for the colormap.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">tuple, default (‘white’, ‘green’)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">shapes</code></dt>
+<dd><p>If you use shapes instead of colors, you can either use the default shapes or set yours. Shapes are Unicode symbols.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of characters (str)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.stroked">
+<code class="descname">stroked</code><a class="headerlink" href="#lingtypology.maps.LingMap.stroked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether to add stroke to markers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool, default True</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.unstroked">
+<code class="descname">unstroked</code><a class="headerlink" href="#lingtypology.maps.LingMap.unstroked" title="Permalink to this definition">¶</a></dt>
+<dd><p>If set to True, circle marker will merge if you zoom out without stroke between them. It multiplies the number of markers by 2. For better performance set it to False.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool, default True</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.control">
+<code class="descname">control</code><a class="headerlink" href="#lingtypology.maps.LingMap.control" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether to add LayerControls and group by features.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool, default False</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.stroke_control">
+<code class="descname">stroke_control</code><a class="headerlink" href="#lingtypology.maps.LingMap.stroke_control" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether to add LayerControls and group by stroke features.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool, default False</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lingtypology.maps.LingMap.control_position">
+<code class="descname">control_position</code><a class="headerlink" href="#lingtypology.maps.LingMap.control_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position of LayerControls.</p>
+<p>May be ‘topleft’, ‘topright’, ‘bottomleft’ or ‘bottomright’.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str, default ‘topright’</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="lingtypology.maps.LingMap.add_custom_coordinates">
 <code class="descname">add_custom_coordinates</code><span class="sig-paren">(</span><em>custom_coordinates</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.add_custom_coordinates" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set custom coordinates</p>
-<p>By default coordinates for the languages are taken from the Glottolog database.
-If you have coordinates and want to use them, use this function.</p>
-<dl class="docutils">
-<dt>custom_coordinates: list of custom_coordinates (tuples)</dt>
-<dd>Length of the list should equal to length of languages.</dd>
-</dl>
+<dd><p>Set custom coordinates.</p>
+<p>By default cooordinates for the languages
+are taken from the Glottolog database. If you have coordinates and
+want to use them, use this function.</p>
+<p>It could be useful if you are using data from a dataset which
+provides coordinates and you do not need to rely on the Glottolog
+data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>custom_coordinates</strong> (<em>list of coordinates</em><em> (</em><em>tuples</em><em>)</em>) – Length of the list should equal to length of languages.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
-<dt id="lingtypology.maps.LingMap.add_minimap">
-<code class="descname">add_minimap</code><span class="sig-paren">(</span><em>position='bottomleft'</em>, <em>width=150</em>, <em>height=150</em>, <em>collapsed_width=25</em>, <em>collapsed_height=25</em>, <em>zoom_animation=True</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.add_minimap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add minimap</p>
-<p>position: str, default ‘bottomleft’
-width: int, default 150
-height: int, default 150
-collapsed_width: int, default 25
-collapsed_height: int, default 25
-zoom_animation: bool, default True</p>
-<blockquote>
-<div>You can disable zoom animation for better performance.</div></blockquote>
+<dt id="lingtypology.maps.LingMap.add_features">
+<code class="descname">add_features</code><span class="sig-paren">(</span><em>features</em>, <em>radius=7</em>, <em>opacity=1</em>, <em>colors=None</em>, <em>numeric=False</em>, <em>control=False</em>, <em>use_shapes=False</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.add_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add features.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>features</strong> (<em>list of strings</em>) – <p>List of features.</p>
+<p>Length of the list should equal to length of languages.
+Amount of features should be equal to the amount of languages.
+By default, if you add features, a legend will appear.
+To shut it down set legend attribute to False.
+To change the title of the legend use legend_title attribute.
+To change legend position use use legend_position attribute.</p>
+</li>
+<li><strong>radius</strong> (<em>int</em><em>, </em><em>default 7</em>) – Marker radius.</li>
+<li><strong>opacity</strong> (<em>float</em><em>, </em><em>default 1</em>) – Marker opacity: a number between 0(invisible) and 1(not transparent).</li>
+<li><strong>colors</strong> (<em>list of html codes for colors</em><em> (</em><em>str</em><em>)</em><em>, </em><em>default None</em>) – Colors that represent features. You can either use the 20 default
+colors(if None) or set yours(else).</li>
+<li><strong>numeric</strong> (<em>bool</em><em>, </em><em>default False</em>) – Whether to assign different color to each feature (False), or
+to assign a color from colormap (True). You can set it to True
+only in case your features are numeric and stroke features are
+not given. To change the default colors of the color scale use
+colormap_colors attribute.</li>
+<li><strong>control</strong> (<em>bool</em><em>, </em><em>default False</em>) – Whether to add LayerControls to the map.
+It allows interactive turning on/off given features.</li>
+<li><strong>use_shapes</strong> (<em>bool</em><em>, </em><em>default False</em>) – Whether to use shapes instead of colors. This option allows to
+represent features as shapes. Shapes are Unicode charaters. You
+can replace or add to default symbols by changing shapes
+attribute. If colors are not a viable option for you, you can
+set this option to True.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
-<dt id="lingtypology.maps.LingMap.add_rectangle">
-<code class="descname">add_rectangle</code><span class="sig-paren">(</span><em>locations</em>, <em>tooltip=''</em>, <em>popup=''</em>, <em>color='black'</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.add_rectangle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add one rectangle</p>
-<p>To add several rectangles, use this function several times.</p>
-<dl class="docutils">
-<dt>locations: list of two tuples</dt>
-<dd>Coordinates of two points to draw a rectangle.</dd>
-</dl>
-<p>tooltip: str, default ‘’
-popups: str, default ‘’
-color: str, default ‘black’</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="lingtypology.maps.LingMap.add_line">
-<code class="descname">add_line</code><span class="sig-paren">(</span><em>locations</em>, <em>tooltip=''</em>, <em>popup=''</em>, <em>color='black'</em>, <em>smooth_factor=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.add_line" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add one line</p>
-<p>To add several lines, use this function several times.</p>
-<dl class="docutils">
-<dt>locations: list of two tuples</dt>
-<dd>Coordinates of two points to draw a line.</dd>
-</dl>
-<p>tooltip: str, default ‘’
-popups: str, default ‘’
-color: str, default ‘black’
-smooth_factor: float, default 1.0</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="lingtypology.maps.LingMap.add_heatmap">
-<code class="descname">add_heatmap</code><span class="sig-paren">(</span><em>heatmap=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.add_heatmap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add heatmap</p>
-<dl class="docutils">
-<dt>heatmap: list of tuples</dt>
-<dd>Coordinates for the heatmap.</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="lingtypology.maps.LingMap.add_minicharts">
-<code class="descname">add_minicharts</code><span class="sig-paren">(</span><em>*minicharts</em>, <em>typ='pie'</em>, <em>size=0.6</em>, <em>names=None</em>, <em>textprops=None</em>, <em>labels=False</em>, <em>startangle=90</em>, <em>colors=None</em>, <em>bar_width=1</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.add_minicharts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create minicharts using maplotlib</p>
-<p>How it works:
-* Draw plots using matplotlib.
-* Save it as SVG but catch the stream.
-* Create markers with SVG DivIcon.
-* Create popups with data from the plots.</p>
+<dt id="lingtypology.maps.LingMap.add_stroke_features">
+<code class="descname">add_stroke_features</code><span class="sig-paren">(</span><em>features</em>, <em>radius=12</em>, <em>opacity=1</em>, <em>colors=None</em>, <em>numeric=False</em>, <em>control=False</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.add_stroke_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add stroke features.</p>
+<p>This function assigns features to strokes of markers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>features</strong> (<em>list of strings</em>) – List of additional features. Amount of features should be equal
+to the amount of languages. By default, if you add stroke
+features, a legend will appear. To shut it down set
+stroke_legend attribute to False. To change the title of
+the legend use stroke_legend_title attribute. To change
+legend position use use stroke_legend_position attribute.</li>
+<li><strong>opacity</strong> (<em>float</em><em>, </em><em>default 1</em>) – Marker opacity: a number between 0(invisible) and 1(not transparent).</li>
+<li><strong>colors</strong> (<em>list of html codes for colors</em><em> (</em><em>str</em><em>)</em><em>, </em><em>default None</em>) – Colors that represent stroke features. You can either use the 20 default
+colors(if None) or set yours(else).</li>
+<li><strong>radius</strong> (<em>int</em><em>, </em><em>default 12</em>) – Marker radius.</li>
+<li><strong>control</strong> (<em>bool</em><em>, </em><em>default False</em>) – Whether to add LayerControls to the map.
+It allows interactive turning on/off given features.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="lingtypology.maps.LingMap.add_overlapping_features">
 <code class="descname">add_overlapping_features</code><span class="sig-paren">(</span><em>marker_groups</em>, <em>radius=7</em>, <em>radius_increment=4</em>, <em>colors=None</em>, <em>mapping=None</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.add_overlapping_features" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add overlapping features</p>
+<dd><p>Add overlapping features.</p>
 <p>For example, if you want to draw on map whether language ‘is ergative’, ‘is slavic’, ‘is spoken in Russia’.
 It will draw several markers of different size for each location.</p>
-<dl class="docutils">
-<dt>features: list of lists</dt>
-<dd>List of features. Amount of features should be equal to the
-amount of languages.</dd>
-<dt>radius: int, default 7</dt>
-<dd>Radius of the smallest circle.</dd>
-<dt>radius_increment: int, default 4</dt>
-<dd>Step by which the size of the marker for each feature will be
-incremented.</dd>
-<dt>colors: list of html codes for colors (str), default None</dt>
-<dd>Colors that represent features. You can either use the 20 default
-colors(if <em>None</em>) or set yours(else).</dd>
-<dt>mapping: dict, default None</dt>
-<dd>Mapping for the legend.</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>features</strong> (<em>list of lists</em>) – List of features. Amount of features should be equal to the
+amount of languages.</li>
+<li><strong>radius</strong> (<em>int</em><em>, </em><em>default 7</em>) – Radius of the smallest circle.</li>
+<li><strong>radius_increment</strong> (<em>int</em><em>, </em><em>default 4</em>) – Step by which the size of the marker for each feature will be
+incremented.</li>
+<li><strong>colors</strong> (<em>list of html codes for colors</em><em> (</em><em>str</em><em>)</em><em>, </em><em>default None</em>) – Colors that represent features. You can either use the 20 default
+colors(if None) or set yours(else).</li>
+<li><strong>mapping</strong> (<em>dict</em><em>, </em><em>default None</em>) – Mapping for the legend.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lingtypology.maps.LingMap.add_minicharts">
+<code class="descname">add_minicharts</code><span class="sig-paren">(</span><em>*minicharts</em>, <em>typ='pie'</em>, <em>size=0.6</em>, <em>names=None</em>, <em>textprops=None</em>, <em>labels=False</em>, <em>startangle=90</em>, <em>colors=None</em>, <em>bar_width=1</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.add_minicharts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create minicharts using maplotlib.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>*minicharts</strong> (<em>list-like objects</em>) – Data for minicharts. Two list-like objects.</li>
+<li><strong>typ</strong> (<em>str</em><em>, </em><em>default pie</em>) – Type of the minicharts. Either pie or bar.</li>
+<li><strong>size</strong> (<em>float</em>) – Size of the minicharts.</li>
+<li><strong>texprops</strong> (<em>dict</em><em>, </em><em>default None</em>) – Textprops for Matplotlib.</li>
+<li><strong>labels</strong> (<em>bool</em><em>, </em><em>default False</em>) – Whether to display labels.</li>
+<li><strong>colors</strong> (<em>list</em><em>, </em><em>default None</em>) – Minicharts colors.</li>
+<li><strong>startange</strong> (<em>int</em><em>, </em><em>default 90</em>) – Start angle of pie-charts (pie-charts only).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lingtypology.maps.LingMap.add_heatmap">
+<code class="descname">add_heatmap</code><span class="sig-paren">(</span><em>heatmap=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.add_heatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add heatmap.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>heatmap</strong> (<em>list of tuples</em>) – Coordinates for the heatmap.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lingtypology.maps.LingMap.add_popups">
+<code class="descname">add_popups</code><span class="sig-paren">(</span><em>popups</em>, <em>parse_html=False</em>, <em>glottolog_links=True</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.add_popups" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add popups to markers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>popups</strong> (<em>list of strings</em>) – List of popups. Length of the list should equal to length of languages.</li>
+<li><strong>parse_html</strong> (<em>bool</em><em>, </em><em>default False</em>) – By default (False) you can add small pieces of html code.
+If you need to add full html pages to popups, you need to set the option to True.</li>
+<li><strong>glottolog_links</strong> (<em>bool</em><em>, </em><em>default True</em>) – Whether to include links to Glottolog in popups.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lingtypology.maps.LingMap.add_tooltips">
+<code class="descname">add_tooltips</code><span class="sig-paren">(</span><em>tooltips</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.add_tooltips" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add tooltips to markers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tooltips</strong> (<em>list of strings</em>) – List of tooltips. Length of the list should equal to length of languages.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lingtypology.maps.LingMap.add_minimap">
+<code class="descname">add_minimap</code><span class="sig-paren">(</span><em>position='bottomleft'</em>, <em>width=150</em>, <em>height=150</em>, <em>collapsed_width=25</em>, <em>collapsed_height=25</em>, <em>zoom_animation=True</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.add_minimap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add minimap.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>position</strong> (<em>str</em><em>, </em><em>default 'bottomleft'</em>) – </li>
+<li><strong>width</strong> (<em>int</em><em>, </em><em>default 150</em>) – </li>
+<li><strong>height</strong> (<em>int</em><em>, </em><em>default 150</em>) – </li>
+<li><strong>collapsed_width</strong> (<em>int</em><em>, </em><em>default 25</em>) – </li>
+<li><strong>collapsed_height</strong> (<em>int</em><em>, </em><em>default 25</em>) – </li>
+<li><strong>zoom_animation</strong> (<em>bool</em><em>, </em><em>default True</em>) – You can disable zoom animation for better performance.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lingtypology.maps.LingMap.add_rectangle">
+<code class="descname">add_rectangle</code><span class="sig-paren">(</span><em>locations</em>, <em>tooltip=''</em>, <em>popup=''</em>, <em>color='black'</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.add_rectangle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add one rectangle.</p>
+<p>To add several rectangles, use this method several times.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>locations</strong> (<em>list of two tuples</em>) – Coordinates of two points to draw a rectangle.</li>
+<li><strong>tooltip</strong> (<em>str</em><em>, </em><em>default ''</em>) – </li>
+<li><strong>popups</strong> (<em>str</em><em>, </em><em>default ''</em>) – </li>
+<li><strong>color</strong> (<em>str</em><em>, </em><em>default 'black'</em>) – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lingtypology.maps.LingMap.add_line">
+<code class="descname">add_line</code><span class="sig-paren">(</span><em>locations</em>, <em>tooltip=''</em>, <em>popup=''</em>, <em>color='black'</em>, <em>smooth_factor=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.add_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add one line.</p>
+<p>To add several lines, use this method several times.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>locations</strong> (<em>list of two tuples</em>) – Coordinates of two points to draw a line.</li>
+<li><strong>tooltip</strong> (<em>str</em><em>, </em><em>default ''</em>) – </li>
+<li><strong>popups</strong> (<em>str</em><em>, </em><em>default ''</em>) – </li>
+<li><strong>color</strong> (<em>str</em><em>, </em><em>default 'black'</em>) – </li>
+<li><strong>smooth_factor</strong> (<em>float</em><em>, </em><em>default 1.0</em>) – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="lingtypology.maps.LingMap.create_map">
 <code class="descname">create_map</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.create_map" title="Permalink to this definition">¶</a></dt>
-<dd><p>Draw the map</p>
-<p>Gets all necessary attributes and draws everything on the map.</p>
-<p>How it works:
-* Set up start location and zoom if start_location is passed as shortcut.
-* Create folium.Map object using [self.start_location, zoom_start=self.start_zoom,</p>
-<blockquote>
-<div>control_scale=self.control_scale, prefer_canvas=self.prefer_canvas]</div></blockquote>
-<ul>
-<li><p class="first">Create default_group (folium.FeatureGroup)</p>
-</li>
-<li><p class="first">Declare lists: markers, strokes, s_markers, s_strokes</p>
-</li>
-<li><p class="first">Check whether minimap, rectangles, lines and title are here and draw them.</p>
-</li>
-<li><dl class="first docutils">
-<dt>If the user sets self.heatmap_only to True, draw it and return the map.</dt>
-<dd><p class="first last">{{ first ending }}</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>If user passes minicharts:</dt>
-<dd><ul class="first simple">
-<li><dl class="first docutils">
-<dt>Walk in self.languages:</dt>
-<dd><ul class="first last">
-<li>Apply custom coordinates or the ones from Glottolog.</li>
-<li>Set folium.Marker with plot SVG as folium.DivIcon</li>
-<li><dl class="first docutils">
-<dt>Create popups with links to Glottolog (if necessary) and</dt>
-<dd>data from plots.</dd>
-</dl>
-</li>
-<li>Draw the logend using names from plots and colors.</li>
-<li>Return the map.</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-<p class="last">{{ second ending }}</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>If user passes overlapping_features (LingMap().marker_groups):</dt>
-<dd><ul class="first simple">
-<li>If color_mapping is not given, make it.</li>
-<li><dl class="first docutils">
-<dt>Walk in languages:</dt>
-<dd><ul class="first last">
-<li>Get coordinates if not given.</li>
-<li>Set markers, popups and tooltips.</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li>Create legend.</li>
-</ul>
-<p class="last">{{ third ending }}</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>If features are given, prepare them (_prepare_features). This includes:</dt>
-<dd><ul class="first last simple">
-<li>Creating folium.FeatureGroup.</li>
-<li>Creating data for legend.</li>
-<li><dl class="first docutils">
-<dt>Storing info on features as list of tuples (len = 2)</dt>
-<dd><ul class="first last">
-<li>The first element: color (HEX) of shape (Unicode)</li>
-<li>The second element: folium.FeatureGroup</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><p class="first">If stroke features are given, prepare them as well.</p>
-</li>
-<li><dl class="first docutils">
-<dt>Walk in languages:</dt>
-<dd><ul class="first last simple">
-<li>Apply custom coordinates or the ones from Glottolog.</li>
-<li><dl class="first docutils">
-<dt>Create unified marker using:</dt>
-<dd>coordinates, color/shape for features and color for stroke features.
-Unified marker is a dict that consists of information necessary
-to draw 1-4 markers (more look in docstring for _create_unified_marker.</dd>
-</dl>
-</li>
-<li>Create popup for the marker (_create_popups method).</li>
-<li>Create tooltips.</li>
-<li>Append the unified_marker to the the folium.FeatureGroup.</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>If features are numeric:</dt>
-<dd><ul class="first last simple">
-<li>Add them to the default FeatureGroup.</li>
-<li>Draw the legend (_create_legend).</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>If not:</dt>
-<dd><ul class="first last simple">
-<li>Add them to proper FeatureGroups.</li>
-<li>If LayerControl if asked for, draw it.</li>
-<li>Draw the legend (_create_legend).</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><p class="first">If heatmap is asked for, draw it (_create_heatmap).</p>
-</li>
-<li><p class="first">Return the map.</p>
-</li>
-</ul>
-<p>{{true ending}}</p>
+<dd><p>Create the map.</p>
+<p>To display the map in Jupyter Notebook, use this method.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -527,24 +739,51 @@ to draw 1-4 markers (more look in docstring for _create_unified_marker.</dd>
 <dl class="method">
 <dt id="lingtypology.maps.LingMap.save">
 <code class="descname">save</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.save" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save to file</p>
-<dl class="docutils">
-<dt>path: str</dt>
-<dd>Path to the output HTML file.</dd>
-</dl>
+<dd><p>Save as html.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<em>str</em>) – Path to the output HTML file.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="lingtypology.maps.LingMap.render">
 <code class="descname">render</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.render" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the map returns it as HTML string</p>
+<dd><p>Renders the map returns it as HTML string.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="lingtypology.maps.LingMap.save_static">
 <code class="descname">save_static</code><span class="sig-paren">(</span><em>fname=None</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.LingMap.save_static" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save as PNG (requires ‘geckodriver’)</p>
-<p>If fname is not given, returns the image as bytes.</p>
+<dd><p>Save the map as PNG.</p>
+<p>Experimental function. Requires additional Python package Selenium and additional application Geckodriver.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fname</strong> (<em>str</em><em>, </em><em>default None</em>) – Path to the output PNG file.
+If None, the method will return PNG as bytes.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bytes</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -556,32 +795,67 @@ to draw 1-4 markers (more look in docstring for _create_unified_marker.</dd>
 <dt id="lingtypology.maps.merge">
 <code class="descclassname">lingtypology.maps.</code><code class="descname">merge</code><span class="sig-paren">(</span><em>*maps</em>, <em>autoset_legends=True</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.merge" title="Permalink to this definition">¶</a></dt>
 <dd><p>Merge several LingMap objects</p>
-<dl class="docutils">
-<dt><a href="#id1"><span class="problematic" id="id2">*</span></a>maps: list of LingMap</dt>
-<dd>List of LingMap objects.</dd>
-<dt>autoset_legends: bool, default True</dt>
-<dd>If set to True, legends will automatically move to free spaces</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>*maps</strong> (<em>list of LingMap</em>) – List of LingMap objects.</li>
+<li><strong>autoset_legends</strong> (<em>bool</em><em>, </em><em>default True</em>) – If set to True, legends will automatically move to free spaces</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>m</strong></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#lingtypology.maps.LingMap" title="lingtypology.maps.LingMap">lingtypology.maps.LingMap</a></p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="lingtypology.maps.get_elevations">
 <code class="descclassname">lingtypology.maps.</code><code class="descname">get_elevations</code><span class="sig-paren">(</span><em>languages</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.get_elevations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get elevation data for list of languages</p>
+<dd><p>Get elevation data for list of languages.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>languages</strong> (<em>list of str</em>) – Languages from Glottolog.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>elevations</strong></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of coordinates</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="lingtypology.maps.gradient">
 <code class="descclassname">lingtypology.maps.</code><code class="descname">gradient</code><span class="sig-paren">(</span><em>iterations</em>, <em>color1='white'</em>, <em>color2='green'</em><span class="sig-paren">)</span><a class="headerlink" href="#lingtypology.maps.gradient" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes a color gradient</p>
-<dl class="docutils">
-<dt>iterations: int</dt>
-<dd>Length of gradient.</dd>
-<dt>color1: str, default ‘white’</dt>
-<dd>First color.</dd>
-<dt>color2: str, default ‘green’</dt>
-<dd>Second color.</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>iterations</strong> (<em>int</em>) – Length of gradient.</li>
+<li><strong>color1</strong> (<em>str</em><em>, </em><em>default 'white'</em>) – First color.</li>
+<li><strong>color2</strong> (<em>str</em><em>, </em><em>default 'green'</em>) – Second color.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>colors</strong> – List of HEX-colors with #.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of str</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
