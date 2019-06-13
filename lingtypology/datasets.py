@@ -1,4 +1,37 @@
-"""APIs for work Wals and Autotyp."""
+"""
+Intro
+-------
+One of the objectives of LingTypology is to provide a simple interface for linguistic databases. Therefore, classes used for acccessing them have unified API: most attributes and methods overlap among all of them. In the following two sections I will describe this universal interface.
+
+Universal Attributes
+---------------------
+*   **show_citation** (*bool*, default *True*)
+        Whether to print the citation when ``get_df`` method is called.
+*   **citation** (*str*)
+        Citation for the database.
+*   **features_list** or **subsets_list** *list* of str
+        List of available features for all the databases except for Phoible.
+        In the case of Phoible it is list of available subsets (UPSID, SPA etc.).
+
+Universal Methods
+-----------------
+*   **get_df**
+
+    In all cases parameters are optional. They depend on the particular class.
+
+    In the case of Wals it has optional str parameter join_how: the way multiple WALS pages will be joined (either ``inner`` or ``outer``). If the value is ``inner``, the resulting table will only contain data for languages mentioned in all the given pages. Else, the resulting table will contain values mentioned in at least one of the pages. Default: ``inner``.
+
+    In the case of Autotyp and Phoible it has optional list parameter ``strip_na``. It is a list of columns. If this parameter is given, the rows where some values in the given columns are not present will be dropped. Default: ``[]``.
+
+    Returns the dataset as pandas.DataFrame.
+
+*   **get_json**
+    
+    It works the same way as get_df but it returns dict object where keys are headers of the table.
+
+Classes
+-------
+"""
 import pandas
 import requests
 import urllib.error
@@ -9,25 +42,46 @@ import re
 import os
 import io
 import zipfile
-from functools import reduce
-from datetime import datetime
+import functools
+import datetime
 
 module_directory = os.path.dirname(os.path.realpath(__file__))
 
 class Wals(object):
-    """Wals
+    """WALS database.
+    
+    WALS: ’The World Atlas of Language Structures (WALS) is a large database
+    of structural (phonological, grammatical, lexical) properties of languages gathered
+    from descriptive materials (such as reference grammars) by a team of 55
+    authors.’ (Dryer and Haspelmath 2013). The data from wals is retrieved from
+    multiple web-pages that contain data for each chapter when ``get_df`` method
+    is called.
 
-    show_citation: bool, default True
-        Whether to print the citation.
-    general_citation: str<
-        General citation of the whole WALS.
+    
+    Parameters
+    -----------
+    *features: list of str
+        List of WALS pages that will be present in the resulting table. E.g. ``['1A']``.
+        
+    Attributes
+    -----------
+    general_citation: str
+        The general citation for **all** the WALS pages.
+    show_citation: str
+        Whether to print the citation for the given features when ``get_df`` method is called.
+    features_list: str
+        List of all the WALS pages.
     """
 
     def __init__(self, *features):
         """init
 
-        features: list of strings
+        *features: list of strings
             Wals pages you want to use.
+        show_citation: bool, default True
+            Whether to print the citation.
+        general_citation: str
+            General citation of the whole WALS.
         """
         self.features = features
         self.show_citation = True
@@ -36,7 +90,7 @@ class Wals(object):
             'The World Atlas of Language Structures Online.\n' \
             'Leipzig: Max Planck Institute for Evolutionary Anthropology.\n' \
             '(Available online at http://wals.info, Accessed on {}.)'.format(
-                datetime.now().strftime('%Y-%m-%d'))
+                datetime.datetime.now().strftime('%Y-%m-%d'))
         self.features_list = [
             '1A', '2A', '3A', '4A', '5A', '6A', '7A', '8A', '9A', '10A',
             '10B', '11A', '12A', '13A', '14A', '15A', '16A', '17A', '18A',
@@ -66,10 +120,14 @@ class Wals(object):
     def _get_wals_data(self, feature):
         """Loads data from Wals
 
-        Parameter feature: str
+        Parameters
+        ----------
+        feature: str
             Name of the Wals page.
 
-        Returns pandas.DataFrame
+        Returns
+        -------
+        pandas.DataFrame
             Headers: 'wals code', 'description'.
         """
         wals_url = 'http://wals.info/feature/{}.tab'.format(feature)
@@ -115,18 +173,22 @@ class Wals(object):
     
     @property
     def citation(self):
+        """str: Citation for the given WALS pages."""
         cit = ''
         for feature in self.features:
             cit += self._get_citation(feature.upper()) + '\n'
         return cit
 
     def get_df(self, join_how='inner'):
-        """Get data from Wals in pandas.DataFrame format.
+        """Get data from WALS in pandas.DataFrame format.
 
-        Returns pandas.DataFrame
-            Headers: 'wals code', 'language', 'genus', \
-                     'family', 'area', 'coordinates', \
-                     [[name of the page1]], [[name of the page2]], ...
+        Returns
+        -------
+        pandas.DataFrame
+            DataFrame.
+            Headers: 'wals code', 'language', 'genus',
+            'family', 'area', 'coordinates',
+            [[name of the page1]], [[name of the page2]], ...
             Names of the pages start with '_'.
         """
         features = self.features
@@ -143,7 +205,7 @@ class Wals(object):
         if len(dataframes) == 1:
             df = dataframes[0]
         else:
-            df = reduce(lambda left, right: pandas.merge(
+            df = functools.reduce(lambda left, right: pandas.merge(
                 left, right, how=join_how,
                 on=['wals_code', 'language', 'genus', 'family', 'coordinates']
             ), dataframes)
@@ -155,10 +217,13 @@ class Wals(object):
     def get_json(self, join_how='inner'):
         """Get data from Wals in JSON format.
 
-        Returns dict
-            Keys: 'wals code', 'language', 'genus', \
-                  'family', 'area', 'coordinates', \
-                  [[name of the page1]], [[name of the page2]], ...
+        Returns
+        --------
+        dict
+            Dictionary.
+            Keys: 'wals code', 'language', 'genus',
+            'family', 'area', 'coordinates',
+            [[name of the page1]], [[name of the page2]], ...
             Names of the pages start with '_'.
         """
         df = self.get_df(join_how=join_how)
@@ -167,7 +232,25 @@ class Wals(object):
 
 
 class Autotyp(object):
-    """Autotyp"""
+    """Autotyp database.
+    
+    Autotyp is database that contains of multiple modules. Each module represents
+    a grammatical feature (e.g. Agreeement), it contains information on this
+    feature for various languages (Bickel et al. 2017). The data is downloaded when
+    ``get_df`` method is called.
+    
+    Parameters
+    -----------
+    *tables: list of str
+        List of the Autoptyp tables that will be merged in the resulting table. E.g. ``['gender']``.
+    
+    Attributes
+    -----------
+    show_citation: str
+        Whether to print the citation when ``get_df`` method is called.
+    citation: str
+        Citation for the Autotyp database.
+    """
     def __init__(self, *tables):
         """init
 
@@ -177,7 +260,7 @@ class Autotyp(object):
             Whether to display citation for Autoyp or not.
         citation:
             Citation for Autotyp.
-        mapping: dict
+        _mapping: dict
             Mapping from Autotyp LID to Glottocode.
         features_list: list
             List of available tables from Autotyp.
@@ -193,7 +276,7 @@ class Autotyp(object):
         self._pages = []
 
     @property
-    def mapping(self):
+    def _mapping(self):
         """Get mapping from Autotyp LID to Glottocode"""
         with open(
             module_directory + os.path.sep + 'autotyp_lang_mapping.json',
@@ -204,7 +287,7 @@ class Autotyp(object):
     
     @property
     def features_list(self):
-        """List of available Autotyp tables"""
+        """list: List of available Autotyp tables."""
         github_page = requests.get(
             'https://github.com/autotyp/autotyp-data/tree/master/data'
         ).content.decode('utf-8')
@@ -213,8 +296,10 @@ class Autotyp(object):
     def get_df(self, strip_na=[]):
         """Get data from Autotyp in pandas.DataFrame format.
 
-        Returns pandas.DataFrame
-            Headers: 'Language', 'LID', [[features columns]]
+        Returns
+        --------
+        pandas.DataFrame
+             DataFrame. Headers: 'Language', 'LID', [[features columns]]
         """
         if not self.tables:
             warnings.warn('No tables given. To get list of available ' \
@@ -241,7 +326,7 @@ class Autotyp(object):
                     try:
                         languages.append(
                             lingtypology.glottolog.get_by_glot_id(
-                                self.mapping[str(LID)]
+                                self._mapping[str(LID)]
                             )
                         )
                     except KeyError:
@@ -260,8 +345,10 @@ class Autotyp(object):
     def get_json(self, strip_na=[]):
         """Get data from Autotyp in JSON format.
 
-        Returns dict
-            Keys: 'Language', 'LID', [[features columns]]
+        Returns
+        -------
+        dict
+            Dictionary. Keys: 'Language', 'LID', [[features columns]]
         """
         df = self.get_df(strip_na=strip_na)
         js = {header: list(df[header]) for header in list(df)}
@@ -269,7 +356,23 @@ class Autotyp(object):
 
 
 class AfBo(object):
-    """AfBo database of borrowed affixes"""
+    """AfBo database of borrowed affixes.
+    
+    AfBo: A world-wide survey of affix borrowing (Seifart 2013). AfBo contains
+    information about borrewed affixes in different languages. It provides data in ZIP
+    archive with CSV files. The data is downloaded with initialization of the class.
+
+    Parameters
+    ----------
+    *features: list of str
+        List of AfBo features that will be present in the resulting table. E.g. ``['adjectivizer']``.
+    show_citation: bool, default True
+        Whether to print the citation when ``get_df`` method is called.
+    citation:
+        Citation for AfBo.
+    features_list: list
+        List of available features from AfBo.
+    """
     def __init__(self, *features):
         """init
 
@@ -280,7 +383,7 @@ class AfBo(object):
         citation:
             Citation for AfBo.
         features_list: list
-            List of available tables from AfBo.
+            List of available features from AfBo.
         """
         self.features = features
         self.show_citation = True
@@ -289,7 +392,8 @@ class AfBo(object):
             'AfBo: A world-wide survey of affix borrowing.\n' \
             'Leipzig: Max Planck Institute for Evolutionary Anthropology.\n' \
             '(Available online at http://afbo.info, ' \
-                'Accessed on {}.)'.format(datetime.now().strftime('%Y-%m-%d'))
+                'Accessed on {}.)'.format(
+                    datetime.datetime.now().strftime('%Y-%m-%d'))
 
         response = requests.get(
             'https://cdstar.shh.mpg.de/bitstreams/' \
@@ -309,8 +413,10 @@ class AfBo(object):
     def get_df(self):
         """Get data from AfBo in pandas.DataFrame format.
 
-        Returns pandas.DataFrame
-            Headers: 'Recipient_name', 'Donor_name', [[feature1]], [[feature2]], ...
+        Returns
+        --------
+        pandas.DataFrame
+             DataFrame. Headers: 'Recipient_name', 'Donor_name', [[feature1]], [[feature2]], ...
         """
         if not self.features:
             warnings.warn(
@@ -341,8 +447,10 @@ class AfBo(object):
     def get_json(self):
         """Get data from AfBo in JSON format.
 
-        Returns dict
-            Keys: 'Recipient_name', 'Donor_name', [[feature1]], [[feature2]], ...
+        Returns
+        -------
+        dict
+            Dictionary. Keys: 'Recipient_name', 'Donor_name', [[feature1]], [[feature2]], ...
         """
         df = self.get_df()
         js = {header: list(df[header]) for header in list(df)}
@@ -350,9 +458,29 @@ class AfBo(object):
 
         
 class Sails(object):
-    """Sails dataset
+    """SAILS dataset.
+    
+    ‘The South American Indigenous Language Structures (SAILS) is a large database
+    of grammatical properties of languages gathered from descriptive materials (such
+    as reference grammars)‘ (Muysken et al. 2016). Like in the case of AfBo, SAILS
+    data is available in ZIP archive. The data is downloaded with initialization of the
+    class.
 
-    It's from CLLD, so it's really complicated.
+    Parameters
+    ----------
+    list of str
+        List of SAILS pages that will be included in the resulting table.
+    
+    Attributes
+    ----------
+    show_citation: bool, default True
+        Whether to print the citation when ``get_df`` method is called.
+    citation:
+        Citation for SAILS.
+    features_list: list
+        List of available features from SAILS.
+    features_descriptions: pandas.DataFrame
+        Table that contain description for all the SAILS pages.
     """
     def __init__(self, *features):
         """init
@@ -416,7 +544,16 @@ class Sails(object):
         })
 
     def feature_descriptions(self, *features):
-        """Get the description for a particular feature."""
+        """Get the description for particular features.
+        
+        Parameters
+        ----------
+        *features: list
+            Features from SAILS.
+        Returns
+        -------
+        pandas.DataFrame
+        """
         descriptions = []
         for feature in features:
             descriptions += list(
@@ -430,9 +567,11 @@ class Sails(object):
     def get_df(self):
         """Get data from SAILS in pandas.DataFrame format.
 
-        Returns pandas.DataFrame
-            Headers: 'Language', 'Coordinates', [[feature 1]], \
-                     [[feature 1 human_readable]], [[feature 2]], ...
+        Returns
+        -------
+        pandas.DataFrame
+             DataFrame. Headers: 'Language', 'Coordinates', [[feature 1]], \
+             [[feature 1 human_readable]], [[feature 2]], ...
         """
         if self.show_citation:
             print(self.citation)
@@ -475,9 +614,11 @@ class Sails(object):
     def get_json(self):
         """Get data from SAILS in JSON format.
 
-        Returns dict
-            Keys: 'Language', 'Coordinates', [[feature 1]], \
-                  [[feature 1 human_readable]], [[feature 2]], ...
+        Returns
+        -------
+        dict
+            Dictionary. Keys: 'Language', 'Coordinates', [[feature 1]], \
+            [[feature 1 human_readable]], [[feature 2]], ...
         """
         df = self.get_df()
         js = {header: list(df[header]) for header in list(df)}
@@ -485,16 +626,57 @@ class Sails(object):
 
 
 class Phoible(object):
-    """Phoible"""
+    """PHOIBLE phonological database.
+    
+    ‘PHOIBLE is a repository of cross-linguistic phonological inventory data,
+    which have been extracted from source documents and tertiary databases and
+    compiled into a single searchable convenience sample.‘ (Moran and McCloy 2019).
+    Unlike other databases supported by Lingtypology, PHOIBLE is not a unified
+    dataset. It contains data of the following datasets:
+    
+        - SAPHON: South American Phonological Inventory Database (Lev, Stark,and Chang 2012).
+        
+        - AA: Alphabets of Africa (Chanard 2006).
+        
+        - GM: ‘Christopher Green and Steven Moran extracted phonological inventories
+        from secondary sources including grammars and phonological descriptions
+        with the goal of attaining pan-Africa coverage‘ (Moran, McCloy,
+        and Wright 2014).
+        
+        - PH: ‘Christopher Green and Steven Moran extracted phonological inventories
+        from secondary sources including grammars and phonological descriptions
+        with the goal of attaining pan-Africa coverage‘ (Moran, McCloy,
+        and Wright 2014).
+        
+        - RA: Common Linguistic Features in Indian Languages: Phoentics (Ramaswami
+        1999).
+        
+        - SPA: Stanford Phonology Archive (Crothers et al. 1979).
+        
+        - UPSID: UCLA Phonological Segment Inventory Database (Maddieson and Precoda 1990).
+    Parameters
+    ----------
+    subset: str, default 'all'
+        One of the PHOIBLE datasets or all of them.
+    
+    Attributes
+    ----------
+    show_citation: bool, default True
+        Whether to print the citation when ``get_df`` method is called.
+    citation:
+        Citation for PKOIBLE.
+    subsets_list: list
+        List of available subsets of PHOIBLE.
+    """
     def __init__(self, subset='all', aggregated=True):
         """init
 
         show_citation: bool, default True
             Whether to display citation for Autoyp or not.
         citation:
-            Citation for Phoible.
+            Citation for PHOIBLE.
         subset: str, default 'all'
-            Subset of Phoible (all, only UPSID, only SPA etc.)
+            Subset of PHOIBLE (all, only UPSID, only SPA etc.)
         subsets_list: list
             List of available subsets of Phoible.
         """
@@ -503,7 +685,7 @@ class Phoible(object):
             'Moran, Steven & McCloy, Daniel (eds.) 2019.\nPHOIBLE 2.0.\n' \
             'Jena: Max Planck Institute for the Science of Human History.\n' \
             '(Available online at http://phoible.org, Accessed on {}.)'.format(
-                datetime.now().strftime('%Y-%m-%d'))
+                datetime.datetime.now().strftime('%Y-%m-%d'))
         self.subsets_list = ['all', 'UPSID', 'SPA', 'AA',
                              'PH', 'GM', 'RA', 'SAPHON']
         
@@ -526,11 +708,13 @@ class Phoible(object):
             )
 
     def get_df(self, strip_na=[]):
-        """Get data from Phoible in pandas.DataFrame format.
+        """Get data from PHOIBLE in pandas.DataFrame format.
 
-        Returns pandas.DataFrame
-            Headers: 'contribution_name', 'language', 'coordinates', 'glottocode', \
-                     'macroarea', 'consonants', 'vowels', 'source', 'inventory_page'
+        Returns
+        -------
+        pandas.DataFrame
+            DataFrame. Headers: 'contribution_name', 'language', 'coordinates', 'glottocode', \
+            'macroarea', 'consonants', 'vowels', 'source', 'inventory_page'
         """
         if self.show_citation:
             print(self.citation)
@@ -576,11 +760,13 @@ class Phoible(object):
         return df
 
     def get_json(self, strip_na=[]):
-        """Get data from Phoible in JSON format.
+        """Get data from PHOIBLE in JSON format.
 
-        Returns dict
-            Keys: 'contribution_name', 'language', 'coordinates', 'glottocode', \
-                  'macroarea', 'consonants', 'vowels', 'source', 'inventory_page'
+        Returns
+        -------
+        dict
+            Dictionary. Keys: 'contribution_name', 'language', 'coordinates', 'glottocode', \
+            'macroarea', 'consonants', 'vowels', 'source', 'inventory_page'
         """
         df = self.get_df(strip_na=strip_na)
         js = {header: list(df[header]) for header in list(df)}

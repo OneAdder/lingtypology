@@ -1,9 +1,9 @@
 """Using data from Glottolog DB"""
 import pandas
 import os
-from pathlib import Path
+import pathlib
 
-def get_glottolog_table(directory):
+def _get_glottolog_table(directory):
     """get name of the CSV and version
 
     This function returns name and version of the proper CSV-file containing Glottolog data.
@@ -20,14 +20,14 @@ def get_glottolog_table(directory):
     return path, version
     
 #---------------------------------------------------------------------------------
-home = Path.home()
+home = pathlib.Path.home()
 try:
-    path, version = get_glottolog_table(
+    path, version = _get_glottolog_table(
         os.path.join(str(home), '.lingtypology_data')
     )
 except (FileNotFoundError, IndexError):
     module_directory = os.path.dirname(os.path.realpath(__file__))
-    path, version = get_glottolog_table(module_directory)
+    path, version = _get_glottolog_table(module_directory)
 
 glottolog = pandas.read_csv(path, delimiter=',', header=0)
 warnings = []
