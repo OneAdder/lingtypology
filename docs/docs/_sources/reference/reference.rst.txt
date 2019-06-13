@@ -1,9 +1,0 @@
-.. _reference:
-
-Reference Manual
-================
-
-.. toctree::
-    maps
-    datasets
-    glottolog
