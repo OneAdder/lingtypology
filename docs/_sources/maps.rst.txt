@@ -1,0 +1,10 @@
+.. _maps:
+
+Linguistic Interactive Maps
+===========
+
+.. automodule:: lingtypology.maps
+   :members:
+   :inherited-members:
+   :undoc-members:
+   :show-inheritance:   

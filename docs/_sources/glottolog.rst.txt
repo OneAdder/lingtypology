@@ -1,0 +1,11 @@
+.. _glottolog:
+
+Glottolog
+===========
+
+.. automodule:: lingtypology.glottolog
+   :members:
+   :imported-members:
+   :inherited-members:
+   :undoc-members:
+   :show-inheritance:   
