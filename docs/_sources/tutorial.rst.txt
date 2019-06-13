@@ -1,8 +1,0 @@
-.. _tutorial:
-
-Tutorial
-===========
-
-.. toctree::
-    t_maps
-    t_datasets
