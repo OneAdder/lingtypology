@@ -1,0 +1,3 @@
+echo 'Building...'
+sphinx-build -b html ./ ../html
+echo 'Build finished.'
