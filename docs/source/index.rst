@@ -12,6 +12,11 @@ online linguistic databases API. It is inspired by
 `Agrizolamz <https://github.com/agricolamz>`__. It uses the same
 phylosophy and provides similar functionality.
 
+`Gihub Repository <https://github.com/OneAdder/lingtypology>`_,
+`PyPI <https://pypi.org/project/lingtypology/>`_,
+`DOI <https://doi.org/10.5281/zenodo.2669068>`_,
+`License <https://github.com/OneAdder/lingtypology/blob/master/LICENSE.md>`_
+
 Installation
 ------------
 
