@@ -12,10 +12,17 @@ online linguistic databases API. It is inspired by
 `Agrizolamz <https://github.com/agricolamz>`__. It uses the same
 phylosophy and provides similar functionality.
 
-`Gihub Repository <https://github.com/OneAdder/lingtypology>`_,
-`PyPI <https://pypi.org/project/lingtypology/>`_,
-`DOI <https://doi.org/10.5281/zenodo.2669068>`_,
-`License <https://github.com/OneAdder/lingtypology/blob/master/LICENSE.md>`_
+.. image:: https://img.shields.io/github/release/OneAdder/lingtypology.svg
+    :target: https://github.com/OneAdder/lingtypology
+
+.. image:: https://img.shields.io/pypi/v/lingtypology.svg
+    :target: https://pypi.org/project/lingtypology/
+
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.3244114.svg
+   :target: https://doi.org/10.5281/zenodo.3244114
+
+.. image:: https://img.shields.io/github/license/OneAdder/lingtypology.svg
+    :target: https://github.com/OneAdder/lingtypology/blob/master/LICENSE.md
 
 Installation
 ------------
@@ -40,7 +47,22 @@ Usage
 Lingtypology package contains ``LingMap`` class that allows to draw
 interactive maps, ``glottolog`` library that allows to interact with
 Glottolog data and ``datasets`` that allows to interact with different
-online linguistic databases.
+online linguistic databases. See more info below.
+
+Citation
+---------
+It would be most appreciated if you cite the package if you are using it. The suggested way is:
+
+.. code-block:: bibtex
+
+    @misc{MichaelVoronov2669068,
+        author = {Michael Voronov},
+        title = {{lingtypology: a Python tool for linguistic typology}},
+        month = june,
+        year = 2019,
+        doi = {10.5281/zenodo.2669068},
+        url = {https://doi.org/10.5281/zenodo.2669068}
+    }
 
 Contents
 ========
