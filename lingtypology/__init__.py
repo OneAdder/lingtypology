@@ -1,9 +1,8 @@
 from lingtypology.maps import LingMap, merge, gradient, get_elevations
 import lingtypology.datasets
-from lingtypology import datasets as db_apis
 import lingtypology.glottolog
 
-__version__ = '0.8.4'
+__version__ = '0.8.5'
 __citation__ = \
     '@misc{MichaelVoronov2669068,\n' \
     '    author = {Michael Voronov},\n' \

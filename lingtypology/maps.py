@@ -1,4 +1,3 @@
-"""This module consist of classes and functions to draw linguistic interactive maps."""
 import folium
 import folium.plugins
 
@@ -91,7 +90,7 @@ def get_elevations(languages):
     return elevations
 
 def gradient(iterations, color1='white', color2='green'):
-    """Makes a color gradient
+    """Makes a color gradient.
     
     Parameters
     -----------

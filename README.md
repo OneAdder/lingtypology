@@ -48,13 +48,13 @@ Locally: `pip3 install lingtypology --user`
 Globally (not recommended): `sudo pip3 install lingtypology`
 
 ## Usage
-Lingtypology package contains `LingMap` class that allows to draw interactive maps, `glottolog` library that allows to interact with Glottolog data and `db_apis` that allows to interact with different other linguistic databases.  
+Lingtypology package contains `LingMap` class that allows to draw interactive maps, `glottolog` library that allows to interact with Glottolog data and `datasets` that allows to interact with different other linguistic databases.  
 For more informations consult the [tutorial](https://oneadder.github.io/lingtypology/)
 or docstrings from the code.
 
 ## Glottolog
 Lingtypology relies on data from the [Glottolog](https://glottolog.org/glottolog/language) database.
-With each new version of `lingtypology` Glottolog data is updated. Now it is using Glottolog `3.4-34`.
+With each new version of `lingtypology` Glottolog data is updated. Now it is using Glottolog `3.4-41`.
 You can update data from Glottolog. To get the instruction on how to do it, consult the [tutorial](https://oneadder.github.io/lingtypology/glottolog#g_version).
 
 ## Citation
