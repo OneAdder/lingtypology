@@ -14,8 +14,8 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('..'))
-from lingtypology import *
+sys.path.insert(0, os.path.abspath('..' + os.path.sep + '..' + os.path.sep + 'lingtypology'))
+from lingtypology import maps, datasets, glottolog
 
 import mock
 MOCK_MODULES = [
