@@ -13071,7 +13071,7 @@ arme1241,Armenic,,,,arme1241,,indo1319,indo1319,Indo-European,,,family,
 ital1284,Italic,,,,ital1284,,indo1319,indo1319,Indo-European,,,family,
 anat1257,Anatolian,,,,anat1257,,indo1319,indo1319,Indo-European,,,family,
 indo1320,Indo-Iranian,,,,indo1320,,indo1319,indo1319,Indo-European,,,family,
-daci1234,Dacian,Eurasia,,,daci1234,xdc,indo1319,indo1319,Indo-European,daci1234,Dacian,language,extinct
+daci1234,Dacian,Eurasia,46.2,23.3,daci1234,xdc,indo1319,indo1319,Indo-European,daci1234,Dacian,language,extinct
 alba1267,Albanian,Eurasia,,,alba1267,sqi,indo1319,indo1319,Indo-European,,,family,
 germ1287,Germanic,,,,germ1287,,indo1319,indo1319,Indo-European,,,family,
 thra1250,Thracian,Eurasia,42.115469,24.711977,thra1250,txh,indo1319,indo1319,Indo-European,thra1250,Thracian,language,extinct
@@ -13212,7 +13212,7 @@ stan1289,Catalan,Eurasia,41.453,1.569,stan1289,cat,indo1319/ital1284/lati1262/la
 west2838,West Ibero-Romance,,,,west2838,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183,indo1319,Indo-European,,,family,
 occi1239,Occitan,Eurasia,44.1415,6.82979,occi1239,oci,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/occi1240,indo1319,Indo-European,occi1239,Occitan,language,not endangered
 gard1245,Gardiol,Eurasia,,,gard1245,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/occi1240,indo1319,Indo-European,gard1245,Gardiol,language,shifting
-oldp1253,Old Provençal,Eurasia,,,oldp1253,pro,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/occi1240,indo1319,Indo-European,oldp1253,Old Provençal,language,extinct
+oldp1253,Old Provençal,Eurasia,43.5,0.6,oldp1253,pro,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/occi1240,indo1319,Indo-European,oldp1253,Old Provençal,language,extinct
 sout2612,Southern Occitan,Eurasia,,,sout2612,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/occi1240/occi1239,indo1319,Indo-European,occi1239,Occitan,dialect,
 gasc1240,Gascon,Eurasia,,,gasc1240,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/occi1240/occi1239,indo1319,Indo-European,occi1239,Occitan,dialect,
 nort2608,Northen Occitan,Eurasia,,,nort2608,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/occi1240/occi1239,indo1319,Indo-European,occi1239,Occitan,dialect,
@@ -13243,9 +13243,29 @@ basl1242,Bas-Limousin,Eurasia,,,basl1242,,indo1319/ital1284/lati1262/lati1263/im
 haut1246,Haut-Limousin,Eurasia,,,haut1246,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/occi1240/occi1239/nort2608/limo1246,indo1319,Indo-European,occi1239,Occitan,dialect,
 basa1276,Bas-Auvergnat,Eurasia,,,basa1276,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/occi1240/occi1239/nort2608/auve1239,indo1319,Indo-European,occi1239,Occitan,dialect,
 haut1245,Haut-Auvergnat,Eurasia,,,haut1245,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/occi1240/occi1239/nort2608/auve1239,indo1319,Indo-European,occi1239,Occitan,dialect,
+cata1290,Català Occidental,,,,cata1290,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289,indo1319,Indo-European,stan1289,Catalan,dialect,
 oldc1251,Old Catalan,,,,oldc1251,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289,indo1319,Indo-European,stan1289,Catalan,dialect,
-algh1238,Algherese,Eurasia,,,algh1238,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289,indo1319,Indo-European,stan1289,Catalan,dialect,
-nons1235,Nonstandard Central Catalan,Eurasia,,,nons1235,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289,indo1319,Indo-European,stan1289,Catalan,dialect,
+cata1289,Català Oriental,,,,cata1289,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289,indo1319,Indo-European,stan1289,Catalan,dialect,
+cata1291,Català Nord-Occidental,,,,cata1291,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289/cata1290,indo1319,Indo-European,stan1289,Catalan,dialect,
+vale1252,Valencià,,,,vale1252,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289/cata1290,indo1319,Indo-European,stan1289,Catalan,dialect,
+riba1251,Ribagorçà,,,,riba1251,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289/cata1290/cata1291,indo1319,Indo-European,stan1289,Catalan,dialect,
+pall1245,Pallarès,,,,pall1245,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289/cata1290/cata1291,indo1319,Indo-European,stan1289,Catalan,dialect,
+tort1234,Tortosì,,,,tort1234,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289/cata1290/cata1291,indo1319,Indo-European,stan1289,Catalan,dialect,
+vale1253,Valencià Septentrional,,,,vale1253,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289/cata1290/vale1252,indo1319,Indo-European,stan1289,Catalan,dialect,
+vale1254,Valencià Apitxat,,,,vale1254,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289/cata1290/vale1252,indo1319,Indo-European,stan1289,Catalan,dialect,
+vale1255,Valencià Meridional,,,,vale1255,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289/cata1290/vale1252,indo1319,Indo-European,stan1289,Catalan,dialect,
+ross1234,Rossellonès,,,,ross1234,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289/cata1289,indo1319,Indo-European,stan1289,Catalan,dialect,
+bale1256,Balear,,,,bale1256,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289/cata1289,indo1319,Indo-European,stan1289,Catalan,dialect,
+algh1238,Algherese,Eurasia,,,algh1238,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289/cata1289,indo1319,Indo-European,stan1289,Catalan,dialect,
+nons1235,Central Catalan,Eurasia,,,nons1235,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289/cata1289,indo1319,Indo-European,stan1289,Catalan,dialect,
+meno1253,Menorquí,,,,meno1253,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289/cata1289/bale1256,indo1319,Indo-European,stan1289,Catalan,dialect,
+eivi1239,Eivissenc i formenterer,,,,eivi1239,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289/cata1289/bale1256,indo1319,Indo-European,stan1289,Catalan,dialect,
+mall1248,Mallorquí,,,,mall1248,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289/cata1289/bale1256,indo1319,Indo-European,stan1289,Catalan,dialect,
+cata1292,Català Central Septentrional de Transició,,,,cata1292,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289/cata1289/nons1235,indo1319,Indo-European,stan1289,Catalan,dialect,
+barc1237,Barceloní,,,,barc1237,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289/cata1289/nons1235,indo1319,Indo-European,stan1289,Catalan,dialect,
+xipe1234,Xipella,,,,xipe1234,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289/cata1289/nons1235,indo1319,Indo-European,stan1289,Catalan,dialect,
+sala1282,Salat (Català),,,,sala1282,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289/cata1289/nons1235,indo1319,Indo-European,stan1289,Catalan,dialect,
+tarr1234,Tarragoní,,,,tarr1234,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/stan1289/cata1289/nons1235,indo1319,Indo-European,stan1289,Catalan,dialect,
 astu1244,Asturo-Leonese,,,,astu1244,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/west2838,indo1319,Indo-European,,,family,
 cast1243,Castilic,,,,cast1243,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/west2838,indo1319,Indo-European,,,family,
 gali1263,Galician Romance,,,,gali1263,,indo1319/ital1284/lati1262/lati1263/impe1234/roma1334/ital1285/west2813/shif1234/sout3183/west2838,indo1319,Indo-European,,,family,
@@ -13585,7 +13605,7 @@ sogd1247,Sogdic-Ossetic,,,,sogd1247,,indo1319/indo1320/iran1269/cent2317,indo131
 cent2318,Central Iranian PB,,,,cent2318,,indo1319/indo1320/iran1269/cent2317,indo1319,Indo-European,,,family,
 osse1245,Ossetic,,,,osse1245,,indo1319/indo1320/iran1269/cent2317/sogd1247,indo1319,Indo-European,,,family,
 sogd1248,Sogdic,,,,sogd1248,,indo1319/indo1320/iran1269/cent2317/sogd1247,indo1319,Indo-European,,,family,
-oldo1234,Old Ossetic,Eurasia,,,oldo1234,oos,indo1319/indo1320/iran1269/cent2317/sogd1247/osse1245,indo1319,Indo-European,oldo1234,Old Ossetic,language,extinct
+oldo1234,Old Ossetic,Eurasia,48.48,39.46,oldo1234,oos,indo1319/indo1320/iran1269/cent2317/sogd1247/osse1245,indo1319,Indo-European,oldo1234,Old Ossetic,language,extinct
 osse1243,Ossetian,Eurasia,42.98,44.61,osse1243,oss,indo1319/indo1320/iran1269/cent2317/sogd1247/osse1245,indo1319,Indo-European,osse1243,Ossetian,language,threatened
 alla1246,Allagir,Eurasia,,,alla1246,,indo1319/indo1320/iran1269/cent2317/sogd1247/osse1245/osse1243,indo1319,Indo-European,osse1243,Ossetian,dialect,
 digo1242,Digor,Eurasia,,,digo1242,,indo1319/indo1320/iran1269/cent2317/sogd1247/osse1245/osse1243,indo1319,Indo-European,osse1243,Ossetian,dialect,
@@ -13641,7 +13661,7 @@ biya1234,Biyabuneki,,,,biya1234,,indo1319/indo1320/iran1269/cent2317/cent2318/no
 semn1251,Semnan,,,,semn1251,,indo1319/indo1320/iran1269/cent2317/cent2318/nort3177/semn1249,indo1319,Indo-European,semn1249,Semnani-Biyabuneki,dialect,
 gora1267,Gorani,,,,gora1267,,indo1319/indo1320/iran1269/cent2317/cent2318/nort3177/tati1243,indo1319,Indo-European,,,family,
 tati1244,Tatic,,,,tati1244,,indo1319/indo1320/iran1269/cent2317/cent2318/nort3177/tati1243,indo1319,Indo-European,,,family,
-adha1238,Adhari,Eurasia,,,adha1238,,indo1319/indo1320/iran1269/cent2317/cent2318/nort3177/tati1243,indo1319,Indo-European,adha1238,Adhari,language,extinct
+adha1238,Adhari,Eurasia,40.05,48.06,adha1238,,indo1319/indo1320/iran1269/cent2317/cent2318/nort3177/tati1243,indo1319,Indo-European,adha1238,Adhari,language,extinct
 zaza1246,Zaza,Eurasia,,,zaza1246,zza,indo1319/indo1320/iran1269/cent2317/cent2318/nort3177/tati1243,indo1319,Indo-European,,,family,
 gura1251,Gurani,Eurasia,36.8377,44.4956,gura1251,hac,indo1319/indo1320/iran1269/cent2317/cent2318/nort3177/tati1243/gora1267,indo1319,Indo-European,gura1251,Gurani,language,threatened
 sarl1241,Sarli,Eurasia,36.021,43.644,sarl1241,sdf,indo1319/indo1320/iran1269/cent2317/cent2318/nort3177/tati1243/gora1267,indo1319,Indo-European,sarl1241,Sarli,language,shifting
@@ -13926,7 +13946,7 @@ vedd1240,Veddah,Eurasia,6.97396,81.2618,vedd1240,ved,indo1319/indo1320/indo1321/
 sinh1246,Sinhala,Eurasia,8.0,81.0,sinh1246,sin,indo1319/indo1320/indo1321/sinh1245/sinh1247,indo1319,Indo-European,sinh1246,Sinhala,language,not endangered
 rodi1239,Rodiya,Eurasia,,,rodi1239,,indo1319/indo1320/indo1321/sinh1245/sinh1247/sinh1246,indo1319,Indo-European,sinh1246,Sinhala,dialect,
 konk1270,Konkanic,Eurasia,,,konk1270,kok,indo1319/indo1320/indo1321/indo1325,indo1319,Indo-European,,,family,
-maha1305,Maharastri Prakrit,Eurasia,,,maha1305,pmh,indo1319/indo1320/indo1321/indo1325,indo1319,Indo-European,maha1305,Maharastri Prakrit,language,extinct
+maha1305,Maharastri Prakrit,Eurasia,19.18,74.71,maha1305,pmh,indo1319/indo1320/indo1321/indo1325,indo1319,Indo-European,maha1305,Maharastri Prakrit,language,extinct
 mara1416,Marathic,,,,mara1416,,indo1319/indo1320/indo1321/indo1325,indo1319,Indo-European,,,family,
 goan1235,Goan Konkani,Eurasia,15.2732,74.2098,goan1235,gom,indo1319/indo1320/indo1321/indo1325/konk1270,indo1319,Indo-European,goan1235,Goan Konkani,language,not endangered
 konk1267,Maharashtrian Konkani,Eurasia,19.2414,73.9166,konk1267,knn,indo1319/indo1320/indo1321/indo1325/konk1270,indo1319,Indo-European,konk1267,Maharashtrian Konkani,language,not endangered
@@ -13949,7 +13969,7 @@ para1288,Parabhi,Eurasia,,,para1288,,indo1319/indo1320/indo1321/indo1325/konk127
 kiri1253,Kiristav,Eurasia,,,kiri1253,,indo1319/indo1320/indo1321/indo1325/konk1270/konk1267,indo1319,Indo-European,konk1267,Maharashtrian Konkani,dialect,
 bhan1240,Bhandari,Eurasia,,,bhan1240,,indo1319/indo1320/indo1321/indo1325/konk1270/konk1267,indo1319,Indo-European,konk1267,Maharashtrian Konkani,dialect,
 sang1319,Sangamesvari,Eurasia,,,sang1319,,indo1319/indo1320/indo1321/indo1325/konk1270/konk1267,indo1319,Indo-European,konk1267,Maharashtrian Konkani,dialect,
-oldm1244,Old Marathi,Eurasia,,,oldm1244,omr,indo1319/indo1320/indo1321/indo1325/mara1416,indo1319,Indo-European,oldm1244,Old Marathi,language,extinct
+oldm1244,Old Marathi,Eurasia,18.0,75.0,oldm1244,omr,indo1319/indo1320/indo1321/indo1325/mara1416,indo1319,Indo-European,oldm1244,Old Marathi,language,extinct
 samv1238,Samvedi,Eurasia,18.3068,74.9104,samv1238,smv,indo1319/indo1320/indo1321/indo1325/mara1416,indo1319,Indo-European,samv1238,Samvedi,language,not endangered
 varl1238,Varli,Eurasia,20.5635,73.2975,varl1238,vav,indo1319/indo1320/indo1321/indo1325/mara1416,indo1319,Indo-European,varl1238,Varli,language,not endangered
 andh1242,Andh,Eurasia,19.4734,77.7156,andh1242,anr,indo1319/indo1320/indo1321/indo1325/mara1416,indo1319,Indo-European,andh1242,Andh,language,threatened
@@ -14079,7 +14099,7 @@ roma1329,Romani,Eurasia,,,roma1329,rom,indo1319/indo1320/indo1321/indo1322,indo1
 subc1234,Subcontinental Central Indo-Aryan,,,,subc1234,,indo1319/indo1320/indo1321/indo1322,indo1319,Indo-European,,,family,
 loma1235,Lomavren,Eurasia,41.599419,44.094985,loma1235,rmi,indo1319/indo1320/indo1321/indo1322,indo1319,Indo-European,loma1235,Lomavren,language,moribund
 doma1260,Domaaki,Eurasia,36.3258,74.7984,doma1260,dmk,indo1319/indo1320/indo1321/indo1322,indo1319,Indo-European,doma1260,Domaaki,language,moribund
-saur1252,Sauraseni Prakrit,Eurasia,,,saur1252,psu,indo1319/indo1320/indo1321/indo1322,indo1319,Indo-European,saur1252,Sauraseni Prakrit,language,moribund
+saur1252,Sauraseni Prakrit,Eurasia,27.46,77.56,saur1252,psu,indo1319/indo1320/indo1321/indo1322,indo1319,Indo-European,saur1252,Sauraseni Prakrit,language,moribund
 doma1258,Domari,Eurasia,32.0,35.0,doma1258,rmt,indo1319/indo1320/indo1321/indo1322,indo1319,Indo-European,doma1258,Domari,language,moribund
 roma1330,Central Romani,,,,roma1330,,indo1319/indo1320/indo1321/indo1322/roma1329,indo1319,Indo-European,,,family,
 vlax1238,Vlax Romani,Eurasia,46.8191,14.8451,vlax1238,rmy,indo1319/indo1320/indo1321/indo1322/roma1329,indo1319,Indo-European,vlax1238,Vlax Romani,language,not endangered
@@ -14171,7 +14191,7 @@ bhil1254,Bhil,,,,bhil1254,,indo1319/indo1320/indo1321/indo1322/subc1234,indo1319
 east2726,Eastern Hindi,,,,east2726,,indo1319/indo1320/indo1321/indo1322/subc1234,indo1319,Indo-European,,,family,
 khan1271,Khandesic,,,,khan1271,,indo1319/indo1320/indo1321/indo1322/subc1234,indo1319,Indo-European,,,family,
 guja1255,Gujarati-Rajasthani,,,,guja1255,,indo1319/indo1320/indo1321/indo1322/subc1234,indo1319,Indo-European,,,family,
-midd1350,Middle Indo-Aryan,Eurasia,,,midd1350,,indo1319/indo1320/indo1321/indo1322/subc1234,indo1319,Indo-European,midd1350,Middle Indo-Aryan,language,extinct
+midd1350,Middle Indo-Aryan,Eurasia,26.61,78.97,midd1350,,indo1319/indo1320/indo1321/indo1322/subc1234,indo1319,Indo-European,midd1350,Middle Indo-Aryan,language,extinct
 braj1242,Braj,Eurasia,26.4758,78.0813,braj1242,bra,indo1319/indo1320/indo1321/indo1322/subc1234/west2812,indo1319,Indo-European,braj1242,Braj,language,not endangered
 unun9883,Unclassified Western Hindi,,,,unun9883,,indo1319/indo1320/indo1321/indo1322/subc1234/west2812,indo1319,Indo-European,,,family,
 hind1270,Hindustani,,,,hind1270,,indo1319/indo1320/indo1321/indo1322/subc1234/west2812,indo1319,Indo-European,,,family,
@@ -15457,12 +15477,12 @@ alan1247,Åland Islands Swedish,Eurasia,,,alan1247,,indo1319/germ1287/nort3152/n
 celt1247,Celtiberian,Eurasia,,,celt1247,xce,indo1319/celt1248,indo1319,Indo-European,celt1247,Celtiberian,language,extinct
 nucl1715,Nuclear Celtic,,,,nucl1715,,indo1319/celt1248,indo1319,Indo-European,,,family,
 unun9887,Unclassified Nuclear Celtic,,,,unun9887,,indo1319/celt1248/nucl1715,indo1319,Indo-European,,,family,
-gala1252,Galatian,Eurasia,,,gala1252,xga,indo1319/celt1248/nucl1715,indo1319,Indo-European,gala1252,Galatian,language,extinct
+gala1252,Galatian,Eurasia,39.34,32.84,gala1252,xga,indo1319/celt1248/nucl1715,indo1319,Indo-European,gala1252,Galatian,language,extinct
 cisa1238,Cisalpine Celtic,,,,cisa1238,,indo1319/celt1248/nucl1715,indo1319,Indo-European,,,family,
 tgbc1234,TGB Celtic,,,,tgbc1234,,indo1319/celt1248/nucl1715,indo1319,Indo-European,,,family,
-nori1240,Noric,Eurasia,,,nori1240,nrc,indo1319/celt1248/nucl1715/unun9887,indo1319,Indo-European,nori1240,Noric,language,extinct
-lepo1240,Lepontic,Eurasia,,,lepo1240,xlp,indo1319/celt1248/nucl1715/cisa1238,indo1319,Indo-European,lepo1240,Lepontic,language,extinct
-cisa1237,Cisalpine Gaulish,Eurasia,,,cisa1237,xcg,indo1319/celt1248/nucl1715/cisa1238,indo1319,Indo-European,cisa1237,Cisalpine Gaulish,language,extinct
+nori1240,Noric,Eurasia,46.419444,15.869444,nori1240,nrc,indo1319/celt1248/nucl1715/unun9887,indo1319,Indo-European,nori1240,Noric,language,extinct
+lepo1240,Lepontic,Eurasia,45.98,8.92,lepo1240,xlp,indo1319/celt1248/nucl1715/cisa1238,indo1319,Indo-European,lepo1240,Lepontic,language,extinct
+cisa1237,Cisalpine Gaulish,Eurasia,45.2,8.93,cisa1237,xcg,indo1319/celt1248/nucl1715/cisa1238,indo1319,Indo-European,cisa1237,Cisalpine Gaulish,language,extinct
 tran1282,Transalpine Gaulish,Eurasia,43.97,3.3,tran1282,xtg,indo1319/celt1248/nucl1715/tgbc1234,indo1319,Indo-European,tran1282,Transalpine Gaulish,language,extinct
 insu1254,Insular Celtic,,,,insu1254,,indo1319/celt1248/nucl1715/tgbc1234,indo1319,Indo-European,,,family,
 goid1240,Goidelic,,,,goid1240,,indo1319/celt1248/nucl1715/tgbc1234/insu1254,indo1319,Indo-European,,,family,
@@ -19895,7 +19915,7 @@ bere1250,Berembun,Papunesia,,,bere1250,,aust1307/mala1545/mala1536/nort3170/mala
 peka1242,Pekal,Papunesia,-3.02248,101.691,peka1242,pel,aust1307/mala1545/mala1536/nort3170/mala1538/nucl1733/mina1280,aust1307,Austronesian,peka1242,Pekal,language,not endangered
 nege1240,Negeri Sembilan Malay,Eurasia,2.66503,102.291,nege1240,zmi,aust1307/mala1545/mala1536/nort3170/mala1538/nucl1733/mina1280,aust1307,Austronesian,nege1240,Negeri Sembilan Malay,language,threatened
 lubu1241,Lubu,Papunesia,0.63989,99.74549,lubu1241,lcf,aust1307/mala1545/mala1536/nort3170/mala1538/nucl1733/mina1280,aust1307,Austronesian,lubu1241,Lubu,language,not endangered
-mina1268,Minangkabau,Papunesia,4.17,96.25,mina1268,min,aust1307/mala1545/mala1536/nort3170/mala1538/nucl1733/mina1280,aust1307,Austronesian,mina1268,Minangkabau,language,not endangered
+mina1268,Minangkabau,Papunesia,-0.896,100.44,mina1268,min,aust1307/mala1545/mala1536/nort3170/mala1538/nucl1733/mina1280,aust1307,Austronesian,mina1268,Minangkabau,language,not endangered
 agam1238,Agam,Papunesia,,,agam1238,,aust1307/mala1545/mala1536/nort3170/mala1538/nucl1733/mina1280/mina1268,aust1307,Austronesian,mina1268,Minangkabau,dialect,
 sing1267,Singkarak,Papunesia,,,sing1267,,aust1307/mala1545/mala1536/nort3170/mala1538/nucl1733/mina1280/mina1268,aust1307,Austronesian,mina1268,Minangkabau,dialect,
 tana1280,Tanah,Papunesia,,,tana1280,,aust1307/mala1545/mala1536/nort3170/mala1538/nucl1733/mina1280/mina1268,aust1307,Austronesian,mina1268,Minangkabau,dialect,
