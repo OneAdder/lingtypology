@@ -18,8 +18,8 @@ phylosophy and provides similar functionality.
 .. image:: https://img.shields.io/pypi/v/lingtypology.svg
     :target: https://pypi.org/project/lingtypology/
 
-.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.3244114.svg
-   :target: https://doi.org/10.5281/zenodo.3244114
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.2669068.svg
+   :target: https://doi.org/10.5281/zenodo.2669068
 
 .. image:: https://img.shields.io/github/license/OneAdder/lingtypology.svg
     :target: https://github.com/OneAdder/lingtypology/blob/master/LICENSE.md
