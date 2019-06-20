@@ -50,25 +50,27 @@ module_directory = os.path.dirname(os.path.realpath(__file__))
 class Wals(object):
     """WALS database.
     
-    WALS: ’The World Atlas of Language Structures (WALS) is a large database
-    of structural (phonological, grammatical, lexical) properties of languages gathered
-    from descriptive materials (such as reference grammars) by a team of 55
-    authors.’ (Dryer and Haspelmath 2013). The data from wals is retrieved from
-    multiple web-pages that contain data for each chapter when ``get_df`` method
-    is called.
-
+    WALS: ’The World Atlas of Language Structures (WALS) is a large
+    database of structural (phonological, grammatical, lexical)
+    properties of languages gathered from descriptive materials
+    (such as reference grammars) by a team of 55 authors.’ (Dryer
+    and Haspelmath 2013). The data from wals is retrieved from
+    multiple web-pages that contain data for each chapter when
+    ``get_df`` method is called.
     
     Parameters
     -----------
     *features: list of str
-        List of WALS pages that will be present in the resulting table. E.g. ``['1A']``.
+        List of WALS pages that will be present in the resulting table.
+        E.g. ``['1A']``.
         
     Attributes
     -----------
     general_citation: str
         The general citation for **all** the WALS pages.
     show_citation: str
-        Whether to print the citation for the given features when ``get_df`` method is called.
+        Whether to print the citation for the given features when
+        ``get_df`` method is called.
     features_list: str
         List of all the WALS pages.
     """
@@ -134,7 +136,9 @@ class Wals(object):
         try:
             df_feature = pandas.read_csv(wals_url, delimiter='\t', skiprows=7)
         except urllib.error.HTTPError:
-            warnings.warn('(Wals) Warning: cannot read Wals feature ' + feature)
+            warnings.warn(
+                '(Wals) Warning: cannot read Wals feature ' + feature
+            )
         else:
             df = df_feature[['wals code', 'name', 'genus', 'family', 'area',
                              'latitude', 'longitude', 'value', 'description']]
@@ -167,7 +171,8 @@ class Wals(object):
             return
         _citation = 'Citation for feature {}:\n{}\n'
         citation = _citation.format(
-            feature, '\n'.join(wals_page.content.decode('utf-8').split('\n')[:5])
+            feature,
+            '\n'.join(wals_page.content.decode('utf-8').split('\n')[:5])
         )
         return citation
     
@@ -234,15 +239,17 @@ class Wals(object):
 class Autotyp(object):
     """Autotyp database.
     
-    Autotyp is database that contains of multiple modules. Each module represents
-    a grammatical feature (e.g. Agreeement), it contains information on this
-    feature for various languages (Bickel et al. 2017). The data is downloaded when
-    ``get_df`` method is called.
+    Autotyp is database that contains of multiple modules.
+    Each module represents a grammatical feature
+    (e.g. Agreeement), it contains information on this
+    feature for various languages (Bickel et al. 2017).
+    The data is downloaded when ``get_df`` method is called.
     
     Parameters
     -----------
     *tables: list of str
-        List of the Autoptyp tables that will be merged in the resulting table. E.g. ``['gender']``.
+        List of the Autoptyp tables that will be merged
+        in the resulting table. E.g. ``['gender']``.
     
     Attributes
     -----------
@@ -269,9 +276,9 @@ class Autotyp(object):
         self.show_citation = True
         self.citation = \
             'Bickel, Balthasar, Johanna Nichols, Taras Zakharko,\n' \
-            'Alena Witzlack-Makarevich, Kristine Hildebrandt, Michael Rießler,\n' \
-            'Lennart Bierkandt, Fernando Zúñiga & John B. Lowe.\n' \
-            '2017. The AUTOTYP typological databases.\n' \
+            'Alena Witzlack-Makarevich, Kristine Hildebrandt,\n' \
+            'Michael Rießler, Lennart Bierkandt, Fernando Zúñiga &\n' \
+            'John B. Lowe. 2017. The AUTOTYP typological databases.\n' \
             'Version 0.1.0 https://github.com/autotyp/autotyp-data/tree/0.1.0'
         self._pages = []
 
@@ -293,7 +300,7 @@ class Autotyp(object):
         ).content.decode('utf-8')
         return re.findall('title="(.*?)\.csv"', github_page)
 
-    def get_df(self, strip_na=[]):
+    def get_df(self, strip_na=None):
         """Get data from Autotyp in pandas.DataFrame format.
 
         Returns
@@ -338,11 +345,12 @@ class Autotyp(object):
             else:
                 merged_df = pandas.merge(merged_df, df, on='LID')
         merged_df.fillna('~N/A~', inplace=True)
-        for column in strip_na:
-            merged_df = merged_df[merged_df[column] != '~N/A~']
+        if strip_na:
+            for column in strip_na:
+                merged_df = merged_df[merged_df[column] != '~N/A~']
         return merged_df
 
-    def get_json(self, strip_na=[]):
+    def get_json(self, strip_na=None):
         """Get data from Autotyp in JSON format.
 
         Returns
@@ -707,7 +715,7 @@ class Phoible(object):
                 sep=',', header=0, low_memory=False
             )
 
-    def get_df(self, strip_na=[]):
+    def get_df(self, strip_na=None):
         """Get data from PHOIBLE in pandas.DataFrame format.
 
         Returns
@@ -755,11 +763,12 @@ class Phoible(object):
             if self.subset != 'all':
                 df = df[df.Source == self.subset.lower()]
         df = df.fillna('~N/A~')
-        for column in strip_na:
-            df = df[df[column] != '~N/A~']
+        if strip_na:
+            for column in strip_na:
+                df = df[df[column] != '~N/A~']
         return df
 
-    def get_json(self, strip_na=[]):
+    def get_json(self, strip_na=None):
         """Get data from PHOIBLE in JSON format.
 
         Returns
