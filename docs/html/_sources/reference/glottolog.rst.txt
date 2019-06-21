@@ -5,4 +5,4 @@
 
 .. _functions-1:
 
-.. automodule:: glottolog
+.. automodule:: lingtypology.glottolog

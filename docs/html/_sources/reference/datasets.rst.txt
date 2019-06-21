@@ -3,7 +3,7 @@
 ``lingtypology.datasets``
 =========================
 
-.. automodule:: datasets
+.. automodule:: lingtypology.datasets
    :members:
    :imported-members:
    :inherited-members:

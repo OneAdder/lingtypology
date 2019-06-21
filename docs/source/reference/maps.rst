@@ -9,11 +9,11 @@ This module consist of the class and functions to draw linguistic interactive ma
 
 ``lingtypology.LingMap class``
 ------------------------------
-.. automodule:: maps     
+.. automodule:: lingtypology.maps     
    :members: LingMap
 
 Functions
 ---------
-.. automodule:: maps     
+.. automodule:: lingtypology.maps     
    :members: merge, get_elevations, gradient
 
