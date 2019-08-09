@@ -1,7 +1,7 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "dc:": "Harald Hammarstr\u00f6m, Robert Forkel & Martin Haspelmath. clld/glottolog: Glottolog database (Version v3.4-41-gaebc83616f) [Data set]. Zenodo. http://doi.org/10.5281/zenodo.596479",
-    "dc:version": "v3.4-41-gaebc83616f",
+    "dc:": "Harald Hammarstr\u00f6m, Robert Forkel & Martin Haspelmath. clld/glottolog: Glottolog database (Version v4.0-26-gb2138530b3) [Data set]. Zenodo. http://doi.org/10.5281/zenodo.596479",
+    "dc:version": "v4.0-26-gb2138530b3",
     "tables": [
         {
             "dc:conformsTo": "http://cldf.clld.org/v1.0/terms.rdf#LanguageTable",
@@ -95,7 +95,7 @@
                     }
                 ]
             },
-            "url": "glottolog-languoids-v3.4-41-gaebc83616f.csv"
+            "url": "glottolog-languoids-v4.0-26-gb2138530b3.csv"
         }
     ]
 }
