@@ -594,6 +594,15 @@ class LingMap(object):
         ----------
         features: str
         """
+        def _sort_by_factor(l, f):
+            result = []
+            for fact in f:
+                for el in l:
+                    if el[0] == fact:
+                        result.append(el)
+            if not len(result) == len(l):
+                raise LingMapError('Something is wrong with the sorting')
+            return result
         attrs = [self.languages, self.popups,
                  self.tooltips, self.custom_coordinates]
         length = [False for n in range(len(features))]
@@ -603,13 +612,17 @@ class LingMap(object):
                 attrs_r.append(attr)
             else:
                 attrs_r.append(length)
-        try:
+        if self._factor:
             al = list(zip(features, *attrs_r))
-            al.sort(key=lambda element: element[0])
-        except TypeError:
-            #In case of different types, fall back to sorting as str
-            al = list(zip(map(str, features), *attrs_r))
-            al.sort(key=lambda element: element[0])
+            al = _sort_by_factor(al, self._factor)
+        else:
+            try:
+                al = list(zip(features, *attrs_r))
+                al.sort(key=lambda element: element[0])
+            except TypeError:
+                #In case of different types, fall back to sorting as str
+                al = list(zip(map(str, features), *attrs_r))
+                al.sort(key=lambda element: element[0])
         features = []
         self.languages = []
         self.popups = []
@@ -948,8 +961,10 @@ class LingMap(object):
         self._sanity_check(custom_coordinates, feature_name='custom_coordinates')
         self.custom_coordinates = custom_coordinates
 
-    def add_features(self, features, radius=7, opacity=1, colors=None,
-                     numeric=False, control=False, use_shapes=False):
+    def add_features(self, features, radius=7,
+                     opacity=1, colors=None,
+                     numeric=False, control=False,
+                     use_shapes=False, factor=None):
         """Add features.
         
         Parameters
@@ -994,12 +1009,15 @@ class LingMap(object):
         if colors:
             self.colors = colors
         
+        self._factor = factor
         self.numeric = numeric
         self.control = control
         self.use_shapes = use_shapes
 
-    def add_stroke_features(self, features, radius=12, opacity=1,
-                            colors=None, numeric=False, control=False):
+    def add_stroke_features(self, features, radius=12,
+                            opacity=1, colors=None,
+                            numeric=False, control=False,
+                            factor=None):
         """Add stroke features.
 
         This function assigns features to strokes of markers.
@@ -1032,6 +1050,7 @@ class LingMap(object):
         if colors:
             self.stroke_colors = colors
         
+        self._factor = factor
         self.s_numeric = numeric
         self.stroke_control = control
     
