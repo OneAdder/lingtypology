@@ -582,7 +582,7 @@ class LingMap(object):
 
     
     def _sort_all(self, features):
-        """This crazy function is needed to sort everything by features for the colormap
+        """This crazy function is needed to sort everything by features.
 
         It takes all necessary attributes and sorts them by features.
         Parameters
@@ -612,12 +612,12 @@ class LingMap(object):
                 attrs_r.append(attr)
             else:
                 attrs_r.append(length)
+        self.all_attrs = list(zip(features, *attrs_r))
         if self._factor:
-            al = list(zip(features, *attrs_r))
-            al = _sort_by_factor(al, self._factor)
+            al = _sort_by_factor(self.all_attrs, self._factor)
         else:
             try:
-                al = list(zip(features, *attrs_r))
+                al = self.all_attrs.copy()
                 al.sort(key=lambda element: element[0])
             except TypeError:
                 #In case of different types, fall back to sorting as str
@@ -1613,6 +1613,23 @@ class LingMap(object):
                     )
                 )
             )
+        #Needed for non-destructive sorting
+        if hasattr(self, 'all_attrs'):
+            self.features = []
+            self.languages = []
+            self.popups = []
+            self.tooltips = []
+            self.custom_coordinates = []
+            for el in self.all_attrs:
+                self.features.append(el[0])
+                if el[1]:
+                    self.languages.append(el[1])
+                if el[2]:
+                    self.popups.append(el[2])
+                if el[3]:
+                    self.tooltips.append(el[3])
+                if el[4]:
+                    self.custom_coordinates.append(el[4])
         return m
 
     def save(self, path):
