@@ -82,10 +82,24 @@ def test_LingMap_features3():
         '</a>'
     m.languages_in_popups = False
     m.add_popups(
-        [html.format(data=popup) for popup in contents],
-        parse_html=True
+        [html.format(data=popup) for popup in contents]
     )
     m.add_features(features, use_shapes=True, control=True)
+    m.create_map()
+
+def test_LingMap_features4():
+    languages = ["Adyghe", "Kabardian", "Polish", "Russian", "Bulgarian"]
+    features = ["Agglutinative", "Agglutinative",
+                    "Inflected", "Inflected", "Analytic"]
+    contents = ('Caucasus', 'Caucasus', 'Europe', 'Europe', 'Europe')
+        
+    m = LingMap(languages)
+    html = \
+        '<a href="https://en.wikipedia.org/wiki/{data}" target="_blank">' \
+            '{data}' \
+        '</a>'
+    m.languages_in_popups = False
+    m.add_features(features, factor=["Inflected", 'Analytic', 'Agglutinative'])
     m.create_map()
 
 def test_LingMap_overlapping_features():
