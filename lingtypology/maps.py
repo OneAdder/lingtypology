@@ -1000,6 +1000,14 @@ class LingMap(object):
             can replace or add to default symbols by changing shapes
             attribute. If colors are not a viable option for you, you can
             set this option to True.
+        factor: list-like, default None
+            Unless the factor of sorting is specified, the features will be
+            sorted alphabetically.
+            How to use it:
+            For example you have features ('a', 'a', 'b', 'c'). By default
+            they will be included into the legend with the following order:
+            a, b, c. If you pass ('b', 'a', 'c') as factor, they will be
+            included into the legend this way.
         """
         features = tuple(features)
         self._sanity_check(features, feature_name='features')
