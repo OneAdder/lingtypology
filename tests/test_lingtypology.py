@@ -1,4 +1,5 @@
 import os
+from operator import itemgetter
 
 import pandas
 from lingtypology import *
@@ -127,6 +128,17 @@ def test_LingMap_merge():
     m1 = LingMap('Russian')
     m2 = LingMap('English')
     merge(m1, m2).create_map()
+
+def test_LingMap_stroke_features_after_rendered():
+    languages = ["Adyghe", "Kabardian", "Polish", "Russian", "Bulgarian"]
+    features = ["Agglutinative", "Agglutinative", "Inflected", "Inflected", "Analytic"]
+    stroke_features = ['Ergative', 'Ergative', 'Accusative', 'Accusative', 'Accusative']
+    m = lingtypology.LingMap(languages)
+    m.add_features(features)
+    m.add_stroke_features(stroke_features)
+    m.create_map()
+    features_after = list(map(itemgetter(0), m.all_attrs))
+    assert features_after == features
 
 def test_LingMapError():
     try:

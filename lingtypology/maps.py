@@ -757,8 +757,8 @@ class LingMap(object):
         colormap_colors = self.stroke_colormap_colors \
             if stroke \
             else self.colormap_colors
-            
-        features = self._sort_all(features)
+
+        features = features if stroke else self._sort_all(features)
         if numeric:
             if not all(isinstance(f, int) or isinstance(f, float) for f in features):
                 try:
