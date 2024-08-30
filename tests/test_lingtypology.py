@@ -155,7 +155,7 @@ def test_Glottolog():
     isos = set()
     coordinates = set()
     
-    affiliations0_ex = 'Indo-European, Balto-Slavic, Slavic, East Slavic'
+    affiliations0_ex = 'Indo-European, Classical Indo-European, Balto-Slavic, Slavic, East Slavic'
     macroarea_ex = 'Eurasia'
     
     languages.add(glottolog.get_by_iso('rus'))
