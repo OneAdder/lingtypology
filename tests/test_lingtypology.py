@@ -184,9 +184,16 @@ def test_Glottolog():
         affiliations0 == affiliations0_ex and \
         macroarea == macroarea_ex
     assert assertion
-    
-def test_wals():
-    datasets.Wals('1a', '20a', '3a').get_df(join_how='outer')
+
+@pytest.mark.parametrize(
+    'tables',
+    [
+        ('1a', '20a', '3a'),
+        ('1a', '2a'),
+    ],
+)
+def test_wals(tables):
+    datasets.Wals(*tables).get_df(join_how='outer')
 
 def test_autotyp():
     datasets.Autotyp('Gender', 'Agreement').get_df()

@@ -134,7 +134,7 @@ class Wals(object):
         """
         wals_url = 'http://wals.info/feature/{}.tab'.format(feature)
         try:
-            df_feature = pandas.read_csv(wals_url, delimiter='\t', skiprows=7)
+            df_feature = pandas.read_csv(wals_url, delimiter='\t', skiprows=5)
         except urllib.error.HTTPError:
             warnings.warn(
                 '(Wals) Warning: cannot read Wals feature ' + feature
