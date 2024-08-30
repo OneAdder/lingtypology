@@ -142,13 +142,14 @@ def get_coordinates(language):
     get_coordinates('Russian')
     >>> (59.0, 50.0)
     '''
-    latitude = glottolog[glottolog.Name == language].Latitude
-    longitude = glottolog[glottolog.Name == language].Longitude
-    if not list(latitude) or not list(longitude):
+    language_row = glottolog[glottolog.Name == language]
+    latitude_values = language_row['Latitude']
+    longitude_values = language_row['Longitude']
+    if not len(latitude_values) == 1 or not len(longitude_values) == 1:
         global warnings
         warnings.append(language)
     else:
-        return (float(latitude), float(longitude))
+        return next(iter(latitude_values)), next(iter(longitude_values))
 
 def get_coordinates_by_glot_id(glot_id):
     '''
