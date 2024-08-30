@@ -16,11 +16,10 @@ Lingtypology package contains `LingMap` class that allows to draw interactive ma
 For more informations consult [Lingtypology: Documentation](https://oneadder.github.io/lingtypology/).
 """
 from setuptools import setup
-from lingtypology import __version__
 
 setup(
     name='lingtypology',
-    version=__version__,
+    version="0.8.7",
     description='A tool for linguistic typology.',
     long_description=__doc__,
     long_description_content_type='text/markdown',

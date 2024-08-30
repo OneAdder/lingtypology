@@ -1,4 +1,5 @@
 import os
+from operator import itemgetter
 
 import pandas
 from lingtypology import *
@@ -128,6 +129,17 @@ def test_LingMap_merge():
     m2 = LingMap('English')
     merge(m1, m2).create_map()
 
+def test_LingMap_stroke_features_after_rendered():
+    languages = ["Adyghe", "Kabardian", "Polish", "Russian", "Bulgarian"]
+    features = ["Agglutinative", "Agglutinative", "Inflected", "Inflected", "Analytic"]
+    stroke_features = ['Ergative', 'Ergative', 'Accusative', 'Accusative', 'Accusative']
+    m = lingtypology.LingMap(languages)
+    m.add_features(features)
+    m.add_stroke_features(stroke_features)
+    m.create_map()
+    features_after = list(map(itemgetter(0), m.all_attrs))
+    assert features_after == features
+
 def test_LingMapError():
     try:
         m = lingtypology.LingMap('Russian')
@@ -143,7 +155,7 @@ def test_Glottolog():
     isos = set()
     coordinates = set()
     
-    affiliations0_ex = 'Indo-European, Balto-Slavic, Slavic, East Slavic'
+    affiliations0_ex = 'Indo-European, Classical Indo-European, Balto-Slavic, Slavic, East Slavic'
     macroarea_ex = 'Eurasia'
     
     languages.add(glottolog.get_by_iso('rus'))
@@ -172,9 +184,16 @@ def test_Glottolog():
         affiliations0 == affiliations0_ex and \
         macroarea == macroarea_ex
     assert assertion
-    
-def test_wals():
-    datasets.Wals('1a', '20a', '3a').get_df(join_how='outer')
+
+@pytest.mark.parametrize(
+    'tables',
+    [
+        ('1a', '20a', '3a'),
+        ('1a', '2a'),
+    ],
+)
+def test_wals(tables):
+    datasets.Wals(*tables).get_df(join_how='outer')
 
 def test_autotyp():
     datasets.Autotyp('Gender', 'Agreement').get_df()

@@ -8,20 +8,6 @@
     </td>
   </tr>
   <tr>
-    <td> Build Status </td>
-    <td>
-      <a href="https://travis-ci.org/OneAdder/lingtypology"/>
-      <img src="https://img.shields.io/travis/OneAdder/lingtypology.svg"/>
-    </td>
-  </tr>
-  <tr>
-    <td>Code Quality</td>
-    <td>
-      <a href="https://app.codacy.com/app/OneAdder/lingtypology?utm_source=github.com&utm_medium=referral&utm_content=OneAdder/lingtypology&utm_campaign=Badge_Grade_Dashboard"/>
-      <img src="https://api.codacy.com/project/badge/Grade/abe7b99539d141c4acbd3b485fd80959"/>
-    </td>
-  </tr>
-  <tr>
     <td>License</td>
     <td>
       <a href="https://github.com/OneAdder/lingtypology/blob/master/LICENSE.md"/>
@@ -43,9 +29,7 @@ It uses the same phylosophy and provides similar functionality.
 
 ## Installation
 The package is available in PyPI.
-Therefore, you can install it by running:  
-Locally: `pip3 install lingtypology --user`  
-Globally (not recommended): `sudo pip3 install lingtypology`
+Therefore, you can install it by running: pip install lingtypology`
 
 ## Usage
 Lingtypology package contains `LingMap` class that allows to draw interactive maps, `glottolog` library that allows to interact with Glottolog data and `datasets` that allows to interact with different other linguistic databases.  
@@ -53,7 +37,7 @@ For more informations consult [Lingtypology: Documentation](https://oneadder.git
 
 ## Glottolog
 Lingtypology relies on data from the [Glottolog](https://glottolog.org/glottolog/language) database.
-With each new version of `lingtypology` Glottolog data is updated. Now it is using Glottolog `3.4-41`.
+With each new version of `lingtypology` Glottolog data is updated. Now it is using Glottolog `5.0`.
 You can update data from Glottolog. To get the instruction on how to do it, consult the [tutorial](https://oneadder.github.io/lingtypology/glottolog#g_version).
 
 ## Citation
