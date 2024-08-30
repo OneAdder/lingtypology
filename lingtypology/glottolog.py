@@ -156,14 +156,14 @@ def get_coordinates_by_glot_id(glot_id):
     >>> get_coordinates_by_glot_id('russ1263')
     (59.0, 50.0)
     '''
-    latitude = glottolog[glottolog.ID == glot_id].Latitude
-    longitude = glottolog[glottolog.ID == glot_id].Longitude
-    try:
-        coordinates = (float(latitude), float(longitude))
-    except TypeError:
-        pass
+    language_row = glottolog[glottolog.ID == glot_id]
+    latitude_values = language_row['Latitude']
+    longitude_values = language_row['Longitude']
+    if not len(latitude_values) == 1 or not len(longitude_values) == 1:
+        global warnings
+        warnings.append(glot_id)
     else:
-        return coordinates
+        return next(iter(latitude_values)), next(iter(longitude_values))
 
 def get_glot_id(language):
     '''
